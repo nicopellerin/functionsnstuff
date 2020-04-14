@@ -1,7 +1,55 @@
 import * as React from "react"
+import { useState } from "react"
 import styled from "styled-components"
+import { Link } from "gatsby"
+import { motion, AnimateSharedLayout } from "framer-motion"
+
+const techItems = [
+  {
+    title: "React",
+    link: "/",
+  },
+  {
+    title: "NodeJS",
+    link: "/",
+  },
+  {
+    title: "Javascript",
+    link: "/",
+  },
+  {
+    title: "Typescript",
+    link: "/",
+  },
+  {
+    title: "Framer Motion",
+    link: "/",
+  },
+  {
+    title: "Gatsby",
+    link: "/",
+  },
+  {
+    title: "Next.js",
+    link: "/",
+  },
+  {
+    title: "GraphQL",
+    link: "/",
+  },
+  {
+    title: "Go",
+    link: "/",
+  },
+  {
+    title: "MongoDB",
+    link: "/",
+  },
+]
 
 export const Main = () => {
+  const [show, setShow] = useState(null)
+
   return (
     <Wrapper>
       <div>
@@ -26,17 +74,31 @@ export const Main = () => {
       </div>
       <Tech>
         <TechTitle>Technology</TechTitle>
-        <TechList>
-          <TechListItem>React</TechListItem>
-          <TechListItem>NodeJs</TechListItem>
-          <TechListItem>Javascript</TechListItem>
-          <TechListItem>Typescript</TechListItem>
-          <TechListItem>Framer Motion</TechListItem>
-          <TechListItem>Gatsby</TechListItem>
-          <TechListItem>Next.js</TechListItem>
-          <TechListItem>GraphQL</TechListItem>
-          <TechListItem>Go</TechListItem>
-          <TechListItem>MongoDB</TechListItem>
+        <TechList onMouseLeave={() => setShow(null)}>
+          <AnimateSharedLayout>
+            {techItems.map(({ title, link }, i) => (
+              <>
+                <TechListItem key={title} onMouseEnter={() => setShow(i)}>
+                  <Link to={link}>{title}</Link>
+                  {show === i && (
+                    <motion.div
+                      layoutId="techItem"
+                      style={{
+                        position: "absolute",
+                        left: -17,
+                        background: "#FF88AA",
+                        height: 8,
+                        width: 8,
+                        borderRadius: "100%",
+                        top: "26%",
+                        transform: "translateY(-50%)",
+                      }}
+                    />
+                  )}
+                </TechListItem>
+              </>
+            ))}
+          </AnimateSharedLayout>
         </TechList>
       </Tech>
     </Wrapper>
@@ -51,11 +113,11 @@ const Wrapper = styled.main`
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;
-  padding: 8rem 0;
+  padding: 10rem 0 13rem;
 `
 
 const Title = styled.h3`
-  font-size: 1.8rem;
+  font-size: 2.2rem;
 `
 
 const Tech = styled.aside`
@@ -75,8 +137,9 @@ const TechListItem = styled.li`
   font-family: "Lora", serif;
   font-size: 1.6rem;
   font-weight: 500;
+  position: relative;
 
   &:not(:last-of-type) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
   }
 `

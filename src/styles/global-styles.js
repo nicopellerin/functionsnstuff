@@ -43,4 +43,9 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Lora', serif;
     line-height: 1.6em;
   }
+
+  a {
+    color: var(--menuColor);
+    text-decoration: none;
+  }
 `
