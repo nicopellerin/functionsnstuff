@@ -39,7 +39,7 @@ const techItems = [
   },
 ]
 
-export const Main = () => {
+const Main = () => {
   const [show, setShow] = useState(null)
 
   return (
@@ -96,6 +96,8 @@ export const Main = () => {
     </Wrapper>
   )
 }
+
+export default Main
 
 // Styles
 const Wrapper = styled.main`

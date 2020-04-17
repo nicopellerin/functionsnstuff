@@ -17,7 +17,7 @@ import tsLogo from "../images/icons/typescript.svg"
 import wave from "../images/wave.svg"
 
 import anim from "../anim-funny.json"
-import { Navbar } from "./navbar"
+import Navbar from "./navbar"
 
 import cover from "../images/background-7.jpg"
 
@@ -171,9 +171,9 @@ const Header = () => {
           </TerminalContainer>
         </TerminalWrapper>
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0, x: "-50%" }}
           animate={{ opacity: [0, 1] }}
-          style={{ position: "absolute", top: "20%", left: "38%" }}
+          style={{ position: "absolute", top: "23%", left: "50%" }}
           transition={{ delay: 1 }}
         >
           <Lottie

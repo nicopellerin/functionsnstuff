@@ -21,7 +21,7 @@ const menuItems = [
   },
 ]
 
-export const Navbar = () => {
+const Navbar = () => {
   const [show, setShow] = useState(null)
 
   return (
@@ -56,6 +56,8 @@ export const Navbar = () => {
     </Wrapper>
   )
 }
+
+export default Navbar
 
 // Styles
 const Wrapper = styled.div`

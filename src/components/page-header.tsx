@@ -16,13 +16,13 @@ import wave from "../images/wave.svg"
 
 import cover from "../images/cover-react.jpg"
 
-import { Navbar } from "./navbar"
+import Navbar from "./navbar"
 
 interface Props {
   tech?: string
 }
 
-export const PageHeader: React.FC<Props> = ({ tech = "react" }) => {
+const PageHeader: React.FC<Props> = ({ tech = "react" }) => {
   return (
     <Wrapper bg={cover}>
       <Container>
@@ -51,6 +51,8 @@ export const PageHeader: React.FC<Props> = ({ tech = "react" }) => {
     </Wrapper>
   )
 }
+
+export default PageHeader
 
 // Styles
 const Wrapper = styled.div`

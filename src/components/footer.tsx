@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 import wave from "../images/wavee.svg"
 
-export const Footer = () => (
+const Footer = () => (
   <Wrapper>
     <Container>
       <NewsletterWrapper>
@@ -32,6 +32,8 @@ export const Footer = () => (
     />
   </Wrapper>
 )
+
+export default Footer
 
 // Styles
 const Wrapper = styled.div`

@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Header from "./header"
 
 import { GlobalStyles } from "../styles/global-styles"
-import { Footer } from "./footer"
+import Footer from "./footer"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`

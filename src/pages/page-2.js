@@ -4,8 +4,8 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { PageHeader } from "../components/page-header"
-import { Card } from "../components/card"
+import PageHeader from "../components/page-header"
+import Card from "../components/card"
 
 import cover from "../images/cover-react.jpg"
 

@@ -11,7 +11,7 @@ interface Props {
 
 import cover from "../images/cover-react.jpg"
 
-export const Card: React.FC<Props> = ({ title, image, link }) => {
+const Card: React.FC<Props> = ({ title, image, link }) => {
   return (
     <Link to={link}>
       <Wrapper
@@ -23,6 +23,8 @@ export const Card: React.FC<Props> = ({ title, image, link }) => {
     </Link>
   )
 }
+
+export default Card
 
 // Styles
 const Wrapper = styled(motion.div)`
