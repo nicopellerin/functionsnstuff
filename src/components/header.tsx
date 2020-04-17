@@ -8,7 +8,6 @@ import Lottie from "react-lottie"
 
 import bg from "../images/hero.png"
 import terminal from "../images/terminal.png"
-import logo from "../images/logo.png"
 import reactLogo from "../images/icons/react.png"
 import graphqlLogo from "../images/icons/graphql.png"
 import goLogo from "../images/icons/go.png"
@@ -18,24 +17,11 @@ import tsLogo from "../images/icons/typescript.svg"
 import wave from "../images/wave.svg"
 
 import anim from "../anim-funny.json"
+import { Navbar } from "./navbar"
 
-const menuItems = [
-  {
-    title: "Tutorials",
-    link: "/",
-  },
-  {
-    title: "Tips",
-    link: "/",
-  },
-  {
-    title: "Contact",
-    link: "/",
-  },
-]
+import cover from "../images/background-7.jpg"
 
 const Header = () => {
-  const [show, setShow] = useState(null)
   const [toggleBrowser, setToggleBrowser] = useState(false)
 
   const defaultOptions = {
@@ -48,35 +34,9 @@ const Header = () => {
   }
 
   return (
-    <Wrapper bg={bg}>
+    <Wrapper bg={cover}>
       <Container>
-        <img src={logo} alt="logo" width={267} />
-        <Menu>
-          <MenuList onMouseLeave={() => setShow(null)}>
-            <AnimateSharedLayout>
-              {menuItems.map(({ title, link }, i) => (
-                <>
-                  <MenuListItem key={title} onMouseEnter={() => setShow(i)}>
-                    <Link to={link}>{title}</Link>
-                    {show === i && (
-                      <motion.div
-                        layoutId="menuItem"
-                        style={{
-                          position: "absolute",
-                          left: 0,
-                          bottom: -5,
-                          background: "var(--menuColor)",
-                          height: 2,
-                          width: "100%",
-                        }}
-                      />
-                    )}
-                  </MenuListItem>
-                </>
-              ))}
-            </AnimateSharedLayout>
-          </MenuList>
-        </Menu>
+        <Navbar />
         <TerminalWrapper
           terminal={terminal}
           initial={{ y: 400, x: "-50%" }}
@@ -247,7 +207,8 @@ export default Header
 const Wrapper = styled.div`
   background: ${props => `url(${props.bg})`};
   background-size: cover;
-  height: 62rem;
+  background-attachment: fixed;
+  height: 65rem;
   position: relative;
   overflow: hidden;
 `
@@ -255,35 +216,13 @@ const Wrapper = styled.div`
 const Container = styled.header`
   max-width: 80rem;
   margin: 0 auto;
-  padding: 4rem 0;
-  display: flex;
-  justify-content: space-between;
-`
-
-const Menu = styled.nav`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-`
-
-const MenuList = styled.ul`
-  display: flex;
-  list-style: none;
-`
-
-const MenuListItem = styled(motion.li)`
-  color: var(--menuColor);
-  font-size: 1.6rem;
-  margin-left: 4rem;
-  font-weight: 500;
-  position: relative;
 `
 
 const TerminalWrapper = styled(motion.div)`
   background: ${props => `url(${props.terminal})`};
   background-size: cover;
   width: 83rem;
-  height: 44rem;
+  height: 45rem;
   position: absolute;
   bottom: 0px;
   left: 50%;

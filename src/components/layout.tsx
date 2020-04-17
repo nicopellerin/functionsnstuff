@@ -20,9 +20,8 @@ const Layout = ({ children }) => {
 
   return (
     <Wrapper>
-      <Header />
       <div>
-        <main>{children}</main>
+        <Main>{children}</Main>
       </div>
       <Footer />
       <GlobalStyles />
@@ -34,3 +33,9 @@ export default Layout
 
 // Styles
 const Wrapper = styled.div``
+
+const Main = styled.main`
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 10rem 0 15rem;
+`

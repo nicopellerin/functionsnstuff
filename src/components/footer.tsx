@@ -28,7 +28,7 @@ export const Footer = () => (
     <img
       src={wave}
       alt="wave"
-      style={{ position: "absolute", top: -140, width: "100%" }}
+      style={{ position: "absolute", top: "-32%", width: "100%" }}
     />
   </Wrapper>
 )
@@ -89,7 +89,7 @@ const Button = styled.button`
 
 const FooterWrapper = styled.footer`
   text-align: center;
-  padding: 10rem 0 8rem 0;
+  padding: 12rem 0 10rem 0;
   font-size: 1.4rem;
   font-weight: 500;
   color: var(--textColor);

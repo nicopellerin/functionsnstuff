@@ -22,10 +22,6 @@ const techItems = [
     link: "/",
   },
   {
-    title: "Framer Motion",
-    link: "/",
-  },
-  {
     title: "Gatsby",
     link: "/",
   },
@@ -39,10 +35,6 @@ const techItems = [
   },
   {
     title: "Go",
-    link: "/",
-  },
-  {
-    title: "MongoDB",
     link: "/",
   },
 ]
@@ -113,7 +105,7 @@ const Wrapper = styled.main`
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;
-  padding: 10rem 0 13rem;
+  /* padding: 10rem 0 13rem; */
 `
 
 const Title = styled.h3`
