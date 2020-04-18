@@ -105,7 +105,6 @@ const Wrapper = styled.main`
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;
-  /* padding: 10rem 0 13rem; */
 `
 
 const Title = styled.h3`
@@ -118,6 +117,7 @@ const Tech = styled.aside`
 
 const TechTitle = styled.h4`
   font-size: 1.8rem;
+  font-weight: 700;
   font-family: var(--systemFont);
   color: var(--primaryColor);
 `
