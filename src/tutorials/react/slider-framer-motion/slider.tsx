@@ -39,6 +39,7 @@ const Example = () => {
     <Container>
       <AnimatePresence initial={false} custom={direction}>
         <ImageStyled
+          alt="Slider"
           key={page}
           src={images[imageIndex]}
           custom={direction}

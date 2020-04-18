@@ -25,6 +25,7 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
                 animate={{ opacity: [0, 1], y: [170, 0] }}
                 src={`/icons/${tech}.png`}
                 width={120}
+                alt={tech}
               />
             </Link>
           ) : (
