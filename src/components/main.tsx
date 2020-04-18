@@ -11,31 +11,31 @@ const techItems = [
   },
   {
     title: "NodeJS",
-    link: "/",
+    link: "/tutorials/nodejs",
   },
   {
     title: "Javascript",
-    link: "/",
+    link: "/tutorials/javascript",
   },
   {
     title: "Typescript",
-    link: "/",
+    link: "/tutorials/typescript",
   },
   {
     title: "Gatsby",
-    link: "/",
+    link: "/tutorials/gatsby",
   },
   {
     title: "Next.js",
-    link: "/",
+    link: "/tutorials/nextjs",
   },
   {
     title: "GraphQL",
-    link: "/",
+    link: "/tutorials/graphql",
   },
   {
     title: "Go",
-    link: "/",
+    link: "/tutorials/go",
   },
 ]
 

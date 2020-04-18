@@ -29,7 +29,12 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
               />
             </Link>
           ) : (
-            <Title>{title}</Title>
+            <Title
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: [0, 1], y: [50, 0] }}
+            >
+              {title}
+            </Title>
           )}
         </Heading>
       </Container>
@@ -74,6 +79,6 @@ const Heading = styled.div`
   height: 39%;
 `
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   color: var(--textColor);
 `

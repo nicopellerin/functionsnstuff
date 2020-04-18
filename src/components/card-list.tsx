@@ -1,44 +1,27 @@
 import * as React from "react"
 import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
 
 import Card from "./card"
 
 interface Props {
-  tech: string
+  data: any
 }
 
-const CardList: React.FC<Props> = ({ tech }) => {
-  const {
-    allMdx: { edges },
-  } = useStaticQuery(graphql`
-    {
-      allMdx(filter: { frontmatter: { tech: { eq: "react" } } }) {
-        edges {
-          node {
-            id
-            frontmatter {
-              title
-              tech
-              slug
-              cover
-            }
-          }
-        }
-      }
-    }
-  `)
-
+const CardList: React.FC<Props> = ({ data }) => {
   return (
     <Wrapper>
-      {edges.map(({ node }) => (
-        <Card
-          title={node.frontmatter.title}
-          image={node.frontmatter.cover}
-          link={`tutorials/${node.frontmatter.tech}/${node.frontmatter.slug}`}
-          key={node.frontmatter.slug}
-        />
-      ))}
+      {data.length > 0 ? (
+        data.map(({ node }) => (
+          <Card
+            title={node.frontmatter.title}
+            image={node.frontmatter.cover}
+            link={`tutorials/${node.frontmatter.tech}/${node.frontmatter.slug}`}
+            key={node.frontmatter.slug}
+          />
+        ))
+      ) : (
+        <h3 style={{ color: "white" }}>Coming soon!</h3>
+      )}
     </Wrapper>
   )
 }

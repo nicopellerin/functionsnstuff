@@ -19,6 +19,10 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const metaTitle =
+    title !== "helloworldnstuff"
+      ? `%s | ${site.siteMetadata.title}`
+      : `${title}`
 
   return (
     <Helmet
@@ -26,7 +30,7 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={metaTitle}
       meta={[
         {
           name: `description`,
@@ -69,6 +73,7 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
+  title: `helloworldnstuff`,
 }
 
 SEO.propTypes = {

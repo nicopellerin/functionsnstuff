@@ -21,6 +21,7 @@
     "gatsby-plugin-typescript": "^2.3.1",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-sharp": "^2.4.3",
+    "graphql-request": "^1.8.2",
     "lottie-web": "^5.6.8",
     "preact": "^10.4.0",
     "prop-types": "^15.7.2",
@@ -30,6 +31,7 @@
     "react-lottie": "^1.2.3",
     "react-tooltip": "^4.2.3",
     "styled-components": "^5.1.0",
+    "swr": "^0.2.0",
     "typeface-lora": "^0.0.72"
   },
   "devDependencies": {

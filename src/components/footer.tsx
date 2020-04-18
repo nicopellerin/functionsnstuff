@@ -28,7 +28,12 @@ const Footer = () => (
     <img
       src={wave}
       alt="wave"
-      style={{ position: "absolute", top: "-32%", width: "100%" }}
+      style={{
+        position: "absolute",
+        top: "-32%",
+        width: "100%",
+        pointerEvents: "none",
+      }}
     />
   </Wrapper>
 )

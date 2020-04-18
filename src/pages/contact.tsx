@@ -1,11 +1,18 @@
-import * as React from "react"
+import React from "react"
+import styled from "styled-components"
 
-const ContactPage = () => {
-  return (
-    <div>
-      <h2>Contact</h2>
-    </div>
-  )
-}
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import PageHeader from "../components/page-header"
+
+const ContactPage = () => (
+  <>
+    <SEO title="Contact" />
+    <PageHeader title="Contact" />
+    <Layout></Layout>
+  </>
+)
 
 export default ContactPage
+
+// Styles

@@ -27,7 +27,7 @@ const Header = () => {
   //   return () => animObj.destroy()
   // }, [])
 
-  const journalVariants = {
+  const terminalVariants = {
     hidden: {},
     show: {
       transition: {
@@ -50,7 +50,7 @@ const Header = () => {
       transition: {
         type: "spring",
         damping: 10,
-        stiffness: 20,
+        stiffness: 30,
       },
     },
   }
@@ -83,7 +83,7 @@ const Header = () => {
             Click
           </button>
           <TerminalContainer
-            variants={journalVariants}
+            variants={terminalVariants}
             initial="hidden"
             animate="show"
           >
@@ -120,89 +120,71 @@ const Header = () => {
             </motion.h3>
             <IconsList>
               <Link to="/tutorials/react">
-                <motion.div
+                <motion.img
+                  src={"/icons/react.png"}
+                  alt="react"
+                  width={75}
+                  variants={itemVariants}
+                  data-tip="React"
                   whileHover={{ scale: 1.1 }}
                   style={{ cursor: "pointer" }}
-                >
-                  <motion.img
-                    src={"/icons/react.png"}
-                    alt="react"
-                    width={75}
-                    variants={itemVariants}
-                    // animate={{
-                    //   y: [200, 10],
-                    //   opacity: [0, 1],
-                    //   transition: { delay: 0.1 },
-                    // }}
-                    data-tip="React"
-                  />
-                </motion.div>
+                />
               </Link>
-              <motion.img
-                src={"/icons/graphql.png"}
-                alt="react"
-                width={70}
-                // animate={{
-                //   y: [200, 10],
-                //   opacity: [0, 1],
-                //   transition: { delay: 0.2 },
-                // }}
-                variants={itemVariants}
-                whileHover={{ scale: 1.1 }}
-                data-tip="GraphQL"
-              />
-              <motion.img
-                src={"/icons/go.png"}
-                alt="react"
-                width={115}
-                variants={itemVariants}
-                // animate={{
-                //   y: [200, 10],
-                //   opacity: [0, 1],
-                //   transition: { delay: 0.3 },
-                // }}
-                whileHover={{ scale: 1.1 }}
-                data-tip="Go"
-              />
-              <motion.img
-                src={"/icons/nodejs.png"}
-                alt="react"
-                width={115}
-                variants={itemVariants}
-                // animate={{
-                //   y: [200, 10],
-                //   opacity: [0, 1],
-                //   transition: { delay: 0.4 },
-                // }}
-                whileHover={{ scale: 1.1 }}
-                data-tip="NodeJS"
-              />
-              <motion.img
-                src={"/icons/js.png"}
-                alt="react"
-                width={75}
-                variants={itemVariants}
-                // animate={{
-                //   y: [200, 10],
-                //   opacity: [0, 1],
-                //   transition: { delay: 0.5 },
-                // }}
-                whileHover={{ scale: 1.1 }}
-                data-tip="Javascript"
-              />
-              <motion.img
-                src={"/icons/typescript.svg"}
-                alt="react"
-                width={75}
-                variants={itemVariants}
-                // animate={{
-                //   y: [200, 10],
-                //   opacity: [0, 1],
-                //   transition: { delay: 0.6 },
-                // }}
-                whileHover={{ scale: 1.1 }}
-                data-tip="Typescript"
-              />
+              <Link to="/tutorials/graphql">
+                <motion.img
+                  src={"/icons/graphql.png"}
+                  alt="react"
+                  width={70}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  style={{ cursor: "pointer" }}
+                  data-tip="Graphql"
+                />
+              </Link>
+              <Link to="/tutorials/go">
+                <motion.img
+                  src={"/icons/go.png"}
+                  alt="react"
+                  width={115}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  style={{ cursor: "pointer" }}
+                  data-tip="Go"
+                />
+              </Link>
+              <Link to="/tutorials/nodejs">
+                <motion.img
+                  src={"/icons/nodejs.png"}
+                  alt="react"
+                  width={115}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  style={{ cursor: "pointer" }}
+                  data-tip="NodeJS"
+                />
+              </Link>
+              <Link to="/tutorials/javascript">
+                <motion.img
+                  src={"/icons/javascript.png"}
+                  alt="react"
+                  width={75}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  style={{ cursor: "pointer" }}
+                  data-tip="Javascript"
+                />
+              </Link>
+              <Link to="/tutorials/typescript">
+                <motion.img
+                  src={"/icons/typescript.svg"}
+                  alt="react"
+                  width={75}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  style={{ cursor: "pointer" }}
+                  data-tip="Typescript"
+                />
+              </Link>
               <ReactTooltip />
             </IconsList>
           </TerminalContainer>
