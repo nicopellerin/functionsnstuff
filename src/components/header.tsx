@@ -34,7 +34,6 @@ const Header = () => {
         type: "spring",
         damping: 100,
         stiffness: 300,
-        // velocity: 2,
         staggerChildren: 0.07,
       },
     },
@@ -79,7 +78,9 @@ const Header = () => {
               outline: "none",
               cursor: "pointer",
             }}
-          ></button>
+          >
+            Click
+          </button>
           <TerminalContainer
             variants={journalVariants}
             initial="hidden"
