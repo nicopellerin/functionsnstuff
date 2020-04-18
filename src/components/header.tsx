@@ -73,6 +73,7 @@ const Header = () => {
               top: 15,
               height: 20,
               background: "transparent",
+              color: "transparent",
               border: "none",
               zIndex: 3000,
               outline: "none",
