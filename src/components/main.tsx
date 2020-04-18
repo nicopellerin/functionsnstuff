@@ -119,6 +119,7 @@ const Tech = styled.aside`
 const TechTitle = styled.h4`
   font-size: 1.8rem;
   font-family: var(--systemFont);
+  color: var(--primaryColor);
 `
 
 const TechList = styled.ul`
