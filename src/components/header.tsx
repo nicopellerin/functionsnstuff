@@ -56,7 +56,7 @@ const Header = () => {
   }
 
   return (
-    <Wrapper bg={"/bg2.png"}>
+    <Wrapper bg={"/bg2.webp"}>
       <Container>
         <Navbar />
         <TerminalWrapper
