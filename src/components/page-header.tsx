@@ -6,7 +6,6 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 
 import wave from "../images/wave.svg"
-import cover from "../images/cover-react.jpg"
 
 interface Props {
   tech?: string
@@ -15,13 +14,14 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
-    <Wrapper bg={cover}>
+    <Wrapper bg={"/bg.png"}>
       <Container>
         <Navbar />
         <Heading>
           {tech ? (
             <Link to={`/tutorials/${tech}`}>
               <motion.img
+                initial={{ opacity: 0, y: 170 }}
                 animate={{ opacity: [0, 1], y: [170, 0] }}
                 src={`/icons/${tech}.png`}
                 width={120}

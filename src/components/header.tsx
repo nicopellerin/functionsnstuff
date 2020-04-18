@@ -27,8 +27,37 @@ const Header = () => {
   //   return () => animObj.destroy()
   // }, [])
 
+  const journalVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        type: "spring",
+        damping: 100,
+        stiffness: 300,
+        // velocity: 2,
+        staggerChildren: 0.07,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 200,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 10,
+        stiffness: 20,
+      },
+    },
+  }
+
   return (
-    <Wrapper bg={"/background-7.jpg"}>
+    <Wrapper bg={"/bg2.png"}>
       <Container>
         <Navbar />
         <TerminalWrapper
@@ -51,7 +80,11 @@ const Header = () => {
               cursor: "pointer",
             }}
           ></button>
-          <TerminalContainer>
+          <TerminalContainer
+            variants={journalVariants}
+            initial="hidden"
+            animate="show"
+          >
             <motion.h3
               style={{
                 fontSize: 16,
@@ -93,11 +126,12 @@ const Header = () => {
                     src={"/icons/react.png"}
                     alt="react"
                     width={75}
-                    animate={{
-                      y: [200, 10],
-                      opacity: [0, 1],
-                      transition: { delay: 0.1 },
-                    }}
+                    variants={itemVariants}
+                    // animate={{
+                    //   y: [200, 10],
+                    //   opacity: [0, 1],
+                    //   transition: { delay: 0.1 },
+                    // }}
                     data-tip="React"
                   />
                 </motion.div>
@@ -106,11 +140,12 @@ const Header = () => {
                 src={"/icons/graphql.png"}
                 alt="react"
                 width={70}
-                animate={{
-                  y: [200, 10],
-                  opacity: [0, 1],
-                  transition: { delay: 0.2 },
-                }}
+                // animate={{
+                //   y: [200, 10],
+                //   opacity: [0, 1],
+                //   transition: { delay: 0.2 },
+                // }}
+                variants={itemVariants}
                 whileHover={{ scale: 1.1 }}
                 data-tip="GraphQL"
               />
@@ -118,11 +153,12 @@ const Header = () => {
                 src={"/icons/go.png"}
                 alt="react"
                 width={115}
-                animate={{
-                  y: [200, 10],
-                  opacity: [0, 1],
-                  transition: { delay: 0.3 },
-                }}
+                variants={itemVariants}
+                // animate={{
+                //   y: [200, 10],
+                //   opacity: [0, 1],
+                //   transition: { delay: 0.3 },
+                // }}
                 whileHover={{ scale: 1.1 }}
                 data-tip="Go"
               />
@@ -130,11 +166,12 @@ const Header = () => {
                 src={"/icons/nodejs.png"}
                 alt="react"
                 width={115}
-                animate={{
-                  y: [200, 10],
-                  opacity: [0, 1],
-                  transition: { delay: 0.4 },
-                }}
+                variants={itemVariants}
+                // animate={{
+                //   y: [200, 10],
+                //   opacity: [0, 1],
+                //   transition: { delay: 0.4 },
+                // }}
                 whileHover={{ scale: 1.1 }}
                 data-tip="NodeJS"
               />
@@ -142,11 +179,12 @@ const Header = () => {
                 src={"/icons/js.png"}
                 alt="react"
                 width={75}
-                animate={{
-                  y: [200, 10],
-                  opacity: [0, 1],
-                  transition: { delay: 0.5 },
-                }}
+                variants={itemVariants}
+                // animate={{
+                //   y: [200, 10],
+                //   opacity: [0, 1],
+                //   transition: { delay: 0.5 },
+                // }}
                 whileHover={{ scale: 1.1 }}
                 data-tip="Javascript"
               />
@@ -154,11 +192,12 @@ const Header = () => {
                 src={"/icons/typescript.svg"}
                 alt="react"
                 width={75}
-                animate={{
-                  y: [200, 10],
-                  opacity: [0, 1],
-                  transition: { delay: 0.6 },
-                }}
+                variants={itemVariants}
+                // animate={{
+                //   y: [200, 10],
+                //   opacity: [0, 1],
+                //   transition: { delay: 0.6 },
+                // }}
                 whileHover={{ scale: 1.1 }}
                 data-tip="Typescript"
               />
@@ -221,7 +260,7 @@ const TerminalWrapper = styled(motion.div)`
   z-index: 10;
 `
 
-const TerminalContainer = styled.div`
+const TerminalContainer = styled(motion.div)`
   position: relative;
   width: 100%;
   height: 100%;
