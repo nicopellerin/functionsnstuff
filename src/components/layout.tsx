@@ -1,23 +1,13 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 
-import Header from "./header"
+import "typeface-lora"
 
-import { GlobalStyles } from "../styles/global-styles"
 import Footer from "./footer"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+import { GlobalStyles } from "../styles/global-styles"
 
+const Layout = ({ children }) => {
   return (
     <Wrapper>
       <div>

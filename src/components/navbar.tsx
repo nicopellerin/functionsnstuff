@@ -4,20 +4,18 @@ import styled from "styled-components"
 import { motion, AnimateSharedLayout } from "framer-motion"
 import { Link } from "gatsby"
 
-import logo from "../images/logo.png"
-
 const menuItems = [
   {
     title: "Tutorials",
-    link: "/",
+    link: "/tutorials",
   },
   {
     title: "Tips",
-    link: "/",
+    link: "/tips",
   },
   {
     title: "Contact",
-    link: "/",
+    link: "/contact",
   },
 ]
 
@@ -26,29 +24,29 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <img src={logo} alt="logo" width={267} />
+      <Link to="/">
+        <img src={"/logo.png"} alt="logo" width={267} />
+      </Link>
       <Menu>
         <MenuList onMouseLeave={() => setShow(null)}>
           <AnimateSharedLayout>
             {menuItems.map(({ title, link }, i) => (
-              <>
-                <MenuListItem key={title} onMouseEnter={() => setShow(i)}>
-                  <Link to={link}>{title}</Link>
-                  {show === i && (
-                    <motion.div
-                      layoutId="menuItem"
-                      style={{
-                        position: "absolute",
-                        left: 0,
-                        bottom: -5,
-                        background: "var(--menuColor)",
-                        height: 2,
-                        width: "100%",
-                      }}
-                    />
-                  )}
-                </MenuListItem>
-              </>
+              <MenuListItem key={title} onMouseEnter={() => setShow(i)}>
+                <Link to={link}>{title}</Link>
+                {show === i && (
+                  <motion.div
+                    layoutId="menuItem"
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      bottom: -5,
+                      background: "var(--menuColor)",
+                      height: 2,
+                      width: "100%",
+                    }}
+                  />
+                )}
+              </MenuListItem>
             ))}
           </AnimateSharedLayout>
         </MenuList>

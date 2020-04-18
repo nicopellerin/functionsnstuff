@@ -1,38 +1,35 @@
 import * as React from "react"
-import { useState } from "react"
 import styled from "styled-components"
-import { motion, AnimateSharedLayout } from "framer-motion"
+import { motion } from "framer-motion"
 import { Link } from "gatsby"
-
-import bg from "../images/hero.png"
-import terminal from "../images/terminal.png"
-import reactLogo from "../images/icons/react.png"
-import graphqlLogo from "../images/icons/graphql.png"
-import goLogo from "../images/icons/go.png"
-import nodeLogo from "../images/icons/nodejs.png"
-import jsLogo from "../images/icons/js.png"
-import tsLogo from "../images/icons/typescript.svg"
-import wave from "../images/wave.svg"
-
-import cover from "../images/cover-react.jpg"
 
 import Navbar from "./navbar"
 
+import wave from "../images/wave.svg"
+import cover from "../images/cover-react.jpg"
+
 interface Props {
   tech?: string
+  title?: string
 }
 
-const PageHeader: React.FC<Props> = ({ tech = "react" }) => {
+const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
     <Wrapper bg={cover}>
       <Container>
         <Navbar />
         <Heading>
-          <motion.img
-            animate={{ opacity: [0, 1], y: [170, 0] }}
-            src={graphqlLogo}
-            width={120}
-          />
+          {tech ? (
+            <Link to={`/tutorials/${tech}`}>
+              <motion.img
+                animate={{ opacity: [0, 1], y: [170, 0] }}
+                src={`/icons/${tech}.png`}
+                width={120}
+              />
+            </Link>
+          ) : (
+            <Title>{title}</Title>
+          )}
         </Heading>
       </Container>
       <img
@@ -77,6 +74,5 @@ const Heading = styled.div`
 `
 
 const Title = styled.h1`
-  font-size: 4rem;
-  color: ghostwhite;
+  color: var(--textColor);
 `

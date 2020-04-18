@@ -7,7 +7,7 @@ import { motion, AnimateSharedLayout } from "framer-motion"
 const techItems = [
   {
     title: "React",
-    link: "/",
+    link: "/tutorials/react",
   },
   {
     title: "NodeJS",
@@ -69,26 +69,24 @@ const Main = () => {
         <TechList onMouseLeave={() => setShow(null)}>
           <AnimateSharedLayout>
             {techItems.map(({ title, link }, i) => (
-              <>
-                <TechListItem key={title} onMouseEnter={() => setShow(i)}>
-                  <Link to={link}>{title}</Link>
-                  {show === i && (
-                    <motion.div
-                      layoutId="techItem"
-                      style={{
-                        position: "absolute",
-                        left: -17,
-                        background: "#FF88AA",
-                        height: 8,
-                        width: 8,
-                        borderRadius: "100%",
-                        top: "26%",
-                        transform: "translateY(-50%)",
-                      }}
-                    />
-                  )}
-                </TechListItem>
-              </>
+              <TechListItem key={title} onMouseEnter={() => setShow(i)}>
+                <Link to={link}>{title}</Link>
+                {show === i && (
+                  <motion.div
+                    layoutId="techItem"
+                    style={{
+                      position: "absolute",
+                      left: -17,
+                      background: "#FF88AA",
+                      height: 8,
+                      width: 8,
+                      borderRadius: "100%",
+                      top: "26%",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                )}
+              </TechListItem>
             ))}
           </AnimateSharedLayout>
         </TechList>

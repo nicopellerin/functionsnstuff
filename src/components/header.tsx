@@ -1,44 +1,38 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
-import { motion, AnimateSharedLayout } from "framer-motion"
-import { Link } from "gatsby"
+import { motion } from "framer-motion"
 import ReactTooltip from "react-tooltip"
-import Lottie from "react-lottie"
+import lottie from "lottie-web"
+import { Link } from "gatsby"
 
-import bg from "../images/hero.png"
-import terminal from "../images/terminal.png"
-import reactLogo from "../images/icons/react.png"
-import graphqlLogo from "../images/icons/graphql.png"
-import goLogo from "../images/icons/go.png"
-import nodeLogo from "../images/icons/nodejs.png"
-import jsLogo from "../images/icons/js.png"
-import tsLogo from "../images/icons/typescript.svg"
-import wave from "../images/wave.svg"
-
-import anim from "../anim-funny.json"
 import Navbar from "./navbar"
 
-import cover from "../images/background-7.jpg"
+import animation from "../anim.json"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: false,
-    animationData: anim,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  }
+  // const lottieRef = useRef()
+
+  // useEffect(() => {
+  //   const animObj = lottie.loadAnimation({
+  //     container: lottieRef.current,
+  //     renderer: "svg",
+  //     loop: true,
+  //     autoplay: false,
+  //     animationData: animation,
+  //   })
+
+  //   return () => animObj.destroy()
+  // }, [])
 
   return (
-    <Wrapper bg={cover}>
+    <Wrapper bg={"/background-7.jpg"}>
       <Container>
         <Navbar />
         <TerminalWrapper
-          terminal={terminal}
+          terminal={"/terminal.png"}
           initial={{ y: 400, x: "-50%" }}
           animate={{ y: toggleBrowser ? 300 : 20 }}
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
@@ -90,24 +84,26 @@ const Header = () => {
               </motion.span>
             </motion.h3>
             <IconsList>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                style={{ cursor: "pointer" }}
-              >
-                <motion.img
-                  src={reactLogo}
-                  alt="react"
-                  width={75}
-                  animate={{
-                    y: [200, 10],
-                    opacity: [0, 1],
-                    transition: { delay: 0.1 },
-                  }}
-                  data-tip="React"
-                />
-              </motion.div>
+              <Link to="/tutorials/react">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <motion.img
+                    src={"/icons/react.png"}
+                    alt="react"
+                    width={75}
+                    animate={{
+                      y: [200, 10],
+                      opacity: [0, 1],
+                      transition: { delay: 0.1 },
+                    }}
+                    data-tip="React"
+                  />
+                </motion.div>
+              </Link>
               <motion.img
-                src={graphqlLogo}
+                src={"/icons/graphql.png"}
                 alt="react"
                 width={70}
                 animate={{
@@ -119,7 +115,7 @@ const Header = () => {
                 data-tip="GraphQL"
               />
               <motion.img
-                src={goLogo}
+                src={"/icons/go.png"}
                 alt="react"
                 width={115}
                 animate={{
@@ -131,7 +127,7 @@ const Header = () => {
                 data-tip="Go"
               />
               <motion.img
-                src={nodeLogo}
+                src={"/icons/nodejs.png"}
                 alt="react"
                 width={115}
                 animate={{
@@ -143,7 +139,7 @@ const Header = () => {
                 data-tip="NodeJS"
               />
               <motion.img
-                src={jsLogo}
+                src={"/icons/js.png"}
                 alt="react"
                 width={75}
                 animate={{
@@ -155,7 +151,7 @@ const Header = () => {
                 data-tip="Javascript"
               />
               <motion.img
-                src={tsLogo}
+                src={"/icons/typescript.svg"}
                 alt="react"
                 width={75}
                 animate={{
@@ -173,19 +169,14 @@ const Header = () => {
         <motion.div
           initial={{ opacity: 0, x: "-50%" }}
           animate={{ opacity: [0, 1] }}
-          style={{ position: "absolute", top: "23%", left: "50%" }}
+          style={{ position: "absolute", top: "20px", left: "50%" }}
           transition={{ delay: 1 }}
         >
-          <Lottie
-            options={defaultOptions}
-            height={350}
-            width={350}
-            isPaused={!toggleBrowser}
-          />
+          {/* <div style={{ width: 400 }} ref={lottieRef} /> */}
         </motion.div>
       </Container>
       <img
-        src={wave}
+        src={"/wave.svg"}
         style={{
           position: "absolute",
           bottom: -88,

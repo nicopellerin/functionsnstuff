@@ -9,13 +9,15 @@ interface Props {
   link?: string
 }
 
-import cover from "../images/cover-react.jpg"
-
-const Card: React.FC<Props> = ({ title, image, link }) => {
+const Card: React.FC<Props> = ({
+  title,
+  image,
+  link = "/tutorials/react/react",
+}) => {
   return (
     <Link to={link}>
       <Wrapper
-        image={cover}
+        image={image}
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>
@@ -28,9 +30,8 @@ export default Card
 
 // Styles
 const Wrapper = styled(motion.div)`
-  background: ${(props: { image: string }) =>
-    props.image && `url(${props.image})`};
-  background: #112;
+  background: ${props => `url(${props.image})`};
+  background-size: cover;
   padding: 2.5rem 3rem;
   border-radius: 20px;
   height: 20rem;
