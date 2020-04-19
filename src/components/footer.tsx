@@ -7,18 +7,26 @@ const Footer = () => (
   <Wrapper>
     <Container>
       <NewsletterWrapper>
-        <Title>Newsletter</Title>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-          voluptatum asperiores fugit numquam enim eos quia? Obcaecati tempore
-          esse eligendi, illum, magnam nostrum itaque nobis nihil labore
-          accusamus atque aspernatur?
-        </p>
-        <Form>
-          <Label htmlFor="email">Email</Label>
-          <InputField id="email" name="email" type="email" />
-          <Button>Subscribe</Button>
-        </Form>
+        <div>
+          <Title>Newsletter</Title>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
+            voluptatum asperiores fugit numquam enim eos quia? Obcaecati tempore
+            esse eligendi, illum, magnam nostrum itaque nobis nihil labore
+            accusamus atque aspernatur?
+          </p>
+          <Form>
+            <Label htmlFor="email">Email</Label>
+            <InputField id="email" name="email" type="email" />
+            <Button>Subscribe</Button>
+          </Form>
+        </div>
+        <img
+          src="/donut.png"
+          alt="donut"
+          width={275}
+          style={{ marginTop: "4rem" }}
+        />
       </NewsletterWrapper>
 
       <FooterWrapper>
@@ -55,8 +63,11 @@ const Container = styled.div`
 
 const NewsletterWrapper = styled.div`
   min-height: 20rem;
-  max-width: 60rem;
   padding-top: 8rem;
+  display: grid;
+  grid-template-columns: 60rem 1fr;
+  place-items: center;
+  grid-gap: 5rem;
 `
 
 const Title = styled.h3`
