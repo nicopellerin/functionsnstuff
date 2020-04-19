@@ -2,6 +2,8 @@ import * as React from "react"
 import styled from "styled-components"
 
 import wave from "../images/wavee.svg"
+import Donut from "./donut"
+import { motion } from "framer-motion"
 
 const Footer = () => (
   <Wrapper>
@@ -21,11 +23,17 @@ const Footer = () => (
             <Button>Subscribe</Button>
           </Form>
         </div>
-        <img
+        <motion.img
           src="/donut.png"
           alt="donut"
-          width={275}
+          width={280}
           style={{ marginTop: "4rem" }}
+          animate={{ y: [10, -10], rotate: [0, 3] }}
+          transition={{
+            yoyo: Infinity,
+            duration: 4,
+            ease: "easeInOut",
+          }}
         />
       </NewsletterWrapper>
 
