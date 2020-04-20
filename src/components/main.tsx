@@ -65,7 +65,7 @@ const Main = () => {
   return (
     <Wrapper>
       <div>
-        <div style={{ marginBottom: "6rem" }}>
+        <div style={{ marginBottom: "8rem" }}>
           <Title>
             Latest{" "}
             <svg

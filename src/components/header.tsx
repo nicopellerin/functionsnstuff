@@ -101,7 +101,7 @@ const Header = () => {
         <TerminalWrapper
           terminal={"/terminal.png"}
           initial={{ y: 400, x: "-50%" }}
-          animate={{ y: toggleBrowser ? 300 : 20 }}
+          animate={{ y: toggleBrowser ? 310 : 10 }}
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
         >
           <button
@@ -128,7 +128,7 @@ const Header = () => {
           >
             <motion.h3
               style={{
-                fontSize: 16,
+                fontSize: 18,
                 position: "absolute",
                 fontWeight: 500,
                 fontFamily: "menlo",
@@ -160,13 +160,14 @@ const Header = () => {
             <IconsList>
               {techList.map(({ tech, logo, link, width }) => (
                 <Link to={link}>
-                  <TechWrapper>
+                  <TechWrapper
+                    whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
+                  >
                     <motion.img
                       src={logo}
                       alt="react"
                       width={width}
                       variants={itemVariants}
-                      whileHover={{ scale: 1.1 }}
                       style={{ cursor: "pointer" }}
                       onMouseEnter={() => setSelected(tech)}
                       onMouseLeave={() => setSelected(null)}
@@ -211,7 +212,7 @@ const Wrapper = styled.div`
   background: ${props => `url(${props.bg})`};
   background-size: cover;
   background-attachment: fixed;
-  height: 65rem;
+  height: 70rem;
   position: relative;
   overflow: hidden;
 `
@@ -225,7 +226,7 @@ const TerminalWrapper = styled(motion.div)`
   background: ${props => `url(${props.terminal})`};
   background-size: cover;
   width: 100rem;
-  height: 45rem;
+  height: 46rem;
   position: absolute;
   bottom: 0px;
   left: 50%;
@@ -245,7 +246,7 @@ const IconsList = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 95%;
-  height: 92%;
+  height: 100%;
   margin: 0 auto;
 `
 
@@ -260,5 +261,5 @@ const TechTitle = styled.h2`
   font-weight: 500;
   color: var(--primaryColor);
   position: absolute;
-  bottom: -5rem;
+  bottom: -4.5rem;
 `
