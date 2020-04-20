@@ -14,9 +14,9 @@ const Footer = () => (
             <span style={{ color: "var(--primaryColor)" }}>
               helloworldnstuff
             </span>{" "}
-            newsletter to get access to the newest tutorials and tips right from
-            your mailbox. No spam ever. Fun fact: Built the donut on the right
-            by following a Blender tutorial. Yay to tutorials! :P
+            newsletter to get access to the newest tutorials and tips. No spam
+            ever. Fun fact: Built the donut on the right by following a Blender
+            tutorial. Yay to tutorials! :P
           </p>
           <Form>
             <Label htmlFor="email">Email</Label>
