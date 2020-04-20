@@ -35,7 +35,7 @@ const techItems = [
     link: "/tutorials/graphql",
   },
   {
-    title: "Go",
+    title: "Golang",
     link: "/tutorials/golang",
   },
 ]
