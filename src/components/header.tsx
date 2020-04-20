@@ -235,7 +235,7 @@ const Container = styled.header`
 const TerminalWrapper = styled(motion.div)`
   background: ${props => `url(${props.terminal})`};
   background-size: cover;
-  width: 83rem;
+  width: 100rem;
   height: 45rem;
   position: absolute;
   bottom: 0px;

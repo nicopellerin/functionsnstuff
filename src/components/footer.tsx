@@ -79,7 +79,7 @@ const NewsletterWrapper = styled.div`
 `
 
 const Title = styled.h3`
-  font-size: 2rem;
+  font-size: 3.6rem;
 `
 
 const Form = styled.form`

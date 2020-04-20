@@ -3,6 +3,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { motion, AnimateSharedLayout } from "framer-motion"
+import { useStaticQuery, graphql } from "gatsby"
 
 const techItems = [
   {
@@ -42,20 +43,72 @@ const techItems = [
 const Main = () => {
   const [show, setShow] = useState(null)
 
+  const {
+    allMdx: { edges },
+  } = useStaticQuery(graphql`
+    {
+      allMdx(limit: 1) {
+        edges {
+          node {
+            frontmatter {
+              title
+              tech
+              cover
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <Wrapper>
       <div>
         <div style={{ marginBottom: "6rem" }}>
-          <Title>Welcome to helloworldnstuff</Title>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
+          <Title>
+            Latest{" "}
+            <svg
+              style={{ marginLeft: 10 }}
+              xmlns="http://www.w3.org/2000/svg"
+              width="10.154"
+              height="18"
+            >
+              <path
+                d="M 0.443 9.711 C 0.01 9.279 0.01 8.578 0.443 8.146 L 8.265 0.324 C 8.697 -0.108 9.397 -0.108 9.829 0.324 L 9.829 0.324 C 10.262 0.756 10.262 1.456 9.829 1.888 L 2.007 9.711 C 1.575 10.143 0.875 10.143 0.443 9.711 Z M 0.324 8.289 C 0.756 7.857 1.456 7.857 1.889 8.289 L 9.711 16.111 C 10.143 16.544 10.143 17.244 9.711 17.676 L 9.711 17.676 C 9.279 18.108 8.579 18.108 8.147 17.676 L 0.324 9.854 C -0.108 9.422 -0.108 8.721 0.324 8.289 Z"
+                transform="rotate(180 5.077 9)"
+                fill="rgba(255, 137, 170, 1.00)"
+              ></path>
+            </svg>
+          </Title>
+          <Link
+            to={`/tutorials/${edges[0].node.frontmatter.tech}/${edges[0].node.frontmatter.slug}`}
+          >
+            <h4>{edges[0].node.frontmatter.title}</h4>
+            <img
+              src={edges[0].node.frontmatter.cover}
+              width={400}
+              alt=""
+              style={{ borderRadius: 10 }}
+            />
+          </Link>
         </div>
         <div>
-          <Title>Learn by building</Title>
+          <Title>
+            Learn by building{" "}
+            <svg
+              style={{ marginLeft: 10 }}
+              xmlns="http://www.w3.org/2000/svg"
+              width="10.154"
+              height="18"
+            >
+              <path
+                d="M 0.443 9.711 C 0.01 9.279 0.01 8.578 0.443 8.146 L 8.265 0.324 C 8.697 -0.108 9.397 -0.108 9.829 0.324 L 9.829 0.324 C 10.262 0.756 10.262 1.456 9.829 1.888 L 2.007 9.711 C 1.575 10.143 0.875 10.143 0.443 9.711 Z M 0.324 8.289 C 0.756 7.857 1.456 7.857 1.889 8.289 L 9.711 16.111 C 10.143 16.544 10.143 17.244 9.711 17.676 L 9.711 17.676 C 9.279 18.108 8.579 18.108 8.147 17.676 L 0.324 9.854 C -0.108 9.422 -0.108 8.721 0.324 8.289 Z"
+                transform="rotate(180 5.077 9)"
+                fill="rgba(255, 137, 170, 1.00)"
+              ></path>
+            </svg>
+          </Title>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -113,7 +166,8 @@ const Wrapper = styled.main`
 `
 
 const Title = styled.h3`
-  font-size: 2.2rem;
+  font-size: 3.2rem;
+  line-height: 1;
 `
 
 const Tech = styled.aside`
