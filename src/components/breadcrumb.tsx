@@ -21,7 +21,7 @@ const Breadcrumb: React.FC = () => {
         </Link>
         <Sep />
         <Link to={`/${type}/${tech}`}>
-          <Tech>{tech}</Tech>
+          <Tech aria-label={`${tech} tutorials`}>{tech}</Tech>
           <TechHide>{`${tech} tutorials`}</TechHide>
         </Link>
       </Wrapper>
