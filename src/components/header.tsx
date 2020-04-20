@@ -1,11 +1,12 @@
 import * as React from "react"
-import { useState, useEffect, useRef } from "react"
+import { useState, Suspense } from "react"
 import styled from "styled-components"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "gatsby"
 
 import Navbar from "./navbar"
-import Buddy from "./buddy"
+
+const Buddy = React.lazy(() => import("./buddy"))
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
@@ -169,7 +170,13 @@ const Header = () => {
           style={{ position: "absolute", top: "20px", left: "50%" }}
           transition={{ delay: 1 }}
         >
-          <Buddy toggleBrowser={toggleBrowser} />
+          <Suspense fallback={null}>
+            {toggleBrowser && (
+              <motion.div>
+                <Buddy toggleBrowser={toggleBrowser} />
+              </motion.div>
+            )}
+          </Suspense>
         </motion.div>
       </Container>
       <img
