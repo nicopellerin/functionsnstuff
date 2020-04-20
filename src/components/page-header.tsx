@@ -27,7 +27,9 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
                 width={120}
                 alt={tech}
               />
-              <span style={{ position: "absolute", left: -9999 }}>{tech}</span>
+              <span
+                style={{ position: "absolute", left: -9999 }}
+              >{`${tech} tutorials`}</span>
             </Link>
           ) : (
             <Title
