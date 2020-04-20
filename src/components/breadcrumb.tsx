@@ -22,6 +22,7 @@ const Breadcrumb: React.FC = () => {
         <Sep />
         <Link to={`/${type}/${tech}`}>
           <Tech>{tech}</Tech>
+          <TechHide>{`${tech} tutorials`}</TechHide>
         </Link>
       </Wrapper>
     </div>
@@ -59,4 +60,9 @@ const SepStyled = styled.span`
   font-size: 1.6rem;
   margin: 0 1rem;
   color: var(--primaryColor);
+`
+
+const TechHide = styled.span`
+  position: absolute;
+  left: -9999px;
 `
