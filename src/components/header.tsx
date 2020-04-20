@@ -2,30 +2,14 @@ import * as React from "react"
 import { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
-import lottie from "lottie-web"
 import { Link } from "gatsby"
 
 import Navbar from "./navbar"
-
-import animation from "../anim.json"
+import Buddy from "./buddy"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState(null)
-
-  // const lottieRef = useRef()
-
-  // useEffect(() => {
-  //   const animObj = lottie.loadAnimation({
-  //     container: lottieRef.current,
-  //     renderer: "svg",
-  //     loop: true,
-  //     autoplay: false,
-  //     animationData: animation,
-  //   })
-
-  //   return () => animObj.destroy()
-  // }, [])
 
   const techList = [
     {
@@ -185,7 +169,7 @@ const Header = () => {
           style={{ position: "absolute", top: "20px", left: "50%" }}
           transition={{ delay: 1 }}
         >
-          {/* <div style={{ width: 400 }} ref={lottieRef} /> */}
+          <Buddy toggleBrowser={toggleBrowser} />
         </motion.div>
       </Container>
       <img
