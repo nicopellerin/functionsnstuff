@@ -22,7 +22,8 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-preact`,
+    // `gatsby-plugin-preact`,
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -41,10 +42,42 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve("./src/templates/tutorials.tsx"),
         },
+        gatsbyRemarkPlugins: [`gatsby-remark-embed-snippet`],
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-embed-snippet`,
+            options: {
+              directory: `${__dirname}`,
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              aliases: {
+                dosini: `ini`,
+                env: `bash`,
+                es6: `js`,
+                flowchart: `none`,
+                gitignore: `none`,
+                gql: `graphql`,
+                htaccess: `apacheconf`,
+                mdx: `markdown`,
+                ml: `fsharp`,
+                styl: `stylus`,
+              },
+            },
+          },
+        ],
       },
     },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-typescript`,
+    `gatsby-plugin-netlify-cache`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

@@ -68,4 +68,16 @@ export const GlobalStyles = createGlobalStyle`
     color: var(--menuColor);
     text-decoration: none;
   }
+
+  .language-jsx{
+  background-color: #112;
+  display: block;
+  font-size: 1.6rem;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding: 1em 0;
+  padding-right: 1em;
+  padding-left: 2em;
+  border-left: 0.25em solid #f99;
+}
 `

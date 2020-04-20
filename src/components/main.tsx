@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import { motion, AnimateSharedLayout } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
+import Spacer from "./spacer"
 
 const techItems = [
   {
@@ -67,7 +68,7 @@ const Main = () => {
       <div>
         <div style={{ marginBottom: "8rem" }}>
           <Title>
-            Latest{" "}
+            Latest tutorial{" "}
             <svg
               style={{ marginLeft: 10 }}
               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +94,7 @@ const Main = () => {
             />
           </Link>
         </div>
-        <div>
+        {/* <div>
           <Title>
             Learn by building{" "}
             <svg
@@ -110,12 +111,10 @@ const Main = () => {
             </svg>
           </Title>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            As I was (and still am) learning, I found concepts were easier to grasp when putting them to execution by building 
           </p>
-        </div>
+        </div> */}
+        {/* <Spacer /> */}
       </div>
       <Tech>
         <TechTitle>Technology</TechTitle>
@@ -129,7 +128,7 @@ const Main = () => {
                     style={{
                       position: "absolute",
                       left: -15,
-                      top: "26%",
+                      top: "28%",
                       transform: "translateY(-50%)",
                     }}
                     layoutId="techItem"
@@ -159,7 +158,6 @@ export default Main
 const Wrapper = styled.main`
   display: grid;
   grid-template-columns: 1fr auto;
-  justify-items: center;
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;

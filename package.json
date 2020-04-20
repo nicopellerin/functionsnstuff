@@ -13,13 +13,17 @@
     "gatsby-image": "^2.3.1",
     "gatsby-plugin-manifest": "^2.3.3",
     "gatsby-plugin-mdx": "^1.1.9",
+    "gatsby-plugin-netlify-cache": "^1.2.0",
     "gatsby-plugin-offline": "^3.1.2",
     "gatsby-plugin-preact": "^3.2.3",
     "gatsby-plugin-react-helmet": "^3.2.1",
     "gatsby-plugin-sharp": "^2.5.3",
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-plugin-typescript": "^2.3.1",
+    "gatsby-remark-embed-snippet": "^4.2.4",
+    "gatsby-remark-prismjs": "^3.4.4",
     "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-transformer-remark": "^2.7.3",
     "gatsby-transformer-sharp": "^2.4.3",
     "graphql-request": "^1.8.2",
     "lottie-web": "^5.6.8",
@@ -37,6 +41,7 @@
     "typeface-lora": "^0.0.72"
   },
   "devDependencies": {
+    "@mdx-js/loader": "^1.5.8",
     "prettier": "^1.19.1"
   },
   "keywords": [

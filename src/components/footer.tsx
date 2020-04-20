@@ -25,7 +25,7 @@ const Footer = () => (
           </Form>
         </div>
         <img
-          src="/donut.png"
+          src="/donut3.png"
           alt="donut"
           width={375}
           style={{ marginTop: "8rem" }}
