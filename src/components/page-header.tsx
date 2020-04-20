@@ -67,7 +67,7 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.header`
-  max-width: 80rem;
+  max-width: 100rem;
   margin: 0 auto;
   height: 100%;
 `

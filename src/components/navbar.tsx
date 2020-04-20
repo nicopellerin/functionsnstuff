@@ -59,7 +59,6 @@ export default Navbar
 
 // Styles
 const Wrapper = styled.div`
-  max-width: 80rem;
   width: 100%;
   margin: 0 auto;
   padding: 4rem 0;
