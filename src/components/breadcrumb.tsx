@@ -20,7 +20,7 @@ const Breadcrumb: React.FC = () => {
           <Type>{type}</Type>
         </Link>
         <Sep />
-        <Link to={`/${type}/${tech}`}>
+        <Link to={`/${type}/${tech}`} aria-label={`${tech} tutorials`}>
           <Tech>{tech}</Tech>
         </Link>
       </Wrapper>
