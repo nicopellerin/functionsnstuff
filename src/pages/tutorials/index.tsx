@@ -20,9 +20,9 @@ const techList = [
     width: 90,
   },
   {
-    tech: "Go",
+    tech: "Golang",
     logo: "/icons/go.png",
-    link: "/tutorials/go",
+    link: "/tutorials/golang",
     width: 160,
   },
   {

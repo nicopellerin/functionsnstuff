@@ -13,7 +13,7 @@ const TutorialsGo = () => {
     allMdx: { edges },
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { tech: { eq: "go" } } }) {
+      allMdx(filter: { frontmatter: { tech: { eq: "golang" } } }) {
         edges {
           node {
             id
@@ -31,7 +31,7 @@ const TutorialsGo = () => {
 
   return (
     <>
-      <SEO title="Go - Tutorials" />
+      <SEO title="Golang - Tutorials" />
       <PageHeader tech="go" />
       <Layout>
         <Breadcrumb />
