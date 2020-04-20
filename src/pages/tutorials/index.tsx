@@ -67,6 +67,7 @@ const TutorialsPage = () => (
           <TechCard tech={tech} logo={logo} link={link} width={width} />
         ))}
       </TechCardList>
+      <Spacer />
     </Layout>
   </>
 )
@@ -80,4 +81,8 @@ const TechCardList = styled.div`
   align-items: center;
   grid-gap: 7rem 3rem;
   justify-items: center;
+`
+
+const Spacer = styled.div`
+  margin-bottom: 6rem;
 `

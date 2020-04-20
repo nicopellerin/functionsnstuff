@@ -9,7 +9,7 @@ const Footer = () => (
       <NewsletterWrapper>
         <div>
           <Title>Newsletter</Title>
-          <p>
+          <Text>
             Subscribe to the{" "}
             <span style={{ color: "var(--primaryColor)" }}>
               helloworldnstuff
@@ -17,7 +17,7 @@ const Footer = () => (
             newsletter to get access to the newest tutorials and tips. No spam
             ever. Fun fact: Built the donut on the right by following a Blender
             tutorial. Yay to tutorials! :P
-          </p>
+          </Text>
           <Form>
             <Label htmlFor="email">Email</Label>
             <InputField id="email" name="email" type="email" />
@@ -75,6 +75,11 @@ const NewsletterWrapper = styled.div`
 
 const Title = styled.h3`
   font-size: 3.6rem;
+  margin-bottom: 2rem;
+`
+
+const Text = styled.p`
+  margin-bottom: 3rem;
 `
 
 const Form = styled.form`
