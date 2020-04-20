@@ -2,7 +2,6 @@ import * as React from "react"
 import { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
-import ReactTooltip from "react-tooltip"
 import lottie from "lottie-web"
 import { Link } from "gatsby"
 
@@ -12,6 +11,7 @@ import animation from "../anim.json"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
+  const [selected, setSelected] = useState(null)
 
   // const lottieRef = useRef()
 
@@ -26,6 +26,45 @@ const Header = () => {
 
   //   return () => animObj.destroy()
   // }, [])
+
+  const techList = [
+    {
+      tech: "React",
+      logo: "/icons/react.png",
+      link: "/tutorials/react",
+      width: 100,
+    },
+    {
+      tech: "GraphQL",
+      logo: "/icons/graphql.png",
+      link: "/tutorials/graphql",
+      width: 90,
+    },
+    {
+      tech: "Go",
+      logo: "/icons/go.png",
+      link: "/tutorials/go",
+      width: 160,
+    },
+    {
+      tech: "NodeJS",
+      logo: "/icons/nodejs.png",
+      link: "/tutorials/nodejs",
+      width: 120,
+    },
+    {
+      tech: "Javascript",
+      logo: "/icons/javascript.png",
+      link: "/tutorials/javascript",
+      width: 90,
+    },
+    {
+      tech: "Typescript",
+      logo: "/icons/typescript.svg",
+      link: "/tutorials/typescript",
+      width: 90,
+    },
+  ]
 
   const terminalVariants = {
     hidden: {},
@@ -119,73 +158,23 @@ const Header = () => {
               </motion.span>
             </motion.h3>
             <IconsList>
-              <Link to="/tutorials/react">
-                <motion.img
-                  src={"/icons/react.png"}
-                  alt="react"
-                  width={75}
-                  variants={itemVariants}
-                  data-tip="React"
-                  whileHover={{ scale: 1.1 }}
-                  style={{ cursor: "pointer" }}
-                />
-              </Link>
-              <Link to="/tutorials/graphql">
-                <motion.img
-                  src={"/icons/graphql.png"}
-                  alt="react"
-                  width={70}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  style={{ cursor: "pointer" }}
-                  data-tip="Graphql"
-                />
-              </Link>
-              <Link to="/tutorials/go">
-                <motion.img
-                  src={"/icons/go.png"}
-                  alt="react"
-                  width={115}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  style={{ cursor: "pointer" }}
-                  data-tip="Go"
-                />
-              </Link>
-              <Link to="/tutorials/nodejs">
-                <motion.img
-                  src={"/icons/nodejs.png"}
-                  alt="react"
-                  width={115}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  style={{ cursor: "pointer" }}
-                  data-tip="NodeJS"
-                />
-              </Link>
-              <Link to="/tutorials/javascript">
-                <motion.img
-                  src={"/icons/javascript.png"}
-                  alt="react"
-                  width={75}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  style={{ cursor: "pointer" }}
-                  data-tip="Javascript"
-                />
-              </Link>
-              <Link to="/tutorials/typescript">
-                <motion.img
-                  src={"/icons/typescript.svg"}
-                  alt="react"
-                  width={75}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  style={{ cursor: "pointer" }}
-                  data-tip="Typescript"
-                />
-              </Link>
-              <ReactTooltip />
+              {techList.map(({ tech, logo, link, width }) => (
+                <Link to={link}>
+                  <TechWrapper>
+                    <motion.img
+                      src={logo}
+                      alt="react"
+                      width={width}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                      style={{ cursor: "pointer" }}
+                      onMouseEnter={() => setSelected(tech)}
+                      onMouseLeave={() => setSelected(null)}
+                    />
+                    {selected === tech && <TechTitle>{tech}</TechTitle>}
+                  </TechWrapper>
+                </Link>
+              ))}
             </IconsList>
           </TerminalContainer>
         </TerminalWrapper>
@@ -258,4 +247,18 @@ const IconsList = styled.div`
   width: 95%;
   height: 92%;
   margin: 0 auto;
+`
+
+const TechWrapper = styled(motion.div)`
+  display: grid;
+  place-items: center;
+  position: relative;
+`
+
+const TechTitle = styled.h2`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--primaryColor);
+  position: absolute;
+  bottom: -5rem;
 `
