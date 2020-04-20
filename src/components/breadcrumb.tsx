@@ -21,8 +21,7 @@ const Breadcrumb: React.FC = () => {
         </Link>
         <Sep />
         <Link to={`/${type}/${tech}`}>
-          <Tech aria-label={`${tech} tutorials`}>{tech}</Tech>
-          <TechHide>{`${tech} tutorials`}</TechHide>
+          <Tech>{tech}</Tech>
         </Link>
       </Wrapper>
     </div>
@@ -46,13 +45,18 @@ const Type = styled.span`
   }
 `
 
-const Tech = styled.span`
+const Tech = styled.button`
   font-size: 1.4rem;
   font-weight: 500;
   text-transform: capitalize;
+  background: none;
+  border: none;
+  color: var(--textColor);
+  padding: 0;
 
   &:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 `
 
