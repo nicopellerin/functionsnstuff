@@ -2,8 +2,6 @@ import * as React from "react"
 import styled from "styled-components"
 
 import wave from "../images/wavee.svg"
-import Donut from "./donut"
-import { motion } from "framer-motion"
 
 const Footer = () => (
   <Wrapper>
@@ -12,10 +10,13 @@ const Footer = () => (
         <div>
           <Title>Newsletter</Title>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-            voluptatum asperiores fugit numquam enim eos quia? Obcaecati tempore
-            esse eligendi, illum, magnam nostrum itaque nobis nihil labore
-            accusamus atque aspernatur?
+            Subscribe to the{" "}
+            <span style={{ color: "var(--primaryColor)" }}>
+              helloworldnstuff
+            </span>{" "}
+            newsletter to get access to the newest tutorials and tips right from
+            your mailbox. No spam ever. Fun fact: Built the donut on the right
+            by following a Blender tutorial. Yay to tutorials! :P
           </p>
           <Form>
             <Label htmlFor="email">Email</Label>
@@ -23,17 +24,11 @@ const Footer = () => (
             <Button>Subscribe</Button>
           </Form>
         </div>
-        <motion.img
+        <img
           src="/donut.png"
           alt="donut"
-          width={280}
-          style={{ marginTop: "4rem" }}
-          animate={{ y: [10, -10], rotate: [0, 3] }}
-          transition={{
-            yoyo: Infinity,
-            duration: 4,
-            ease: "easeInOut",
-          }}
+          width={375}
+          style={{ marginTop: "8rem" }}
         />
       </NewsletterWrapper>
 
@@ -75,7 +70,7 @@ const NewsletterWrapper = styled.div`
   display: grid;
   grid-template-columns: 60rem 1fr;
   place-items: center;
-  grid-gap: 5rem;
+  grid-gap: 3rem;
 `
 
 const Title = styled.h3`
