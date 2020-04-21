@@ -70,12 +70,13 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .language-jsx{
-  background-color: #112;
+  background-color: #112!important;
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  margin: 2rem 0;
   margin-right: -1em;
   margin-left: -1em;
-  padding: 1em 0;
+  padding: 1.5em 0;
   padding-right: 1em;
   padding-left: 2em;
   border-left: 0.25em solid #f99;

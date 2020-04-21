@@ -28,8 +28,10 @@ const ContactPage = () => (
       </Text>
       <Text>
         Drop me a message and we can talk!{" "}
-        <EmojiHappy src="/happy.png" alt="happy" />
+        <EmojiHappy src="/happy.png" alt="happy" />-{" "}
+        <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>Nico</span>
       </Text>
+      <Text></Text>
       <Spacer margin="4rem 0 6rem 0" />
       <ContactForm />
       <Spacer margin="4rem 0 8rem 0" />
@@ -49,5 +51,6 @@ const Text = styled.h4`
 
 const EmojiHappy = styled.img`
   margin-left: 1rem;
+  margin-right: 1rem;
   width: 20px;
 `

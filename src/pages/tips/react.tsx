@@ -8,15 +8,13 @@ import Layout from "../../components/layout"
 import Breadcrumb from "../../components/breadcrumb"
 import SEO from "../../components/seo"
 
-const TutorialsTypescript = () => {
+const TipsReact = () => {
   const {
     allMdx: { edges },
   } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: {
-          frontmatter: { tech: { eq: "typescript" }, type: { eq: "tutorials" } }
-        }
+        filter: { frontmatter: { tech: { eq: "react" }, type: { eq: "tips" } } }
       ) {
         edges {
           node {
@@ -36,8 +34,8 @@ const TutorialsTypescript = () => {
 
   return (
     <>
-      <SEO title="Typescript - Tutorials" />
-      <PageHeader tech="typescript" />
+      <SEO title="React - Tips" />
+      <PageHeader tech="react" />
       <Layout template>
         <Breadcrumb />
         <Spacer />
@@ -48,7 +46,7 @@ const TutorialsTypescript = () => {
   )
 }
 
-export default TutorialsTypescript
+export default TipsReact
 
 // Styles
 const Spacer = styled.div`

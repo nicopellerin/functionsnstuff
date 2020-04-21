@@ -13,7 +13,11 @@ const TutorialsReact = () => {
     allMdx: { edges },
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { tech: { eq: "react" } } }) {
+      allMdx(
+        filter: {
+          frontmatter: { tech: { eq: "react" }, type: { eq: "tutorials" } }
+        }
+      ) {
         edges {
           node {
             id
@@ -22,6 +26,7 @@ const TutorialsReact = () => {
               tech
               slug
               cover
+              type
             }
           }
         }
@@ -33,7 +38,7 @@ const TutorialsReact = () => {
     <>
       <SEO title="React - Tutorials" />
       <PageHeader tech="react" />
-      <Layout>
+      <Layout template>
         <Breadcrumb />
         <Spacer />
         <CardList data={edges} />

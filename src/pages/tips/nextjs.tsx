@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import CardList from "../../components/card-list"
 import PageHeader from "../../components/page-header"
@@ -8,14 +8,14 @@ import Layout from "../../components/layout"
 import Breadcrumb from "../../components/breadcrumb"
 import SEO from "../../components/seo"
 
-const TutorialsTypescript = () => {
+const TipsNextjs = () => {
   const {
     allMdx: { edges },
   } = useStaticQuery(graphql`
     {
       allMdx(
         filter: {
-          frontmatter: { tech: { eq: "typescript" }, type: { eq: "tutorials" } }
+          frontmatter: { tech: { eq: "nextjs" }, type: { eq: "tips" } }
         }
       ) {
         edges {
@@ -33,11 +33,10 @@ const TutorialsTypescript = () => {
       }
     }
   `)
-
   return (
     <>
-      <SEO title="Typescript - Tutorials" />
-      <PageHeader tech="typescript" />
+      <SEO title="Next.js - Tips" />
+      <PageHeader tech="nextjs" />
       <Layout template>
         <Breadcrumb />
         <Spacer />
@@ -48,7 +47,7 @@ const TutorialsTypescript = () => {
   )
 }
 
-export default TutorialsTypescript
+export default TipsNextjs
 
 // Styles
 const Spacer = styled.div`

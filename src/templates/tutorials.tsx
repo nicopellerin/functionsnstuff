@@ -8,8 +8,9 @@ import SEO from "../components/seo"
 import PageHeader from "../components/page-header"
 import Breadcrumb from "../components/breadcrumb"
 import Spacer from "../components/spacer"
+import Code from "../components/code"
 
-const shortcodes = { SEO, Spacer }
+const shortcodes = { SEO, Spacer, pre: Code }
 
 const TutorialsTemplate = ({ data: { mdx } }) => (
   <>

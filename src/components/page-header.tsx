@@ -5,8 +5,6 @@ import { Link } from "gatsby"
 
 import Navbar from "./navbar"
 
-import wave from "../images/wave.svg"
-
 interface Props {
   tech?: string
   title?: string
@@ -14,7 +12,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
-    <Wrapper bg={"/bg4.png"}>
+    <Wrapper bg={"/bg8.png"}>
       <Container>
         <Navbar />
         <Heading>
@@ -64,9 +62,14 @@ export default PageHeader
 const Wrapper = styled.div`
   background: ${props => `url(${props.bg})`};
   background-size: cover;
-  height: 39rem;
+  height: 42rem;
   position: relative;
   overflow: hidden;
+
+  @media (min-width: 1500px) {
+    background-position-y: 15%;
+    height: 46rem;
+  }
 `
 
 const Container = styled.header`
@@ -79,9 +82,13 @@ const Heading = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 39%;
+  height: 40%;
+
+  @media (min-width: 1500px) {
+    height: 46%;
+  }
 `
 
 const Title = styled(motion.h1)`
-  color: var(--textColor);
+  color: var(--primaryColor);
 `

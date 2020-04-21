@@ -7,12 +7,15 @@ import Footer from "./footer"
 
 import { GlobalStyles } from "../styles/global-styles"
 
-const Layout = ({ children }) => {
+interface Props {
+  children: React.ReactNode
+  template?: boolean
+}
+
+const Layout: React.FC<Props> = ({ children, template }) => {
   return (
     <Wrapper>
-      <div>
-        <Main>{children}</Main>
-      </div>
+      <Main template={template}>{children}</Main>
       <Footer />
       <GlobalStyles />
     </Wrapper>
@@ -25,7 +28,9 @@ export default Layout
 const Wrapper = styled.div``
 
 const Main = styled.main`
-  max-width: 80rem;
+  max-width: ${(props: { template: boolean }) =>
+    props.template ? "100rem" : "80rem"};
   margin: 0 auto;
   padding: 10rem 0 15rem;
+  background: #080808;
 `

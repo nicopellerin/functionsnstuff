@@ -242,6 +242,7 @@ const TechWrapper = styled(motion.div)`
   display: grid;
   place-items: center;
   position: relative;
+  will-change: transform;
 `
 
 const TechTitle = styled.h2`

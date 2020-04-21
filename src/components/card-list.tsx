@@ -15,7 +15,7 @@ const CardList: React.FC<Props> = ({ data }) => {
           <Card
             title={node.frontmatter.title}
             image={node.frontmatter.cover}
-            link={`tutorials/${node.frontmatter.tech}/${node.frontmatter.slug}`}
+            link={`${node.frontmatter.type}/${node.frontmatter.tech}/${node.frontmatter.slug}`}
             key={node.frontmatter.slug}
           />
         ))

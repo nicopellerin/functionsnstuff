@@ -9,15 +9,12 @@ interface Props {
   link?: string
 }
 
-const Card: React.FC<Props> = ({
-  title,
-  image,
-  link = "/tutorials/react/react",
-}) => {
+const Card: React.FC<Props> = ({ title, image, link }) => {
+  const random = Math.ceil(Math.random() * 2)
   return (
     <Link to={link}>
       <Wrapper
-        image={`/card.png`}
+        image={`/card${random}.png`}
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>
@@ -35,8 +32,8 @@ const Wrapper = styled(motion.div)`
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
   padding: 2.5rem 2.5rem;
   border-radius: 10px;
-  /* border: 2px solid #222; */
   height: 25rem;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -44,6 +41,7 @@ const Wrapper = styled(motion.div)`
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+  will-change: transform;
 `
 
 const Title = styled.h2`

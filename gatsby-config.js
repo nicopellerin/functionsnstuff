@@ -16,8 +16,21 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        names: "tutorials",
+        name: "tutorials",
         path: `${__dirname}/src/tutorials`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: "tips",
+        path: `${__dirname}/src/tips`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint: "",
       },
     },
     `gatsby-transformer-sharp`,
@@ -40,41 +53,12 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: {
-          default: require.resolve("./src/templates/tutorials.tsx"),
+          tutorials: require.resolve("./src/templates/tutorials.tsx"),
+          tips: require.resolve("./src/templates/tips.tsx"),
         },
-        gatsbyRemarkPlugins: [`gatsby-remark-embed-snippet`],
       },
     },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-embed-snippet`,
-            options: {
-              directory: `${__dirname}`,
-            },
-          },
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              aliases: {
-                dosini: `ini`,
-                env: `bash`,
-                es6: `js`,
-                flowchart: `none`,
-                gitignore: `none`,
-                gql: `graphql`,
-                htaccess: `apacheconf`,
-                mdx: `markdown`,
-                ml: `fsharp`,
-                styl: `stylus`,
-              },
-            },
-          },
-        ],
-      },
-    },
+
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-netlify-cache`,

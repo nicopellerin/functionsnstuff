@@ -98,7 +98,9 @@ const Label = styled.label`
 `
 
 const InputField = styled.input`
-  border: none;
+  border: 1px solid #333;
+  color: ghostwhite;
+  background: rgba(255, 255, 255, 0.03);
   padding: 0.8em 0.5em;
   border-radius: 5px;
   font-size: 1.6rem;

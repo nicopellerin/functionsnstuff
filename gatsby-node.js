@@ -3,9 +3,9 @@ const path = require("path")
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  const result = await graphql(`
+  const tutorialsData = await graphql(`
     query {
-      allMdx {
+      allMdx(filter: { frontmatter: { type: { eq: "tutorials" } } }) {
         edges {
           node {
             id
@@ -19,16 +19,46 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `)
 
-  if (result.errors) {
+  if (tutorialsData.errors) {
     reporter.panicOnBuild("Error: Loading createPages query")
   }
 
-  const tutorials = result.data.allMdx.edges
+  const tutorials = tutorialsData.data.allMdx.edges
 
   tutorials.forEach(({ node }) => {
     createPage({
       path: `tutorials/${node.frontmatter.tech}/${node.frontmatter.slug}`,
       component: path.resolve("./src/templates/tutorials.tsx"),
+      context: { id: node.id },
+    })
+  })
+
+  const tipsData = await graphql(`
+    query {
+      allMdx(filter: { frontmatter: { type: { eq: "tips" } } }) {
+        edges {
+          node {
+            id
+            frontmatter {
+              slug
+              tech
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (tipsData.errors) {
+    reporter.panicOnBuild("Error: Loading createPages query")
+  }
+
+  const tips = tipsData.data.allMdx.edges
+
+  tips.forEach(({ node }) => {
+    createPage({
+      path: `tips/${node.frontmatter.tech}/${node.frontmatter.slug}`,
+      component: path.resolve("./src/templates/tips.tsx"),
       context: { id: node.id },
     })
   })
