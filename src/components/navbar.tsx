@@ -39,7 +39,7 @@ const Navbar = () => {
                     style={{
                       position: "absolute",
                       left: 0,
-                      bottom: -5,
+                      bottom: -10,
                       background: "var(--menuColor)",
                       height: 2,
                       width: "100%",
