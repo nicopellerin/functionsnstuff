@@ -22,7 +22,7 @@ function SEO({ description, lang, meta, title }) {
   const metaTitle =
     title !== "helloworldnstuff"
       ? `%s | ${site.siteMetadata.title}`
-      : `${title} | Learn by building. Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`
+      : `${title} | Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`
 
   return (
     <Helmet

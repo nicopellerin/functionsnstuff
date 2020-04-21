@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `helloworldnstuff`,
-    description: `Learn by building. Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`,
+    description: `Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`,
     author: `@nicopellerin_io`,
   },
   plugins: [
