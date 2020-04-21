@@ -66,11 +66,15 @@ const Container = styled.div`
 
 const NewsletterWrapper = styled.div`
   min-height: 20rem;
-  padding-top: 2rem;
+  padding-top: 8rem;
   display: grid;
   grid-template-columns: 60rem 1fr;
   place-items: center;
   grid-gap: 3rem;
+
+  @media (max-width: 1440px) {
+    padding-top: 2rem;
+  }
 `
 
 const Title = styled.h3`
