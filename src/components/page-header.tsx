@@ -12,7 +12,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
-    <Wrapper bg={"/bg8.png"}>
+    <Wrapper bg={"/bg9.png"}>
       <Container>
         <Navbar />
         <Heading>
