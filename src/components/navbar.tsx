@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <Link to="/">
-        <img src={"/logo.png"} alt="logo" width={267} />
+        <img src={"/logo.png"} alt="logo" width={285} />
       </Link>
       <Menu>
         <MenuList onMouseLeave={() => setShow(null)}>
@@ -64,6 +64,7 @@ const Wrapper = styled.div`
   padding: 4rem 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 const Menu = styled.nav`
@@ -79,7 +80,7 @@ const MenuList = styled.ul`
 
 const MenuListItem = styled(motion.li)`
   color: var(--menuColor);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin-left: 4rem;
   font-weight: 500;
   position: relative;
