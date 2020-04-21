@@ -14,7 +14,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
-    <Wrapper bg={"/codebg.png"}>
+    <Wrapper bg={"/bg4.png"}>
       <Container>
         <Navbar />
         <Heading>
