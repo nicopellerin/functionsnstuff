@@ -79,7 +79,7 @@ const Header = () => {
   }
 
   return (
-    <Wrapper bg={"/bg2.png"}>
+    <Wrapper bg={"/bg3.png"}>
       <Container>
         <Navbar />
         <TerminalWrapper
@@ -112,11 +112,11 @@ const Header = () => {
           >
             <motion.h3
               style={{
-                fontSize: 18,
+                fontSize: 16,
                 position: "absolute",
                 fontWeight: 500,
                 fontFamily: "menlo",
-                color: "lightgreen",
+                color: "cyan",
                 left: "50%",
                 letterSpacing: 5,
                 top: 90,

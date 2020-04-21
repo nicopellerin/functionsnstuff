@@ -90,6 +90,7 @@ const Form = styled.form`
 const Label = styled.label`
   font-size: 1.4rem;
   margin-bottom: 5px;
+  color: var(--primaryColor);
 `
 
 const InputField = styled.input`
@@ -98,7 +99,7 @@ const InputField = styled.input`
   border-radius: 5px;
   font-size: 1.6rem;
   font-family: inherit;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.6rem;
   max-width: 80%;
 `
 

@@ -14,7 +14,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
-    <Wrapper bg={"/bg.png"}>
+    <Wrapper bg={"/codebg.png"}>
       <Container>
         <Navbar />
         <Heading>
@@ -42,7 +42,7 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
         </Heading>
       </Container>
       <img
-        src={wave}
+        src={"/wave.svg"}
         style={{
           position: "absolute",
           bottom: -88,

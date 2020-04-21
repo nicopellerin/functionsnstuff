@@ -17,7 +17,7 @@ const Card: React.FC<Props> = ({
   return (
     <Link to={link}>
       <Wrapper
-        image={image}
+        image={`/card.png`}
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>
@@ -32,17 +32,24 @@ export default Card
 const Wrapper = styled(motion.div)`
   background: ${props => `url(${props.image})`};
   background-size: cover;
-  padding: 2.5rem 3rem;
-  border-radius: 20px;
-  height: 20rem;
+  padding: 2.5rem 2.5rem;
+  border-radius: 10px;
+  /* border: 2px solid #222; */
+  height: 25rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 `
 
 const Title = styled.h2`
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   color: var(--menuColor);
+  max-width: 80%;
+  margin: 0;
 `
 
 const Desc = styled.p`

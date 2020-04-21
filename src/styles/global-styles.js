@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     height: 100%;
-    background: #0d0d0d;
+    background: #080808;
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
