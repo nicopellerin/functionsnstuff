@@ -27,7 +27,7 @@ const Footer = () => (
         <img
           src="/donut3.png"
           alt="donut"
-          width={350}
+          width={300}
           style={{ marginTop: "8rem" }}
         />
       </NewsletterWrapper>
