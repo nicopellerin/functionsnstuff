@@ -27,7 +27,7 @@ const Footer = () => (
         <img
           src="/donut3.png"
           alt="donut"
-          width={375}
+          width={350}
           style={{ marginTop: "8rem" }}
         />
       </NewsletterWrapper>
@@ -66,7 +66,7 @@ const Container = styled.div`
 
 const NewsletterWrapper = styled.div`
   min-height: 20rem;
-  padding-top: 8rem;
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: 60rem 1fr;
   place-items: center;
