@@ -27,12 +27,6 @@ module.exports = {
         path: `${__dirname}/src/tips`,
       },
     },
-    {
-      resolve: "gatsby-plugin-mailchimp",
-      options: {
-        endpoint: "",
-      },
-    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     // `gatsby-plugin-preact`,
