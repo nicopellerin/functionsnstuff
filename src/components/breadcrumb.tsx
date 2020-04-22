@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 `
 
 const Type = styled.span`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
   text-transform: capitalize;
 
@@ -46,7 +46,7 @@ const Type = styled.span`
 `
 
 const Tech = styled.button`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
   text-transform: capitalize;
   background: none;

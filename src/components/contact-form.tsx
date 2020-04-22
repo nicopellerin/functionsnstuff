@@ -59,7 +59,7 @@ const Label = styled.label`
 `
 
 const InputField = styled.input`
-  border: 1px solid #333;
+  border: 1px solid #222;
   color: ghostwhite;
   background: rgba(255, 255, 255, 0.03);
   padding: 0.8em 0.5em;
@@ -70,7 +70,7 @@ const InputField = styled.input`
 `
 
 const TextareaField = styled.textarea`
-  border: 1px solid #333;
+  border: 1px solid #222;
   color: ghostwhite;
   background: rgba(255, 255, 255, 0.03);
   padding: 0.8em 0.5em;

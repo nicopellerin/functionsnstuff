@@ -12,7 +12,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
-    <Wrapper bg={"/bg9.png"}>
+    <Wrapper bg={"/bg12.png"}>
       <Container>
         <Navbar />
         <Heading>
@@ -62,12 +62,13 @@ export default PageHeader
 const Wrapper = styled.div`
   background: ${props => `url(${props.bg})`};
   background-size: cover;
+  background-attachment: fixed;
   height: 42rem;
   position: relative;
   overflow: hidden;
 
   @media (min-width: 1500px) {
-    background-position-y: 15%;
+    background-position-y: 100%;
     height: 46rem;
   }
 `

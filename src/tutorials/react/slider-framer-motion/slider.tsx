@@ -65,8 +65,34 @@ const Example = () => {
           }}
         />
       </AnimatePresence>
-      <NextIcon onClick={() => paginate(1)}>{"‣"}</NextIcon>
-      <PrevIcon onClick={() => paginate(-1)}>{"‣"}</PrevIcon>
+      <NextIcon onClick={() => paginate(1)}>
+        <svg
+          layoutId="techItem"
+          xmlns="http://www.w3.org/2000/svg"
+          width="5.641"
+          height="10"
+        >
+          <path
+            d="M 0.246 5.395 C 0.006 5.155 0.006 4.766 0.246 4.526 L 4.592 0.18 C 4.832 -0.06 5.221 -0.06 5.461 0.18 L 5.461 0.18 C 5.701 0.42 5.701 0.809 5.461 1.049 L 1.115 5.395 C 0.875 5.635 0.486 5.635 0.246 5.395 Z M 0.18 4.605 C 0.42 4.365 0.809 4.365 1.049 4.605 L 5.395 8.951 C 5.635 9.191 5.635 9.58 5.395 9.82 L 5.395 9.82 C 5.155 10.06 4.766 10.06 4.526 9.82 L 0.18 5.474 C -0.06 5.234 -0.06 4.845 0.18 4.605 Z"
+            transform="rotate(180 2.82 5)"
+            fill="ghostwhite"
+          ></path>
+        </svg>
+      </NextIcon>
+      <PrevIcon onClick={() => paginate(-1)}>
+        <svg
+          layoutId="techItem"
+          xmlns="http://www.w3.org/2000/svg"
+          width="5.641"
+          height="10"
+        >
+          <path
+            d="M 0.246 5.395 C 0.006 5.155 0.006 4.766 0.246 4.526 L 4.592 0.18 C 4.832 -0.06 5.221 -0.06 5.461 0.18 L 5.461 0.18 C 5.701 0.42 5.701 0.809 5.461 1.049 L 1.115 5.395 C 0.875 5.635 0.486 5.635 0.246 5.395 Z M 0.18 4.605 C 0.42 4.365 0.809 4.365 1.049 4.605 L 5.395 8.951 C 5.635 9.191 5.635 9.58 5.395 9.82 L 5.395 9.82 C 5.155 10.06 4.766 10.06 4.526 9.82 L 0.18 5.474 C -0.06 5.234 -0.06 4.845 0.18 4.605 Z"
+            transform="rotate(180 2.82 5)"
+            fill="ghostwhite"
+          ></path>
+        </svg>
+      </PrevIcon>
     </Container>
   )
 }
@@ -97,7 +123,7 @@ const ImageStyled = styled(motion.img)`
 const NextIcon = styled.div`
   top: calc(50% - 20px);
   position: absolute;
-  background: white;
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 30px;
   width: 40px;
   height: 40px;
@@ -115,7 +141,7 @@ const NextIcon = styled.div`
 const PrevIcon = styled.div`
   top: calc(50% - 20px);
   position: absolute;
-  background: white;
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 30px;
   width: 40px;
   height: 40px;
@@ -128,5 +154,5 @@ const PrevIcon = styled.div`
   font-size: 18px;
   z-index: 2;
   left: 10px;
-  transform: scale(-1);
+  transform: rotate(-180deg);
 `

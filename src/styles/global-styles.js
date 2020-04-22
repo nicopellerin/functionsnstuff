@@ -72,7 +72,7 @@ export const GlobalStyles = createGlobalStyle`
   .language-jsx{
   background-color: #112!important;
   display: block;
-  font-size: 1.8rem;
+  font-size: 2rem!important;
   margin: 2rem 0;
   margin-right: -1em;
   margin-left: -1em;
