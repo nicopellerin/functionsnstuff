@@ -1,6 +1,7 @@
 import * as React from "react"
+import { useRef, useState, useLayoutEffect } from "react"
 import styled from "styled-components"
-import { motion } from "framer-motion"
+import { motion, useViewportScroll, useTransform } from "framer-motion"
 import { Link } from "gatsby"
 
 import Navbar from "./navbar"
@@ -11,8 +12,44 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title }) => {
+  const [elementTop, setElementTop] = useState(0)
+  const { scrollY } = useViewportScroll()
+  const ref = useRef()
+
+  const y = useTransform(scrollY, [elementTop, elementTop + 4], [0, -0.3], {
+    clamp: false,
+  })
+
+  const y2 = useTransform(scrollY, [elementTop, elementTop + 2], [0, -0.3], {
+    clamp: false,
+  })
+
+  useLayoutEffect(() => {
+    const element = ref.current
+    setElementTop(element.offsetTop)
+  }, [ref])
+
   return (
-    <Wrapper bg={"/bg12.png"}>
+    <Wrapper bg={""} ref={ref}>
+      <motion.img
+        src={"/bg_back.png"}
+        initial={{ scale: 1.02 }}
+        animate={{
+          // opacity: 0.8,
+          rotate: [-3, 3],
+        }}
+        style={{ position: "absolute", top: 0, width: "100%", zIndex: -2, y }}
+      />
+      <motion.img
+        src={"/bg_front.png"}
+        style={{
+          position: "absolute",
+          top: 0,
+          width: "100%",
+          zIndex: -1,
+          y: y2,
+        }}
+      />
       <Container>
         <Navbar />
         <Heading>
@@ -62,13 +99,13 @@ export default PageHeader
 const Wrapper = styled.div`
   background: ${props => `url(${props.bg})`};
   background-size: cover;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   height: 42rem;
   position: relative;
   overflow: hidden;
 
   @media (min-width: 1500px) {
-    background-position-y: 100%;
+    background-position-y: 20%;
     height: 46rem;
   }
 `
