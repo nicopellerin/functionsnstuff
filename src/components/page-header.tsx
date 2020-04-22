@@ -41,7 +41,7 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
         style={{ position: "absolute", top: 0, width: "100%", zIndex: -2, y }}
       />
       <motion.img
-        src={"/bg_front.png"}
+        src={"/bg_front2.png"}
         style={{
           position: "absolute",
           top: 0,
