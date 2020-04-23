@@ -83,7 +83,7 @@ const Header = () => {
       <Container>
         <Navbar />
         <TerminalWrapper
-          terminal={"/terminal.png"}
+          terminal={"/terminal.webp"}
           initial={{ y: 400, x: "-50%" }}
           animate={{ y: toggleBrowser ? 310 : 10 }}
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
