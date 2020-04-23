@@ -32,5 +32,5 @@ const Main = styled.main`
     props.template ? "100rem" : "80rem"};
   margin: 0 auto;
   padding: 10rem 0 15rem;
-  background: #080808;
+  /* background: #080808; */
 `

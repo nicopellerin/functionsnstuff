@@ -1,0 +1,42 @@
+---
+title: Custom toggle hook
+author: Nico Pellerin
+tech: react
+slug: custom-toggle-hook
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+import Toggle from "./useToggle.tsx"
+
+<SEO title="Custom toggle hook" />
+
+# Custom toggle hook
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+// useToggle hook
+const useToggle = initialValue => {
+  const [isToggled, setToggle] = useState(initialValue)
+
+  const toggle = () => setToggle(prevState => !prevState)
+
+  return [isToggled, toggle]
+}
+
+// Using the hook in a component
+const Toggle = () => {
+  const [isToggled, toggle] = useToggle(false)
+
+  return (
+    <>
+      <button onClick={toggle}>{isToggled ? "Hide" : "Show"}</button>
+      {isToggled && <span>Hiiii</span>}
+    </>
+  )
+}
+```
+
+<Spacer margin="6rem 0 4rem 0" />
+<Toggle />

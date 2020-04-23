@@ -5,7 +5,6 @@ import { Link } from "gatsby"
 import { motion, AnimateSharedLayout } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Spacer from "./spacer"
 import Card from "./card"
 
 const techItems = [
@@ -14,7 +13,7 @@ const techItems = [
     link: "/tutorials/react",
   },
   {
-    title: "NodeJS",
+    title: "Node.js",
     link: "/tutorials/nodejs",
   },
   {
