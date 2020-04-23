@@ -116,7 +116,7 @@ const Header = () => {
                 position: "absolute",
                 fontWeight: 500,
                 fontFamily: "menlo",
-                color: "pink",
+                color: "green",
                 left: "50%",
                 letterSpacing: 5,
                 top: 90,
