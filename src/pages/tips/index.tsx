@@ -5,6 +5,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
 import TechCard from "../../components/tech-card"
+import { graphql } from "gatsby"
 
 const techList = [
   {
@@ -14,7 +15,7 @@ const techList = [
     width: 100,
   },
   {
-    tech: "GraphQL",
+    tech: "Graphql",
     logo: "/icons/graphql.png",
     link: "/tips/graphql",
     width: 90,
@@ -57,20 +58,57 @@ const techList = [
   },
 ]
 
-const TipsPage = () => (
-  <>
-    <SEO title="Tips" />
-    <PageHeader title="Tips" />
-    <Layout>
-      <TechCardList>
-        {techList.map(({ tech, logo, link, width }) => (
-          <TechCard tech={tech} logo={logo} link={link} width={width} />
-        ))}
-      </TechCardList>
-      <Spacer />
-    </Layout>
-  </>
-)
+const TipsPage = ({ data }) => {
+  const techCount = {
+    react: 0,
+    javascript: 0,
+    golang: 0,
+    graphql: 0,
+    nodejs: 0,
+    typescript: 0,
+    gatsby: 0,
+    "next.js": 0,
+  }
+  data.allMdx.edges.forEach(post => {
+    techCount[post.node.frontmatter.tech]++
+  })
+
+  return (
+    <>
+      <SEO title="Tips" />
+      <PageHeader title="Tips" />
+      <Layout>
+        <TechCardList>
+          {techList.map(({ tech, logo, link, width }) => (
+            <TechCard
+              key={tech}
+              tech={tech}
+              logo={logo}
+              link={link}
+              width={width}
+              totalCount={techCount[tech.toLowerCase()]}
+            />
+          ))}
+        </TechCardList>
+        <Spacer />
+      </Layout>
+    </>
+  )
+}
+
+export const query = graphql`
+  query {
+    allMdx(filter: { frontmatter: { type: { eq: "tips" } } }) {
+      edges {
+        node {
+          frontmatter {
+            tech
+          }
+        }
+      }
+    }
+  }
+`
 
 export default TipsPage
 

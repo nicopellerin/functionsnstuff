@@ -9,8 +9,9 @@ import PageHeader from "../components/page-header"
 import Breadcrumb from "../components/breadcrumb"
 import Spacer from "../components/spacer"
 import Code from "../components/code"
+import Share from "../components/share"
 
-const shortcodes = { SEO, Spacer, pre: Code }
+const shortcodes = { SEO, Spacer, pre: Code, Share }
 
 const TipsTemplate = ({ data: { mdx } }) => (
   <>
@@ -20,6 +21,7 @@ const TipsTemplate = ({ data: { mdx } }) => (
       <MDXProvider components={shortcodes}>
         <MDXRenderer>{mdx.body}</MDXRenderer>
       </MDXProvider>
+      <Share />
     </Layout>
   </>
 )

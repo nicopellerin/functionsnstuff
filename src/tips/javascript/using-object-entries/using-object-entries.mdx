@@ -1,0 +1,32 @@
+---
+title: Using Object.entries()
+author: Nico Pellerin
+tech: javascript
+slug: using-object-entries
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+<SEO title="Using Object.entries()" />
+
+# Using Object.entries()
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+const cat = {
+  name: "Nini",
+  age: 2,
+  isFriendly: true,
+}
+
+// Looping over cat object, we have access to [key, value] pairs of each property
+for (let [key, value] of Object.entries(cat)) {
+  console.log(`${key}: ${value}`)
+}
+
+// Output from loop
+// "name: Nini"
+// "age: 2"
+// "isFriendly: true"
+```
