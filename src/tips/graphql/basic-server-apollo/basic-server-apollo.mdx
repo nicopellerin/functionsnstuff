@@ -1,0 +1,43 @@
+---
+title: Basic server with Apollo
+author: Nico Pellerin
+tech: graphql
+slug: new-nextjs-project-typescript
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+<SEO title="Basic server with Apollo" />
+
+# Basic server with Apollo
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```js
+const { ApolloServer, gql } = require("apollo-server")
+
+// Graphql schema
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`
+
+// Resolvers
+const resolvers = {
+  Query: {
+    hello: () => "helloworldnstuff",
+  },
+}
+
+// Create server
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+// Listen to server
+server.listen().then(({ url }) => {
+  console.log(`Server listening at ${url}`)
+})
+```

@@ -1,17 +1,24 @@
 import * as React from "react"
 import { useRef, useState, useLayoutEffect } from "react"
 import styled from "styled-components"
-import { motion, useViewportScroll, useTransform } from "framer-motion"
+import {
+  motion,
+  useViewportScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion"
 import { Link } from "gatsby"
 
 import Navbar from "./navbar"
+import BuddyHeader from "./buddy-header"
 
 interface Props {
   tech?: string
   title?: string
+  randomTip?: boolean
 }
 
-const PageHeader: React.FC<Props> = ({ tech, title }) => {
+const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
   const ref = useRef()
@@ -70,12 +77,26 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
           ) : (
             <Title
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: [0, 1], y: [50, 0] }}
+              animate={{ opacity: randomTip ? 0 : [0, 1], y: [50, 0] }}
             >
               {title}
             </Title>
           )}
         </Heading>
+
+        <AnimatePresence>
+          {randomTip && (
+            <motion.div
+              initial={{ position: "absolute", x: "-50%", y: 200 }}
+              animate={{ y: [200, -405] }}
+              style={{
+                left: "50%",
+              }}
+            >
+              <BuddyHeader toggleBrowser={randomTip} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Container>
       <img
         src={"/wave.svg"}

@@ -45,11 +45,25 @@ const techItems = [
 const Main = () => {
   const [show, setShow] = useState(null)
 
-  const {
-    allMdx: { edges },
-  } = useStaticQuery(graphql`
-    {
-      allMdx(limit: 1) {
+  const { tutorial, tip } = useStaticQuery(graphql`
+    query latestTutorials {
+      tutorial: allMdx(
+        filter: { frontmatter: { type: { eq: "tutorials" } } } # sort: { order: DESC }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              tech
+              cover
+              slug
+            }
+          }
+        }
+      }
+      tip: allMdx(
+        filter: { frontmatter: { type: { eq: "tips" } } } # sort: { order: DESC }
+      ) {
         edges {
           node {
             frontmatter {
@@ -84,9 +98,33 @@ const Main = () => {
             </svg>
           </Title>
           <Card
-            title={edges[0].node.frontmatter.title}
-            image={edges[0].node.frontmatter.cover}
-            link={`/tutorials/${edges[0].node.frontmatter.tech}/${edges[0].node.frontmatter.slug}`}
+            tech={tutorial.edges[0].node.frontmatter.tech}
+            title={tutorial.edges[0].node.frontmatter.title}
+            image={tutorial.edges[0].node.frontmatter.cover}
+            link={`/tutorials/${tutorial.edges[0].node.frontmatter.tech}/${tutorial.edges[0].node.frontmatter.slug}`}
+          />
+        </div>
+        <div style={{ marginBottom: "6rem", maxWidth: "80%" }}>
+          <Title>
+            Latest tip{" "}
+            <svg
+              style={{ marginLeft: 10 }}
+              xmlns="http://www.w3.org/2000/svg"
+              width="10.154"
+              height="18"
+            >
+              <path
+                d="M 0.443 9.711 C 0.01 9.279 0.01 8.578 0.443 8.146 L 8.265 0.324 C 8.697 -0.108 9.397 -0.108 9.829 0.324 L 9.829 0.324 C 10.262 0.756 10.262 1.456 9.829 1.888 L 2.007 9.711 C 1.575 10.143 0.875 10.143 0.443 9.711 Z M 0.324 8.289 C 0.756 7.857 1.456 7.857 1.889 8.289 L 9.711 16.111 C 10.143 16.544 10.143 17.244 9.711 17.676 L 9.711 17.676 C 9.279 18.108 8.579 18.108 8.147 17.676 L 0.324 9.854 C -0.108 9.422 -0.108 8.721 0.324 8.289 Z"
+                transform="rotate(180 5.077 9)"
+                fill="rgba(255, 137, 170, 1.00)"
+              ></path>
+            </svg>
+          </Title>
+          <Card
+            tech={tip.edges[0].node.frontmatter.tech}
+            title={tip.edges[0].node.frontmatter.title}
+            image={tip.edges[0].node.frontmatter.cover}
+            link={`/tips/${tip.edges[0].node.frontmatter.tech}/${tip.edges[0].node.frontmatter.slug}`}
           />
         </div>
       </div>
@@ -135,6 +173,7 @@ const Wrapper = styled.main`
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;
+  background: #080808;
 `
 
 const Title = styled.h3`

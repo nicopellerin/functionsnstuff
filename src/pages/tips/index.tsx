@@ -1,11 +1,14 @@
 import React from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { FaDice } from "react-icons/fa"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
 import TechCard from "../../components/tech-card"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
+import { motion } from "framer-motion"
 
 const techList = [
   {
@@ -67,6 +70,8 @@ const techList = [
 ]
 
 const TipsPage = ({ data }) => {
+  const [randomTip, setRandomTip] = useState(false)
+
   const techCount = {
     react: 0,
     javascript: 0,
@@ -81,13 +86,51 @@ const TipsPage = ({ data }) => {
     techCount[post.node.frontmatter.tech]++
   })
 
-  console.log(techCount)
+  useEffect(() => {
+    let id
+
+    const random = Math.floor(Math.random() * 8)
+    if (randomTip) {
+      console.log(random)
+      id = setTimeout(() => {
+        navigate(
+          `/tips/${data.allMdx.edges[random].node.frontmatter.tech}/${data.allMdx.edges[random].node.frontmatter.slug}`
+        )
+      }, 2500)
+    }
+    ;() => clearTimeout(id)
+  }, [randomTip])
 
   return (
     <>
       <SEO title="Tips" />
-      <PageHeader title="Tips" />
+      <PageHeader title="Tips" randomTip={randomTip} />
       <Layout>
+        <RandomButtonWrapper initial={{ x: "-50%" }}>
+          <RandomButton
+            onClick={() => setRandomTip(true)}
+            whileHover={{ y: -1 }}
+            whileTap={{ y: 1 }}
+          >
+            {randomTip ? (
+              <motion.div
+                animate={{ rotate: 180 }}
+                transition={{ yoyo: Infinity }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                <FaDice />
+              </motion.div>
+            ) : (
+              <>
+                Random tip <FaDice style={{ marginLeft: 7 }} />
+              </>
+            )}
+          </RandomButton>
+        </RandomButtonWrapper>
         <TechCardList>
           {techList.map(({ tech, logo, link, width, slug }) => (
             <TechCard
@@ -96,7 +139,6 @@ const TipsPage = ({ data }) => {
               logo={logo}
               link={link}
               width={width}
-              slug={slug}
               totalCount={techCount[slug]}
             />
           ))}
@@ -114,6 +156,7 @@ export const query = graphql`
         node {
           frontmatter {
             tech
+            slug
           }
         }
       }
@@ -134,4 +177,26 @@ const TechCardList = styled.div`
 
 const Spacer = styled.div`
   margin-bottom: 6rem;
+`
+
+const RandomButtonWrapper = styled(motion.div)`
+  position: absolute;
+  top: 1px;
+  left: 50%;
+`
+
+const RandomButton = styled(motion.button)`
+  border: none;
+  padding: 0.8em 1.4em;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  background: var(--pink);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 150px;
+  height: 44px;
+  outline: none;
+  will-change: transform;
 `

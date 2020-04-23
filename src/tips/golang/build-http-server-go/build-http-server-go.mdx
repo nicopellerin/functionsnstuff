@@ -1,0 +1,33 @@
+---
+title: Building a basic HTTP server in Go
+author: Nico Pellerin
+tech: golang
+slug: build-http-server-go
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+<SEO title="Building a basic HTTP server in Go" />
+
+# Building a basic HTTP server in Go
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```go
+package main
+
+import (
+  "net/http"
+  "fmt"
+)
+
+func helloWorld (w http.ResponseWriter, r *http.Request) {
+  fmt.Fprint(w, "helloworldnstuff")
+}
+
+func main() {
+  http.HandleFunc("/", helloWorld)
+
+  http.ListenAndServe(":8080", nil)
+}
+```

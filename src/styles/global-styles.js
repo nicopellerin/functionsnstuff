@@ -7,6 +7,8 @@ export const GlobalStyles = createGlobalStyle`
 
     --textColor: #DEDEDE;
     --menuColor: #E6E6E6;
+    
+    --pink: #ff88aa;
 
     --systemFont: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }

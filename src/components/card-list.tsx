@@ -13,6 +13,7 @@ const CardList: React.FC<Props> = ({ data }) => {
       {data.length > 0 ? (
         data.map(({ node }) => (
           <Card
+            tech={node.frontmatter.tech}
             title={node.frontmatter.title}
             image={node.frontmatter.cover}
             link={`${node.frontmatter.type}/${node.frontmatter.tech}/${node.frontmatter.slug}`}

@@ -4,13 +4,14 @@ import { Link } from "gatsby"
 import { motion } from "framer-motion"
 
 interface Props {
-  title?: string
-  image?: string
-  link?: string
+  title: string
+  image: string
+  link: string
+  tech?: string
 }
 
-const Card: React.FC<Props> = ({ title, image, link }) => {
-  const random = Math.ceil(Math.random() * 2)
+const Card: React.FC<Props> = ({ title, image, tech, link }) => {
+  // const random = Math.ceil(Math.random() * 2)
   return (
     <Link to={link}>
       <Wrapper
@@ -18,6 +19,7 @@ const Card: React.FC<Props> = ({ title, image, link }) => {
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>
+        <TechLogo src={`/icons/${tech}.png`} alt={tech} />
       </Wrapper>
     </Link>
   )
@@ -51,9 +53,9 @@ const Title = styled.h2`
   margin: 0;
 `
 
-const Desc = styled.p`
-  font-size: 1.6rem;
-  color: var(--menuColor);
-  padding: 0;
-  margin: 0;
+const TechLogo = styled.img`
+  max-width: 50px;
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
 `
