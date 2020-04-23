@@ -32,7 +32,7 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
   return (
     <Wrapper bg={""} ref={ref}>
       <motion.img
-        src={"/bg_back.png"}
+        src={"/bg_back.webp"}
         initial={{ scale: 1.02 }}
         animate={{
           // opacity: 0.8,
@@ -41,7 +41,7 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
         style={{ position: "absolute", top: 0, width: "100%", zIndex: -2, y }}
       />
       <motion.img
-        src={"/bg_front2.png"}
+        src={"/bg_front2.webp"}
         style={{
           position: "absolute",
           top: 0,
