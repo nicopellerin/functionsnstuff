@@ -73,7 +73,7 @@ const NewsletterWrapper = styled.div`
   grid-gap: 3rem;
 
   @media (max-width: 1440px) {
-    padding-top: 2rem;
+    padding-top: 4rem;
   }
 `
 
