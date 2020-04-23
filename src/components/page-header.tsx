@@ -33,15 +33,16 @@ const PageHeader: React.FC<Props> = ({ tech, title }) => {
     <Wrapper bg={""} ref={ref}>
       <motion.img
         src={"/bg_back.webp"}
+        alt="background sky"
         initial={{ scale: 1.02 }}
         animate={{
-          // opacity: 0.8,
           rotate: [-3, 3],
         }}
         style={{ position: "absolute", top: 0, width: "100%", zIndex: -2, y }}
       />
       <motion.img
         src={"/bg_front2.webp"}
+        alt="background mountains"
         style={{
           position: "absolute",
           top: 0,
