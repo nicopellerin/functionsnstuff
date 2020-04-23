@@ -26,7 +26,7 @@ const Header = () => {
     },
     {
       tech: "Golang",
-      logo: "/icons/go.png",
+      logo: "/icons/golang.png",
       link: "/tutorials/golang",
       width: 160,
     },

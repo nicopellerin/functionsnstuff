@@ -28,7 +28,7 @@ const techList = [
   {
     tech: "Golang",
     slug: "golang",
-    logo: "/icons/go.png",
+    logo: "/icons/golang.png",
     link: "/tips/golang",
     width: 160,
   },
