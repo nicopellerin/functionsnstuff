@@ -20,7 +20,7 @@ const ContactPage = () => (
           marginBottom: 75,
         }}
       >
-        <img src="/donut3.png" alt="donut" width={150} />
+        <img src="/donut3.webp" alt="donut" width={150} />
       </div>
       <Text>
         Have an idea for a tutorial or would like to retain my services as a web
