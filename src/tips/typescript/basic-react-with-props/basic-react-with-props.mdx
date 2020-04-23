@@ -1,0 +1,39 @@
+---
+title: Basic React component with Typescript
+author: Nico Pellerin
+tech: typescript
+slug: basic-react-component-typescript
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+<SEO title="Basic React component with Typescript" />
+
+# Basic React component with Typescript
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+interface Props {
+  name: string
+  isDev: boolean
+  favLanguage: string
+}
+
+const Dev: React.FC<Props> = ({name, isDev, favLanguage}) => {
+  return (
+    <div>
+      <h1>{name}</h1>
+      {isDev && (
+        <h4>Favorite programming language</h4>
+        <span>{favLanguage}</span>
+      )}
+    </div>
+  )
+}
+
+export default Dev
+
+// Using component
+<Dev name="Nico Pellerin" isDev={true} favLanguage="Go" />
+```

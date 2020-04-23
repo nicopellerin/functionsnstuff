@@ -1,0 +1,30 @@
+---
+title: Basic Node.js server using Express
+author: Nico Pellerin
+tech: nodejs
+slug: basic-nodejs-server-express
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+<SEO title="Basic Node.js server using Express" />
+
+# Basic Node.js server using Express
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+const express = require("express")
+
+const app = express()
+
+app.get("/", (req, res) => {
+  res.send("Hello world")
+})
+
+const PORT = process.env.PORT || 5000
+
+app.listen(PORT, () => {
+  console.log(`Listening to server on port ${PORT}`)
+})
+```

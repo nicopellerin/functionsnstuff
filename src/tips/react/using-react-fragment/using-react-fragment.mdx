@@ -1,0 +1,47 @@
+---
+title: Using React.Fragment
+author: Nico Pellerin
+tech: react
+slug: using-react-fragment
+cover: /cards/cover-react.jpg
+type: tips
+---
+
+<SEO title="Using React.Fragment" />
+
+# Using React.Fragment
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+// Without React.Fragment
+const App = () => {
+  return (
+    <div>
+      <Component1 />
+      <Component2 />
+    </div>
+  )
+}
+
+// First example adds an extra (and unnecessary in this case)
+// node to the DOM. React.Fragment fixes this.
+const App = () => {
+  return (
+    <React.Fragment>
+      <Component1 />
+      <Component2 />
+    </React.Fragment>
+  )
+}
+
+// or using the short syntax
+const App = () => {
+  return (
+    <>
+      <Component1 />
+      <Component2 />
+    </>
+  )
+}
+```

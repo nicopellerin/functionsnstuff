@@ -20,6 +20,8 @@ const menuItems = [
 ]
 
 const Navbar = () => {
+  const url = typeof window !== "undefined" ? window.location.href : null
+  const paths = url.split("/")
   const [show, setShow] = useState(null)
 
   return (
@@ -31,7 +33,11 @@ const Navbar = () => {
         <MenuList onMouseLeave={() => setShow(null)}>
           <AnimateSharedLayout>
             {menuItems.map(({ title, link }, i) => (
-              <MenuListItem key={title} onMouseEnter={() => setShow(i)}>
+              <MenuListItem
+                active={paths.includes(title.toLowerCase()) ? true : false}
+                key={title}
+                onMouseEnter={() => setShow(i)}
+              >
                 <Link to={link}>{title}</Link>
                 {show === i && (
                   <motion.div
@@ -84,4 +90,14 @@ const MenuListItem = styled(motion.li)`
   margin-left: 4rem;
   font-weight: 500;
   position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background: var(--menuColor);
+    height: ${(props: { active: boolean }) => props.active && "2px"};
+    width: 100%;
+  }
 `

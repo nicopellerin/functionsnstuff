@@ -7,11 +7,14 @@ const Breadcrumb: React.FC = () => {
   const location = useLocation()
 
   const type = location.pathname.split("/")[1]
-  const tech = location.pathname.split("/")[2]
+  let tech = location.pathname.split("/")[2]
 
   const Sep = () => {
     return <SepStyled>/</SepStyled>
   }
+
+  tech = tech === "nodejs" ? "Node.js" : tech
+  tech = tech === "nextjs" ? "Next.js" : tech
 
   return (
     <div>

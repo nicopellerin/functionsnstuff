@@ -27,7 +27,7 @@ const techList = [
     width: 160,
   },
   {
-    tech: "NodeJS",
+    tech: "Node.js",
     logo: "/icons/nodejs.png",
     link: "/tutorials/nodejs",
     width: 120,
@@ -81,6 +81,7 @@ const TutorialsPage = ({ data }) => {
         <TechCardList>
           {techList.map(({ tech, logo, link, width }) => (
             <TechCard
+              key={tech}
               tech={tech}
               logo={logo}
               link={link}

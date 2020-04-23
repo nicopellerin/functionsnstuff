@@ -143,7 +143,7 @@ const Header = () => {
             </motion.h3>
             <IconsList>
               {techList.map(({ tech, logo, link, width }) => (
-                <Link to={link}>
+                <Link key={tech} to={link}>
                   <TechWrapper
                     whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                   >
