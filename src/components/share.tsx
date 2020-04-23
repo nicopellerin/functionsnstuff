@@ -10,7 +10,7 @@ import {
 import styled from "styled-components"
 
 const Share = () => {
-  const url = window.location.href
+  const url = typeof window !== "undefined" ? window.location.href : null
 
   return (
     <Wrapper>
