@@ -1,5 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 import wave from "../images/wavee.svg"
 
@@ -24,7 +25,7 @@ const Footer = () => (
             <Button>Subscribe</Button>
           </Form>
         </div>
-        <img
+        <LazyLoadImage
           src={`https://images.weserv.nl/?url=${encodeURI(
             "https://modest-jones-332c08.netlify.app/donut3.webp"
           )}&h=350`}
