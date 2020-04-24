@@ -3,6 +3,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import { motion, AnimateSharedLayout } from "framer-motion"
 import { Link } from "gatsby"
+import Logo from "./logo"
 
 const menuItems = [
   {
@@ -27,7 +28,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <Link to="/">
-        <img src={"/logo.png"} alt="logo" width={285} />
+        <Logo width={285} />
       </Link>
       <Menu>
         <MenuList onMouseLeave={() => setShow(null)}>
