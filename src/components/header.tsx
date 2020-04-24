@@ -148,9 +148,7 @@ const Header = () => {
                     whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                   >
                     <motion.img
-                      src={`https://images.weserv.nl/?url=${encodeURI(
-                        `https://modest-jones-332c08.netlify.app/icons/${tech}.png`
-                      )}&w=${width}`}
+                      src={logo}
                       alt="react"
                       width={width}
                       variants={itemVariants}
