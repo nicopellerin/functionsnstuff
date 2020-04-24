@@ -60,7 +60,7 @@ export default function Particles({ count, mouse }) {
   })
   return (
     <>
-      <pointLight ref={light} distance={40} intensity={4} color="lightpink" />
+      <pointLight ref={light} distance={40} intensity={5} color="lightpink" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <sphereBufferGeometry attach="geometry" args={[0.2, 0]} />
         <meshPhongMaterial attach="material" color="pink" />
