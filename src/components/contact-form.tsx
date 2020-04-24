@@ -36,8 +36,13 @@ const ContactForm = () => {
     try {
       await axios.post("/.netlify/functions/contact-form", body)
     } catch (err) {
+      console.error(err)
     } finally {
       setIsSending(false)
+      setName("")
+      setEmail("")
+      setSubject("")
+      setMessage("")
     }
   }
 
@@ -89,7 +94,7 @@ const ContactForm = () => {
       <Spacer margin="1rem 0" />
       <Button>
         {isSending ? (
-          <>Sending</>
+          <>Sending...</>
         ) : (
           <>
             Send <FiSend style={{ marginLeft: 5 }} />
