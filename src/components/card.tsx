@@ -15,7 +15,7 @@ const Card: React.FC<Props> = ({ title, image, tech, link }) => {
   return (
     <Link to={link}>
       <Wrapper
-        image={`/card1.webp`}
+        image={image}
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>

@@ -1,0 +1,25 @@
+---
+title: Validate JSON
+author: Nico Pellerin
+tech: javascript
+slug: validate-json
+cover: /card2.webp
+type: tips
+---
+
+<SEO title="Validate JSON" />
+
+# Validate JSON
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+const validateJSON = value => {
+  try {
+    JSON.parse(value)
+    return true
+  } catch (err) {
+    return false
+  }
+}
+```

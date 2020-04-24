@@ -15,20 +15,6 @@ interface Props {
 const TechCard: React.FC<Props> = ({ tech, logo, link, width, totalCount }) => {
   const [selected, setSelected] = useState("")
 
-  // const {
-  //   allMdx: { totalCount },
-  // } = useStaticQuery(graphql`
-  //   query {
-  //     allMdx(
-  //       filter: {
-  //         frontmatter: { type: { eq: "tips" }, tech: { eq: "javascript" } }
-  //       }
-  //     ) {
-  //       totalCount
-  //     }
-  //   }
-  // `)
-
   return (
     <Link to={link}>
       <Wrapper whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}>
