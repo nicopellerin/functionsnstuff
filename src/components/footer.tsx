@@ -25,7 +25,9 @@ const Footer = () => (
           </Form>
         </div>
         <img
-          src="/donut3.webp"
+          src={`https://images.weserv.nl/?url=${encodeURI(
+            "https://modest-jones-332c08.netlify.app/donut3.webp"
+          )}&h=350`}
           alt="donut"
           width={300}
           style={{ marginTop: "8rem" }}

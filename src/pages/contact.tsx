@@ -20,7 +20,13 @@ const ContactPage = () => (
           marginBottom: 75,
         }}
       >
-        <img src="/donut3.webp" alt="donut" width={150} />
+        <img
+          src={`https://images.weserv.nl/?url=${encodeURI(
+            "https://modest-jones-332c08.netlify.app/donut3.webp"
+          )}&h=300`}
+          alt="donut"
+          width={150}
+        />
       </div>
       <Text>
         Have an idea for a tutorial or would like to retain my services as a web
@@ -28,7 +34,13 @@ const ContactPage = () => (
       </Text>
       <Text>
         Drop me a message and we can talk!{" "}
-        <EmojiHappy src="/happy.png" alt="happy" />-{" "}
+        <EmojiHappy
+          src={`https://images.weserv.nl/?url=${encodeURI(
+            "https://modest-jones-332c08.netlify.app/happy.png"
+          )}&h=40`}
+          alt="happy"
+        />
+        -{" "}
         <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>Nico</span>
       </Text>
       <Text></Text>
