@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useRef, useState, useLayoutEffect } from "react"
+import { Canvas } from "react-three-fiber"
 import styled from "styled-components"
 import {
   motion,
@@ -11,6 +12,8 @@ import { Link } from "gatsby"
 
 import Navbar from "./navbar"
 import BuddyHeader from "./buddy-header"
+import Stars from "./stars"
+import Particles from "./particles"
 
 interface Props {
   tech?: string
@@ -37,16 +40,19 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   }, [ref])
 
   return (
-    <Wrapper bg={""} ref={ref}>
-      <motion.img
-        src={"/bg_back.webp"}
-        alt="background sky"
-        initial={{ scale: 1.02 }}
-        animate={{
-          rotate: [-3, 3],
-        }}
-        style={{ position: "absolute", top: 0, width: "100%", zIndex: -2, y }}
-      />
+    <Wrapper ref={ref}>
+      <Canvas
+        camera={{ fov: 100, position: [0, 0, 30] }}
+        style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+      >
+        <Particles count={150} />
+      </Canvas>
+      <Canvas
+        camera={{ fov: 100, position: [0, 0, 2000], near: 0.01, far: 10000 }}
+        style={{ position: "absolute", top: 0, width: "100%", zIndex: -3 }}
+      >
+        <Stars count={1000} />
+      </Canvas>
       <motion.img
         src={"/bg_front2.webp"}
         alt="background mountains"
@@ -119,9 +125,6 @@ export default PageHeader
 
 // Styles
 const Wrapper = styled.div`
-  background: ${props => `url(${props.bg})`};
-  background-size: cover;
-  /* background-attachment: fixed; */
   height: 42rem;
   position: relative;
   overflow: hidden;
