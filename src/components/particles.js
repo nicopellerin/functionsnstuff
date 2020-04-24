@@ -1,12 +1,10 @@
 import * as THREE from "three"
 import React, { useRef, useMemo } from "react"
-import { useFrame, useThree } from "react-three-fiber"
+import { useFrame } from "react-three-fiber"
 
-export default function Particles({ count, mouse }) {
+export default function Particles({ count }) {
   const mesh = useRef()
   const light = useRef()
-  const { size, viewport } = useThree()
-  const aspect = size.width / viewport.width
 
   const dummy = useMemo(() => new THREE.Object3D(), [])
   // Generate some random positions, speed factors and timings
@@ -33,8 +31,7 @@ export default function Particles({ count, mouse }) {
       const a = Math.cos(t) + Math.sin(t * 1) / 10
       const b = Math.sin(t) + Math.cos(t * 2) / 10
       const s = Math.cos(t)
-      // particle.mx += (mouse.current[0] - particle.mx) * 0.01
-      // particle.my += (mouse.current[1] * -1 - particle.my) * 0.01
+
       // Update the dummy object
       dummy.position.set(
         (particle.mx / 10) * a +

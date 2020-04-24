@@ -42,16 +42,22 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   return (
     <Wrapper ref={ref}>
       <Canvas
+        concurrent
         camera={{ fov: 100, position: [0, 0, 30] }}
         style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
       >
-        <Particles count={150} />
+        <React.Suspense fallback={null}>
+          <Particles count={150} />
+        </React.Suspense>
       </Canvas>
       <Canvas
+        concurrent
         camera={{ fov: 100, position: [0, 0, 2000], near: 0.01, far: 10000 }}
         style={{ position: "absolute", top: 0, width: "100%", zIndex: -3 }}
       >
-        <Stars count={1000} />
+        <React.Suspense fallback={null}>
+          <Stars count={1000} />
+        </React.Suspense>
       </Canvas>
       <motion.img
         src={"/bg_front2.webp"}
