@@ -19,7 +19,12 @@ const Card: React.FC<Props> = ({ title, image, tech, link }) => {
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>
-        <TechLogo src={`/icons/${tech}.png`} alt={tech} />
+        <TechLogo
+          src={`https://images.weserv.nl/?url=${encodeURI(
+            `https://modest-jones-332c08.netlify.app/icons/${tech}.png`
+          )}&w=50`}
+          alt={tech}
+        />
       </Wrapper>
     </Link>
   )
