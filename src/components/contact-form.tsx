@@ -13,6 +13,7 @@ const ContactForm = () => {
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
   const [isSending, setIsSending] = useState(false)
+  const [isSent, setIsSent] = useState(false)
 
   const [errors, setErrors] = useState("")
 
@@ -35,6 +36,7 @@ const ContactForm = () => {
 
     try {
       await axios.post("/.netlify/functions/contact-form", body)
+      setIsSent(true)
     } catch (err) {
       console.error(err)
     } finally {
@@ -43,6 +45,7 @@ const ContactForm = () => {
       setEmail("")
       setSubject("")
       setMessage("")
+      setTimeout(() => setIsSent(false), 3000)
     }
   }
 
@@ -54,53 +57,67 @@ const ContactForm = () => {
 
   return (
     <FormWrapper onSubmit={handleSubmit}>
-      <InputRow>
-        <InputFieldWrapper>
-          <Label>Name</Label>
-          <InputField
-            name="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
-          <Label>Email</Label>
-          <InputField
-            type="email"
-            name="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </InputFieldWrapper>
-      </InputRow>
-
-      <InputFieldWrapper>
-        <Label>Subject</Label>
-        <InputField
-          name="subject"
-          value={subject}
-          onChange={e => setSubject(e.target.value)}
-        />
-      </InputFieldWrapper>
-
-      <InputFieldWrapper>
-        <Label>Message</Label>
-        <TextareaField
-          name="message"
-          value={message}
-          onChange={e => setMessage(e.target.value)}
-        />
-      </InputFieldWrapper>
-      <Spacer margin="1rem 0" />
-      <Button>
-        {isSending ? (
-          <>Sending...</>
+      <AnimatePresence>
+        {isSent ? (
+          <SuccessMsgWrapper
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: [20, 0] }}
+            exit={{ opacity: 0 }}
+          >
+            <SuccessMsg>{"Your message was sent sucessfully :)"}</SuccessMsg>
+          </SuccessMsgWrapper>
         ) : (
           <>
-            Send <FiSend style={{ marginLeft: 5 }} />
+            <InputRow>
+              <InputFieldWrapper>
+                <Label>Name</Label>
+                <InputField
+                  name="name"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                />
+              </InputFieldWrapper>
+              <InputFieldWrapper>
+                <Label>Email</Label>
+                <InputField
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </InputFieldWrapper>
+            </InputRow>
+
+            <InputFieldWrapper>
+              <Label>Subject</Label>
+              <InputField
+                name="subject"
+                value={subject}
+                onChange={e => setSubject(e.target.value)}
+              />
+            </InputFieldWrapper>
+
+            <InputFieldWrapper>
+              <Label>Message</Label>
+              <TextareaField
+                name="message"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+              />
+            </InputFieldWrapper>
+            <Spacer margin="1rem 0" />
+            <Button>
+              {isSending ? (
+                <>Sending...</>
+              ) : (
+                <>
+                  Send <FiSend style={{ marginLeft: 5 }} />
+                </>
+              )}
+            </Button>
           </>
         )}
-      </Button>
+      </AnimatePresence>
       <AnimatePresence>
         {errors && (
           <ErrMsg
@@ -123,6 +140,8 @@ export default ContactForm
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
 `
 
@@ -130,11 +149,13 @@ const InputRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 3rem;
+  width: 100%;
 `
 
 const InputFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `
 
 const Label = styled.label`
@@ -188,4 +209,16 @@ const ErrMsg = styled(motion.span)`
   font-size: 1.6rem;
   display: flex;
   align-items: center;
+`
+
+const SuccessMsgWrapper = styled(motion.div)`
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const SuccessMsg = styled.h3`
+  margin: 0;
 `
