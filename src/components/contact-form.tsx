@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { FiSend, FiAlertTriangle } from "react-icons/fi"
-import axios from "redaxios"
+import axios from "axios"
 
 import Spacer from "./spacer"
 

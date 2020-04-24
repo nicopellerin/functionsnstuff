@@ -11845,11 +11845,6 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
-redaxios@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/redaxios/-/redaxios-0.2.0.tgz#acf6f50607d232cda407d1e06f4bd043adba1992"
-  integrity sha512-lrDld2bVWIBrW+S1HPMyP8OvEtpHPIfmXyW7T7xTox1SM4/M3aC5X55xa2vRR3LZHwCvpMQAgCye8IyICzkKpA==
-
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
