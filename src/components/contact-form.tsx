@@ -34,7 +34,7 @@ const ContactForm = () => {
     }
 
     try {
-      await axios.post("./netlify/functions/contact-form", body)
+      await axios.post("/.netlify/functions/contact-form", body)
     } catch (err) {
     } finally {
       setIsSending(false)
