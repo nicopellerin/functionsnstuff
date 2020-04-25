@@ -37,7 +37,7 @@ const TipsGo = () => {
   return (
     <>
       <SEO title="Golang - Tips" />
-      <PageHeader tech="go" />
+      <PageHeader tech="golang" />
       <Layout template>
         <Breadcrumb />
         <Spacer />

@@ -37,7 +37,7 @@ const TutorialsGo = () => {
   return (
     <>
       <SEO title="Golang - Tutorials" />
-      <PageHeader tech="go" />
+      <PageHeader tech="golang" />
       <Layout template>
         <Breadcrumb />
         <Spacer />
