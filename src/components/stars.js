@@ -1,4 +1,15 @@
 import React, { useMemo } from "react"
+import { useFrame } from "react-three-fiber"
+
+function Dolly() {
+  useFrame(({ clock, camera }) =>
+    camera.updateProjectionMatrix(
+      void (camera.rotation.y =
+        ((Math.sin(clock.getElapsedTime()) / 200) * (45 * Math.PI)) / 360)
+    )
+  )
+  return null
+}
 
 export default function Stars({ count = 2000 }) {
   const positions = useMemo(() => {
@@ -18,6 +29,7 @@ export default function Stars({ count = 2000 }) {
     }
     return new Float32Array(positions)
   }, [count])
+
   return (
     <points>
       <bufferGeometry attach="geometry">
@@ -35,6 +47,7 @@ export default function Stars({ count = 2000 }) {
         color="pink"
         fog={false}
       />
+      <Dolly />
     </points>
   )
 }

@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as THREE from "three"
 import { useRef, useState, useLayoutEffect } from "react"
 import { Canvas } from "react-three-fiber"
 import styled from "styled-components"
@@ -22,6 +23,8 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
   const ref = useRef()
@@ -41,16 +44,25 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
 
   return (
     <Wrapper ref={ref}>
-      <Canvas
-        concurrent
-        camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
-        style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
-      >
-        <React.Suspense fallback={null}>
-          <Particles count={150} />
-          <Stars count={2000} />
-        </React.Suspense>
-      </Canvas>
+      {isMobile ? (
+        <img src={"/bg_back.png"} />
+      ) : (
+        <Canvas
+          concurrent
+          camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
+          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = THREE.Uncharted2ToneMapping
+            gl.setClearColor(new THREE.Color("#020207"))
+          }}
+        >
+          >
+          <React.Suspense fallback={null}>
+            <Particles count={150} />
+            <Stars count={2000} />
+          </React.Suspense>
+        </Canvas>
+      )}
       <motion.img
         src={"/bg_front2.webp"}
         alt="background mountains"
