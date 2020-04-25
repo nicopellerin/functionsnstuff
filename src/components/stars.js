@@ -44,7 +44,7 @@ export default function Stars({ count = 2000 }) {
         attach="material"
         size={12.5}
         sizeAttenuation
-        color="pink"
+        color="#ff88aa"
         fog={false}
       />
       <Dolly />
