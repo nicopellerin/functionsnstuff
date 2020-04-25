@@ -23,7 +23,10 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+  const isMobile =
+    navigator !== "undefined"
+      ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      : null
 
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
