@@ -220,7 +220,7 @@ const Header = () => {
           left: 0,
           width: "100%",
           pointerEvents: "none",
-          zIndex: 11,
+          zIndex: 111110,
         }}
         alt="wave"
       />

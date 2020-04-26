@@ -173,7 +173,6 @@ const Wrapper = styled.main`
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;
-  background: #080808;
 `
 
 const Title = styled.h3`
