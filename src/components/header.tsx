@@ -15,6 +15,8 @@ const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState(null)
 
+  const isMobile = false
+
   const techList = [
     {
       tech: "React",
@@ -84,7 +86,9 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <React.Suspense fallback={null}>
+      {isMobile ? (
+        <img src={"/bg_back.png"} />
+      ) : (
         <Canvas
           concurrent
           camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
@@ -94,11 +98,13 @@ const Header = () => {
             gl.setClearColor(new THREE.Color("#020207"))
           }}
         >
-          >
-          <Particles count={150} />
-          <Stars count={1250} />
+          <React.Suspense fallback={null}>
+            >
+            <Particles count={150} />
+            <Stars count={1250} />
+          </React.Suspense>
         </Canvas>
-      </React.Suspense>
+      )}
       <motion.img
         src={"/bg_front2.webp"}
         alt="background mountains"
