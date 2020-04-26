@@ -104,8 +104,8 @@ const Header = () => {
         alt="background mountains"
         style={{
           position: "absolute",
-          top: 150,
-          width: "100%",
+          top: "20%",
+          width: "100vw",
           zIndex: -1,
         }}
       />
@@ -249,6 +249,10 @@ const TerminalWrapper = styled(motion.div)`
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+
+  @media (max-width: 1440px) {
+    width: 90rem;
+  }
 `
 
 const TerminalContainer = styled(motion.div)`
