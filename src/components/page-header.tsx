@@ -64,7 +64,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
           >
           <React.Suspense fallback={null}>
             <Particles count={150} />
-            <Stars count={2000} />
+            <Stars count={1250} />
           </React.Suspense>
         </Canvas>
       )}
