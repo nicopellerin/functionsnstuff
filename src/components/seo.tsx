@@ -20,7 +20,7 @@ function SEO({ description, lang, meta, title }) {
 
   const metaDescription = description || site.siteMetadata.description
   const metaTitle =
-    title !== "helloworldnstuff"
+    title !== "functionsnstuff"
       ? `%s | ${site.siteMetadata.title}`
       : `${title} | Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`
 
@@ -73,7 +73,7 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-  title: `helloworldnstuff`,
+  title: `functionsnstuff`,
 }
 
 SEO.propTypes = {

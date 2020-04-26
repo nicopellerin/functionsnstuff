@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as THREE from "three"
 import { useState, Suspense } from "react"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
@@ -6,6 +7,9 @@ import { Link } from "gatsby"
 
 import Navbar from "./navbar"
 import Buddy from "./buddy"
+import { Canvas } from "react-three-fiber"
+import Particles from "./particles"
+import Stars from "./stars"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
@@ -79,7 +83,32 @@ const Header = () => {
   }
 
   return (
-    <Wrapper bg={"/bg5.webp"}>
+    <Wrapper bg={""}>
+      <Canvas
+        concurrent
+        camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
+        style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+        onCreated={({ gl }) => {
+          gl.toneMapping = THREE.Uncharted2ToneMapping
+          gl.setClearColor(new THREE.Color("#020207"))
+        }}
+      >
+        >
+        <React.Suspense fallback={null}>
+          <Particles count={150} />
+          <Stars count={1250} />
+        </React.Suspense>
+      </Canvas>
+      <motion.img
+        src={"/bg_front2.webp"}
+        alt="background mountains"
+        style={{
+          position: "absolute",
+          top: 150,
+          width: "100%",
+          zIndex: -1,
+        }}
+      />
       <Container>
         <Navbar />
         <TerminalWrapper

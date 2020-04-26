@@ -2,7 +2,7 @@ require("dotenv")
 
 module.exports = {
   siteMetadata: {
-    title: `helloworldnstuff`,
+    title: `functionsnstuff`,
     description: `Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`,
     author: `@nicopellerin_io`,
   },

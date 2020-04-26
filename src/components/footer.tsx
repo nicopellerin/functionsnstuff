@@ -13,7 +13,7 @@ const Footer = () => (
           <Text>
             Subscribe to the{" "}
             <span style={{ color: "var(--primaryColor)" }}>
-              helloworldnstuff
+              functionsnstuff
             </span>{" "}
             newsletter to get access to the newest tutorials and tips. No spam
             ever. Fun fact: Built the donut on the right by following a Blender
@@ -36,7 +36,7 @@ const Footer = () => (
       </NewsletterWrapper>
 
       <FooterWrapper>
-        &copy;{new Date().getFullYear()} helloworldnstuff. All Right Reserved.
+        &copy;{new Date().getFullYear()} functionsnstuff. All Right Reserved.
       </FooterWrapper>
     </Container>
     <img

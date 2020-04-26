@@ -7,7 +7,7 @@ import Header from "../components/header"
 
 const IndexPage = () => (
   <>
-    <SEO title="helloworldnstuff" />
+    <SEO title="functionsnstuff" />
     <Header />
     <Layout>
       <Main />
