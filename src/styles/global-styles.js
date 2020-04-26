@@ -24,6 +24,8 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
+  #___gatsby {}
+
   body {
     height: 100%;
     background: #080808;

@@ -25,7 +25,9 @@ const Layout: React.FC<Props> = ({ children, template }) => {
 export default Layout
 
 // Styles
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  background: #080808;
+`
 
 const Main = styled.main`
   max-width: ${(props: { template: boolean }) =>
@@ -33,5 +35,4 @@ const Main = styled.main`
   margin: 0 auto;
   padding: 10rem 0 15rem;
   position: relative;
-  /* background: #080808; */
 `

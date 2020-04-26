@@ -92,7 +92,13 @@ const Header = () => {
         <Canvas
           concurrent
           camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
-          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+          style={{
+            position: "absolute",
+            top: 0,
+            width: "100%",
+            maxHeight: "65rem",
+            zIndex: -2,
+          }}
           onCreated={({ gl }) => {
             gl.toneMapping = THREE.Uncharted2ToneMapping
             gl.setClearColor(new THREE.Color("#020207"))
@@ -220,7 +226,7 @@ const Header = () => {
           left: 0,
           width: "100%",
           pointerEvents: "none",
-          zIndex: 111110,
+          zIndex: 12,
         }}
         alt="wave"
       />
