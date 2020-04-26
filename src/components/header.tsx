@@ -83,22 +83,22 @@ const Header = () => {
   }
 
   return (
-    <Wrapper bg={""}>
-      <Canvas
-        concurrent
-        camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
-        style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
-        onCreated={({ gl }) => {
-          gl.toneMapping = THREE.Uncharted2ToneMapping
-          gl.setClearColor(new THREE.Color("#020207"))
-        }}
-      >
+    <Wrapper>
+      <React.Suspense fallback={null}>
+        <Canvas
+          concurrent
+          camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
+          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = THREE.Uncharted2ToneMapping
+            gl.setClearColor(new THREE.Color("#020207"))
+          }}
         >
-        <React.Suspense fallback={null}>
+          >
           <Particles count={150} />
           <Stars count={1250} />
-        </React.Suspense>
-      </Canvas>
+        </Canvas>
+      </React.Suspense>
       <motion.img
         src={"/bg_front2.webp"}
         alt="background mountains"
@@ -226,9 +226,6 @@ export default Header
 
 // Styles
 const Wrapper = styled.div`
-  background: ${props => `url(${props.bg})`};
-  background-size: cover;
-  background-attachment: fixed;
   height: 70rem;
   position: relative;
   overflow: hidden;
