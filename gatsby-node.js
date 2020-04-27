@@ -42,6 +42,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             frontmatter {
               slug
               tech
+              title
             }
           }
         }
@@ -55,11 +56,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const tips = tipsData.data.allMdx.edges
 
-  tips.forEach(({ node }) => {
+  tips.forEach(({ node }, index) => {
+    const prevTip = index === 0 ? null : tips[index - 1].node
+    const nextTip = index === tips.length - 1 ? null : tips[index + 1].node
+
     createPage({
       path: `tips/${node.frontmatter.tech}/${node.frontmatter.slug}`,
       component: path.resolve("./src/templates/tips.tsx"),
-      context: { id: node.id },
+      context: { id: node.id, prevTip, nextTip },
     })
   })
 }

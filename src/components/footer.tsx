@@ -25,7 +25,7 @@ const Footer = () => (
             <Button>Subscribe</Button>
           </Form>
         </div>
-        <LazyLoadImage
+        <img
           src={`https://images.weserv.nl/?url=${encodeURI(
             "https://modest-jones-332c08.netlify.app/donut3.webp"
           )}&h=350`}

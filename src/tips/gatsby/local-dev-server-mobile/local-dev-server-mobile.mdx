@@ -1,0 +1,25 @@
+---
+title: Develop for mobile on local network
+author: Nico Pellerin
+tech: gatsby
+slug: local-dev-server-mobile
+cover: /card1.webp
+type: tips
+---
+
+<SEO title="Develop for mobile on local network" />
+
+# Develop for mobile on local network
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```
+// Launch Gatsby in development
+
+gatsby develop -o -H 0.0.0.0 -p 8000
+
+// In your browser
+// To find network IP on Unix machine, in terminal > ipconfig getifaddr en0
+
+http://<Your network IP address>:8000
+```

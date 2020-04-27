@@ -10,21 +10,27 @@ import Breadcrumb from "../components/breadcrumb"
 import Spacer from "../components/spacer"
 import Code from "../components/code"
 import Share from "../components/share"
+import Pagination from "../components/pagination"
 
 const shortcodes = { SEO, Spacer, pre: Code, Share }
 
-const TipsTemplate = ({ data: { mdx } }) => (
-  <>
-    <PageHeader tech={mdx.frontmatter.tech} />
-    <Layout>
-      <Breadcrumb />
-      <MDXProvider components={shortcodes}>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
-      </MDXProvider>
-      <Share />
-    </Layout>
-  </>
-)
+const TipsTemplate = ({ data: { mdx }, pageContext }) => {
+  const { prevTip, nextTip } = pageContext
+  console.log(pageContext)
+  return (
+    <>
+      <PageHeader tech={mdx.frontmatter.tech} />
+      <Layout>
+        <Breadcrumb />
+        <MDXProvider components={shortcodes}>
+          <MDXRenderer>{mdx.body}</MDXRenderer>
+        </MDXProvider>
+        <Share />
+        <Pagination prev={prevTip} next={nextTip} />
+      </Layout>
+    </>
+  )
+}
 
 export const pageQuery = graphql`
   query TipsQuery($id: String) {
