@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { CompactPicker } from "react-color"
 import Spacer from "./spacer"
 import Checkbox from "./checkbox"
+import DarkMode from "./dark-mode"
 
 const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
 
@@ -32,6 +33,7 @@ const ButtonGenerator = () => {
   const [anim, setAnim] = useState(true)
   const [copied, setCopied] = useState(false)
   const [checkedIcon, setCheckedIcon] = useState(true)
+  const [darkMode, setDarkMode] = useState(true)
 
   const border = "none"
   const fontWeight = 400
@@ -52,15 +54,15 @@ const ButtonGenerator = () => {
   }${
     anim ? " whileTap={{ y: 1 }}\n " : ""
   }style={{ color: "${textColor}",\n background: "${background}",\n padding: "${vertPadding}px ${horiPadding}px",\n border: "${border}",\n borderRadius: "${borderRadius}px",\n fontSize: "${fontSize}px",\n fontWeight: "${fontWeight}",\n boxShadow: "0 4px 20px rgba(0,0,0,${dropShadow /
-    10})",\n cursor: "${cursor}" }}>\n${text}\n${
-    checkedIcon ? "<FiSend style={{ marginLeft: 5 }} />" : ""
+    10})",\n cursor: "${cursor}" }}>\n${text}${
+    checkedIcon ? "\n<FiSend style={{ marginLeft: 5 }} />" : ""
   }\n</${anim ? "motion." : ""}button>\n)`
 
   const handleCopyToClipboard = async () => {
     const clipboard = window.navigator.clipboard
     await clipboard.writeText(value)
     setCopied(true)
-    await delay(3000)
+    await delay(1500)
     setCopied(false)
   }
 
@@ -69,7 +71,12 @@ const ButtonGenerator = () => {
       <Wrapper>
         <div>
           <TerminalWrapper>
-            <ButtonContainer>
+            <ButtonContainer darkMode={darkMode ? true : false}>
+              <div style={{ position: "absolute", top: 10, right: 10 }}>
+                <DarkMode
+                  setToggle={() => setDarkMode(prevState => !prevState)}
+                />
+              </div>
               <Button
                 whileHover={{ y: anim ? -1 : 0 }}
                 whileTap={{ y: anim ? 1 : 0 }}
@@ -181,7 +188,10 @@ const ButtonGenerator = () => {
                 toggleCheck={() => setAnim(prevState => !prevState)}
               />
             </div>
-            <CopyButton onClick={handleCopyToClipboard}>
+            <CopyButton
+              copied={copied ? true : false}
+              onClick={handleCopyToClipboard}
+            >
               <AnimatePresence>
                 {copied ? (
                   <CopyText
@@ -308,13 +318,14 @@ const TerminalWrapper = styled.div`
   /* background: #0a0a0a; */
   width: 100%;
   padding: 3rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
 
   border-radius: 20px;
-  min-height: 52rem;
+  /* min-height: 60rem; */
 
   position: relative;
 `
@@ -327,9 +338,8 @@ const Sidebar = styled.aside`
 `
 
 const ButtonContainer = styled.div`
-  /* box-shadow: inset 4px 4px 20px rgba(0, 0, 0, 0.2); */
-  background: #112;
-  /* border: 1px solid #aaa; */
+  background: ${(props: { darkMode: boolean }) =>
+    props.darkMode ? "#112" : "#eff"};
   width: 100%;
   display: flex;
   justify-content: center;
@@ -338,6 +348,7 @@ const ButtonContainer = styled.div`
   border-radius: 10px;
   width: 40rem;
   margin: 0 auto;
+  position: relative;
 `
 
 const Button = styled(motion.button)`
@@ -408,14 +419,15 @@ const ColorPickerWrapper = styled.div`
 
 const InputField = styled.input`
   border: 1px solid #111;
-  color: ghostwhite;
+  color: var(--primaryColor);
   background: none;
   padding: 0.8em 0.8em;
   border-radius: 5px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-family: inherit;
   border: 1px solid #222;
   min-width: 253px;
+  margin-top: 5px;
   margin-bottom: 1.6rem;
 `
 
@@ -436,7 +448,7 @@ const CodeOverlayContainer = styled.div`
   line-height: 1.6em;
   border-radius: 10px;
   white-space: pre-wrap;
-  padding: 2rem 0;
+  padding: 0.5rem 0;
   color: var(--primaryColor);
   max-width: 100%;
 `
@@ -445,7 +457,8 @@ const CopyButton = styled(motion.button)`
   padding: 0.8em 2em;
   font-size: 1.6rem;
   font-weight: 500;
-  border: 1px solid var(--primaryColor);
+  border: ${(props: { copied: boolean }) =>
+    props.copied ? "1px solid lightgreen" : "1px solid var(--primaryColor)"};
   border-radius: 5px;
   background: none;
   color: var(--primaryColor);
@@ -457,6 +470,7 @@ const CopyButton = styled(motion.button)`
   width: 100%;
   margin-top: 2rem;
   outline: none;
+  height: 5rem;
 `
 
 const CopyText = styled(motion.div)`
