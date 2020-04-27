@@ -85,4 +85,13 @@ export const GlobalStyles = createGlobalStyle`
   padding-left: 2em;
   border-left: 0.25em solid #f99;
 }
+
+.language-jsx2{
+  background-color: #080808!important;
+  display: block;
+  font-size: 1.9rem!important;
+  margin: 2rem 0;
+  padding: 1.5em 0;
+  width: 100%;
+}
 `
