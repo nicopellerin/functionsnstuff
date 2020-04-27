@@ -1,0 +1,24 @@
+---
+title: Accessing environment variables (.env)
+author: Nico Pellerin
+tech: gatsby
+slug: accessing-env-variables
+cover: /card1.webp
+type: tips
+---
+
+<SEO title="Accessing environment variables (.env)" />
+
+# Accessing environment variables (.env)
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+// In gatsby-node.js
+require('dotenv')
+
+// or when using another name than .env (eg: .env.production)
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}
+})
+```
