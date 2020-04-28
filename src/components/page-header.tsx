@@ -25,14 +25,14 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
-  // const isMobile =
-  //   navigator !== "undefined"
-  //     ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-  //     : null
+  const isMobile =
+    navigator !== "undefined"
+      ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      : null
 
-  const isMobile = useMedia({
-    maxWidth: 768,
-  })
+  // const isMobile = useMedia({
+  //   maxWidth: 768,
+  // })
 
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()

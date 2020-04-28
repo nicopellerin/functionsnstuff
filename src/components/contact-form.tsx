@@ -169,7 +169,7 @@ const FormWrapper = styled.form`
   position: relative;
 
   @media (max-width: 1024px) {
-    padding: 0 2rem;
+    padding: 0;
   }
 `
 
@@ -227,6 +227,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 const ErrMsg = styled(motion.span)`

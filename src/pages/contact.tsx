@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { useMedia } from "react-use-media"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -7,54 +8,58 @@ import PageHeader from "../components/page-header"
 import ContactForm from "../components/contact-form"
 import Spacer from "../components/spacer"
 
-const ContactPage = () => (
-  <>
-    <SEO title="Contact" />
-    <PageHeader title="Contact" />
-    <Layout>
-      <DonutWrapper>
-        <img
-          src={`https://images.weserv.nl/?url=${encodeURI(
-            "https://modest-jones-332c08.netlify.app/donut3.webp"
-          )}&h=300`}
-          alt="donut"
-          width={150}
-        />
-      </DonutWrapper>
-      <TextWrapper>
-        <Text>
-          Have an idea for a tutorial or would like to retain my services as a
-          web developper?
-        </Text>
-        <Text>
-          Drop me a message and we can talk!{" "}
-          <EmojiHappy
-            src={`https://images.weserv.nl/?url=${encodeURI(
-              "https://modest-jones-332c08.netlify.app/happy.png"
-            )}&h=40`}
-            alt="happy"
-          />
-          -{" "}
-          <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
-            Nico
-          </span>
-        </Text>
-      </TextWrapper>
-      <Spacer margin="4rem 0 6rem 0" />
-      <ContactForm />
-      <Spacer margin="4rem 0 8rem 0" />
-    </Layout>
-  </>
-)
+const ContactPage = () => {
+  const isDesktop = useMedia({
+    minWidth: 1024,
+  })
+
+  return (
+    <>
+      <SEO title="Contact" />
+      <PageHeader title="Contact" />
+      <Layout>
+        {isDesktop ? (
+          <DonutWrapper>
+            <img
+              src={`https://images.weserv.nl/?url=${encodeURI(
+                "https://modest-jones-332c08.netlify.app/donut3.webp"
+              )}&h=300`}
+              alt="donut"
+              width={150}
+            />
+          </DonutWrapper>
+        ) : null}
+        <TextWrapper>
+          <Text>
+            Have an idea for a tutorial or would like to retain my services as a
+            web developper?
+          </Text>
+          <Text>
+            Drop me a message and we can talk!{" "}
+            <EmojiHappy
+              src={`https://images.weserv.nl/?url=${encodeURI(
+                "https://modest-jones-332c08.netlify.app/happy.png"
+              )}&h=40`}
+              alt="happy"
+            />
+            -{" "}
+            <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
+              Nico
+            </span>
+          </Text>
+        </TextWrapper>
+        <Spacer margin="4rem 0 6rem 0" />
+        <ContactForm />
+        <Spacer margin="4rem 0 8rem 0" />
+      </Layout>
+    </>
+  )
+}
 
 export default ContactPage
 
 // Styles
-const TextWrapper = styled.div`
-  @media (max-width: 1024px) {
-    padding: 0 2rem;
-  }
-`
+const TextWrapper = styled.div``
 
 const Text = styled.h4`
   margin-bottom: 2rem;

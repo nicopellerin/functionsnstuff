@@ -1,16 +1,10 @@
 import * as React from "react"
-import { useState, useContext } from "react"
+import { useState } from "react"
 import styled from "styled-components"
-import {
-  FaBars,
-  FaHome,
-  FaRegSmile,
-  FaNewspaper,
-  FaPlusCircle,
-  FaSignOutAlt,
-} from "react-icons/fa"
 import { AnimatePresence, motion } from "framer-motion"
 import { Link } from "gatsby"
+
+import { logoBase, donutBase } from "../../utils/base64-images"
 
 const NavbarMobile = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false)
@@ -19,21 +13,29 @@ const NavbarMobile = () => {
     <div style={{ position: "relative" }}>
       <Wrapper>
         <MenuBar onClick={() => setToggleDropdown(prevState => !prevState)}>
-          <Menu
-            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h
-0PSIyMCI+PHBhdGggZD0iTTEgMmExIDEgMCAwMTEtMWgyMGExIDEgMCAwMTEgMXYxYTEgMSAwID
-AxLTEgMUgyYTEgMSAwIDAxLTEtMXpNMSA3YTEgMSAwIDAxMS0xaDE1YTEgMSAwIDAxMSAxdjFhM
-SAxIDAgMDEtMSAxSDJhMSAxIDAgMDEtMS0xek0xIDEyYTEgMSAwIDAxMS0xaDE4YTEgMSAwIDAx
-MSAxdjFhMSAxIDAgMDEtMSAxSDJhMSAxIDAgMDEtMS0xek0xIDE3YTEgMSAwIDAxMS0xaDExYTE
-gMSAwIDAxMSAxdjFhMSAxIDAgMDEtMSAxSDJhMSAxIDAgMDEtMS0xeiIgZmlsbD0iIzMzMyIvPj
-wvc3ZnPg== "
-            alt="menu"
-          />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20">
+            <path
+              d="M 1 2 C 1 1.448 1.448 1 2 1 L 22 1 C 22.552 1 23 1.448 23 2 L 23 3 C 23 3.552 22.552 4 22 4 L 2 4 C 1.448 4 1 3.552 1 3 Z"
+              fill="#FFE5FB"
+            ></path>
+            <path
+              d="M 1 7 C 1 6.448 1.448 6 2 6 L 17 6 C 17.552 6 18 6.448 18 7 L 18 8 C 18 8.552 17.552 9 17 9 L 2 9 C 1.448 9 1 8.552 1 8 Z"
+              fill="#FFE5FB"
+            ></path>
+            <path
+              d="M 1 12 C 1 11.448 1.448 11 2 11 L 20 11 C 20.552 11 21 11.448 21 12 L 21 13 C 21 13.552 20.552 14 20 14 L 2 14 C 1.448 14 1 13.552 1 13 Z"
+              fill="#FFE5FB"
+            ></path>
+            <path
+              d="M 1 17 C 1 16.448 1.448 16 2 16 L 13 16 C 13.552 16 14 16.448 14 17 L 14 18 C 14 18.552 13.552 19 13 19 L 2 19 C 1.448 19 1 18.552 1 18 Z"
+              fill="#FFE5FB"
+            ></path>
+          </svg>
         </MenuBar>
         <Link to="/">
-          <img src="/logo.png" width={175} alt="logo" />
+          <img src={logoBase} width={180} alt="logo" />
         </Link>
-        <div></div>
+        <img src={donutBase} alt="donut" width={35} />
       </Wrapper>
       <AnimatePresence>
         {toggleDropdown && (
@@ -114,7 +116,7 @@ export default NavbarMobile
 
 // Styles
 const Wrapper = styled.div`
-  background: #000;
+  background: #020207;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   position: relative;
   padding: 1.8rem 2rem;
@@ -123,6 +125,7 @@ const Wrapper = styled.div`
   justify-items: center;
   align-items: center;
   z-index: 1000;
+  height: 65px;
 
   @media (min-width: 501px) {
     grid-template-columns: 145px 1fr 145px;
@@ -140,20 +143,15 @@ const MenuBar = styled.div`
   }
 `
 
-const Menu = styled.img`
-  cursor: pointer;
-`
-
 const Dropdown = styled(motion.div)`
   position: absolute;
   background: #000;
   top: 68px;
   width: 100%;
-  padding: 3rem 2rem 4.5rem 2rem;
+  padding: 1rem 2rem 2.5rem 2rem;
   z-index: 999;
   min-height: 100%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  /* border-top: 1px solid var(--primaryColor); */
 `
 
 const DropdownList = styled(motion.ul)`
@@ -167,7 +165,7 @@ const DropdownListItem = styled(motion.li)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ghostwhite;
+  color: var(--menuColor);
   box-shadow: 0 14px 20px -20px rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
   width: 30rem;
