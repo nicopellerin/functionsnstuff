@@ -12,7 +12,7 @@ const ButtonGeneratorPage = () => {
     <>
       <SEO title="React Button Generator" />
       <PageHeader title="React Button Generator" />
-      <Layout template>
+      <Layout>
         <ButtonGenerator />
         <Share />
         {/* <Spacer /> */}
