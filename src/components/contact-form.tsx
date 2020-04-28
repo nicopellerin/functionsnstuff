@@ -18,7 +18,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState("")
 
   const isDesktop = useMedia({
-    minWidth: 1024,
+    minWidth: 500,
   })
 
   const handleSubmit = async e => {
@@ -168,7 +168,7 @@ const FormWrapper = styled.form`
   align-items: center;
   position: relative;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     padding: 0;
   }
 `
@@ -228,7 +228,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     width: 100%;
   }
 `

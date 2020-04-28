@@ -27,7 +27,7 @@ interface Props {
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   const isMobile =
     typeof window !== "undefined"
-      ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      ? /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
       : null
 
   const [elementTop, setElementTop] = useState(0)
@@ -73,15 +73,9 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         </Canvas>
       )}
       {isMobile ? (
-        <motion.img
+        <BackgroundMountainsMobile
           src={"/bg_front2.webp"}
           alt="background mountains"
-          style={{
-            position: "absolute",
-            top: "60%",
-            width: "100%",
-            zIndex: -1,
-          }}
         />
       ) : (
         <motion.img
@@ -163,6 +157,21 @@ const Wrapper = styled.div`
   @media (min-width: 1500px) {
     background-position-y: 20%;
     height: 46rem;
+  }
+`
+
+const BackgroundMountainsMobile = styled(motion.img)`
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  top: 30%;
+
+  @media (max-width: 768px) {
+    top: 40%;
+  }
+
+  @media (max-width: 500px) {
+    top: 62%;
   }
 `
 

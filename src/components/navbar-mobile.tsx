@@ -11,7 +11,7 @@ const NavbarMobile = () => {
 
   return (
     <div style={{ position: "relative" }}>
-      <Wrapper>
+      <Wrapper toggled={toggleDropdown ? true : false}>
         <MenuBar onClick={() => setToggleDropdown(prevState => !prevState)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20">
             <path
@@ -39,7 +39,10 @@ const NavbarMobile = () => {
       </Wrapper>
       <AnimatePresence>
         {toggleDropdown && (
-          <NavbarMobileDropdown setToggleDropdown={setToggleDropdown} />
+          <NavbarMobileDropdown
+            toggleDropdown={toggleDropdown}
+            setToggleDropdown={setToggleDropdown}
+          />
         )}
       </AnimatePresence>
       <AnimatePresence>
@@ -61,12 +64,13 @@ const NavbarMobile = () => {
   )
 }
 
-const NavbarMobileDropdown = ({ setToggleDropdown }) => {
+const NavbarMobileDropdown = ({ setToggleDropdown, toggleDropdown }) => {
   return (
     <Dropdown
+      toggled={toggleDropdown ? true : false}
       initial={{ y: "-100%" }}
       animate={{ y: 0 }}
-      exit={{ y: "-100%" }}
+      exit={{ y: "-102%" }}
       transition={{ type: "spring", damping: 50, stiffness: 200 }}
     >
       <nav>
@@ -126,6 +130,9 @@ const Wrapper = styled.div`
   align-items: center;
   z-index: 1000;
   height: 65px;
+  transition: 0.3s;
+  border-bottom: ${(props: { toggled: boolean }) =>
+    props.toggled ? "2px solid #112" : "2px solid transparent"};
 
   @media (min-width: 501px) {
     grid-template-columns: 145px 1fr 145px;
@@ -148,10 +155,12 @@ const Dropdown = styled(motion.div)`
   background: #000;
   top: 68px;
   width: 100%;
-  padding: 1rem 2rem 2.5rem 2rem;
+  padding: 1.5rem 2rem 2.5rem 2rem;
   z-index: 999;
   min-height: 100%;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  /* border-bottom: ${(props: { toggled: boolean }) =>
+    props.toggled ? "2px solid #112" : "2px solid transparent"}; */
 `
 
 const DropdownList = styled(motion.ul)`
@@ -178,7 +187,7 @@ const Overlay = styled(motion.div)`
   top: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.57);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
   z-index: 998;
 `

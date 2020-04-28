@@ -61,16 +61,7 @@ const FooterMobile = () => {
           &copy;{new Date().getFullYear()} functionsnstuff. All Right Reserved.
         </FooterWrapper>
       </Container>
-      <img
-        src={wave}
-        alt="wave"
-        style={{
-          position: "absolute",
-          top: "-75px",
-          width: "100%",
-          pointerEvents: "none",
-        }}
-      />
+      <Wave src={wave} alt="wave" />
     </Wrapper>
   )
 }
@@ -96,6 +87,10 @@ const NewsletterWrapper = styled.div`
   padding-top: 8rem;
 
   @media (max-width: 1440px) {
+    padding-top: 6rem;
+  }
+
+  @media (max-width: 768px) {
     padding-top: 4rem;
   }
 `
@@ -149,4 +144,19 @@ const FooterWrapper = styled.footer`
   font-size: 1.4rem;
   font-weight: 500;
   color: var(--textColor);
+`
+
+const Wave = styled.img`
+  position: absolute;
+  top: -75px;
+  width: 100%;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    top: -100px;
+  }
+
+  @media (max-width: 500px) {
+    top: -75px;
+  }
 `

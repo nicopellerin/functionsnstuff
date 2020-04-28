@@ -16,7 +16,7 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children, template }) => {
   const isDesktop = useMedia({
-    minWidth: 1024,
+    minWidth: 1440,
   })
   return (
     <Wrapper>

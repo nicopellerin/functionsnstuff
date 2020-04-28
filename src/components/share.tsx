@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 8rem;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     margin-top: 6rem;
     margin-bottom: 4rem;
   }

@@ -104,7 +104,6 @@ const NewsletterWrapper = styled.div`
   padding-top: 8rem;
   display: grid;
   grid-template-columns: 60rem 1fr;
-  /* place-items: center; */
   grid-gap: 3rem;
 
   @media (max-width: 1440px) {

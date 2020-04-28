@@ -10,7 +10,7 @@ import Spacer from "../components/spacer"
 
 const ContactPage = () => {
   const isDesktop = useMedia({
-    minWidth: 1024,
+    minWidth: 500,
   })
 
   return (
@@ -36,16 +36,29 @@ const ContactPage = () => {
           </Text>
           <Text>
             Drop me a message and we can talk!{" "}
-            <EmojiHappy
-              src={`https://images.weserv.nl/?url=${encodeURI(
-                "https://modest-jones-332c08.netlify.app/happy.png"
-              )}&h=40`}
-              alt="happy"
-            />
-            -{" "}
-            <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
-              Nico
-            </span>
+            <>
+              {isDesktop ? (
+                <>
+                  <EmojiHappy
+                    src={`https://images.weserv.nl/?url=${encodeURI(
+                      "https://modest-jones-332c08.netlify.app/happy.png"
+                    )}&h=40`}
+                    alt="happy"
+                  />
+
+                  <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
+                    Nico
+                  </span>
+                </>
+              ) : (
+                <EmojiHappy
+                  src={`https://images.weserv.nl/?url=${encodeURI(
+                    "https://modest-jones-332c08.netlify.app/happy.png"
+                  )}&h=40`}
+                  alt="happy"
+                />
+              )}
+            </>
           </Text>
         </TextWrapper>
         <Spacer margin="4rem 0 6rem 0" />

@@ -72,7 +72,7 @@ const techList = [
 
 const TipsPage = ({ data }) => {
   const isMobile = useMedia({
-    maxWidth: 1024,
+    maxWidth: 500,
   })
 
   const [randomTip, setRandomTip] = useState(false)

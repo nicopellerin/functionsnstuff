@@ -23,7 +23,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 500px) {
       font-size: 57.5%;
 
   }
@@ -90,7 +90,7 @@ export const GlobalStyles = createGlobalStyle`
   padding-left: 2em;
   border-left: 0.25em solid #f99;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
   max-width: 100%;
   margin: 0;
   }

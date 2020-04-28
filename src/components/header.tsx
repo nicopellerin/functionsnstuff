@@ -15,7 +15,7 @@ import Stars from "./stars"
 const Header = () => {
   const isMobile =
     typeof window !== "undefined"
-      ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      ? /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
       : null
 
   const [toggleBrowser, setToggleBrowser] = useState(false)

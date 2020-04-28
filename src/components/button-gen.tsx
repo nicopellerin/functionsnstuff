@@ -37,7 +37,7 @@ const ButtonGenerator = () => {
   const [darkMode, setDarkMode] = useState(true)
 
   const isDesktop = useMedia({
-    minWidth: 1024,
+    minWidth: 500,
   })
 
   const border = "none"
@@ -339,7 +339,7 @@ const Wrapper = styled.div`
   border-radius: 20px;
   position: relative;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     grid-template-columns: 1fr;
   }
 `
@@ -355,7 +355,7 @@ const TerminalWrapper = styled.div`
   border-radius: 20px;
   position: relative;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     padding: 0 2rem;
   }
 `
@@ -364,7 +364,7 @@ const Sidebar = styled.aside`
   border-radius: 10px;
   padding: 3rem 3rem;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     padding: 3rem 1rem;
   }
 `
@@ -382,7 +382,7 @@ const ButtonContainer = styled.div`
   margin: 0 auto;
   position: relative;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     width: 100%;
   }
 `
@@ -479,7 +479,7 @@ const InputField = styled.input`
   margin-top: 5px;
   margin-bottom: 1.6rem;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 500px) {
     width: 100%;
   }
 `
