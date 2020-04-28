@@ -120,15 +120,9 @@ const Header = () => {
         </Canvas>
       )}
       {isMobile ? (
-        <motion.img
-          src={"/bg_front2.webp"}
+        <BackgroundMountainsMobile
+          src={"/bg_front_mobile.png"}
           alt="background mountains"
-          style={{
-            position: "absolute",
-            top: "60%",
-            width: "100%",
-            zIndex: -1,
-          }}
         />
       ) : (
         <motion.img
@@ -296,6 +290,21 @@ const TerminalContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
   z-index: 2000;
+`
+
+const BackgroundMountainsMobile = styled(motion.img)`
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  top: 30%;
+
+  @media (max-width: 768px) {
+    top: 40%;
+  }
+
+  @media (max-width: 500px) {
+    top: 62%;
+  }
 `
 
 const IconsList = styled.div`

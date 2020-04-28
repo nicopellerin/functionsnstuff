@@ -74,7 +74,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
       )}
       {isMobile ? (
         <BackgroundMountainsMobile
-          src={"/bg_front2.webp"}
+          src={"/bg_front_mobile.png"}
           alt="background mountains"
         />
       ) : (
