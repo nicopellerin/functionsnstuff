@@ -43,6 +43,11 @@ const techItems = [
 ]
 
 const Main = () => {
+  const isMobile =
+    navigator !== "undefined"
+      ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      : null
+
   const [show, setShow] = useState(null)
 
   const { tutorial, tip } = useStaticQuery(graphql`
@@ -128,38 +133,40 @@ const Main = () => {
           />
         </div>
       </div>
-      <Tech>
-        <TechTitle>Technology</TechTitle>
-        <TechList onMouseLeave={() => setShow(null)}>
-          <AnimateSharedLayout>
-            {techItems.map(({ title, link }, i) => (
-              <TechListItem key={title} onMouseEnter={() => setShow(i)}>
-                <Link to={link}>{title}</Link>
-                {show === i && (
-                  <motion.svg
-                    style={{
-                      position: "absolute",
-                      left: -15,
-                      top: "28%",
-                      transform: "translateY(-50%)",
-                    }}
-                    layoutId="techItem"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="5.641"
-                    height="10"
-                  >
-                    <path
-                      d="M 0.246 5.395 C 0.006 5.155 0.006 4.766 0.246 4.526 L 4.592 0.18 C 4.832 -0.06 5.221 -0.06 5.461 0.18 L 5.461 0.18 C 5.701 0.42 5.701 0.809 5.461 1.049 L 1.115 5.395 C 0.875 5.635 0.486 5.635 0.246 5.395 Z M 0.18 4.605 C 0.42 4.365 0.809 4.365 1.049 4.605 L 5.395 8.951 C 5.635 9.191 5.635 9.58 5.395 9.82 L 5.395 9.82 C 5.155 10.06 4.766 10.06 4.526 9.82 L 0.18 5.474 C -0.06 5.234 -0.06 4.845 0.18 4.605 Z"
-                      transform="rotate(180 2.82 5)"
-                      fill="rgba(255, 137, 170, 1.00)"
-                    ></path>
-                  </motion.svg>
-                )}
-              </TechListItem>
-            ))}
-          </AnimateSharedLayout>
-        </TechList>
-      </Tech>
+      {isMobile ? null : (
+        <Tech>
+          <TechTitle>Technology</TechTitle>
+          <TechList onMouseLeave={() => setShow(null)}>
+            <AnimateSharedLayout>
+              {techItems.map(({ title, link }, i) => (
+                <TechListItem key={title} onMouseEnter={() => setShow(i)}>
+                  <Link to={link}>{title}</Link>
+                  {show === i && (
+                    <motion.svg
+                      style={{
+                        position: "absolute",
+                        left: -15,
+                        top: "28%",
+                        transform: "translateY(-50%)",
+                      }}
+                      layoutId="techItem"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="5.641"
+                      height="10"
+                    >
+                      <path
+                        d="M 0.246 5.395 C 0.006 5.155 0.006 4.766 0.246 4.526 L 4.592 0.18 C 4.832 -0.06 5.221 -0.06 5.461 0.18 L 5.461 0.18 C 5.701 0.42 5.701 0.809 5.461 1.049 L 1.115 5.395 C 0.875 5.635 0.486 5.635 0.246 5.395 Z M 0.18 4.605 C 0.42 4.365 0.809 4.365 1.049 4.605 L 5.395 8.951 C 5.635 9.191 5.635 9.58 5.395 9.82 L 5.395 9.82 C 5.155 10.06 4.766 10.06 4.526 9.82 L 0.18 5.474 C -0.06 5.234 -0.06 4.845 0.18 4.605 Z"
+                        transform="rotate(180 2.82 5)"
+                        fill="rgba(255, 137, 170, 1.00)"
+                      ></path>
+                    </motion.svg>
+                  )}
+                </TechListItem>
+              ))}
+            </AnimateSharedLayout>
+          </TechList>
+        </Tech>
+      )}
     </Wrapper>
   )
 }
@@ -173,6 +180,11 @@ const Wrapper = styled.main`
   grid-gap: 10rem;
   max-width: 80rem;
   margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-gap: 0rem;
+  }
 `
 
 const Title = styled.h3`
@@ -184,6 +196,10 @@ const Title = styled.h3`
 
 const Tech = styled.aside`
   justify-self: end;
+
+  @media (max-width: 1024px) {
+    justify-self: center;
+  }
 `
 
 const TechTitle = styled.h4`

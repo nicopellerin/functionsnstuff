@@ -40,6 +40,7 @@ const Wrapper = styled(motion.div)`
   padding: 2.5rem 2.5rem;
   border-radius: 10px;
   height: 25rem;
+  min-width: 340px;
   max-width: 500px;
   display: flex;
   flex-direction: column;

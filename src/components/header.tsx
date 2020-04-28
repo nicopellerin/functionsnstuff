@@ -4,18 +4,22 @@ import { useState, Suspense } from "react"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "gatsby"
+import { Canvas } from "react-three-fiber"
 
 import Navbar from "./navbar"
+import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
-import { Canvas } from "react-three-fiber"
 import Particles from "./particles"
 import Stars from "./stars"
 
 const Header = () => {
+  const isMobile =
+    navigator !== "undefined"
+      ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      : null
+
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState(null)
-
-  const isMobile = false
 
   const techList = [
     {
@@ -87,7 +91,11 @@ const Header = () => {
   return (
     <Wrapper>
       {isMobile ? (
-        <img src={"/bg_back.png"} />
+        <div
+          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+        >
+          <img src={"/bg_back.png"} />
+        </div>
       ) : (
         <Canvas
           concurrent
@@ -111,99 +119,114 @@ const Header = () => {
           </React.Suspense>
         </Canvas>
       )}
-      <motion.img
-        src={"/bg_front2.webp"}
-        alt="background mountains"
-        style={{
-          position: "absolute",
-          top: "20%",
-          width: "100vw",
-          zIndex: -1,
-        }}
-      />
+      {isMobile ? (
+        <motion.img
+          src={"/bg_front2.webp"}
+          alt="background mountains"
+          style={{
+            position: "absolute",
+            top: "60%",
+            width: "100%",
+            zIndex: -1,
+          }}
+        />
+      ) : (
+        <motion.img
+          src={"/bg_front2.webp"}
+          alt="background mountains"
+          style={{
+            position: "absolute",
+            top: "20%",
+            width: "100vw",
+            zIndex: -1,
+          }}
+        />
+      )}
       <Container>
-        <Navbar />
-        <TerminalWrapper
-          terminal={"/terminal.webp"}
-          initial={{ y: 400, x: "-50%" }}
-          animate={{ y: toggleBrowser ? 310 : 10 }}
-          transition={{ type: "spring", damping: 20, stiffness: 100 }}
-        >
-          <button
-            onClick={() => setToggleBrowser(prevState => !prevState)}
-            style={{
-              position: "absolute",
-              left: 49,
-              top: 15,
-              height: 20,
-              background: "transparent",
-              color: "transparent",
-              border: "none",
-              zIndex: 3000,
-              outline: "none",
-              cursor: "pointer",
-            }}
+        {isMobile ? <NavbarMobile /> : <Navbar />}
+        {isMobile ? null : (
+          <TerminalWrapper
+            terminal={"/terminal.webp"}
+            initial={{ y: 400, x: "-50%" }}
+            animate={{ y: toggleBrowser ? 310 : 10 }}
+            transition={{ type: "spring", damping: 20, stiffness: 100 }}
           >
-            Click
-          </button>
-          <TerminalContainer
-            variants={terminalVariants}
-            initial="hidden"
-            animate="show"
-          >
-            <motion.h3
+            <button
+              onClick={() => setToggleBrowser(prevState => !prevState)}
               style={{
-                fontSize: 16,
                 position: "absolute",
-                fontWeight: 500,
-                fontFamily: "menlo",
-                color: "lightgreen",
-                left: "50%",
-                letterSpacing: 5,
-                top: 90,
-                display: "flex",
-                alignItems: "center",
+                left: 49,
+                top: 15,
+                height: 20,
+                background: "transparent",
+                color: "transparent",
+                border: "none",
+                zIndex: 3000,
+                outline: "none",
+                cursor: "pointer",
               }}
-              initial={{ opacity: 0, x: "-50%" }}
-              animate={{ opacity: [0, 1], y: [20, 0] }}
-              transition={{ delay: 0.4 }}
             >
-              Start learning
-              <motion.span
-                animate={{ opacity: [0, 1] }}
-                transition={{ yoyo: Infinity }}
+              Click
+            </button>
+            <TerminalContainer
+              variants={terminalVariants}
+              initial="hidden"
+              animate="show"
+            >
+              <motion.h3
                 style={{
-                  display: "inline-block",
-                  fontSize: 28,
-                  lineHeight: 1,
-                  marginLeft: 1,
+                  fontSize: 16,
+                  position: "absolute",
+                  fontWeight: 500,
+                  fontFamily: "menlo",
+                  color: "lightgreen",
+                  left: "50%",
+                  letterSpacing: 5,
+                  top: 90,
+                  display: "flex",
+                  alignItems: "center",
                 }}
+                initial={{ opacity: 0, x: "-50%" }}
+                animate={{ opacity: [0, 1], y: [20, 0] }}
+                transition={{ delay: 0.4 }}
               >
-                &#9646;
-              </motion.span>
-            </motion.h3>
-            <IconsList>
-              {techList.map(({ tech, logo, link, width }) => (
-                <Link key={tech} to={link}>
-                  <TechWrapper
-                    whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
-                  >
-                    <motion.img
-                      src={logo}
-                      alt="react"
-                      width={width}
-                      variants={itemVariants}
-                      style={{ cursor: "pointer" }}
-                      onMouseEnter={() => setSelected(tech)}
-                      onMouseLeave={() => setSelected(null)}
-                    />
-                    {selected === tech && <TechTitle>{tech}</TechTitle>}
-                  </TechWrapper>
-                </Link>
-              ))}
-            </IconsList>
-          </TerminalContainer>
-        </TerminalWrapper>
+                Start learning
+                <motion.span
+                  animate={{ opacity: [0, 1] }}
+                  transition={{ yoyo: Infinity }}
+                  style={{
+                    display: "inline-block",
+                    fontSize: 28,
+                    lineHeight: 1,
+                    marginLeft: 1,
+                  }}
+                >
+                  &#9646;
+                </motion.span>
+              </motion.h3>
+              <IconsList>
+                {techList.map(({ tech, logo, link, width }) => (
+                  <Link key={tech} to={link}>
+                    <TechWrapper
+                      whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
+                    >
+                      <motion.img
+                        src={logo}
+                        alt="react"
+                        width={width}
+                        variants={itemVariants}
+                        style={{ cursor: "pointer" }}
+                        onMouseEnter={() => setSelected(tech)}
+                        onMouseLeave={() => setSelected(null)}
+                      />
+                      {selected === tech && <TechTitle>{tech}</TechTitle>}
+                    </TechWrapper>
+                  </Link>
+                ))}
+              </IconsList>
+            </TerminalContainer>
+          </TerminalWrapper>
+        )}
         <motion.div
           initial={{ opacity: 0, x: "-50%" }}
           animate={{ opacity: [0, 1] }}
@@ -241,6 +264,10 @@ const Wrapper = styled.div`
   height: 70rem;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 40rem;
+  }
 `
 
 const Container = styled.header`
