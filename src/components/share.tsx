@@ -51,13 +51,7 @@ const Wrapper = styled.div`
   margin-top: 8rem;
 
   @media (max-width: 1024px) {
-    margin-top: 4rem;
+    margin-top: 6rem;
     margin-bottom: 4rem;
   }
-`
-
-const Text = styled.span`
-  font-size: 1.6rem;
-  margin-right: 2rem;
-  color: #aaa;
 `

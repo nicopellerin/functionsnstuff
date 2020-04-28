@@ -67,6 +67,10 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 8rem 0 4rem 0;
+
+  @media (max-width: 1024px) {
+    padding: 2rem 0 4rem 0;
+  }
 `
 
 const Prev = styled.div`

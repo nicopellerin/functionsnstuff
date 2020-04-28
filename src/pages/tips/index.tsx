@@ -2,13 +2,14 @@ import React from "react"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { FaDice } from "react-icons/fa"
+import { graphql, navigate } from "gatsby"
+import { motion } from "framer-motion"
+import { useMedia } from "react-use-media"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
 import TechCard from "../../components/tech-card"
-import { graphql, navigate } from "gatsby"
-import { motion } from "framer-motion"
 
 const techList = [
   {
@@ -70,6 +71,10 @@ const techList = [
 ]
 
 const TipsPage = ({ data }) => {
+  const isMobile = useMedia({
+    maxWidth: 1024,
+  })
+
   const [randomTip, setRandomTip] = useState(false)
 
   const techCount = {
@@ -106,31 +111,33 @@ const TipsPage = ({ data }) => {
       <SEO title="Tips" />
       <PageHeader title="Tips" randomTip={randomTip} />
       <Layout>
-        <RandomButtonWrapper initial={{ x: "-50%" }}>
-          <RandomButton
-            onClick={() => setRandomTip(true)}
-            whileHover={{ y: -1 }}
-            whileTap={{ y: 1 }}
-          >
-            {randomTip ? (
-              <motion.div
-                animate={{ rotate: 180 }}
-                transition={{ yoyo: Infinity }}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <FaDice />
-              </motion.div>
-            ) : (
-              <>
-                Random tip <FaDice style={{ marginLeft: 7 }} />
-              </>
-            )}
-          </RandomButton>
-        </RandomButtonWrapper>
+        {isMobile ? null : (
+          <RandomButtonWrapper initial={{ x: "-50%" }}>
+            <RandomButton
+              onClick={() => setRandomTip(true)}
+              whileHover={{ y: -1 }}
+              whileTap={{ y: 1 }}
+            >
+              {randomTip ? (
+                <motion.div
+                  animate={{ rotate: 180 }}
+                  transition={{ yoyo: Infinity }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  <FaDice />
+                </motion.div>
+              ) : (
+                <>
+                  Random tip <FaDice style={{ marginLeft: 7 }} />
+                </>
+              )}
+            </RandomButton>
+          </RandomButtonWrapper>
+        )}
         <TechCardList>
           {techList.map(({ tech, logo, link, width, slug }) => (
             <TechCard

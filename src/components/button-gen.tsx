@@ -365,7 +365,7 @@ const Sidebar = styled.aside`
   padding: 3rem 3rem;
 
   @media (max-width: 1024px) {
-    padding: 3rem 2rem;
+    padding: 3rem 1rem;
   }
 `
 

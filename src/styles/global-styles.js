@@ -89,6 +89,11 @@ export const GlobalStyles = createGlobalStyle`
   padding-right: 1em;
   padding-left: 2em;
   border-left: 0.25em solid #f99;
+
+  @media (max-width: 1024px) {
+  max-width: 100%;
+  margin: 0;
+  }
 }
 
 .language-jsx2{

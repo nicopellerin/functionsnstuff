@@ -10,12 +10,13 @@ import {
   AnimatePresence,
 } from "framer-motion"
 import { Link } from "gatsby"
+import { useMedia } from "react-use-media"
 
 import Navbar from "./navbar"
+import NavbarMobile from "./navbar-mobile"
 import BuddyHeader from "./buddy-header"
 import Stars from "./stars"
 import Particles from "./particles"
-import { useMedia } from "react-use-media"
 
 interface Props {
   tech?: string
@@ -100,7 +101,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         />
       )}
       <Container>
-        <Navbar />
+        {isMobile ? <NavbarMobile /> : <Navbar />}
         <Heading>
           {tech ? (
             <Link to={`/tutorials/${tech}`}>
@@ -183,6 +184,10 @@ const Heading = styled.div`
 
   @media (min-width: 1500px) {
     height: 46%;
+  }
+
+  @media (max-width: 1024px) {
+    height: 65%;
   }
 `
 
