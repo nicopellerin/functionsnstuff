@@ -12,14 +12,7 @@ const ContactPage = () => (
     <SEO title="Contact" />
     <PageHeader title="Contact" />
     <Layout>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: -75,
-          marginBottom: 75,
-        }}
-      >
+      <DonutWrapper>
         <img
           src={`https://images.weserv.nl/?url=${encodeURI(
             "https://modest-jones-332c08.netlify.app/donut3.webp"
@@ -27,7 +20,7 @@ const ContactPage = () => (
           alt="donut"
           width={150}
         />
-      </div>
+      </DonutWrapper>
       <Text>
         Have an idea for a tutorial or would like to retain my services as a web
         developper?
@@ -65,4 +58,11 @@ const EmojiHappy = styled.img`
   margin-left: 1rem;
   margin-right: 1rem;
   width: 20px;
+`
+
+const DonutWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: -75px;
+  margin-bottom: 75px;
 `
