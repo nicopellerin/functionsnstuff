@@ -26,7 +26,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   const isMobile =
-    navigator !== "undefined"
+    typeof window !== "undefined"
       ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
       : null
 

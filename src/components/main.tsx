@@ -44,7 +44,7 @@ const techItems = [
 
 const Main = () => {
   const isMobile =
-    navigator !== "undefined"
+    typeof window !== "undefined"
       ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
       : null
 
