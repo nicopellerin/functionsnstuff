@@ -49,6 +49,11 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 8rem;
+
+  @media (max-width: 1024px) {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
 `
 
 const Text = styled.span`

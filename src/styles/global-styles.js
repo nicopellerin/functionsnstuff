@@ -22,6 +22,11 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
+
+    @media (max-width: 1024px) {
+      font-size: 57.5%;
+
+  }
   }
 
   #___gatsby {}

@@ -15,6 +15,7 @@ import Navbar from "./navbar"
 import BuddyHeader from "./buddy-header"
 import Stars from "./stars"
 import Particles from "./particles"
+import { useMedia } from "react-use-media"
 
 interface Props {
   tech?: string
@@ -28,7 +29,9 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   //     ? /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
   //     : null
 
-  const isMobile = false
+  const isMobile = useMedia({
+    maxWidth: 768,
+  })
 
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
@@ -50,7 +53,11 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   return (
     <Wrapper ref={ref}>
       {isMobile ? (
-        <img src={"/bg_back.png"} />
+        <div
+          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+        >
+          <img src={"/bg_back.png"} />
+        </div>
       ) : (
         <Canvas
           concurrent
@@ -68,17 +75,30 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
           </React.Suspense>
         </Canvas>
       )}
-      <motion.img
-        src={"/bg_front2.webp"}
-        alt="background mountains"
-        style={{
-          position: "absolute",
-          top: 0,
-          width: "100%",
-          zIndex: -1,
-          y: y2,
-        }}
-      />
+      {isMobile ? (
+        <motion.img
+          src={"/bg_front2.webp"}
+          alt="background mountains"
+          style={{
+            position: "absolute",
+            top: "60%",
+            width: "100%",
+            zIndex: -1,
+          }}
+        />
+      ) : (
+        <motion.img
+          src={"/bg_front2.webp"}
+          alt="background mountains"
+          style={{
+            position: "absolute",
+            top: 0,
+            width: "100%",
+            zIndex: -1,
+            y: y2,
+          }}
+        />
+      )}
       <Container>
         <Navbar />
         <Heading>
@@ -104,7 +124,6 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
             </Title>
           )}
         </Heading>
-
         <AnimatePresence>
           {randomTip && (
             <motion.div
@@ -169,4 +188,5 @@ const Heading = styled.div`
 
 const Title = styled(motion.h1)`
   color: var(--primaryColor);
+  text-align: center;
 `

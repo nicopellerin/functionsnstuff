@@ -3,20 +3,21 @@ import { useState, useRef } from "react"
 import styled from "styled-components"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/dracula"
-
 import {
   FiArrowUpCircle,
   FiArrowDownCircle,
   FiSend,
-  FiCode,
   FiCopy,
   FiCheckCircle,
 } from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion"
 import { CompactPicker } from "react-color"
+import { useMedia } from "react-use-media"
+
 import Spacer from "./spacer"
 import Checkbox from "./checkbox"
 import DarkMode from "./dark-mode"
+
 import useClickOutside from "../hooks/useClickOutside"
 
 const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
@@ -34,6 +35,10 @@ const ButtonGenerator = () => {
   const [checkedIcon, setCheckedIcon] = useState(true)
   const [anim, setAnim] = useState(true)
   const [darkMode, setDarkMode] = useState(true)
+
+  const isDesktop = useMedia({
+    minWidth: 1024,
+  })
 
   const border = "none"
   const fontWeight = 400
@@ -96,35 +101,36 @@ const ButtonGenerator = () => {
                 {checkedIcon && <FiSend style={{ marginLeft: 5 }} />}
               </Button>
             </ButtonContainer>
-
-            <CodeOverlay>
-              <CodeOverlayContainer>
-                <Highlight
-                  {...defaultProps}
-                  code={value}
-                  language={"jsx"}
-                  theme={theme}
-                >
-                  {({
-                    className,
-                    style,
-                    tokens,
-                    getLineProps,
-                    getTokenProps,
-                  }) => (
-                    <pre className="language-jsx2" style={style}>
-                      {tokens.map((line, i) => (
-                        <div {...getLineProps({ line, key: i })}>
-                          {line.map((token, key) => (
-                            <span {...getTokenProps({ token, key })} />
-                          ))}
-                        </div>
-                      ))}
-                    </pre>
-                  )}
-                </Highlight>
-              </CodeOverlayContainer>
-            </CodeOverlay>
+            {isDesktop ? (
+              <CodeOverlay>
+                <CodeOverlayContainer>
+                  <Highlight
+                    {...defaultProps}
+                    code={value}
+                    language={"jsx"}
+                    theme={theme}
+                  >
+                    {({
+                      className,
+                      style,
+                      tokens,
+                      getLineProps,
+                      getTokenProps,
+                    }) => (
+                      <pre className="language-jsx2" style={style}>
+                        {tokens.map((line, i) => (
+                          <div {...getLineProps({ line, key: i })}>
+                            {line.map((token, key) => (
+                              <span {...getTokenProps({ token, key })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                </CodeOverlayContainer>
+              </CodeOverlay>
+            ) : null}
           </TerminalWrapper>
         </div>
         <Sidebar>
@@ -262,7 +268,7 @@ interface ColorPickerProps {
   setColor: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ColorPicker = ({
+const ColorPicker: React.FC<ColorPickerProps> = ({
   title = "Background color",
   colorPicked = "red",
   setColor,
@@ -332,6 +338,10 @@ const Wrapper = styled.div`
   grid-gap: 2rem;
   border-radius: 20px;
   position: relative;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const TerminalWrapper = styled.div`
@@ -344,11 +354,19 @@ const TerminalWrapper = styled.div`
   align-items: center;
   border-radius: 20px;
   position: relative;
+
+  @media (max-width: 1024px) {
+    padding: 0 2rem;
+  }
 `
 
 const Sidebar = styled.aside`
   border-radius: 10px;
   padding: 3rem 3rem;
+
+  @media (max-width: 1024px) {
+    padding: 3rem 2rem;
+  }
 `
 
 const ButtonContainer = styled.div`
@@ -363,6 +381,10 @@ const ButtonContainer = styled.div`
   width: 40rem;
   margin: 0 auto;
   position: relative;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 const Button = styled(motion.button)`
@@ -456,6 +478,10 @@ const InputField = styled.input`
   min-width: 253px;
   margin-top: 5px;
   margin-bottom: 1.6rem;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 const CodeOverlay = styled.div`

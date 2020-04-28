@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { FiSend, FiAlertTriangle } from "react-icons/fi"
 import axios from "axios"
+import { useMedia } from "react-use-media"
 
 import Spacer from "./spacer"
 
@@ -14,8 +15,11 @@ const ContactForm = () => {
   const [message, setMessage] = useState("")
   const [isSending, setIsSending] = useState(false)
   const [isSent, setIsSent] = useState(false)
-
   const [errors, setErrors] = useState("")
+
+  const isDesktop = useMedia({
+    minWidth: 1024,
+  })
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -68,26 +72,47 @@ const ContactForm = () => {
           </SuccessMsgWrapper>
         ) : (
           <>
-            <InputRow>
-              <InputFieldWrapper>
-                <Label>Name</Label>
-                <InputField
-                  name="name"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                />
-              </InputFieldWrapper>
-              <InputFieldWrapper>
-                <Label>Email</Label>
-                <InputField
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </InputFieldWrapper>
-            </InputRow>
-
+            {isDesktop ? (
+              <InputRow>
+                <InputFieldWrapper>
+                  <Label>Name</Label>
+                  <InputField
+                    name="name"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                  />
+                </InputFieldWrapper>
+                <InputFieldWrapper>
+                  <Label>Email</Label>
+                  <InputField
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </InputFieldWrapper>
+              </InputRow>
+            ) : (
+              <>
+                <InputFieldWrapper>
+                  <Label>Name</Label>
+                  <InputField
+                    name="name"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                  />
+                </InputFieldWrapper>
+                <InputFieldWrapper>
+                  <Label>Email</Label>
+                  <InputField
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </InputFieldWrapper>
+              </>
+            )}
             <InputFieldWrapper>
               <Label>Subject</Label>
               <InputField
@@ -96,7 +121,6 @@ const ContactForm = () => {
                 onChange={e => setSubject(e.target.value)}
               />
             </InputFieldWrapper>
-
             <InputFieldWrapper>
               <Label>Message</Label>
               <TextareaField
@@ -143,6 +167,10 @@ const FormWrapper = styled.form`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  @media (max-width: 1024px) {
+    padding: 0 2rem;
+  }
 `
 
 const InputRow = styled.div`

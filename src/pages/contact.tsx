@@ -21,22 +21,25 @@ const ContactPage = () => (
           width={150}
         />
       </DonutWrapper>
-      <Text>
-        Have an idea for a tutorial or would like to retain my services as a web
-        developper?
-      </Text>
-      <Text>
-        Drop me a message and we can talk!{" "}
-        <EmojiHappy
-          src={`https://images.weserv.nl/?url=${encodeURI(
-            "https://modest-jones-332c08.netlify.app/happy.png"
-          )}&h=40`}
-          alt="happy"
-        />
-        -{" "}
-        <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>Nico</span>
-      </Text>
-      <Text></Text>
+      <TextWrapper>
+        <Text>
+          Have an idea for a tutorial or would like to retain my services as a
+          web developper?
+        </Text>
+        <Text>
+          Drop me a message and we can talk!{" "}
+          <EmojiHappy
+            src={`https://images.weserv.nl/?url=${encodeURI(
+              "https://modest-jones-332c08.netlify.app/happy.png"
+            )}&h=40`}
+            alt="happy"
+          />
+          -{" "}
+          <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
+            Nico
+          </span>
+        </Text>
+      </TextWrapper>
       <Spacer margin="4rem 0 6rem 0" />
       <ContactForm />
       <Spacer margin="4rem 0 8rem 0" />
@@ -47,6 +50,12 @@ const ContactPage = () => (
 export default ContactPage
 
 // Styles
+const TextWrapper = styled.div`
+  @media (max-width: 1024px) {
+    padding: 0 2rem;
+  }
+`
+
 const Text = styled.h4`
   margin-bottom: 2rem;
   font-size: 1.8rem;

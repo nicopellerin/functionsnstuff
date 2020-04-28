@@ -46,6 +46,7 @@
     "react-share": "^4.1.0",
     "react-three-fiber": "4.0.0-beta.6",
     "react-tooltip": "^4.2.3",
+    "react-use-media": "^0.3.0",
     "styled-components": "^5.1.0",
     "swr": "^0.2.0",
     "three": "^0.115.0",
