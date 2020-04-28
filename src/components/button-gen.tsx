@@ -17,6 +17,7 @@ import { CompactPicker } from "react-color"
 import Spacer from "./spacer"
 import Checkbox from "./checkbox"
 import DarkMode from "./dark-mode"
+import useClickOutside from "../hooks/useClickOutside"
 
 const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
 
@@ -29,10 +30,9 @@ const ButtonGenerator = () => {
   const [background, setBackground] = useState("#F44E3B")
   const [textColor, setTextColor] = useState("#fff")
   const [dropShadow, setDropShadow] = useState(3)
-  const [getCode, setGetCode] = useState(false)
-  const [anim, setAnim] = useState(true)
   const [copied, setCopied] = useState(false)
   const [checkedIcon, setCheckedIcon] = useState(true)
+  const [anim, setAnim] = useState(true)
   const [darkMode, setDarkMode] = useState(true)
 
   const border = "none"
@@ -173,7 +173,11 @@ const ButtonGenerator = () => {
                   setDropShadow(prevState => Number(prevState) - 1)
                 }
               />
-              <ColorPicker colorPicked={background} setColor={setBackground} />
+              <ColorPicker
+                title="Background color"
+                colorPicked={background}
+                setColor={setBackground}
+              />
               <ColorPicker
                 title="Text color"
                 colorPicked={textColor}
@@ -223,9 +227,10 @@ const ButtonGenerator = () => {
   )
 }
 
+// Toggle
 const Toggle = ({ title, toggleCheck }) => {
   const [checked, setChecked] = useState(true)
-  const ref = useRef(null)
+  const inputRef = useRef(null)
 
   const handleCheck = () => {
     setChecked(prevState => !prevState)
@@ -238,7 +243,7 @@ const Toggle = ({ title, toggleCheck }) => {
       <label htmlFor={title}>
         <input
           id={title}
-          ref={ref}
+          ref={inputRef}
           type="checkbox"
           checked={checked}
           onChange={handleCheck}
@@ -250,12 +255,20 @@ const Toggle = ({ title, toggleCheck }) => {
   )
 }
 
+// ColorPicker
+interface ColorPickerProps {
+  title: string
+  colorPicked: string
+  setColor: React.Dispatch<React.SetStateAction<string>>
+}
+
 const ColorPicker = ({
   title = "Background color",
   colorPicked = "red",
   setColor,
 }) => {
   const [toggle, setToggle] = useState(false)
+  const colorNodeRef = useClickOutside(setToggle)
 
   const handleColorChange = color => {
     setColor(color.hex)
@@ -263,17 +276,24 @@ const ColorPicker = ({
   }
 
   return (
-    <CounterWrapper>
+    <CounterWrapper ref={colorNodeRef}>
       <Title>{title}</Title>
       <ColorDiv onClick={() => setToggle(true)} color={colorPicked} />
-      {toggle && (
-        <ColorPickerWrapper>
-          <CompactPicker
-            color={colorPicked}
-            onChangeComplete={handleColorChange}
-          />
-        </ColorPickerWrapper>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {toggle && (
+          <ColorPickerWrapper
+            initial={{ x: 5 }}
+            animate={{ x: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0 } }}
+            transition={{ type: "spring", damping: 60 }}
+          >
+            <CompactPicker
+              color={colorPicked}
+              onChangeComplete={handleColorChange}
+            />
+          </ColorPickerWrapper>
+        )}
+      </AnimatePresence>
     </CounterWrapper>
   )
 }
@@ -315,7 +335,6 @@ const Wrapper = styled.div`
 `
 
 const TerminalWrapper = styled.div`
-  /* background: #0a0a0a; */
   width: 100%;
   padding: 3rem;
   margin-top: 2rem;
@@ -323,18 +342,13 @@ const TerminalWrapper = styled.div`
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-
   border-radius: 20px;
-  /* min-height: 60rem; */
-
   position: relative;
 `
 
 const Sidebar = styled.aside`
-  /* background: #0a0a0a; */
   border-radius: 10px;
   padding: 3rem 3rem;
-  /* border: 1px solid #222; */
 `
 
 const ButtonContainer = styled.div`
@@ -412,9 +426,22 @@ const ColorDiv = styled.div`
   cursor: pointer;
 `
 
-const ColorPickerWrapper = styled.div`
+const ColorPickerWrapper = styled(motion.div)`
   position: absolute;
-  left: 95%;
+  left: 100%;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: -1.2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
+  }
 `
 
 const InputField = styled.input`
