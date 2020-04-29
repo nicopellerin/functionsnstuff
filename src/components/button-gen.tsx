@@ -386,7 +386,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       <AnimatePresence exitBeforeEnter>
         {toggle && (
           <ColorPickerWrapper
-            initial={{ x: 5 }}
+            initial={{ x: 2 }}
             animate={{ x: 0 }}
             exit={{ opacity: 0, transition: { duration: 0 } }}
             transition={{ type: "spring", damping: 60 }}
@@ -561,6 +561,14 @@ const ColorPickerWrapper = styled(motion.div)`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid #fff;
+  }
+
+  @media (max-width: 500px) {
+    left: 15%;
+
+    &:after {
+      display: none;
+    }
   }
 `
 
