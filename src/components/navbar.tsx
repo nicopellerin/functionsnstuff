@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <Link to="/">
-        <Logo width={285} />
+        <Logo width={260} />
       </Link>
       <Menu>
         <MenuList onMouseLeave={() => setShow(null)}>

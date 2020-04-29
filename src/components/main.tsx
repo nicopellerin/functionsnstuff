@@ -141,7 +141,7 @@ const Main = () => {
                     style={{
                       position: "absolute",
                       left: -15,
-                      top: "28%",
+                      top: "27.5%",
                       transform: "translateY(-50%)",
                     }}
                     layoutId="techItem"

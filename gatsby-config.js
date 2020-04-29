@@ -5,6 +5,7 @@ module.exports = {
     title: `functionsnstuff`,
     description: `Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`,
     author: `@nicopellerin_io`,
+    image: "/og-image.png",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

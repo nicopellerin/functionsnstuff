@@ -6,6 +6,7 @@ import { Link } from "gatsby"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
+import Buddy from "./buddy"
 
 const Header = () => {
   const isMobile = (width = 1024) => {
@@ -189,6 +190,18 @@ const Header = () => {
             </IconsList>
           </TerminalContainer>
         </TerminalWrapper>
+        <motion.div
+          initial={{ opacity: 0, x: "-50%" }}
+          animate={{ opacity: [0, 1] }}
+          style={{ position: "absolute", top: "20px", left: "50%" }}
+          transition={{ delay: 1 }}
+        >
+          {toggleBrowser && (
+            <motion.div>
+              <Buddy toggleBrowser={toggleBrowser} />
+            </motion.div>
+          )}
+        </motion.div>
       </Container>
       <Wave
         xmlns="http://www.w3.org/2000/svg"
