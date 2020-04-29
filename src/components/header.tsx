@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
@@ -8,7 +8,7 @@ import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 
 const Header = () => {
-  const isMobile = (width = 1024) => {
+  const isMobileFunc = (width = 1024) => {
     let mql =
       typeof window !== "undefined" &&
       window.matchMedia(`(max-width: ${width}px)`)
@@ -22,6 +22,11 @@ const Header = () => {
     }
     return false
   }
+
+  let isMobile
+  useLayoutEffect(() => {
+    isMobileFunc() ? (isMobile = true) : (isMobile = false)
+  }, [])
 
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState(null)
@@ -95,7 +100,7 @@ const Header = () => {
 
   return (
     <Wrapper>
-      {isMobile() ? (
+      {isMobile ? (
         <BackgroundMountainsMobile
           src={"/bg_front_mobile.png"}
           alt="background mountains"
@@ -113,8 +118,8 @@ const Header = () => {
         />
       )}
       <Container>
-        {isMobile() ? <NavbarMobile /> : <Navbar />}
-        {isMobile() ? null : (
+        {isMobile ? <NavbarMobile /> : <Navbar />}
+        {isMobile ? null : (
           <TerminalWrapper
             terminal={"/terminal.webp"}
             initial={{ y: 400, x: "-50%" }}
@@ -202,7 +207,7 @@ const Header = () => {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="235"
-        viewBox={isMobile(500) ? "0 -200 1483 1" : "0 115 1483 1"}
+        viewBox={isMobile ? "0 -200 1483 1" : "0 115 1483 1"}
         preserveAspectRatio="xMidYMid meet"
       >
         <path

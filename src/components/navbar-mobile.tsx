@@ -130,6 +130,7 @@ const Wrapper = styled.div`
   align-items: center;
   z-index: 1000;
   height: 65px;
+  width: 100%;
   transition: 0.3s;
   border-bottom: ${(props: { toggled: boolean }) =>
     props.toggled ? "2px solid #112" : "2px solid transparent"};
