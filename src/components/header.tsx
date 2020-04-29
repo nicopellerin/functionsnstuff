@@ -1,17 +1,13 @@
 import * as React from "react"
-import * as THREE from "three"
-import { useState, Suspense } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
-import { Canvas } from "react-three-fiber"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
-import Particles from "./particles"
-import Stars from "./stars"
 
-import { backgroundFront } from "../../utils/base64-images"
+import { backgroundFront, terminalBase } from "../../utils/base64-images"
 
 const Header = () => {
   const isMobile = (width = 1024) => {
@@ -103,12 +99,12 @@ const Header = () => {
     <Wrapper>
       {isMobile() ? (
         <BackgroundMountainsMobile
-          src={"/bg_front_mobile.png"}
+          src={backgroundFront}
           alt="background mountains"
         />
       ) : (
         <motion.img
-          src={"/bg_front2.webp"}
+          src={backgroundFront}
           alt="background mountains"
           style={{
             position: "absolute",
@@ -122,10 +118,10 @@ const Header = () => {
         {isMobile() ? <NavbarMobile /> : <Navbar />}
         {isMobile() ? null : (
           <TerminalWrapper
-            terminal={"/terminal.webp"}
-            initial={{ y: 400, x: "-50%" }}
-            animate={{ y: toggleBrowser ? 310 : 10 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100 }}
+            terminal={terminalBase}
+            // initial={{ y: 400, x: "-50%" }}
+            // animate={{ y: toggleBrowser ? 310 : 10 }}
+            // transition={{ type: "spring", damping: 20, stiffness: 100 }}
           >
             <button
               onClick={() => setToggleBrowser(prevState => !prevState)}
@@ -187,9 +183,7 @@ const Header = () => {
                       whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                     >
                       <motion.img
-                        src={`https://images.weserv.nl/?url=${encodeURI(
-                          `https://modest-jones-332c08.netlify.app/icons/${tech}.png`
-                        )}&w=${width * 2}`}
+                        src={logo}
                         alt="react"
                         width={width}
                         variants={itemVariants}

@@ -1,7 +1,5 @@
 import * as React from "react"
-import * as THREE from "three"
 import { useRef, useState, useLayoutEffect } from "react"
-import { Canvas } from "react-three-fiber"
 import styled from "styled-components"
 import {
   motion,
@@ -14,8 +12,6 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import BuddyHeader from "./buddy-header"
-import Stars from "./stars"
-import Particles from "./particles"
 
 import { backgroundFront } from "../../utils/base64-images"
 
@@ -45,10 +41,6 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
   const { scrollY } = useViewportScroll()
   const ref = useRef()
 
-  const y = useTransform(scrollY, [elementTop, elementTop + 4], [0, -0.3], {
-    clamp: false,
-  })
-
   const y2 = useTransform(scrollY, [elementTop, elementTop + 2], [0, -0.3], {
     clamp: false,
   })
@@ -60,40 +52,14 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
 
   return (
     <Wrapper ref={ref}>
-      {/* {isMobile() ? (
-        <BackgroundSkyMobile>
-          <img src={backgroundFront} />
-        </BackgroundSkyMobile>
-      ) : (
-        <React.Suspense fallback={null}>
-          <Canvas
-            concurrent
-            camera={{
-              fov: 10000,
-              position: [0, 0, 30],
-              near: 0.01,
-              far: 10000,
-            }}
-            style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
-            onCreated={({ gl }) => {
-              gl.toneMapping = THREE.Uncharted2ToneMapping
-              gl.setClearColor(new THREE.Color("#020207"))
-            }}
-          >
-            >
-            <Particles count={150} />
-            <Stars count={1250} />
-          </Canvas>
-        </React.Suspense>
-      )} */}
       {isMobile() ? (
         <BackgroundMountainsMobile
-          src={"/bg_front_mobile.png"}
+          src={backgroundFront}
           alt="background mountains"
         />
       ) : (
         <motion.img
-          src={"/bg_front2.webp"}
+          src={backgroundFront}
           alt="background mountains"
           style={{
             position: "absolute",
