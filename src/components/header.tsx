@@ -234,7 +234,7 @@ const Header = () => {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="235"
-        viewBox="0 116 1483 1"
+        viewBox={isMobile ? "0 -200 1483 1" : "0 116 1483 1"}
         preserveAspectRatio="xMidYMid meet"
       >
         <path
