@@ -195,10 +195,6 @@ const Heading = styled.div`
   justify-content: center;
   height: 35%;
 
-  @media (min-width: 1500px) {
-    height: 46%;
-  }
-
   @media (max-width: 1024px) {
     height: 65%;
   }
