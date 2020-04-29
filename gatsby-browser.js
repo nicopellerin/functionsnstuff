@@ -1,11 +1,11 @@
-const React = require("react")
-const Background = require("./src/components/background").default
+// const React = require("react")
+// const Background = require("./src/components/background").default
 
-exports.wrapPageElement = ({ element, props }) => {
-  return (
-    <>
-      <Background {...props} />
-      {element}
-    </>
-  )
-}
+// exports.wrapPageElement = ({ element, props }) => {
+//   return (
+//     <>
+//       <Background {...props} />
+//       {element}
+//     </>
+//   )
+// }
