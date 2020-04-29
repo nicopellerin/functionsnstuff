@@ -148,9 +148,9 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         <path
           d="M 0 140.25 L 61.792 162.216 C 123.583 184.594 247.167 227.906 370.75 217.284 C 494.333 206.25 617.917 140.25 741.5 134.784 C 865.083 128.906 988.667 184.594 1112.25 189.75 C 1235.833 194.906 1359.417 151.594 1421.208 129.216 L 1483 107.25 L 1483 371.25 L 0 371.25 Z"
           fill="#080808"
-          stroke-width="1.02"
+          strokeWidth="1.02"
           stroke="hsl(0, 0%, 10%)"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
       </Wave>
     </Wrapper>

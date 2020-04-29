@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { FiSend, FiAlertTriangle } from "react-icons/fi"
@@ -17,12 +17,18 @@ const ContactForm = () => {
   const [isSent, setIsSent] = useState(false)
   const [errors, setErrors] = useState("")
 
+  const hiddenRef = useRef(null)
+
   const isDesktop = useMedia({
     minWidth: 500,
   })
 
   const handleSubmit = async e => {
     e.preventDefault()
+
+    if (hiddenRef?.current.value !== "") {
+      return
+    }
 
     if (name === "" || email === "" || subject === "" || message === "") {
       setErrors("Please fill out all fields")
@@ -61,6 +67,12 @@ const ContactForm = () => {
 
   return (
     <FormWrapper onSubmit={handleSubmit}>
+      <input
+        ref={hiddenRef}
+        type="hidden"
+        name="mrrobot"
+        aria-label="Please do not fill in"
+      />
       <AnimatePresence>
         {isSent ? (
           <SuccessMsgWrapper
