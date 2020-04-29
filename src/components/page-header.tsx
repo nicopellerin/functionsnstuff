@@ -32,7 +32,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
       window.matchMedia(`(max-width: ${width}px)`)
     if (
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
+        window.navigator.userAgent
       ) &&
       mql.matches
     ) {
