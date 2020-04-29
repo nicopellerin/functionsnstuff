@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { Link } from "gatsby"
 
 import { donutBase } from "../../utils/base64-images"
+import Logo from "./logo"
 
 const NavbarMobile = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false)
@@ -33,7 +34,7 @@ const NavbarMobile = () => {
           </svg>
         </MenuBar>
         <Link to="/">
-          <img src={"/logo.svg"} width={175} alt="logo" />
+          <Logo width={175} />
         </Link>
         <img src={donutBase} alt="donut" width={35} />
       </Wrapper>
