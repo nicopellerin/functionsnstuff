@@ -5,7 +5,7 @@ exports.wrapPageElement = ({ element, props }) => {
   return (
     <>
       <Background />
-      <React.Fragment {...props}>{element}</React.Fragment>
+      <React.Fragment>{element}</React.Fragment>
     </>
   )
 }

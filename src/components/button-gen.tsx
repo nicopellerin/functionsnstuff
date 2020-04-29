@@ -3,16 +3,26 @@ import { useState, useRef } from "react"
 import styled from "styled-components"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/dracula"
-import {
-  FiArrowUpCircle,
-  FiArrowDownCircle,
-  FiSend,
-  FiCopy,
-  FiCheckCircle,
-} from "react-icons/fi"
+// import {
+//   FiArrowUpCircle,
+//   FiArrowDownCircle,
+//   FiSend,
+//   FiCopy,
+//   FiCheckCircle,
+// } from "react-icons/fi"
+import * as Icon from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion"
 import { CompactPicker } from "react-color"
 import { useMedia } from "react-use-media"
+import {
+  Listbox,
+  ListboxInput,
+  ListboxButton,
+  ListboxPopover,
+  ListboxList,
+  ListboxOption,
+} from "@reach/listbox"
+import "@reach/listbox/styles.css"
 
 import Spacer from "./spacer"
 import Checkbox from "./checkbox"
@@ -22,10 +32,17 @@ import useClickOutside from "../hooks/useClickOutside"
 
 const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
 
+enum Icons {
+  User = "FiUser",
+  Send = "FiSend",
+  Check = "FiCheckCircle",
+  ChevronRight = "FiChevronRight",
+}
+
 const ButtonGenerator = () => {
   const [text, setText] = useState("Send")
   const [fontSize, setFontSize] = useState(16)
-  const [borderRadius, setBorderRadius] = useState(10)
+  const [borderRadius, setBorderRadius] = useState(5)
   const [horiPadding, setHoriPadding] = useState(35)
   const [vertPadding, setVertPadding] = useState(15)
   const [background, setBackground] = useState("#F44E3B")
@@ -35,6 +52,7 @@ const ButtonGenerator = () => {
   const [checkedIcon, setCheckedIcon] = useState(true)
   const [anim, setAnim] = useState(true)
   const [darkMode, setDarkMode] = useState(true)
+  const [icon, setIcon] = useState(Icons.Send)
 
   const isDesktop = useMedia({
     minWidth: 500,
@@ -48,7 +66,7 @@ const ButtonGenerator = () => {
   const animImports = `import {motion} from 'framer-motion'\n\n${
     anim ? "" : "\n"
   }`
-  const iconImports = `import {FiSend} from 'react-icons/fi'\n${
+  const iconImports = `import {${icon}} from 'react-icons/fi'\n${
     anim ? "" : "\n"
   }`
 
@@ -69,6 +87,20 @@ const ButtonGenerator = () => {
     setCopied(true)
     await delay(1500)
     setCopied(false)
+  }
+
+  const iconPicker = () => {
+    const style = { marginLeft: 5 }
+    switch (icon) {
+      case Icons.User:
+        return <Icon.FiUser style={style} />
+      case Icons.Send:
+        return <Icon.FiSend style={style} />
+      case Icons.Check:
+        return <Icon.FiCheckCircle style={style} />
+      case Icons.ChevronRight:
+        return <Icon.FiChevronRight style={style} />
+    }
   }
 
   return (
@@ -98,7 +130,8 @@ const ButtonGenerator = () => {
                 }}
               >
                 <span>{text}</span>
-                {checkedIcon && <FiSend style={{ marginLeft: 5 }} />}
+                {/* {checkedIcon && <Icon.FiSend style={{ marginLeft: 5 }} />} */}
+                {checkedIcon && iconPicker("SEND")}
               </Button>
             </ButtonContainer>
             {isDesktop ? (
@@ -190,6 +223,35 @@ const ButtonGenerator = () => {
                 setColor={setTextColor}
               />
               <Toggle
+                renderOptions={
+                  <ListboxStyled
+                    defaultValue={Icons.Send}
+                    onChange={value => setIcon(value as Icons)}
+                    style={{ border: "none" }}
+                  >
+                    <ListboxOptionStyled value={Icons.Send}>
+                      Send
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.User}>
+                      User
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Check}>
+                      Check
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.ChevronRight}>
+                      ChevronRight
+                    </ListboxOptionStyled>
+                  </ListboxStyled>
+                  // <select
+                  //   disabled={!checkedIcon}
+                  //   onChange={e => setIcon(e.target.value as Icons)}
+                  // >
+                  //   <option value={Icons.Send}>Send</option>
+                  //   <option value={Icons.User}>User</option>
+                  //   <option value={Icons.Check}>Check</option>
+                  //   <option value={Icons.ChevronRight}>Chevron Right</option>
+                  // </select>
+                }
                 title="Icon"
                 toggleCheck={() => setCheckedIcon(prevState => !prevState)}
               />
@@ -210,7 +272,7 @@ const ButtonGenerator = () => {
                     exit={{ opacity: 0 }}
                     style={{ color: "lightgreen" }}
                   >
-                    <FiCheckCircle style={{ marginRight: 5 }} />
+                    <Icon.FiCheckCircle style={{ marginRight: 5 }} />
                     <span>Copied to clipboard</span>
                   </CopyText>
                 ) : (
@@ -234,7 +296,17 @@ const ButtonGenerator = () => {
 }
 
 // Toggle
-const Toggle = ({ title, toggleCheck }) => {
+interface ToggleProps {
+  title: string
+  toggleCheck: () => void
+  renderOptions?: React.ReactNode
+}
+
+const Toggle: React.FC<ToggleProps> = ({
+  title,
+  toggleCheck,
+  renderOptions,
+}) => {
   const [checked, setChecked] = useState(true)
   const inputRef = useRef(null)
 
@@ -246,6 +318,7 @@ const Toggle = ({ title, toggleCheck }) => {
   return (
     <CounterWrapper>
       <Title>{title}</Title>
+      {renderOptions}
       <label htmlFor={title}>
         <input
           id={title}
@@ -314,7 +387,7 @@ const Counter = ({ title, value, inc, dec }) => {
           whileTap={{ scale: 0.98 }}
           onClick={dec}
         >
-          <FiArrowDownCircle color="var(--primaryColor)" size={20} />
+          <Icon.FiArrowDownCircle color="var(--primaryColor)" size={20} />
         </IconWrapper>
         <Text>{value}</Text>
         <IconWrapper
@@ -322,7 +395,7 @@ const Counter = ({ title, value, inc, dec }) => {
           whileTap={{ scale: 0.98 }}
           onClick={inc}
         >
-          <FiArrowUpCircle color="var(--primaryColor)" size={20} />
+          <Icon.FiArrowUpCircle color="var(--primaryColor)" size={20} />
         </IconWrapper>
       </Container>
     </CounterWrapper>
@@ -531,7 +604,21 @@ const CopyText = styled(motion.div)`
   align-items: center;
 `
 
-const CopyToClipboardIcon = styled(FiCopy)`
+const CopyToClipboardIcon = styled(Icon.FiCopy)`
   font-size: 2.2rem;
   padding: 5px;
+`
+
+const ListboxStyled = styled(Listbox)`
+  [data-reach-listbox-button] {
+    border: none;
+    font-size: 1.4rem;
+    color: var(--primaryColor);
+  }
+`
+
+const ListboxOptionStyled = styled(ListboxOption)`
+  font-size: 1.4rem;
+  color: #333;
+  padding: 1rem;
 `
