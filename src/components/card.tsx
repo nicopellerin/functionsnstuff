@@ -11,11 +11,18 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ title, image, tech, link }) => {
-  // const random = Math.ceil(Math.random() * 2)
+  const isMobile =
+    typeof window !== "undefined"
+      ? /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+      : null
+
+  const imageName = image?.split(".")[0]
+  const mobileImage = `${imageName}.png`
+
   return (
     <Link to={link}>
       <Wrapper
-        image={image}
+        image={isMobile ? mobileImage : image}
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
         <Title>{title}</Title>
