@@ -72,7 +72,7 @@ export default Navbar
 const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
-  padding: 4rem 0;
+  padding: 4.5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;

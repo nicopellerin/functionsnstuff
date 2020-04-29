@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { AnimatePresence, motion } from "framer-motion"
 import { Link } from "gatsby"
 
-import { logoBase, donutBase } from "../../utils/base64-images"
+import { donutBase } from "../../utils/base64-images"
 
 const NavbarMobile = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false)
@@ -33,7 +33,7 @@ const NavbarMobile = () => {
           </svg>
         </MenuBar>
         <Link to="/">
-          <img src={logoBase} width={180} alt="logo" />
+          <img src={"/logo.svg"} width={175} alt="logo" />
         </Link>
         <img src={donutBase} alt="donut" width={35} />
       </Wrapper>
