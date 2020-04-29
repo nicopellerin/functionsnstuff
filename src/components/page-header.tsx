@@ -60,29 +60,32 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
 
   return (
     <Wrapper ref={ref}>
-      {isMobile() ? (
-        <div
-          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
-        >
+      {/* {isMobile() ? (
+        <BackgroundSkyMobile>
           <img src={backgroundFront} />
-        </div>
+        </BackgroundSkyMobile>
       ) : (
-        <Canvas
-          concurrent
-          camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
-          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
-          onCreated={({ gl }) => {
-            gl.toneMapping = THREE.Uncharted2ToneMapping
-            gl.setClearColor(new THREE.Color("#020207"))
-          }}
-        >
+        <React.Suspense fallback={null}>
+          <Canvas
+            concurrent
+            camera={{
+              fov: 10000,
+              position: [0, 0, 30],
+              near: 0.01,
+              far: 10000,
+            }}
+            style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
+            onCreated={({ gl }) => {
+              gl.toneMapping = THREE.Uncharted2ToneMapping
+              gl.setClearColor(new THREE.Color("#020207"))
+            }}
           >
-          <React.Suspense fallback={null}>
+            >
             <Particles count={150} />
             <Stars count={1250} />
-          </React.Suspense>
-        </Canvas>
-      )}
+          </Canvas>
+        </React.Suspense>
+      )} */}
       {isMobile() ? (
         <BackgroundMountainsMobile
           src={"/bg_front_mobile.png"}
@@ -171,6 +174,13 @@ const Wrapper = styled.div`
     background-position-y: 20%;
     height: 46rem;
   }
+`
+
+const BackgroundSkyMobile = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
 `
 
 const BackgroundMountainsMobile = styled(motion.img)`

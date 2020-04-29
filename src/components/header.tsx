@@ -8,7 +8,6 @@ import { Canvas } from "react-three-fiber"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
-import Buddy from "./buddy"
 import Particles from "./particles"
 import Stars from "./stars"
 
@@ -102,35 +101,6 @@ const Header = () => {
 
   return (
     <Wrapper>
-      {isMobile() ? (
-        <div
-          style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
-        >
-          <img src={backgroundFront} />
-        </div>
-      ) : (
-        <Canvas
-          concurrent
-          camera={{ fov: 10000, position: [0, 0, 30], near: 0.01, far: 10000 }}
-          style={{
-            position: "absolute",
-            top: 0,
-            width: "100%",
-            maxHeight: "65rem",
-            zIndex: -2,
-          }}
-          onCreated={({ gl }) => {
-            gl.toneMapping = THREE.Uncharted2ToneMapping
-            gl.setClearColor(new THREE.Color("#020207"))
-          }}
-        >
-          <React.Suspense fallback={null}>
-            >
-            <Particles count={150} />
-            <Stars count={1250} />
-          </React.Suspense>
-        </Canvas>
-      )}
       {isMobile() ? (
         <BackgroundMountainsMobile
           src={"/bg_front_mobile.png"}
@@ -294,6 +264,13 @@ const TerminalContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
   z-index: 2000;
+`
+
+const BackgroundSkyMobile = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
 `
 
 const BackgroundMountainsMobile = styled(motion.img)`

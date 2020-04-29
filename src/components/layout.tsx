@@ -18,6 +18,7 @@ const Layout: React.FC<Props> = ({ children, template }) => {
   const isDesktop = useMedia({
     minWidth: 1440,
   })
+
   return (
     <Wrapper>
       <Main template={template}>{children}</Main>
@@ -32,6 +33,7 @@ export default Layout
 // Styles
 const Wrapper = styled.div`
   background: #080808;
+  width: 100%;
 `
 
 const Main = styled.main`
