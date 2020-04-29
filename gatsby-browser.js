@@ -4,8 +4,8 @@ const Background = require("./src/components/background").default
 exports.wrapPageElement = ({ element, props }) => {
   return (
     <>
-      <Background {...props} />
-      {element}
+      <Background />
+      <React.Fragment {...props}>{element}</React.Fragment>
     </>
   )
 }

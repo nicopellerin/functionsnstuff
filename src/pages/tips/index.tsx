@@ -111,33 +111,31 @@ const TipsPage = ({ data }) => {
       <SEO title="Tips" />
       <PageHeader title="Tips" randomTip={randomTip} />
       <Layout>
-        {isMobile ? null : (
-          <RandomButtonWrapper initial={{ x: "-50%" }}>
-            <RandomButton
-              onClick={() => setRandomTip(true)}
-              whileHover={{ y: -1 }}
-              whileTap={{ y: 1 }}
-            >
-              {randomTip ? (
-                <motion.div
-                  animate={{ rotate: 180 }}
-                  transition={{ yoyo: Infinity }}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
-                >
-                  <FaDice />
-                </motion.div>
-              ) : (
-                <>
-                  Random tip <FaDice style={{ marginLeft: 7 }} />
-                </>
-              )}
-            </RandomButton>
-          </RandomButtonWrapper>
-        )}
+        <RandomButtonWrapper initial={{ x: "-50%" }}>
+          <RandomButton
+            onClick={() => setRandomTip(true)}
+            whileHover={{ y: -1 }}
+            whileTap={{ y: 1 }}
+          >
+            {randomTip ? (
+              <motion.div
+                animate={{ rotate: 180 }}
+                transition={{ yoyo: Infinity }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                <FaDice />
+              </motion.div>
+            ) : (
+              <>
+                Random tip <FaDice style={{ marginLeft: 7 }} />
+              </>
+            )}
+          </RandomButton>
+        </RandomButtonWrapper>
         <TechCardList>
           {techList.map(({ tech, logo, link, width, slug }) => (
             <TechCard
@@ -191,6 +189,10 @@ const RandomButtonWrapper = styled(motion.div)`
   top: -11px;
   left: 50%;
   z-index: 2000;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const RandomButton = styled(motion.button)`

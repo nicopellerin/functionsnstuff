@@ -76,6 +76,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1366px) {
+    display: none;
+  }
 `
 
 const Menu = styled.nav`

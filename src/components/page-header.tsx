@@ -50,26 +50,24 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
 
   return (
     <Wrapper ref={ref}>
-      {isMobile() ? (
-        <BackgroundMountainsMobile
-          src={"/bg_front_mobile.png"}
-          alt="background mountains"
-        />
-      ) : (
-        <motion.img
-          src={"/bg_front2.webp"}
-          alt="background mountains"
-          style={{
-            position: "absolute",
-            top: 0,
-            width: "100%",
-            zIndex: -1,
-            y: y2,
-          }}
-        />
-      )}
+      <BackgroundMountainsMobile
+        src={"/bg_front_mobile.png"}
+        alt="background mountains"
+      />
+      <BackgroundMountainsDesktop
+        src={"/bg_front2.webp"}
+        alt="background mountains"
+        style={{
+          position: "absolute",
+          top: 0,
+          width: "100%",
+          zIndex: -1,
+          y: y2,
+        }}
+      />
       <Container>
-        {isMobile() ? <NavbarMobile /> : <Navbar />}
+        <NavbarMobile />
+        <Navbar />
         <Heading>
           {tech ? (
             <Link to={`/tutorials/${tech}`}>
@@ -111,7 +109,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="235"
-        viewBox={isMobile(500) ? "0 -165 1483 1" : "0 115 1483 1"}
+        viewBox={"0 115 1483 1"}
         preserveAspectRatio="xMidYMid meet"
       >
         <path
@@ -122,6 +120,21 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
           strokeMiterlimit="10"
         ></path>
       </Wave>
+      <WaveMobile
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="235"
+        viewBox={"0 -165 1483 1"}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M 0 140.25 L 61.792 162.216 C 123.583 184.594 247.167 227.906 370.75 217.284 C 494.333 206.25 617.917 140.25 741.5 134.784 C 865.083 128.906 988.667 184.594 1112.25 189.75 C 1235.833 194.906 1359.417 151.594 1421.208 129.216 L 1483 107.25 L 1483 371.25 L 0 371.25 Z"
+          fill="#080808"
+          strokeWidth="1.02"
+          stroke="hsl(0, 0%, 10%)"
+          strokeMiterlimit="10"
+        ></path>
+      </WaveMobile>
     </Wrapper>
   )
 }
@@ -140,11 +153,15 @@ const Wrapper = styled.div`
   }
 `
 
-const BackgroundSkyMobile = styled.div`
+const BackgroundMountainsDesktop = styled(motion.img)`
   position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: -2;
+  top: 20%;
+  width: 100vw;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const BackgroundMountainsMobile = styled(motion.img)`
@@ -159,6 +176,10 @@ const BackgroundMountainsMobile = styled(motion.img)`
 
   @media (max-width: 500px) {
     top: 62%;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
   }
 `
 
@@ -195,4 +216,21 @@ const Wave = styled.svg`
   left: 0;
   pointer-events: none;
   z-index: 11;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const WaveMobile = styled.svg`
+  position: absolute;
+  height: 265px;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 11;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `

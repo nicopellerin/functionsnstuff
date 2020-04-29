@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useLayoutEffect } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
@@ -8,7 +8,7 @@ import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 
 const Header = () => {
-  const isMobileFunc = (width = 1024) => {
+  const isMobile = (width = 1024) => {
     let mql =
       typeof window !== "undefined" &&
       window.matchMedia(`(max-width: ${width}px)`)
@@ -22,11 +22,6 @@ const Header = () => {
     }
     return false
   }
-
-  let isMobile
-  useLayoutEffect(() => {
-    isMobileFunc() ? (isMobile = true) : (isMobile = false)
-  }, [])
 
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState(null)
@@ -100,114 +95,106 @@ const Header = () => {
 
   return (
     <Wrapper>
-      {isMobile ? (
-        <BackgroundMountainsMobile
-          src={"/bg_front_mobile.png"}
-          alt="background mountains"
-        />
-      ) : (
-        <motion.img
-          src={"/bg_front2.webp"}
-          alt="background mountains"
-          style={{
-            position: "absolute",
-            top: "20%",
-            width: "100vw",
-            zIndex: -1,
-          }}
-        />
-      )}
+      <BackgroundMountainsMobile
+        src={"/bg_front_mobile.png"}
+        alt="background mountains"
+      />
+
+      <BackgroundMountainsDesktop
+        src={"/bg_front2.webp"}
+        alt="background mountains"
+      />
+
       <Container>
-        {isMobile ? <NavbarMobile /> : <Navbar />}
-        {isMobile ? null : (
-          <TerminalWrapper
-            terminal={"/terminal.webp"}
-            initial={{ y: 400, x: "-50%" }}
-            animate={{ y: toggleBrowser ? 310 : 10 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100 }}
+        <NavbarMobile />
+        <Navbar />
+        <TerminalWrapper
+          terminal={"/terminal.webp"}
+          initial={{ y: 400, x: "-50%" }}
+          animate={{ y: toggleBrowser ? 310 : 10 }}
+          transition={{ type: "spring", damping: 20, stiffness: 100 }}
+        >
+          <button
+            onClick={() => setToggleBrowser(prevState => !prevState)}
+            style={{
+              position: "absolute",
+              left: 49,
+              top: 15,
+              height: 20,
+              background: "transparent",
+              color: "transparent",
+              border: "none",
+              zIndex: 3000,
+              outline: "none",
+              cursor: "pointer",
+            }}
           >
-            <button
-              onClick={() => setToggleBrowser(prevState => !prevState)}
+            Click
+          </button>
+          <TerminalContainer
+            variants={terminalVariants}
+            initial="hidden"
+            animate="show"
+          >
+            <motion.h3
               style={{
+                fontSize: 16,
                 position: "absolute",
-                left: 49,
-                top: 15,
-                height: 20,
-                background: "transparent",
-                color: "transparent",
-                border: "none",
-                zIndex: 3000,
-                outline: "none",
-                cursor: "pointer",
+                fontWeight: 500,
+                fontFamily: "menlo",
+                color: "lightgreen",
+                left: "50%",
+                letterSpacing: 5,
+                top: 90,
+                display: "flex",
+                alignItems: "center",
               }}
+              initial={{ opacity: 0, x: "-50%" }}
+              animate={{ opacity: [0, 1], y: [20, 0] }}
+              transition={{ delay: 0.4 }}
             >
-              Click
-            </button>
-            <TerminalContainer
-              variants={terminalVariants}
-              initial="hidden"
-              animate="show"
-            >
-              <motion.h3
+              Start learning
+              <motion.span
+                animate={{ opacity: [0, 1] }}
+                transition={{ yoyo: Infinity }}
                 style={{
-                  fontSize: 16,
-                  position: "absolute",
-                  fontWeight: 500,
-                  fontFamily: "menlo",
-                  color: "lightgreen",
-                  left: "50%",
-                  letterSpacing: 5,
-                  top: 90,
-                  display: "flex",
-                  alignItems: "center",
+                  display: "inline-block",
+                  fontSize: 28,
+                  lineHeight: 1,
+                  marginLeft: 1,
                 }}
-                initial={{ opacity: 0, x: "-50%" }}
-                animate={{ opacity: [0, 1], y: [20, 0] }}
-                transition={{ delay: 0.4 }}
               >
-                Start learning
-                <motion.span
-                  animate={{ opacity: [0, 1] }}
-                  transition={{ yoyo: Infinity }}
-                  style={{
-                    display: "inline-block",
-                    fontSize: 28,
-                    lineHeight: 1,
-                    marginLeft: 1,
-                  }}
-                >
-                  &#9646;
-                </motion.span>
-              </motion.h3>
-              <IconsList>
-                {techList.map(({ tech, logo, link, width }) => (
-                  <Link key={tech} to={link}>
-                    <TechWrapper
-                      whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
-                    >
-                      <motion.img
-                        src={logo}
-                        alt="react"
-                        width={width}
-                        variants={itemVariants}
-                        style={{ cursor: "pointer" }}
-                        onMouseEnter={() => setSelected(tech)}
-                        onMouseLeave={() => setSelected(null)}
-                      />
-                      {selected === tech && <TechTitle>{tech}</TechTitle>}
-                    </TechWrapper>
-                  </Link>
-                ))}
-              </IconsList>
-            </TerminalContainer>
-          </TerminalWrapper>
-        )}
+                &#9646;
+              </motion.span>
+            </motion.h3>
+            <IconsList>
+              {techList.map(({ tech, logo, link, width }) => (
+                <Link key={tech} to={link}>
+                  <TechWrapper
+                    whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
+                  >
+                    <motion.img
+                      src={logo}
+                      alt="react"
+                      width={width}
+                      variants={itemVariants}
+                      style={{ cursor: "pointer" }}
+                      onMouseEnter={() => setSelected(tech)}
+                      onMouseLeave={() => setSelected(null)}
+                    />
+                    {selected === tech && <TechTitle>{tech}</TechTitle>}
+                  </TechWrapper>
+                </Link>
+              ))}
+            </IconsList>
+          </TerminalContainer>
+        </TerminalWrapper>
       </Container>
       <Wave
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="235"
-        viewBox={isMobile ? "0 -200 1483 1" : "0 115 1483 1"}
+        viewBox={"0 115 1483 1"}
         preserveAspectRatio="xMidYMid meet"
       >
         <path
@@ -218,6 +205,21 @@ const Header = () => {
           strokeMiterlimit="10"
         ></path>
       </Wave>
+      <WaveMobile
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="235"
+        viewBox={"0 -165 1483 1"}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M 0 140.25 L 61.792 162.216 C 123.583 184.594 247.167 227.906 370.75 217.284 C 494.333 206.25 617.917 140.25 741.5 134.784 C 865.083 128.906 988.667 184.594 1112.25 189.75 C 1235.833 194.906 1359.417 151.594 1421.208 129.216 L 1483 107.25 L 1483 371.25 L 0 371.25 Z"
+          fill="#080808"
+          strokeWidth="1.02"
+          stroke="hsl(0, 0%, 10%)"
+          strokeMiterlimit="10"
+        ></path>
+      </WaveMobile>
     </Wrapper>
   )
 }
@@ -249,7 +251,11 @@ const TerminalWrapper = styled(motion.div)`
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 2;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
 
   @media (max-width: 1440px) {
     width: 90rem;
@@ -270,6 +276,17 @@ const BackgroundSkyMobile = styled.div`
   z-index: -2;
 `
 
+const BackgroundMountainsDesktop = styled(motion.img)`
+  position: absolute;
+  top: 20%;
+  width: 100vw;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
 const BackgroundMountainsMobile = styled(motion.img)`
   position: absolute;
   width: 100%;
@@ -282,6 +299,10 @@ const BackgroundMountainsMobile = styled(motion.img)`
 
   @media (max-width: 500px) {
     top: 62%;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
   }
 `
 
@@ -316,4 +337,21 @@ const Wave = styled.svg`
   left: 0;
   pointer-events: none;
   z-index: 11;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const WaveMobile = styled.svg`
+  position: absolute;
+  height: 265px;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 11;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `
