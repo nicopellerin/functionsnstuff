@@ -211,6 +211,8 @@ const Title = styled.h3`
 
 const Tech = styled.aside`
   justify-self: end;
+  position: sticky;
+  top: 0;
 
   @media (max-width: 1024px) {
     justify-self: center;

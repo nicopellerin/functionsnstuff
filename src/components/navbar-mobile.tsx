@@ -123,7 +123,7 @@ const Wrapper = styled.div`
   background: #020207;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   position: relative;
-  padding: 1.8rem 2rem;
+  padding: 2rem 1rem;
   display: grid;
   grid-template-columns: 45px 1fr 45px;
   justify-items: center;
