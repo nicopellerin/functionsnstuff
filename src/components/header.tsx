@@ -5,7 +5,6 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
 import { Canvas } from "react-three-fiber"
-import { isMobile } from "react-device-detect"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
@@ -14,6 +13,20 @@ import Particles from "./particles"
 import Stars from "./stars"
 
 const Header = () => {
+  const isMobile = () => {
+    let mql =
+      typeof window !== "undefined" && window.matchMedia("(max-width: 750px)")
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) &&
+      mql.matches
+    ) {
+      return true
+    }
+    return false
+  }
+
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState(null)
 

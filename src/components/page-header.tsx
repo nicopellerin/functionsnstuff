@@ -10,7 +10,7 @@ import {
   AnimatePresence,
 } from "framer-motion"
 import { Link } from "gatsby"
-import { isMobile } from "react-device-detect"
+// import { isMobile } from "react-device-detect"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
@@ -25,6 +25,19 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
+  const isMobile = () => {
+    let mql =
+      typeof window !== "undefined" && window.matchMedia("(max-width: 750px)")
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) &&
+      mql.matches
+    ) {
+      return true
+    }
+    return false
+  }
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
   const ref = useRef()
