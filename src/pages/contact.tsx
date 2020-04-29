@@ -90,6 +90,8 @@ const EmojiHappy = styled.img`
 const DonutWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: -75px;
+  margin-top: -100px;
   margin-bottom: 75px;
+  position: relative;
+  z-index: 2000;
 `

@@ -10,7 +10,7 @@ import {
   AnimatePresence,
 } from "framer-motion"
 import { Link } from "gatsby"
-import { useMedia } from "react-use-media"
+import { isMobile } from "react-device-detect"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
@@ -25,11 +25,6 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
-  const isMobile =
-    typeof window !== "undefined"
-      ? /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-      : null
-
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
   const ref = useRef()
@@ -129,19 +124,21 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
           )}
         </AnimatePresence>
       </Container>
-      <img
-        src={"/wave.svg"}
-        style={{
-          position: "absolute",
-          bottom: -88,
-          height: 265,
-          left: 0,
-          width: "100%",
-          pointerEvents: "none",
-          zIndex: 11,
-        }}
-        alt="wave"
-      />
+      <Wave
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="235"
+        viewBox={isMobile ? "0 -200 1483 1" : "0 116 1483 1"}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M 0 140.25 L 61.792 162.216 C 123.583 184.594 247.167 227.906 370.75 217.284 C 494.333 206.25 617.917 140.25 741.5 134.784 C 865.083 128.906 988.667 184.594 1112.25 189.75 C 1235.833 194.906 1359.417 151.594 1421.208 129.216 L 1483 107.25 L 1483 371.25 L 0 371.25 Z"
+          fill="#080808"
+          stroke-width="1.02"
+          stroke="hsl(0, 0%, 10%)"
+          stroke-miterlimit="10"
+        ></path>
+      </Wave>
     </Wrapper>
   )
 }
@@ -150,7 +147,7 @@ export default PageHeader
 
 // Styles
 const Wrapper = styled.div`
-  height: 42rem;
+  height: 45rem;
   position: relative;
   overflow: hidden;
 
@@ -185,7 +182,7 @@ const Heading = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40%;
+  height: 35%;
 
   @media (min-width: 1500px) {
     height: 46%;
@@ -199,4 +196,13 @@ const Heading = styled.div`
 const Title = styled(motion.h1)`
   color: var(--primaryColor);
   text-align: center;
+`
+
+const Wave = styled.svg`
+  position: absolute;
+  height: 265px;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 11;
 `

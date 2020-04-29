@@ -17,7 +17,7 @@ const ButtonGeneratorPage = () => {
           <img
             src={`https://images.weserv.nl/?url=${encodeURI(
               "https://modest-jones-332c08.netlify.app/icons/react.png"
-            )}&h=200`}
+            )}&w=200`}
             alt="donut"
             width={100}
           />
@@ -35,6 +35,8 @@ export default ButtonGeneratorPage
 const ReactWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: -75px;
-  margin-bottom: 60px;
+  margin-top: -100px;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 2000;
 `

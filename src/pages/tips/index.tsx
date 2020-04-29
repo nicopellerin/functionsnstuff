@@ -188,8 +188,9 @@ const Spacer = styled.div`
 
 const RandomButtonWrapper = styled(motion.div)`
   position: absolute;
-  top: 1px;
+  top: -11px;
   left: 50%;
+  z-index: 2000;
 `
 
 const RandomButton = styled(motion.button)`

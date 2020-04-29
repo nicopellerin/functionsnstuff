@@ -38,10 +38,10 @@ const Main = styled.main`
   max-width: ${(props: { template: boolean }) =>
     props.template ? "100rem" : "80rem"};
   margin: 0 auto;
-  padding: 10rem 0 15rem;
+  padding: 8rem 0 15rem;
   position: relative;
 
   @media (max-width: 1024px) {
-    padding: 8rem 2rem 8rem;
+    padding: 4rem 2rem 8rem;
   }
 `

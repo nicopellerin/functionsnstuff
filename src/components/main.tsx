@@ -43,11 +43,6 @@ const techItems = [
 ]
 
 const Main = () => {
-  const isMobile =
-    typeof window !== "undefined"
-      ? /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-      : null
-
   const [show, setShow] = useState(null)
 
   const { tutorial, tip } = useStaticQuery(graphql`
