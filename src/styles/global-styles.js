@@ -104,4 +104,21 @@ export const GlobalStyles = createGlobalStyle`
   padding: 1.5em 0;
   width: 100%;
 }
+
+[data-reach-listbox-popover] {
+    background: none;
+    outline: none;
+  }
+
+[data-reach-listbox-option] {
+  &:hover {
+    background: var(--primaryColor);
+    color: #333;
+  }
+}
+
+  [data-reach-listbox-option][data-current] {
+    background: var(--pink);
+    color: #333; 
+}
 `

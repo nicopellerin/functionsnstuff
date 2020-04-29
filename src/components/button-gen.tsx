@@ -37,6 +37,10 @@ enum Icons {
   Send = "FiSend",
   Check = "FiCheckCircle",
   ChevronRight = "FiChevronRight",
+  Login = "FiLogIn",
+  Logout = "FiLogOut",
+  Mail = "FiMail",
+  Download = "FiDownload",
 }
 
 const ButtonGenerator = () => {
@@ -48,6 +52,7 @@ const ButtonGenerator = () => {
   const [background, setBackground] = useState("#F44E3B")
   const [textColor, setTextColor] = useState("#fff")
   const [dropShadow, setDropShadow] = useState(3)
+  const [isBold, setIsBold] = useState(false)
   const [copied, setCopied] = useState(false)
   const [checkedIcon, setCheckedIcon] = useState(true)
   const [anim, setAnim] = useState(true)
@@ -78,7 +83,7 @@ const ButtonGenerator = () => {
     anim ? " whileTap={{ y: 1 }}\n " : ""
   }style={{ color: "${textColor}",\n background: "${background}",\n padding: "${vertPadding}px ${horiPadding}px",\n border: "${border}",\n borderRadius: "${borderRadius}px",\n fontSize: "${fontSize}px",\n fontWeight: "${fontWeight}",\n boxShadow: "0 4px 20px rgba(0,0,0,${dropShadow /
     10})",\n cursor: "${cursor}" }}>\n${text}${
-    checkedIcon ? "\n<FiSend style={{ marginLeft: 5 }} />" : ""
+    checkedIcon ? `\n<${icon} style={{ marginLeft: 5 }} />` : ""
   }\n</${anim ? "motion." : ""}button>\n)`
 
   const handleCopyToClipboard = async () => {
@@ -100,6 +105,14 @@ const ButtonGenerator = () => {
         return <Icon.FiCheckCircle style={style} />
       case Icons.ChevronRight:
         return <Icon.FiChevronRight style={style} />
+      case Icons.Login:
+        return <Icon.FiLogIn style={style} />
+      case Icons.Logout:
+        return <Icon.FiLogOut style={style} />
+      case Icons.Mail:
+        return <Icon.FiMail style={style} />
+      case Icons.Download:
+        return <Icon.FiDownload style={style} />
     }
   }
 
@@ -124,14 +137,13 @@ const ButtonGenerator = () => {
                   border,
                   borderRadius,
                   fontSize,
-                  fontWeight,
+                  fontWeight: isBold ? "600" : "400",
                   boxShadow: `0 4px 20px rgba(0,0,0,${dropShadow / 10})`,
                   cursor,
                 }}
               >
                 <span>{text}</span>
-                {/* {checkedIcon && <Icon.FiSend style={{ marginLeft: 5 }} />} */}
-                {checkedIcon && iconPicker("SEND")}
+                {checkedIcon && iconPicker()}
               </Button>
             </ButtonContainer>
             {isDesktop ? (
@@ -223,8 +235,14 @@ const ButtonGenerator = () => {
                 setColor={setTextColor}
               />
               <Toggle
+                title="Bold text"
+                check={isBold}
+                toggleCheck={() => setIsBold(prevState => !prevState)}
+              />
+              <Toggle
                 renderOptions={
                   <ListboxStyled
+                    disabled={!checkedIcon}
                     defaultValue={Icons.Send}
                     onChange={value => setIcon(value as Icons)}
                     style={{ border: "none" }}
@@ -241,22 +259,27 @@ const ButtonGenerator = () => {
                     <ListboxOptionStyled value={Icons.ChevronRight}>
                       ChevronRight
                     </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Login}>
+                      Login
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Logout}>
+                      Logout
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Mail}>
+                      Mail
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Download}>
+                      Download
+                    </ListboxOptionStyled>
                   </ListboxStyled>
-                  // <select
-                  //   disabled={!checkedIcon}
-                  //   onChange={e => setIcon(e.target.value as Icons)}
-                  // >
-                  //   <option value={Icons.Send}>Send</option>
-                  //   <option value={Icons.User}>User</option>
-                  //   <option value={Icons.Check}>Check</option>
-                  //   <option value={Icons.ChevronRight}>Chevron Right</option>
-                  // </select>
                 }
                 title="Icon"
+                check={checkedIcon}
                 toggleCheck={() => setCheckedIcon(prevState => !prevState)}
               />
               <Toggle
                 title="Animation"
+                check={anim}
                 toggleCheck={() => setAnim(prevState => !prevState)}
               />
             </div>
@@ -298,16 +321,18 @@ const ButtonGenerator = () => {
 // Toggle
 interface ToggleProps {
   title: string
+  check?: boolean
   toggleCheck: () => void
   renderOptions?: React.ReactNode
 }
 
 const Toggle: React.FC<ToggleProps> = ({
   title,
+  check,
   toggleCheck,
   renderOptions,
 }) => {
-  const [checked, setChecked] = useState(true)
+  const [checked, setChecked] = useState(check)
   const inputRef = useRef(null)
 
   const handleCheck = () => {
@@ -342,8 +367,8 @@ interface ColorPickerProps {
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
-  title = "Background color",
-  colorPicked = "red",
+  title,
+  colorPicked,
   setColor,
 }) => {
   const [toggle, setToggle] = useState(false)
@@ -615,10 +640,17 @@ const ListboxStyled = styled(Listbox)`
     font-size: 1.4rem;
     color: var(--primaryColor);
   }
+
+  > [data-reach-listbox-popover] {
+    background: red;
+    outline: none;
+  }
 `
 
 const ListboxOptionStyled = styled(ListboxOption)`
   font-size: 1.4rem;
-  color: #333;
+  color: var(--textMenu);
+  background: #112;
   padding: 1rem;
+  cursor: pointer;
 `
