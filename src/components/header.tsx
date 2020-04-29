@@ -117,9 +117,9 @@ const Header = () => {
         {isMobile() ? null : (
           <TerminalWrapper
             terminal={"/terminal.webp"}
-            // initial={{ y: 400, x: "-50%" }}
-            // animate={{ y: toggleBrowser ? 310 : 10 }}
-            // transition={{ type: "spring", damping: 20, stiffness: 100 }}
+            initial={{ y: 400, x: "-50%" }}
+            animate={{ y: toggleBrowser ? 310 : 10 }}
+            transition={{ type: "spring", damping: 20, stiffness: 100 }}
           >
             <button
               onClick={() => setToggleBrowser(prevState => !prevState)}
