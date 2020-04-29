@@ -45,7 +45,7 @@ const ContactPage = () => {
                     )}&h=40`}
                     alt="happy"
                   />
-
+                  {"-"}
                   <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
                     Nico
                   </span>
