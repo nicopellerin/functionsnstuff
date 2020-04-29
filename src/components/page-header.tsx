@@ -13,8 +13,6 @@ import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import BuddyHeader from "./buddy-header"
 
-import { backgroundFront } from "../../utils/base64-images"
-
 interface Props {
   tech?: string
   title?: string
@@ -54,12 +52,12 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
     <Wrapper ref={ref}>
       {isMobile() ? (
         <BackgroundMountainsMobile
-          src={backgroundFront}
+          src={"/bg_front_mobile.png"}
           alt="background mountains"
         />
       ) : (
         <motion.img
-          src={backgroundFront}
+          src={"/bg_front2.webp"}
           alt="background mountains"
           style={{
             position: "absolute",

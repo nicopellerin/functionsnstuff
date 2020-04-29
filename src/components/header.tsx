@@ -7,8 +7,6 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 
-import { backgroundFront, terminalBase } from "../../utils/base64-images"
-
 const Header = () => {
   const isMobile = (width = 1024) => {
     let mql =
@@ -99,12 +97,12 @@ const Header = () => {
     <Wrapper>
       {isMobile() ? (
         <BackgroundMountainsMobile
-          src={backgroundFront}
+          src={"/bg_front_mobile.png"}
           alt="background mountains"
         />
       ) : (
         <motion.img
-          src={backgroundFront}
+          src={"/bg_front2.webp"}
           alt="background mountains"
           style={{
             position: "absolute",
@@ -118,7 +116,7 @@ const Header = () => {
         {isMobile() ? <NavbarMobile /> : <Navbar />}
         {isMobile() ? null : (
           <TerminalWrapper
-            terminal={terminalBase}
+            terminal={"/terminal.webp"}
             // initial={{ y: 400, x: "-50%" }}
             // animate={{ y: toggleBrowser ? 310 : 10 }}
             // transition={{ type: "spring", damping: 20, stiffness: 100 }}
