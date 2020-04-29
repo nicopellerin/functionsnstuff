@@ -16,7 +16,9 @@ import { backgroundFront } from "../../utils/base64-images"
 
 const Header = () => {
   const isMobile = (width = 1024) => {
-    let mql = window.matchMedia(`(max-width: ${width}px)`)
+    let mql =
+      typeof window !== "undefined" &&
+      window.matchMedia(`(max-width: ${width}px)`)
     if (
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
