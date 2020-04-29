@@ -217,7 +217,9 @@ const Header = () => {
                       whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                     >
                       <motion.img
-                        src={logo}
+                        src={`https://images.weserv.nl/?url=${encodeURI(
+                          `https://modest-jones-332c08.netlify.app/icons/${tech}.png`
+                        )}&w=${width * 2}`}
                         alt="react"
                         width={width}
                         variants={itemVariants}
@@ -233,18 +235,6 @@ const Header = () => {
             </TerminalContainer>
           </TerminalWrapper>
         )}
-        <motion.div
-          initial={{ opacity: 0, x: "-50%" }}
-          animate={{ opacity: [0, 1] }}
-          style={{ position: "absolute", top: "20px", left: "50%" }}
-          transition={{ delay: 1 }}
-        >
-          {toggleBrowser && (
-            <motion.div>
-              <Buddy toggleBrowser={toggleBrowser} />
-            </motion.div>
-          )}
-        </motion.div>
       </Container>
       <Wave
         xmlns="http://www.w3.org/2000/svg"
