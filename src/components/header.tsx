@@ -12,10 +12,11 @@ import Buddy from "./buddy"
 import Particles from "./particles"
 import Stars from "./stars"
 
+import { backgroundFront } from "../../utils/base64-images"
+
 const Header = () => {
-  const isMobile = () => {
-    let mql =
-      typeof window !== "undefined" && window.matchMedia("(max-width: 750px)")
+  const isMobile = (width = 1024) => {
+    let mql = window.matchMedia(`(max-width: ${width}px)`)
     if (
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
@@ -99,11 +100,11 @@ const Header = () => {
 
   return (
     <Wrapper>
-      {isMobile ? (
+      {isMobile() ? (
         <div
           style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
         >
-          <img src={"/bg_back.png"} />
+          <img src={backgroundFront} />
         </div>
       ) : (
         <Canvas
@@ -128,7 +129,7 @@ const Header = () => {
           </React.Suspense>
         </Canvas>
       )}
-      {isMobile ? (
+      {isMobile() ? (
         <BackgroundMountainsMobile
           src={"/bg_front_mobile.png"}
           alt="background mountains"
@@ -146,8 +147,8 @@ const Header = () => {
         />
       )}
       <Container>
-        {isMobile ? <NavbarMobile /> : <Navbar />}
-        {isMobile ? null : (
+        {isMobile() ? <NavbarMobile /> : <Navbar />}
+        {isMobile() ? null : (
           <TerminalWrapper
             terminal={"/terminal.webp"}
             initial={{ y: 400, x: "-50%" }}
@@ -247,7 +248,7 @@ const Header = () => {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="235"
-        viewBox={isMobile ? "0 -200 1483 1" : "0 116 1483 1"}
+        viewBox={isMobile(500) ? "0 -200 1483 1" : "0 115 1483 1"}
         preserveAspectRatio="xMidYMid meet"
       >
         <path
@@ -258,19 +259,6 @@ const Header = () => {
           stroke-miterlimit="10"
         ></path>
       </Wave>
-      {/* <img
-        src={"/wave.svg"}
-        style={{
-          position: "absolute",
-          bottom: -88,
-          height: 265,
-          left: 0,
-          width: "100%",
-          pointerEvents: "none",
-          zIndex: 12,
-        }}
-        alt="wave"
-      /> */}
     </Wrapper>
   )
 }

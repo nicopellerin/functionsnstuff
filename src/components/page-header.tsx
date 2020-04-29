@@ -10,13 +10,14 @@ import {
   AnimatePresence,
 } from "framer-motion"
 import { Link } from "gatsby"
-// import { isMobile } from "react-device-detect"
 
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import BuddyHeader from "./buddy-header"
 import Stars from "./stars"
 import Particles from "./particles"
+
+import { backgroundFront } from "../../utils/base64-images"
 
 interface Props {
   tech?: string
@@ -25,9 +26,8 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
-  const isMobile = () => {
-    let mql =
-      typeof window !== "undefined" && window.matchMedia("(max-width: 750px)")
+  const isMobile = (width = 1024) => {
+    let mql = window.matchMedia(`(max-width: ${width}px)`)
     if (
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
@@ -38,6 +38,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
     }
     return false
   }
+
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
   const ref = useRef()
@@ -57,11 +58,11 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
 
   return (
     <Wrapper ref={ref}>
-      {isMobile ? (
+      {isMobile() ? (
         <div
           style={{ position: "absolute", top: 0, width: "100%", zIndex: -2 }}
         >
-          <img src={"/bg_back.png"} />
+          <img src={backgroundFront} />
         </div>
       ) : (
         <Canvas
@@ -80,7 +81,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
           </React.Suspense>
         </Canvas>
       )}
-      {isMobile ? (
+      {isMobile() ? (
         <BackgroundMountainsMobile
           src={"/bg_front_mobile.png"}
           alt="background mountains"
@@ -99,7 +100,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         />
       )}
       <Container>
-        {isMobile ? <NavbarMobile /> : <Navbar />}
+        {isMobile() ? <NavbarMobile /> : <Navbar />}
         <Heading>
           {tech ? (
             <Link to={`/tutorials/${tech}`}>
@@ -141,7 +142,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="235"
-        viewBox={isMobile ? "0 -200 1483 1" : "0 116 1483 1"}
+        viewBox={isMobile(500) ? "0 -165 1483 1" : "0 115 1483 1"}
         preserveAspectRatio="xMidYMid meet"
       >
         <path
