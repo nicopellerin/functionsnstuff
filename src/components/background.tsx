@@ -3,14 +3,8 @@ import styled from "styled-components"
 import { Canvas } from "react-three-fiber"
 import * as THREE from "three"
 
-// import Particles from "./particles"
-// import Stars from "./stars"
-const Particles = React.lazy(() => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(import("./particles") as any), 300)
-  })
-})
-const Stars = React.lazy(() => import("./stars"))
+import Particles from "./particles"
+import Stars from "./stars"
 
 const Background = () => {
   const isMobile = (width = 1024) => {
