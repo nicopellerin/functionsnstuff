@@ -16,7 +16,7 @@ const menuItems = [
   },
   {
     title: "Tools",
-    link: "/tools/react-button-generator",
+    link: "/tools",
   },
   {
     title: "Contact",

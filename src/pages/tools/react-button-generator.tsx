@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
-import ButtonGenerator from "../../components/button-generator/button-generator-main"
+import ButtonGenerator from "../../components/button-generator"
 import Share from "../../components/share"
 
 const ButtonGeneratorPage = () => {
