@@ -15,7 +15,7 @@ exports.handler = async (event, context, callback) => {
   `
 
   const msg = {
-    to: "nickypellerin@gmail.com",
+    to: "hello@functionsnstuff.io",
     from: email,
     subject: subject,
     html: html,
