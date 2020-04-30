@@ -329,7 +329,11 @@ const ButtonGeneratorMain = () => {
 
             <CopyButton
               copied={copied ? true : false}
-              onClick={() => handleCopyToClipboard(value)}
+              onClick={() =>
+                handleCopyToClipboard(
+                  codeStyle === CodeStyles.InlineStyles ? value : valueStyled
+                )
+              }
             >
               <AnimatePresence>
                 {copied ? (
