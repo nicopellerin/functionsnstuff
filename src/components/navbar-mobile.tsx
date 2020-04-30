@@ -96,7 +96,7 @@ const NavbarMobileDropdown = ({ setToggleDropdown, toggleDropdown }) => {
                 Tips
               </DropdownListItem>
             </Link>
-            <Link to="/tools/react-button-generator">
+            <Link to="/tools">
               <DropdownListItem
                 onClick={() => setToggleDropdown(prevState => !prevState)}
               >

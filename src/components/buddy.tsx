@@ -2,7 +2,7 @@ import * as React from "react"
 import { useRef, useEffect } from "react"
 import lottie from "lottie-web"
 
-const Buddy = ({ toggleBrowser }) => {
+const Buddy = ({ toggleBrowser, path = "/anim.json", size = 400 }) => {
   const lottieRef = useRef(null)
 
   let anim
@@ -13,7 +13,7 @@ const Buddy = ({ toggleBrowser }) => {
       renderer: "svg",
       loop: true,
       autoplay: false,
-      path: "/anim.json",
+      path,
     })
 
     return () => anim.destroy()
@@ -23,7 +23,7 @@ const Buddy = ({ toggleBrowser }) => {
     toggleBrowser ? anim.play() : anim.stop()
   }, [toggleBrowser])
 
-  return <div style={{ width: 400, marginTop: 30 }} ref={lottieRef} />
+  return <div style={{ width: size, marginTop: 30 }} ref={lottieRef} />
 }
 
 export default Buddy

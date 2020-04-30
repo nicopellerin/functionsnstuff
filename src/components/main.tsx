@@ -81,7 +81,7 @@ const Main = () => {
   return (
     <Wrapper>
       <div>
-        <Content>
+        {/* <Content>
           <Title>
             Latest tutorial{" "}
             <svg
@@ -103,7 +103,7 @@ const Main = () => {
             image={tutorial.edges[0].node.frontmatter.cover}
             link={`/tutorials/${tutorial.edges[0].node.frontmatter.tech}/${tutorial.edges[0].node.frontmatter.slug}`}
           />
-        </Content>
+        </Content> */}
         <Content>
           <Title>
             Latest tip{" "}

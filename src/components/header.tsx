@@ -31,37 +31,37 @@ const Header = () => {
     {
       tech: "React",
       logo: "/icons/react.png",
-      link: "/tutorials/react",
+      link: "/tips/react",
       width: 100,
     },
     {
       tech: "GraphQL",
       logo: "/icons/graphql.png",
-      link: "/tutorials/graphql",
+      link: "/tips/graphql",
       width: 90,
     },
     {
       tech: "Golang",
       logo: "/icons/golang.png",
-      link: "/tutorials/golang",
+      link: "/tips/golang",
       width: 160,
     },
     {
       tech: "NodeJS",
       logo: "/icons/nodejs.png",
-      link: "/tutorials/nodejs",
+      link: "/tips/nodejs",
       width: 120,
     },
     {
       tech: "Javascript",
       logo: "/icons/javascript.png",
-      link: "/tutorials/javascript",
+      link: "/tips/javascript",
       width: 90,
     },
     {
       tech: "Typescript",
       logo: "/icons/typescript.svg",
-      link: "/tutorials/typescript",
+      link: "/tips/typescript",
       width: 90,
     },
   ]

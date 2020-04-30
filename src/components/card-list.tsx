@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 
 import Card from "./card"
+import Buddy from "./buddy"
 
 interface Props {
   data: any
@@ -21,7 +22,9 @@ const CardList: React.FC<Props> = ({ data }) => {
           />
         ))
       ) : (
-        <h3 style={{ color: "white" }}>Coming soon!</h3>
+        <NoCardsWrapper>
+          <ComingSoonText>Coming soon!</ComingSoonText>
+        </NoCardsWrapper>
       )}
     </Wrapper>
   )
@@ -42,4 +45,17 @@ const Wrapper = styled.div`
   @media (max-width: 500px) {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
+`
+
+const NoCardsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const ComingSoonText = styled.h3`
+  font-size: 3.8rem;
+  color: var(--primaryColor);
+  margin: 4rem 0;
 `
