@@ -28,7 +28,7 @@ const Card: React.FC<Props> = ({ title, image, tech, link }) => {
         <Title>{title}</Title>
         <TechLogo
           src={`https://images.weserv.nl/?url=${encodeURI(
-            `https://modest-jones-332c08.netlify.app/icons/${tech}.png`
+            `https://functionsnstuff.netlify.app/icons/${tech}.png`
           )}&w=100`}
           alt={tech}
         />

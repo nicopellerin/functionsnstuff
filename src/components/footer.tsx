@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
           <img
             src={`https://images.weserv.nl/?url=${encodeURI(
-              "https://modest-jones-332c08.netlify.app/donut3.webp"
+              "https://functionsnstuff.netlify.app/donut3.webp"
             )}&h=350`}
             alt="donut"
             width={300}

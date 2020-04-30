@@ -16,7 +16,7 @@ const ButtonGeneratorPage = () => {
         <ReactWrapper>
           <ReactLogo
             src={`https://images.weserv.nl/?url=${encodeURI(
-              "https://modest-jones-332c08.netlify.app/icons/react.png"
+              "https://functionsnstuff.netlify.app/icons/react.png"
             )}&w=200`}
             alt="donut"
             width={100}

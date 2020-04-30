@@ -22,7 +22,7 @@ const ContactPage = () => {
           <DonutWrapper>
             <img
               src={`https://images.weserv.nl/?url=${encodeURI(
-                "https://modest-jones-332c08.netlify.app/donut3.webp"
+                "https://functionsnstuff.netlify.app/donut3.webp"
               )}&h=300`}
               alt="donut"
               width={150}
@@ -41,7 +41,7 @@ const ContactPage = () => {
                 <>
                   <EmojiHappy
                     src={`https://images.weserv.nl/?url=${encodeURI(
-                      "https://modest-jones-332c08.netlify.app/happy.png"
+                      "https://functionsnstuff.netlify.app/happy.png"
                     )}&h=40`}
                     alt="happy"
                   />
@@ -53,7 +53,7 @@ const ContactPage = () => {
               ) : (
                 <EmojiHappy
                   src={`https://images.weserv.nl/?url=${encodeURI(
-                    "https://modest-jones-332c08.netlify.app/happy.png"
+                    "https://functionsnstuff.netlify.app/happy.png"
                   )}&h=40`}
                   alt="happy"
                 />
