@@ -1,34 +1,20 @@
 import * as React from "react"
-import { useState, useRef } from "react"
+import { useState, useRef, useLayoutEffect, useEffect } from "react"
 import styled from "styled-components"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/dracula"
-// import {
-//   FiArrowUpCircle,
-//   FiArrowDownCircle,
-//   FiSend,
-//   FiCopy,
-//   FiCheckCircle,
-// } from "react-icons/fi"
 import * as Icon from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion"
-import { CompactPicker } from "react-color"
 import { useMedia } from "react-use-media"
-import {
-  Listbox,
-  ListboxInput,
-  ListboxButton,
-  ListboxPopover,
-  ListboxList,
-  ListboxOption,
-} from "@reach/listbox"
+import { Listbox, ListboxOption } from "@reach/listbox"
 import "@reach/listbox/styles.css"
 
-import Spacer from "./spacer"
-import Checkbox from "./checkbox"
-import DarkMode from "./dark-mode"
-
-import useClickOutside from "../hooks/useClickOutside"
+import Spacer from "../spacer"
+import DarkMode from "../dark-mode"
+import Counter from "./counter"
+import ColorPicker from "./color-picker"
+import Toggle from "./toggle"
+import copyToClipboard from "./copy-to-clipboard"
 
 const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
 
@@ -43,13 +29,20 @@ enum Icons {
   Download = "FiDownload",
 }
 
-const ButtonGenerator = () => {
+enum BackgroundType {
+  Fill = "BackgroundFill",
+  Gradient = "BackgroundGradient",
+}
+
+const ButtonGeneratorMain = () => {
   const [text, setText] = useState("Send")
   const [fontSize, setFontSize] = useState(16)
   const [borderRadius, setBorderRadius] = useState(5)
   const [horiPadding, setHoriPadding] = useState(35)
   const [vertPadding, setVertPadding] = useState(15)
   const [background, setBackground] = useState("#F44E3B")
+  const [backgroundGradient1, setBackgroundGradient1] = useState(background)
+  const [backgroundGradient2, setBackgroundGradient2] = useState("#BD11E0")
   const [textColor, setTextColor] = useState("#fff")
   const [dropShadow, setDropShadow] = useState(3)
   const [isBold, setIsBold] = useState(false)
@@ -58,10 +51,15 @@ const ButtonGenerator = () => {
   const [anim, setAnim] = useState(true)
   const [darkMode, setDarkMode] = useState(true)
   const [icon, setIcon] = useState(Icons.Send)
+  const [backgroundType, setBackgroundType] = useState(BackgroundType.Fill)
 
   const isDesktop = useMedia({
     minWidth: 500,
   })
+
+  useEffect(() => {
+    setBackgroundGradient1(background)
+  }, [background])
 
   const border = "none"
   const fontWeight = 400
@@ -81,21 +79,24 @@ const ButtonGenerator = () => {
     anim ? "whileHover={{ y: -1 }}\n" : ""
   }${
     anim ? " whileTap={{ y: 1 }}\n " : ""
-  }style={{ color: "${textColor}",\n background: "${background}",\n padding: "${vertPadding}px ${horiPadding}px",\n border: "${border}",\n borderRadius: "${borderRadius}px",\n fontSize: "${fontSize}px",\n fontWeight: "${fontWeight}",\n boxShadow: "0 4px 20px rgba(0,0,0,${dropShadow /
+  }style={{ color: "${textColor}",\n background: "${
+    backgroundType === BackgroundType.Fill
+      ? background
+      : `linear-gradient(${backgroundGradient1}, ${backgroundGradient2})`
+  }",\n padding: "${vertPadding}px ${horiPadding}px",\n border: "${border}",\n borderRadius: "${borderRadius}px",\n fontSize: "${fontSize}px",\n fontWeight: "${fontWeight}",\n boxShadow: "0 4px 20px rgba(0,0,0,${dropShadow /
     10})",\n cursor: "${cursor}" }}>\n${text}${
-    checkedIcon ? `\n<${icon} style={{ marginLeft: 5 }} />` : ""
+    checkedIcon ? `\n<${icon} style={{ marginLeft: "0.3em" }} />` : ""
   }\n</${anim ? "motion." : ""}button>\n)`
 
-  const handleCopyToClipboard = async () => {
-    const clipboard = window.navigator.clipboard
-    await clipboard.writeText(value)
+  const handleCopyToClipboard = async value => {
+    copyToClipboard(value)
     setCopied(true)
     await delay(1500)
     setCopied(false)
   }
 
   const iconPicker = () => {
-    const style = { marginLeft: 5 }
+    const style = { marginLeft: "0.3em" }
     switch (icon) {
       case Icons.User:
         return <Icon.FiUser style={style} />
@@ -132,7 +133,10 @@ const ButtonGenerator = () => {
                 whileTap={{ y: anim ? 1 : 0 }}
                 style={{
                   color: textColor,
-                  background,
+                  background:
+                    backgroundType === BackgroundType.Fill
+                      ? background
+                      : `linear-gradient(${backgroundGradient1}, ${backgroundGradient2})`,
                   padding: `${vertPadding}px ${horiPadding}px`,
                   border,
                   borderRadius,
@@ -225,14 +229,36 @@ const ButtonGenerator = () => {
                 }
               />
               <ColorPicker
+                renderOptions={
+                  <ListboxStyled
+                    defaultValue={BackgroundType.Fill}
+                    onChange={value =>
+                      setBackgroundType(value as BackgroundType)
+                    }
+                    style={{ border: "none" }}
+                  >
+                    <ListboxOptionStyled value={BackgroundType.Fill}>
+                      Fill
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={BackgroundType.Gradient}>
+                      Gradient
+                    </ListboxOptionStyled>
+                  </ListboxStyled>
+                }
                 title="Background color"
                 colorPicked={background}
                 setColor={setBackground}
+                colorPickedGradient1={backgroundGradient1}
+                setColorPickedGradient1={setBackgroundGradient1}
+                colorPickedGradient2={backgroundGradient2}
+                setColorPickedGradient2={setBackgroundGradient2}
+                backgroundType={backgroundType}
               />
               <ColorPicker
                 title="Text color"
                 colorPicked={textColor}
                 setColor={setTextColor}
+                backgroundType={BackgroundType.Fill}
               />
               <Toggle
                 title="Bold text"
@@ -285,7 +311,7 @@ const ButtonGenerator = () => {
             </div>
             <CopyButton
               copied={copied ? true : false}
-              onClick={handleCopyToClipboard}
+              onClick={() => handleCopyToClipboard(value)}
             >
               <AnimatePresence>
                 {copied ? (
@@ -318,121 +344,12 @@ const ButtonGenerator = () => {
   )
 }
 
-// Toggle
-interface ToggleProps {
-  title: string
-  check?: boolean
-  toggleCheck: () => void
-  renderOptions?: React.ReactNode
-}
-
-const Toggle: React.FC<ToggleProps> = ({
-  title,
-  check,
-  toggleCheck,
-  renderOptions,
-}) => {
-  const [checked, setChecked] = useState(check)
-  const inputRef = useRef(null)
-
-  const handleCheck = () => {
-    setChecked(prevState => !prevState)
-    toggleCheck()
-  }
-
-  return (
-    <CounterWrapper>
-      <Title>{title}</Title>
-      {renderOptions}
-      <label htmlFor={title}>
-        <input
-          id={title}
-          ref={inputRef}
-          type="checkbox"
-          checked={checked}
-          onChange={handleCheck}
-          hidden
-        />
-        <Checkbox checked={checked} />
-      </label>
-    </CounterWrapper>
-  )
-}
-
-// ColorPicker
-interface ColorPickerProps {
-  title: string
-  colorPicked: string
-  setColor: React.Dispatch<React.SetStateAction<string>>
-}
-
-const ColorPicker: React.FC<ColorPickerProps> = ({
-  title,
-  colorPicked,
-  setColor,
-}) => {
-  const [toggle, setToggle] = useState(false)
-  const colorNodeRef = useClickOutside(setToggle)
-
-  const handleColorChange = color => {
-    setColor(color.hex)
-    setToggle(false)
-  }
-
-  return (
-    <CounterWrapper ref={colorNodeRef}>
-      <Title>{title}</Title>
-      <ColorDiv onClick={() => setToggle(true)} color={colorPicked} />
-      <AnimatePresence exitBeforeEnter>
-        {toggle && (
-          <ColorPickerWrapper
-            initial={{ x: 2 }}
-            animate={{ x: 0 }}
-            exit={{ opacity: 0, transition: { duration: 0 } }}
-            transition={{ type: "spring", damping: 60 }}
-          >
-            <CompactPicker
-              color={colorPicked}
-              onChangeComplete={handleColorChange}
-            />
-          </ColorPickerWrapper>
-        )}
-      </AnimatePresence>
-    </CounterWrapper>
-  )
-}
-
-const Counter = ({ title, value, inc, dec }) => {
-  return (
-    <CounterWrapper>
-      <Title>{title}</Title>
-      <Container>
-        <IconWrapper
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={dec}
-        >
-          <Icon.FiArrowDownCircle color="var(--primaryColor)" size={20} />
-        </IconWrapper>
-        <Text>{value}</Text>
-        <IconWrapper
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={inc}
-        >
-          <Icon.FiArrowUpCircle color="var(--primaryColor)" size={20} />
-        </IconWrapper>
-      </Container>
-    </CounterWrapper>
-  )
-}
-
-export default ButtonGenerator
+export default ButtonGeneratorMain
 
 // Styles
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: minmax(520px, 4fr) 1fr;
   grid-gap: 2rem;
   border-radius: 20px;
   position: relative;
@@ -505,71 +422,6 @@ const Title = styled.h4`
   white-space: nowrap;
   user-select: none;
   font-family: var(--systemFont);
-`
-
-const Text = styled.span`
-  font-size: 1.6rem;
-  color: var(--primaryColor);
-  user-select: none;
-`
-
-const CounterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 0rem;
-
-  &:not(:last-of-type) {
-    border-bottom: 1px solid #222;
-  }
-`
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  justify-items: center;
-  grid-gap: 0.5rem;
-  width: auto;
-`
-
-const IconWrapper = styled(motion.div)`
-  cursor: pointer;
-  will-change: transform;
-`
-
-const ColorDiv = styled.div`
-  background: ${(props: { color: string }) => props.color};
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  cursor: pointer;
-`
-
-const ColorPickerWrapper = styled(motion.div)`
-  position: absolute;
-  left: 100%;
-
-  &:after {
-    content: "";
-    position: absolute;
-    left: -1.2rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #fff;
-  }
-
-  @media (max-width: 500px) {
-    left: 15%;
-
-    &:after {
-      display: none;
-    }
-  }
 `
 
 const InputField = styled.input`

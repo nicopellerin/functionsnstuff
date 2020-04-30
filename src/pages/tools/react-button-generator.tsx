@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
-import ButtonGenerator from "../../components/button-gen"
+import ButtonGenerator from "../../components/button-generator/button-generator-main"
 import Share from "../../components/share"
 
 const ButtonGeneratorPage = () => {
@@ -14,7 +14,7 @@ const ButtonGeneratorPage = () => {
       <PageHeader title="React Button Generator" />
       <Layout>
         <ReactWrapper>
-          <img
+          <ReactLogo
             src={`https://images.weserv.nl/?url=${encodeURI(
               "https://modest-jones-332c08.netlify.app/icons/react.png"
             )}&w=200`}
@@ -39,4 +39,9 @@ const ReactWrapper = styled.div`
   margin-bottom: 50px;
   position: relative;
   z-index: 2000;
+`
+
+const ReactLogo = styled.img`
+  width: 100px;
+  height: 89px;
 `
