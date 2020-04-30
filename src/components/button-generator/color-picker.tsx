@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState } from "react"
 import styled from "styled-components"
-import { SketchPicker } from "react-color"
+import { CompactPicker } from "react-color"
 import { motion, AnimatePresence } from "framer-motion"
 import useClickOutside from "../../hooks/useClickOutside"
 
@@ -87,7 +87,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
             exit={{ opacity: 0, transition: { duration: 0 } }}
             transition={{ type: "spring", damping: 60 }}
           >
-            <SketchPicker
+            <CompactPicker
               color={colorPicked}
               onChangeComplete={handleColorChange}
             />
