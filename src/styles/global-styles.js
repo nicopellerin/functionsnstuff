@@ -101,7 +101,7 @@ export const GlobalStyles = createGlobalStyle`
   display: block;
   font-size: 1.9rem!important;
   margin: 2rem 0;
-  padding: 1.5em 0;
+  padding: 0.5em 0;
   width: 100%;
 }
 

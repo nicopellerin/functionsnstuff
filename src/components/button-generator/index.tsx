@@ -1,8 +1,6 @@
 import * as React from "react"
 import { useState, useRef, useLayoutEffect, useEffect } from "react"
 import styled from "styled-components"
-import Highlight, { defaultProps } from "prism-react-renderer"
-import theme from "prism-react-renderer/themes/dracula"
 import * as Icon from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion"
 import { useMedia } from "react-use-media"
@@ -15,6 +13,7 @@ import Counter from "./counter"
 import ColorPicker from "./color-picker"
 import Toggle from "./toggle"
 import copyToClipboard from "./copy-to-clipboard"
+import CodeBlock from "./code-block"
 
 const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
 
@@ -27,6 +26,11 @@ enum Icons {
   Logout = "FiLogOut",
   Mail = "FiMail",
   Download = "FiDownload",
+}
+
+enum CodeStyles {
+  InlineStyles = "Inline styles",
+  StyledComponents = "styled-components",
 }
 
 enum BackgroundType {
@@ -52,6 +56,7 @@ const ButtonGeneratorMain = () => {
   const [darkMode, setDarkMode] = useState(true)
   const [icon, setIcon] = useState(Icons.Send)
   const [backgroundType, setBackgroundType] = useState(BackgroundType.Fill)
+  const [codeStyle, setCodeStyle] = useState(CodeStyles.InlineStyles)
 
   const isDesktop = useMedia({
     minWidth: 500,
@@ -62,12 +67,14 @@ const ButtonGeneratorMain = () => {
   }, [background])
 
   const border = "none"
-  const fontWeight = 400
   const cursor = "pointer"
 
   const imports = `import * as React from 'react'\n`
   const animImports = `import {motion} from 'framer-motion'\n\n${
     anim ? "" : "\n"
+  }`
+  const styledImports = `import styled from 'styled-components'\n${
+    checkedIcon || anim ? "" : "\n"
   }`
   const iconImports = `import {${icon}} from 'react-icons/fi'\n${
     anim ? "" : "\n"
@@ -83,10 +90,34 @@ const ButtonGeneratorMain = () => {
     backgroundType === BackgroundType.Fill
       ? background
       : `linear-gradient(${backgroundGradient1}, ${backgroundGradient2})`
-  }",\n padding: "${vertPadding}px ${horiPadding}px",\n border: "${border}",\n borderRadius: "${borderRadius}px",\n fontSize: "${fontSize}px",\n fontWeight: "${fontWeight}",\n boxShadow: "0 4px 20px rgba(0,0,0,${dropShadow /
+  }",\n padding: "${vertPadding}px ${horiPadding}px",\n border: "${border}",\n borderRadius: "${borderRadius}px",\n fontSize: "${fontSize}px",\n fontWeight: "${
+    isBold ? "600" : "400"
+  }",\n boxShadow: "0 4px 20px rgba(0,0,0,${dropShadow /
     10})",\n cursor: "${cursor}" }}>\n${text}${
     checkedIcon ? `\n<${icon} style={{ marginLeft: "0.3em" }} />` : ""
   }\n</${anim ? "motion." : ""}button>\n)`
+
+  const valueStyled = `${imports}${styledImports}${
+    checkedIcon ? iconImports : ""
+  }${anim ? animImports : ""}export const Button = () => (\n<ButtonStyled ${
+    anim ? "whileHover={{ y: -1 }}\n" : ""
+  }${anim ? " whileTap={{ y: 1 }}\n " : ""}>\n${text}${
+    checkedIcon ? `\n<IconStyled />` : ""
+  }\n</ButtonStyled>\n)\n\n// Styles\nconst ButtonStyled = styled${
+    anim ? "(motion.button)" : ".button"
+  }\`\n color: ${textColor};\n background: ${
+    backgroundType === BackgroundType.Fill
+      ? background
+      : `linear-gradient(${backgroundGradient1}, ${backgroundGradient2})`
+  };\n padding: ${vertPadding}px ${horiPadding}px;\n border: ${border};\n border-radius: ${borderRadius}px;\n font-size: ${fontSize}px;\n font-weight: ${
+    isBold ? "600" : "400"
+  };\n box-shadow: 0 4px 20px rgba(0,0,0,${dropShadow /
+    10});\n cursor: ${cursor};\`\n\n${
+    checkedIcon
+      ? `const IconStyled = styled(${icon})\`\n margin-left: 0.3em;\``
+      : ""
+  }
+  `
 
   const handleCopyToClipboard = async value => {
     copyToClipboard(value)
@@ -120,195 +151,182 @@ const ButtonGeneratorMain = () => {
   return (
     <>
       <Wrapper>
-        <div>
-          <TerminalWrapper>
-            <ButtonContainer darkMode={darkMode ? true : false}>
-              <div style={{ position: "absolute", top: 10, right: 10 }}>
-                <DarkMode
-                  setToggle={() => setDarkMode(prevState => !prevState)}
-                />
-              </div>
-              <Button
-                whileHover={{ y: anim ? -1 : 0 }}
-                whileTap={{ y: anim ? 1 : 0 }}
-                style={{
-                  color: textColor,
-                  background:
-                    backgroundType === BackgroundType.Fill
-                      ? background
-                      : `linear-gradient(${backgroundGradient1}, ${backgroundGradient2})`,
-                  padding: `${vertPadding}px ${horiPadding}px`,
-                  border,
-                  borderRadius,
-                  fontSize,
-                  fontWeight: isBold ? "600" : "400",
-                  boxShadow: `0 4px 20px rgba(0,0,0,${dropShadow / 10})`,
-                  cursor,
-                }}
-              >
-                <span>{text}</span>
-                {checkedIcon && iconPicker()}
-              </Button>
-            </ButtonContainer>
-            {isDesktop ? (
-              <CodeOverlay>
-                <CodeOverlayContainer>
-                  <Highlight
-                    {...defaultProps}
-                    code={value}
-                    language={"jsx"}
-                    theme={theme}
-                  >
-                    {({
-                      className,
-                      style,
-                      tokens,
-                      getLineProps,
-                      getTokenProps,
-                    }) => (
-                      <pre className="language-jsx2" style={style}>
-                        {tokens.map((line, i) => (
-                          <div {...getLineProps({ line, key: i })}>
-                            {line.map((token, key) => (
-                              <span {...getTokenProps({ token, key })} />
-                            ))}
-                          </div>
-                        ))}
-                      </pre>
-                    )}
-                  </Highlight>
-                </CodeOverlayContainer>
-              </CodeOverlay>
-            ) : null}
-          </TerminalWrapper>
-        </div>
+        <TerminalWrapper>
+          <ButtonWrapper darkMode={darkMode ? true : false}>
+            <DarkModeWrapper>
+              <DarkMode
+                setToggle={() => setDarkMode(prevState => !prevState)}
+              />
+            </DarkModeWrapper>
+            <Button
+              whileHover={{ y: anim ? -1 : 0 }}
+              whileTap={{ y: anim ? 1 : 0 }}
+              style={{
+                color: textColor,
+                background:
+                  backgroundType === BackgroundType.Fill
+                    ? background
+                    : `linear-gradient(${backgroundGradient1}, ${backgroundGradient2})`,
+                padding: `${vertPadding}px ${horiPadding}px`,
+                border,
+                borderRadius,
+                fontSize,
+                fontWeight: isBold ? "600" : "400",
+                boxShadow: `0 4px 20px rgba(0,0,0,${dropShadow / 10})`,
+                cursor,
+              }}
+            >
+              <span>{text}</span>
+              {checkedIcon && iconPicker()}
+            </Button>
+          </ButtonWrapper>
+          {isDesktop ? (
+            <>
+              <CodeStyleWrapper>
+                <ListboxStyled
+                  defaultValue={CodeStyles.InlineStyles}
+                  onChange={value => setCodeStyle(value as CodeStyles)}
+                  style={{ border: "none" }}
+                >
+                  <div>
+                    <ListboxOptionStyled value={CodeStyles.InlineStyles}>
+                      {CodeStyles.InlineStyles}
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={CodeStyles.StyledComponents}>
+                      {CodeStyles.StyledComponents}
+                    </ListboxOptionStyled>
+                  </div>
+                </ListboxStyled>
+              </CodeStyleWrapper>
+              <CodeBlock
+                value={
+                  codeStyle === CodeStyles.InlineStyles ? value : valueStyled
+                }
+              />
+            </>
+          ) : null}
+        </TerminalWrapper>
         <Sidebar>
-          <div style={{ width: "100%" }}>
-            <div>
-              <Title>Text</Title>
-              <InputField
-                value={text}
-                onChange={e => setText(e.target.value)}
-              />
-            </div>
-            <div>
-              <Counter
-                title={"Font size"}
-                value={fontSize}
-                inc={() => setFontSize(prevState => prevState + 1)}
-                dec={() => setFontSize(prevState => prevState - 1)}
-              />
-              <Counter
-                title={"Horizontal padding"}
-                value={horiPadding}
-                inc={() => setHoriPadding(prevState => prevState + 1)}
-                dec={() => setHoriPadding(prevState => prevState - 1)}
-              />
-              <Counter
-                title={"Vertical padding"}
-                value={vertPadding}
-                inc={() => setVertPadding(prevState => prevState + 1)}
-                dec={() => setVertPadding(prevState => prevState - 1)}
-              />
-              <Counter
-                title={"Border radius"}
-                value={borderRadius}
-                inc={() => setBorderRadius(prevState => prevState + 1)}
-                dec={() => setBorderRadius(prevState => prevState - 1)}
-              />
-              <Counter
-                title={"Drop shadow"}
-                value={`${dropShadow * 10}%`}
-                inc={() =>
-                  dropShadow < 10 &&
-                  setDropShadow(prevState => Number(prevState) + 1)
-                }
-                dec={() =>
-                  dropShadow > 0 &&
-                  setDropShadow(prevState => Number(prevState) - 1)
-                }
-              />
-              <ColorPicker
-                renderOptions={
-                  <ListboxStyled
-                    defaultValue={BackgroundType.Fill}
-                    onChange={value =>
-                      setBackgroundType(value as BackgroundType)
-                    }
-                    style={{ border: "none" }}
-                  >
+          <SidebarContainer>
+            <Title>Text</Title>
+            <InputField value={text} onChange={e => setText(e.target.value)} />
+            <Counter
+              title={"Font size"}
+              value={fontSize}
+              inc={() => setFontSize(prevState => prevState + 1)}
+              dec={() => setFontSize(prevState => prevState - 1)}
+            />
+            <Counter
+              title={"Horizontal padding"}
+              value={horiPadding}
+              inc={() => setHoriPadding(prevState => prevState + 1)}
+              dec={() => setHoriPadding(prevState => prevState - 1)}
+            />
+            <Counter
+              title={"Vertical padding"}
+              value={vertPadding}
+              inc={() => setVertPadding(prevState => prevState + 1)}
+              dec={() => setVertPadding(prevState => prevState - 1)}
+            />
+            <Counter
+              title={"Border radius"}
+              value={borderRadius}
+              inc={() => setBorderRadius(prevState => prevState + 1)}
+              dec={() => setBorderRadius(prevState => prevState - 1)}
+            />
+            <Counter
+              title={"Drop shadow"}
+              value={`${dropShadow * 10}%`}
+              inc={() =>
+                dropShadow < 10 &&
+                setDropShadow(prevState => Number(prevState) + 1)
+              }
+              dec={() =>
+                dropShadow > 0 &&
+                setDropShadow(prevState => Number(prevState) - 1)
+              }
+            />
+            <ColorPicker
+              renderOptions={
+                <ListboxStyled
+                  defaultValue={BackgroundType.Fill}
+                  onChange={value => setBackgroundType(value as BackgroundType)}
+                  style={{ border: "none" }}
+                >
+                  <div>
                     <ListboxOptionStyled value={BackgroundType.Fill}>
                       Fill
                     </ListboxOptionStyled>
                     <ListboxOptionStyled value={BackgroundType.Gradient}>
                       Gradient
                     </ListboxOptionStyled>
-                  </ListboxStyled>
-                }
-                title="Background color"
-                colorPicked={background}
-                setColor={setBackground}
-                colorPickedGradient1={backgroundGradient1}
-                setColorPickedGradient1={setBackgroundGradient1}
-                colorPickedGradient2={backgroundGradient2}
-                setColorPickedGradient2={setBackgroundGradient2}
-                backgroundType={backgroundType}
-              />
-              <ColorPicker
-                title="Text color"
-                colorPicked={textColor}
-                setColor={setTextColor}
-                backgroundType={BackgroundType.Fill}
-              />
-              <Toggle
-                title="Bold text"
-                check={isBold}
-                toggleCheck={() => setIsBold(prevState => !prevState)}
-              />
-              <Toggle
-                renderOptions={
-                  <ListboxStyled
-                    disabled={!checkedIcon}
-                    defaultValue={Icons.Send}
-                    onChange={value => setIcon(value as Icons)}
-                    style={{ border: "none" }}
-                  >
-                    <ListboxOptionStyled value={Icons.Send}>
-                      Send
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.User}>
-                      User
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.Check}>
-                      Check
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.ChevronRight}>
-                      ChevronRight
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.Login}>
-                      Login
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.Logout}>
-                      Logout
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.Mail}>
-                      Mail
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={Icons.Download}>
-                      Download
-                    </ListboxOptionStyled>
-                  </ListboxStyled>
-                }
-                title="Icon"
-                check={checkedIcon}
-                toggleCheck={() => setCheckedIcon(prevState => !prevState)}
-              />
-              <Toggle
-                title="Animation"
-                check={anim}
-                toggleCheck={() => setAnim(prevState => !prevState)}
-              />
-            </div>
+                  </div>
+                </ListboxStyled>
+              }
+              title="Background color"
+              colorPicked={background}
+              setColor={setBackground}
+              colorPickedGradient1={backgroundGradient1}
+              setColorPickedGradient1={setBackgroundGradient1}
+              colorPickedGradient2={backgroundGradient2}
+              setColorPickedGradient2={setBackgroundGradient2}
+              backgroundType={backgroundType}
+            />
+            <ColorPicker
+              title="Text color"
+              colorPicked={textColor}
+              setColor={setTextColor}
+              backgroundType={BackgroundType.Fill}
+            />
+            <Toggle
+              title="Bold text"
+              check={isBold}
+              toggleCheck={() => setIsBold(prevState => !prevState)}
+            />
+            <Toggle
+              renderOptions={
+                <ListboxStyled
+                  disabled={!checkedIcon}
+                  defaultValue={Icons.Send}
+                  onChange={value => setIcon(value as Icons)}
+                  style={{ border: "none" }}
+                >
+                  <ListboxOptionStyled value={Icons.Send}>
+                    Send
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.User}>
+                    User
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.Check}>
+                    Check
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.ChevronRight}>
+                    ChevronRight
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.Login}>
+                    Login
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.Logout}>
+                    Logout
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.Mail}>
+                    Mail
+                  </ListboxOptionStyled>
+                  <ListboxOptionStyled value={Icons.Download}>
+                    Download
+                  </ListboxOptionStyled>
+                </ListboxStyled>
+              }
+              title="Icon"
+              check={checkedIcon}
+              toggleCheck={() => setCheckedIcon(prevState => !prevState)}
+            />
+            <Toggle
+              title="Animation"
+              check={anim}
+              toggleCheck={() => setAnim(prevState => !prevState)}
+            />
+
             <CopyButton
               copied={copied ? true : false}
               onClick={() => handleCopyToClipboard(value)}
@@ -336,7 +354,7 @@ const ButtonGeneratorMain = () => {
                 )}
               </AnimatePresence>
             </CopyButton>
-          </div>
+          </SidebarContainer>
         </Sidebar>
       </Wrapper>
       <Spacer />
@@ -375,6 +393,12 @@ const TerminalWrapper = styled.div`
   }
 `
 
+const DarkModeWrapper = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`
+
 const Sidebar = styled.aside`
   border-radius: 10px;
   padding: 3rem 3rem;
@@ -384,7 +408,18 @@ const Sidebar = styled.aside`
   }
 `
 
-const ButtonContainer = styled.div`
+const CodeStyleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 3rem;
+`
+
+const SidebarContainer = styled.div`
+  width: 100%;
+`
+
+const ButtonWrapper = styled.div`
   background: ${(props: { darkMode: boolean }) =>
     props.darkMode ? "#112" : "#eff"};
   width: 100%;
@@ -440,28 +475,6 @@ const InputField = styled.input`
   @media (max-width: 500px) {
     width: 100%;
   }
-`
-
-const CodeOverlay = styled.div`
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const CodeOverlayContainer = styled.div`
-  font-family: "menlo", monospace;
-  font-weight: 400;
-  background: #0a0a0a;
-  font-size: 1.3rem;
-  line-height: 1.6em;
-  border-radius: 10px;
-  white-space: pre-wrap;
-  padding: 0.5rem 0;
-  color: var(--primaryColor);
-  max-width: 100%;
 `
 
 const CopyButton = styled(motion.button)`
