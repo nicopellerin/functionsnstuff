@@ -14,7 +14,7 @@ const ToolsPage = () => {
       <Layout>
         <Card
           title="React Button Generator"
-          image={"/card1.webp"}
+          image={"/card-rbg.png"}
           link="/tools/react-button-generator"
           tech="react"
         />
