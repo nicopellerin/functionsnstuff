@@ -42,9 +42,18 @@ const ReactWrapper = styled.div`
   margin-bottom: 50px;
   position: relative;
   z-index: 2000;
+
+  @media (max-width: 500px) {
+    margin-top: -30px;
+  }
 `
 
 const ReactLogo = styled.img`
   width: 100px;
   height: 89px;
+
+  @media (max-width: 500px) {
+    width: 90px;
+    height: 79px;
+  }
 `

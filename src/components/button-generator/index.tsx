@@ -180,30 +180,28 @@ const ButtonGeneratorMain = () => {
               {checkedIcon && iconPicker()}
             </Button>
           </ButtonWrapper>
+          <CodeStyleWrapper>
+            <ListboxStyled
+              defaultValue={CodeStyles.InlineStyles}
+              onChange={value => setCodeStyle(value as CodeStyles)}
+              style={{ border: "none" }}
+            >
+              <div>
+                <ListboxOptionStyled value={CodeStyles.InlineStyles}>
+                  {CodeStyles.InlineStyles}
+                </ListboxOptionStyled>
+                <ListboxOptionStyled value={CodeStyles.StyledComponents}>
+                  {CodeStyles.StyledComponents}
+                </ListboxOptionStyled>
+              </div>
+            </ListboxStyled>
+          </CodeStyleWrapper>
           {isDesktop ? (
-            <>
-              <CodeStyleWrapper>
-                <ListboxStyled
-                  defaultValue={CodeStyles.InlineStyles}
-                  onChange={value => setCodeStyle(value as CodeStyles)}
-                  style={{ border: "none" }}
-                >
-                  <div>
-                    <ListboxOptionStyled value={CodeStyles.InlineStyles}>
-                      {CodeStyles.InlineStyles}
-                    </ListboxOptionStyled>
-                    <ListboxOptionStyled value={CodeStyles.StyledComponents}>
-                      {CodeStyles.StyledComponents}
-                    </ListboxOptionStyled>
-                  </div>
-                </ListboxStyled>
-              </CodeStyleWrapper>
-              <CodeBlock
-                value={
-                  codeStyle === CodeStyles.InlineStyles ? value : valueStyled
-                }
-              />
-            </>
+            <CodeBlock
+              value={
+                codeStyle === CodeStyles.InlineStyles ? value : valueStyled
+              }
+            />
           ) : null}
         </TerminalWrapper>
         <Sidebar>
