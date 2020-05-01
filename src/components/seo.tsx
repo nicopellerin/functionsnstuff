@@ -20,6 +20,7 @@ function SEO({ description, lang, meta, title, image }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const ogImage = image || site.siteMetadata.image
   const metaTitle =
     title !== "functionsnstuff"
       ? `%s | ${site.siteMetadata.title}`
@@ -47,7 +48,7 @@ function SEO({ description, lang, meta, title, image }) {
         },
         {
           property: `og:image`,
-          content: site.siteMetadata.image,
+          content: ogImage,
         },
         {
           property: `og:type`,
