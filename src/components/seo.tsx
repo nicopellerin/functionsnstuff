@@ -23,8 +23,8 @@ function SEO({ description, lang, meta, title, image }) {
   const ogImage = image || site.siteMetadata.image
   const metaTitle =
     title !== "functionsnstuff"
-      ? `%s | ${site.siteMetadata.title}`
-      : `${title} | Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`
+      ? `${title} | ${site.siteMetadata.title}`
+      : `${title} | Tutorials & tips for React, Go, Node.js, Javascript, Gatsby and more!`
 
   return (
     <Helmet

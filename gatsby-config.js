@@ -3,7 +3,7 @@ require("dotenv").config()
 module.exports = {
   siteMetadata: {
     title: `functionsnstuff`,
-    description: `Tutorials & tips for React, Go, NodeJS, Javascript, Gatsby and more!`,
+    description: `Tutorials & tips for React, Go, Node.js, Javascript, Gatsby and more!`,
     author: `@nicopellerin_io`,
     image: "/og-image.png",
   },
