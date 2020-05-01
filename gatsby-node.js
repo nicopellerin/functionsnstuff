@@ -3,35 +3,35 @@ const path = require("path")
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  const tutorialsData = await graphql(`
-    query {
-      allMdx(filter: { frontmatter: { type: { eq: "tutorials" } } }) {
-        edges {
-          node {
-            id
-            frontmatter {
-              slug
-              tech
-            }
-          }
-        }
-      }
-    }
-  `)
+  // const tutorialsData = await graphql(`
+  //   query {
+  //     allMdx(filter: { frontmatter: { type: { eq: "tutorials" } } }) {
+  //       edges {
+  //         node {
+  //           id
+  //           frontmatter {
+  //             slug
+  //             tech
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
 
-  if (tutorialsData.errors) {
-    reporter.panicOnBuild("Error: Loading createPages query")
-  }
+  // if (tutorialsData.errors) {
+  //   reporter.panicOnBuild("Error: Loading createPages query")
+  // }
 
-  const tutorials = tutorialsData.data.allMdx.edges
+  // const tutorials = tutorialsData.data.allMdx.edges
 
-  tutorials.forEach(({ node }) => {
-    createPage({
-      path: `tutorials/${node.frontmatter.tech}/${node.frontmatter.slug}`,
-      component: path.resolve("./src/templates/tutorials.tsx"),
-      context: { id: node.id },
-    })
-  })
+  // tutorials.forEach(({ node }) => {
+  //   createPage({
+  //     path: `tutorials/${node.frontmatter.tech}/${node.frontmatter.slug}`,
+  //     component: path.resolve("./src/templates/tutorials.tsx"),
+  //     context: { id: node.id },
+  //   })
+  // })
 
   const tipsData = await graphql(`
     query {
