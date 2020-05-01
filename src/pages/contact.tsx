@@ -18,17 +18,16 @@ const ContactPage = () => {
       <SEO title="Contact" />
       <PageHeader title="Contact" />
       <Layout>
-        {isDesktop ? (
-          <DonutWrapper>
-            <img
-              src={`https://images.weserv.nl/?url=${encodeURI(
-                "https://functionsnstuff.netlify.app/donut3.webp"
-              )}&h=300`}
-              alt="donut"
-              width={150}
-            />
-          </DonutWrapper>
-        ) : null}
+        <DonutWrapper>
+          <img
+            src={`https://images.weserv.nl/?url=${encodeURI(
+              "https://functionsnstuff.netlify.app/donut3.webp"
+            )}&h=300`}
+            alt="donut"
+            width={150}
+            height={115}
+          />
+        </DonutWrapper>
         <TextWrapper>
           <Text>
             Have an idea for a tutorial or would like to retain my services as a
@@ -94,4 +93,8 @@ const DonutWrapper = styled.div`
   margin-bottom: 75px;
   position: relative;
   z-index: 2000;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `
