@@ -6,8 +6,6 @@ import Layout from "../../components/layout"
 import Spacer from "../../components/spacer"
 import Card from "../../components/card"
 
-const toolsData = [{ title: "React Button Generator" }]
-
 const ToolsPage = () => {
   return (
     <>
