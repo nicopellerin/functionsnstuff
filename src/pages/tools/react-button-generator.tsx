@@ -10,7 +10,10 @@ import Share from "../../components/share"
 const ButtonGeneratorPage = () => {
   return (
     <>
-      <SEO title="React Button Generator" />
+      <SEO
+        title="React Button Generator"
+        image="/og-button-generator-react.png"
+      />
       <PageHeader title="React Button Generator" />
       <Layout>
         <ReactWrapper>
