@@ -41,11 +41,18 @@ const CardGeneratorMain = () => {
   const [heading, setHeading] = useState("Welcome")
   const [headingFontSize, setHeadingFontSize] = useState(36)
   const [headingColor, setHeadingColor] = useState("#fff")
-
+  const [isHeadingBold, setIsHeadingBold] = useState(true)
   const [text, setText] = useState(
     "Tutorials & tips for React, Node.js and more!"
   )
   const [fontSize, setFontSize] = useState(16)
+  const [imageSrc, setImageSrc] = useState("/slide3.jpg")
+  const [imageFileName, setImageFileName] = useState("")
+  const [imageZoom, setImageZoom] = useState(1)
+  const [imageOpacity, setImageOpacity] = useState(1)
+  const [imageDimensions, setImageDimensions] = useState({ h: 400, w: 650 })
+  const [editImagePosition, setEditImagePosition] = useState(false)
+  const [showShape, setShowShape] = useState(false)
   const [borderRadius, setBorderRadius] = useState(10)
   const [horiPadding, setHoriPadding] = useState(35)
   const [vertPadding, setVertPadding] = useState(15)
@@ -63,10 +70,7 @@ const CardGeneratorMain = () => {
   const [codeStyle, setCodeStyle] = useState(CodeStyles.InlineStyles)
 
   const imageRef = useRef(null)
-
-  const isDesktop = useMedia({
-    minWidth: 500,
-  })
+  const inputFileRef = useRef(null)
 
   useEffect(() => {
     setBackgroundGradient1(background)
@@ -132,6 +136,47 @@ const CardGeneratorMain = () => {
     setCopied(false)
   }
 
+  const handleImageUpload = e => {
+    const file = e.target.files[0]
+
+    let img = new Image()
+    img.src = URL.createObjectURL(file)
+    img.onload = () => {
+      setImageDimensions({ h: img.height, w: img.width })
+    }
+    setImageZoom(1)
+    setImageSrc(img.src)
+    setImageFileName(file.name)
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", e => {
+      if (e.keyCode === 18) {
+        setEditImagePosition(true)
+      }
+    })
+
+    document.addEventListener("keyup", e => {
+      if (e.keyCode === 18) {
+        setEditImagePosition(false)
+      }
+    })
+
+    return () => {
+      document.removeEventListener("keydown", e => {
+        if (e.keyCode === 18) {
+          setEditImagePosition(true)
+        }
+      })
+
+      document.removeEventListener("keyup", e => {
+        if (e.keyCode === 18) {
+          setEditImagePosition(false)
+        }
+      })
+    }
+  }, [])
+
   return (
     <>
       <Wrapper>
@@ -139,7 +184,7 @@ const CardGeneratorMain = () => {
           <div
             style={{
               background: "#eef",
-              padding: "40px 20px",
+              padding: "50px 20px",
               borderRadius: 10,
             }}
           >
@@ -162,22 +207,31 @@ const CardGeneratorMain = () => {
                 overflow: "hidden",
                 boxShadow: `0 7px 20px rgba(0,0,0,${dropShadow / 10})`,
                 willChange: "transform",
-                // cursor,
               }}
             >
               <motion.img
+                draggable="false"
                 ref={imageRef}
-                drag
-                src="/bg12.png"
+                drag={editImagePosition ? true : false}
+                src={imageSrc}
                 style={{
-                  width: "150%",
+                  width: imageZoom + "%",
                   borderTopLeftRadius: 10,
                   borderTopRightRadius: 10,
-                  height: "17rem",
+                  height:
+                    imageDimensions.w > 800
+                      ? 400 * imageZoom
+                      : (imageDimensions.h / 1.5) * imageZoom,
+                  width:
+                    imageDimensions.w > 800
+                      ? 600 * imageZoom
+                      : (imageDimensions.w / 1.5) * imageZoom,
                   objectFit: "cover",
                   position: "absolute",
                   top: 0,
                   left: 0,
+                  opacity: imageOpacity,
+                  cursor: editImagePosition ? "move" : "initial",
                 }}
               />
               <div
@@ -193,7 +247,8 @@ const CardGeneratorMain = () => {
                     color: headingColor,
                     marginBottom: 5,
                     fontSize: headingFontSize,
-                    maxWidth: "calc(100% - 2rem)",
+                    fontWeight: isHeadingBold ? 700 : 400,
+                    width: "100%",
                   }}
                 >
                   {heading}
@@ -204,42 +259,45 @@ const CardGeneratorMain = () => {
                     color: textColor,
                     fontFamily: "var(--systemFont)",
                     fontSize,
+                    fontWeight: isBold ? 600 : 400,
                   }}
                 >
                   {text}
                 </p>
               </div>
-              <svg
-                viewBox={`0 0 100 ${heading.length >= 16 ? 40 : 20}`}
-                height="100%"
-                width="100%"
-                style={{ position: "absolute", pointerEvents: "none" }}
-              >
-                <path
-                  fill={background}
-                  d="M0 60 V10 Q30 17 55 10 T100 11 V60z"
-                  width="100%"
+              {showShape ? (
+                <svg
+                  viewBox={`0 0 100 ${heading.length >= 16 ? 40 : 18}`}
                   height="100%"
-                  // stroke="#fff"
-                />
-              </svg>
+                  width="100%"
+                  style={{ position: "absolute", pointerEvents: "none" }}
+                >
+                  <path
+                    fill={background}
+                    d="M0 60 V10 Q30 17 55 10 T100 13 V60z"
+                    width="100%"
+                    height="100%"
+                    // stroke="#fff"
+                  />
+                </svg>
+              ) : null}
             </motion.div>
           </div>
-          <CodeStyleWrapper>
-            {/* <ListboxStyled
-              defaultValue={CodeStyles.InlineStyles}
-              onChange={value => setCodeStyle(value as CodeStyles)}
-              style={{ border: "none" }}
-            >
-              <div>
-                <ListboxOptionStyled value={CodeStyles.InlineStyles}>
-                  {CodeStyles.InlineStyles}
-                </ListboxOptionStyled>
-                <ListboxOptionStyled value={CodeStyles.StyledComponents}>
-                  {CodeStyles.StyledComponents}
-                </ListboxOptionStyled>
-              </div>
-            </ListboxStyled> */}
+          <p
+            style={{
+              color: "#999",
+              fontSize: "1.4rem",
+              textAlign: "center",
+              margin: "3rem auto 0 auto",
+              maxWidth: "55rem",
+            }}
+          >
+            Press Alt (Option key on Mac) + drag image to move it around to
+            desired position. You can also zoom the image using `Image zoom`
+            below :)
+          </p>
+          {/* <CodeStyleWrapper>
+          
           </CodeStyleWrapper>
           {isDesktop ? (
             <CodeBlock
@@ -247,149 +305,217 @@ const CardGeneratorMain = () => {
                 codeStyle === CodeStyles.InlineStyles ? value : valueStyled
               }
             />
-          ) : null}
+          ) : null} */}
         </TerminalWrapper>
-        <Sidebar>
-          <SidebarContainer>
-            <InputGroup>
-              <Title>Heading</Title>
-              <InputField
-                value={heading}
-                onChange={e => setHeading(e.target.value)}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+          <Sidebar>
+            <SidebarContainer>
+              <InputGroup>
+                <Title>Heading</Title>
+                <InputField
+                  value={heading}
+                  onChange={e => setHeading(e.target.value)}
+                />
+                <Counter
+                  title={"Font size"}
+                  value={headingFontSize}
+                  inc={() => setHeadingFontSize(prevState => prevState + 1)}
+                  dec={() => setHeadingFontSize(prevState => prevState - 1)}
+                />
+                <Toggle
+                  title="Bold heading"
+                  check={isHeadingBold}
+                  toggleCheck={() => setIsHeadingBold(prevState => !prevState)}
+                />
+                <ColorPicker
+                  title="Heading color"
+                  colorPicked={headingColor}
+                  setColor={setHeadingColor}
+                  backgroundType={BackgroundType.Fill}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Title>Text</Title>
+                <InputField
+                  value={text}
+                  onChange={e => setText(e.target.value)}
+                />
+                <Counter
+                  title={"Font size"}
+                  value={fontSize}
+                  inc={() => setFontSize(prevState => prevState + 1)}
+                  dec={() => setFontSize(prevState => prevState - 1)}
+                />
+                <Toggle
+                  title="Bold text"
+                  check={isBold}
+                  toggleCheck={() => setIsBold(prevState => !prevState)}
+                />
+                <ColorPicker
+                  title="Text color"
+                  colorPicked={textColor}
+                  setColor={setTextColor}
+                  backgroundType={BackgroundType.Fill}
+                />
+              </InputGroup>
+            </SidebarContainer>
+          </Sidebar>
+          <Sidebar>
+            <SidebarContainer>
+              <InputGroup>
+                <Title>Image</Title>
+                <input
+                  ref={inputFileRef}
+                  type="file"
+                  onChange={e => handleImageUpload(e)}
+                  hidden
+                />
+                <InputFile onClick={() => inputFileRef.current.click()}>
+                  <Icon.FiUpload style={{ marginRight: 5 }} /> Upload
+                </InputFile>
+                <Counter
+                  title={"Image zoom"}
+                  value={`${(imageZoom * 100).toFixed(0)}%`}
+                  inc={() => setImageZoom(prevState => prevState + 0.05)}
+                  dec={() => setImageZoom(prevState => prevState - 0.05)}
+                />
+                <Counter
+                  title={"Image opacity"}
+                  value={`${Math.abs((imageOpacity * 100).toFixed(0))}%`}
+                  inc={() =>
+                    imageOpacity < 1 &&
+                    setImageOpacity(prevState => prevState + 0.05)
+                  }
+                  dec={() =>
+                    imageOpacity >= 0 &&
+                    setImageOpacity(prevState => prevState - 0.05)
+                  }
+                />
+              </InputGroup>
+              <InputGroup>
+                <Toggle
+                  title="Shape (SVG)"
+                  check={showShape}
+                  toggleCheck={() => setShowShape(prevState => !prevState)}
+                />
+                <ColorPicker
+                  renderOptions={
+                    null
+                    // <ListboxStyled
+                    //   defaultValue={BackgroundType.Fill}
+                    //   onChange={value => setBackgroundType(value as BackgroundType)}
+                    //   style={{ border: "none" }}
+                    // >
+                    //   <div>
+                    //     <ListboxOptionStyled value={BackgroundType.Fill}>
+                    //       Fill
+                    //     </ListboxOptionStyled>
+                    //     <ListboxOptionStyled value={BackgroundType.Gradient}>
+                    //       Gradient
+                    //     </ListboxOptionStyled>
+                    //   </div>
+                    // </ListboxStyled>
+                  }
+                  title="Shape color"
+                  colorPicked={background}
+                  setColor={setBackground}
+                  colorPickedGradient1={backgroundGradient1}
+                  setColorPickedGradient1={setBackgroundGradient1}
+                  colorPickedGradient2={backgroundGradient2}
+                  setColorPickedGradient2={setBackgroundGradient2}
+                  backgroundType={backgroundType}
+                />
+                <Toggle
+                  title="Shape border"
+                  check={showShape}
+                  toggleCheck={() => setShowShape(prevState => !prevState)}
+                />
+                <ColorPicker
+                  renderOptions={
+                    null
+                    // <ListboxStyled
+                    //   defaultValue={BackgroundType.Fill}
+                    //   onChange={value => setBackgroundType(value as BackgroundType)}
+                    //   style={{ border: "none" }}
+                    // >
+                    //   <div>
+                    //     <ListboxOptionStyled value={BackgroundType.Fill}>
+                    //       Fill
+                    //     </ListboxOptionStyled>
+                    //     <ListboxOptionStyled value={BackgroundType.Gradient}>
+                    //       Gradient
+                    //     </ListboxOptionStyled>
+                    //   </div>
+                    // </ListboxStyled>
+                  }
+                  title="Shape border color"
+                  colorPicked={background}
+                  setColor={setBackground}
+                  colorPickedGradient1={backgroundGradient1}
+                  setColorPickedGradient1={setBackgroundGradient1}
+                  colorPickedGradient2={backgroundGradient2}
+                  setColorPickedGradient2={setBackgroundGradient2}
+                  backgroundType={backgroundType}
+                />
+              </InputGroup>
+              <Counter
+                title={"Border radius"}
+                value={borderRadius}
+                inc={() => setBorderRadius(prevState => prevState + 1)}
+                dec={() => setBorderRadius(prevState => prevState - 1)}
               />
               <Counter
-                title={"Font size"}
-                value={headingFontSize}
-                inc={() => setHeadingFontSize(prevState => prevState + 1)}
-                dec={() => setHeadingFontSize(prevState => prevState - 1)}
+                title={"Drop shadow"}
+                value={`${dropShadow * 10}%`}
+                inc={() =>
+                  dropShadow < 10 &&
+                  setDropShadow(prevState => Number(prevState) + 1)
+                }
+                dec={() =>
+                  dropShadow > 0 &&
+                  setDropShadow(prevState => Number(prevState) - 1)
+                }
               />
               <Toggle
-                title="Bold text"
-                check={isBold}
-                toggleCheck={() => setIsBold(prevState => !prevState)}
+                title="Animation"
+                check={anim}
+                toggleCheck={() => setAnim(prevState => !prevState)}
               />
-              <ColorPicker
-                title="Heading color"
-                colorPicked={headingColor}
-                setColor={setHeadingColor}
-                backgroundType={BackgroundType.Fill}
-              />
-            </InputGroup>
-            <InputGroup>
-              <Title>Text</Title>
-              <InputField
-                value={text}
-                onChange={e => setText(e.target.value)}
-              />
-              <Counter
-                title={"Font size"}
-                value={fontSize}
-                inc={() => setFontSize(prevState => prevState + 1)}
-                dec={() => setFontSize(prevState => prevState - 1)}
-              />
-              <Toggle
-                title="Bold text"
-                check={isBold}
-                toggleCheck={() => setIsBold(prevState => !prevState)}
-              />
-              <ColorPicker
-                title="Text color"
-                colorPicked={textColor}
-                setColor={setTextColor}
-                backgroundType={BackgroundType.Fill}
-              />
-            </InputGroup>
-            <InputGroup>
-              <Title>Image</Title>
-              <InputField
-                value={text}
-                onChange={e => setText(e.target.value)}
-              />
-            </InputGroup>
-            <ColorPicker
-              renderOptions={
-                null
-                // <ListboxStyled
-                //   defaultValue={BackgroundType.Fill}
-                //   onChange={value => setBackgroundType(value as BackgroundType)}
-                //   style={{ border: "none" }}
-                // >
-                //   <div>
-                //     <ListboxOptionStyled value={BackgroundType.Fill}>
-                //       Fill
-                //     </ListboxOptionStyled>
-                //     <ListboxOptionStyled value={BackgroundType.Gradient}>
-                //       Gradient
-                //     </ListboxOptionStyled>
-                //   </div>
-                // </ListboxStyled>
-              }
-              title="Background color"
-              colorPicked={background}
-              setColor={setBackground}
-              colorPickedGradient1={backgroundGradient1}
-              setColorPickedGradient1={setBackgroundGradient1}
-              colorPickedGradient2={backgroundGradient2}
-              setColorPickedGradient2={setBackgroundGradient2}
-              backgroundType={backgroundType}
-            />
-            <Counter
-              title={"Border radius"}
-              value={borderRadius}
-              inc={() => setBorderRadius(prevState => prevState + 1)}
-              dec={() => setBorderRadius(prevState => prevState - 1)}
-            />
-            <Counter
-              title={"Drop shadow"}
-              value={`${dropShadow * 10}%`}
-              inc={() =>
-                dropShadow < 10 &&
-                setDropShadow(prevState => Number(prevState) + 1)
-              }
-              dec={() =>
-                dropShadow > 0 &&
-                setDropShadow(prevState => Number(prevState) - 1)
-              }
-            />
-            <Toggle
-              title="Animation"
-              check={anim}
-              toggleCheck={() => setAnim(prevState => !prevState)}
-            />
 
-            <CopyButton
-              copied={copied ? true : false}
-              onClick={() =>
-                handleCopyToClipboard(
-                  codeStyle === CodeStyles.InlineStyles ? value : valueStyled
-                )
-              }
-            >
-              <AnimatePresence>
-                {copied ? (
-                  <CopyText
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    style={{ color: "lightgreen" }}
-                  >
-                    <Icon.FiCheckCircle style={{ marginRight: 5 }} />
-                    <span>Copied to clipboard</span>
-                  </CopyText>
-                ) : (
-                  <CopyText
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <CopyToClipboardIcon title="Copy to clipboard" />
-                    <span>Copy JSX</span>
-                  </CopyText>
-                )}
-              </AnimatePresence>
-            </CopyButton>
-          </SidebarContainer>
-        </Sidebar>
+              <CopyButton
+                copied={copied ? true : false}
+                onClick={() =>
+                  handleCopyToClipboard(
+                    codeStyle === CodeStyles.InlineStyles ? value : valueStyled
+                  )
+                }
+              >
+                <AnimatePresence>
+                  {copied ? (
+                    <CopyText
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      style={{ color: "lightgreen" }}
+                    >
+                      <Icon.FiCheckCircle style={{ marginRight: 5 }} />
+                      <span>Copied to clipboard</span>
+                    </CopyText>
+                  ) : (
+                    <CopyText
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <CopyToClipboardIcon title="Copy to clipboard" />
+                      <span>Copy JSX</span>
+                    </CopyText>
+                  )}
+                </AnimatePresence>
+              </CopyButton>
+            </SidebarContainer>
+          </Sidebar>
+        </div>
       </Wrapper>
       <Spacer />
     </>
@@ -401,7 +527,7 @@ export default CardGeneratorMain
 // Styles
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(520px, 4fr) 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 2rem;
   border-radius: 20px;
   position: relative;
@@ -484,6 +610,8 @@ const InputGroup = styled.div`
   padding-bottom: 1rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--pink);
+  display: flex;
+  flex-direction: column;
 `
 
 const InputField = styled.input`
@@ -502,6 +630,24 @@ const InputField = styled.input`
   @media (max-width: 500px) {
     width: 100%;
   }
+`
+
+const InputFile = styled.button`
+  padding: 1em 1.5em;
+  border: 1px solid #333;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 5px;
+  background: none;
+  color: var(--primaryColor);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  outline: none;
+  align-self: center;
+  justify-self: center;
 `
 
 const CopyButton = styled(motion.button)`
