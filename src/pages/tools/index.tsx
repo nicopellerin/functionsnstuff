@@ -1,4 +1,5 @@
 import * as React from "react"
+import styled from "styled-components"
 
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
@@ -11,13 +12,21 @@ const ToolsPage = () => {
     <>
       <SEO title="Tools" />
       <PageHeader title="Tools" />
-      <Layout>
-        <Card
-          title="React Button Generator"
-          image={"/card-rbg.png"}
-          link="/tools/react-button-generator"
-          tech="react"
-        />
+      <Layout template>
+        <Wrapper>
+          <Card
+            title="React Button Generator"
+            image={"/card-rbg.png"}
+            link="/tools/react-button-generator"
+            tech="react"
+          />
+          <Card
+            title="React Card Generator"
+            image={"/card-rbg.png"}
+            link="/tools/react-card-generator"
+            tech="react"
+          />
+        </Wrapper>
         <Spacer />
       </Layout>
     </>
@@ -25,3 +34,18 @@ const ToolsPage = () => {
 }
 
 export default ToolsPage
+
+// Styles
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 4rem;
+
+  @media (max-width: 1024px) {
+    justify-items: center;
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+`

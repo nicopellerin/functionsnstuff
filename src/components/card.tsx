@@ -41,7 +41,7 @@ export default Card
 
 // Styles
 const Wrapper = styled(motion.div)`
-  background: ${props => `url(${props.image})`};
+  background: ${(props: { image: string }) => `url(${props.image})`};
   background-size: cover;
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
   padding: 2.5rem 2.5rem;

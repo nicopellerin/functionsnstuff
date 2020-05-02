@@ -10,7 +10,7 @@ interface Props {
   image?: string
 }
 
-const SEO: React.FC<Props> = ({ description, lang, meta, title, image }) => {
+const SEO: React.FC<Props> = ({ description, lang, title, image }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -26,12 +26,13 @@ const SEO: React.FC<Props> = ({ description, lang, meta, title, image }) => {
     `
   )
 
+  lang = `en`
   const metaDescription = description || site.siteMetadata.description
   const ogImage = image || site.siteMetadata.image
   const metaTitle =
     title !== "functionsnstuff"
       ? `${title} | ${site.siteMetadata.title}`
-      : `${title} | Tutorials & tips for React, Go, Node.js, Javascript, Gatsby and more!`
+      : `${title} | Tutorials & tips for React, Go, Node.js, Gatsby and more!`
 
   return (
     <Helmet
@@ -81,16 +82,9 @@ const SEO: React.FC<Props> = ({ description, lang, meta, title, image }) => {
           name: `twitter:image`,
           content: ogImage,
         },
-      ].concat(meta)}
+      ]}
     />
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-  title: `functionsnstuff`,
 }
 
 export default SEO

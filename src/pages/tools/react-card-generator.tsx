@@ -4,18 +4,18 @@ import styled from "styled-components"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
-import ButtonGenerator from "../../components/button-generator"
+import CardGenerator from "../../components/card-generator"
 import Share from "../../components/share"
 
-const ButtonGeneratorPage = () => {
+const CardGeneratorPage = () => {
   return (
     <>
       <SEO
-        title="React Button Generator"
+        title="React Card Generator"
         image="/og-button-generator-react2.png"
-        description="Easily create custom React buttons with icons and animations"
+        description="Easily create custom React cards with beautiful animations"
       />
-      <PageHeader title="React Button Generator" />
+      <PageHeader title="React Card Generator" />
       <Layout>
         <ReactWrapper>
           <ReactLogo
@@ -26,14 +26,14 @@ const ButtonGeneratorPage = () => {
             width={100}
           />
         </ReactWrapper>
-        <ButtonGenerator />
+        <CardGenerator />
         <Share />
       </Layout>
     </>
   )
 }
 
-export default ButtonGeneratorPage
+export default CardGeneratorPage
 
 // Styles
 const ReactWrapper = styled.div`

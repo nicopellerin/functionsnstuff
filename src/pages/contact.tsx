@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { useMedia } from "react-use-media"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,10 +8,6 @@ import ContactForm from "../components/contact-form"
 import Spacer from "../components/spacer"
 
 const ContactPage = () => {
-  const isDesktop = useMedia({
-    minWidth: 500,
-  })
-
   return (
     <>
       <SEO title="Contact" />
@@ -31,33 +26,16 @@ const ContactPage = () => {
         <TextWrapper>
           <Text>
             Have an idea for a tutorial or would like to retain my services as a
-            web developper?
+            programmer?
           </Text>
           <Text>
             Drop me a message and we can talk!{" "}
-            <>
-              {isDesktop ? (
-                <>
-                  <EmojiHappy
-                    src={`https://images.weserv.nl/?url=${encodeURI(
-                      "https://functionsnstuff.netlify.app/happy.png"
-                    )}&h=40`}
-                    alt="happy"
-                  />
-                  {"-"}
-                  <span style={{ fontFamily: "cursive", fontSize: "2.2rem" }}>
-                    Nico
-                  </span>
-                </>
-              ) : (
-                <EmojiHappy
-                  src={`https://images.weserv.nl/?url=${encodeURI(
-                    "https://functionsnstuff.netlify.app/happy.png"
-                  )}&h=40`}
-                  alt="happy"
-                />
-              )}
-            </>
+            <EmojiHappy
+              src={`https://images.weserv.nl/?url=${encodeURI(
+                "https://functionsnstuff.netlify.app/happy.png"
+              )}&h=40`}
+              alt="happy"
+            />
           </Text>
         </TextWrapper>
         <Spacer margin="4rem 0 6rem 0" />

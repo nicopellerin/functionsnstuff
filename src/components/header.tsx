@@ -9,23 +9,8 @@ import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
 
 const Header = () => {
-  const isMobile = (width = 1024) => {
-    let mql =
-      typeof window !== "undefined" &&
-      window.matchMedia(`(max-width: ${width}px)`)
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        typeof window !== "undefined" && window.navigator.userAgent
-      ) &&
-      mql.matches
-    ) {
-      return true
-    }
-    return false
-  }
-
   const [toggleBrowser, setToggleBrowser] = useState(false)
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState("")
 
   const techList = [
     {
@@ -111,7 +96,7 @@ const Header = () => {
         <Navbar />
         <TerminalWrapper
           terminal={"/terminal.webp"}
-          initial={{ y: 400, x: "-50%" }}
+          initial={{ y: 310, x: "-50%" }}
           animate={{ y: toggleBrowser ? 310 : 10 }}
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
         >
@@ -181,7 +166,7 @@ const Header = () => {
                       variants={itemVariants}
                       style={{ cursor: "pointer" }}
                       onMouseEnter={() => setSelected(tech)}
-                      onMouseLeave={() => setSelected(null)}
+                      onMouseLeave={() => setSelected("")}
                     />
                     {selected === tech && <TechTitle>{tech}</TechTitle>}
                   </TechWrapper>
@@ -256,7 +241,7 @@ const Container = styled.header`
 `
 
 const TerminalWrapper = styled(motion.div)`
-  background: ${props => `url(${props.terminal})`};
+  background: ${(props: { terminal: string }) => `url(${props.terminal})`};
   background-size: cover;
   width: 100rem;
   height: 46rem;
@@ -280,13 +265,6 @@ const TerminalContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
   z-index: 2000;
-`
-
-const BackgroundSkyMobile = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: -2;
 `
 
 const BackgroundMountainsDesktop = styled(motion.img)`
