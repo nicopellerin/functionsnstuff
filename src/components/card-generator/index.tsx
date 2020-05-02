@@ -481,8 +481,7 @@ const CardGeneratorMain = () => {
                 check={anim}
                 toggleCheck={() => setAnim(prevState => !prevState)}
               />
-
-              <CopyButton
+              {/* <CopyButton
                 copied={copied ? true : false}
                 onClick={() =>
                   handleCopyToClipboard(
@@ -512,7 +511,7 @@ const CardGeneratorMain = () => {
                     </CopyText>
                   )}
                 </AnimatePresence>
-              </CopyButton>
+              </CopyButton> */}
             </SidebarContainer>
           </Sidebar>
         </div>
