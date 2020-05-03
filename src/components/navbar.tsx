@@ -34,6 +34,7 @@ const Navbar = () => {
     <Wrapper>
       <Link to="/">
         <Logo width={260} />
+        <h1 style={{ position: "absolute", left: -9999 }}>functionsnstuff</h1>
       </Link>
       <Menu>
         <MenuList onMouseLeave={() => setShow(null)}>

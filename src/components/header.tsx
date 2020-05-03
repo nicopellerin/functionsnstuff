@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
@@ -11,8 +11,19 @@ import Buddy from "./buddy"
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState("")
+  const [width, setWidth] = useState(
+    typeof window !== "undefined" && window.innerWidth
+  )
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= 500
+  useLayoutEffect(() => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth))
+
+    return () => {
+      window.removeEventListener("resize", () => setWidth(window.innerWidth))
+    }
+  }, [width])
+
+  const isMobile = width <= 500
 
   const techList = [
     {
