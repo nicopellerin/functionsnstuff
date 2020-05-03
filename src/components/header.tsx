@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
@@ -15,15 +15,15 @@ const Header = () => {
     typeof window !== "undefined" && window.innerWidth
   )
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth))
 
     return () => {
       window.removeEventListener("resize", () => setWidth(window.innerWidth))
     }
-  }, [width])
+  }, [])
 
-  const isMobile = width <= 500
+  const isMobile = width <= 1024
 
   const techList = [
     {
@@ -121,8 +121,8 @@ const Header = () => {
         </picture>
       )}
       <Container>
-        {isMobile && <NavbarMobile />}
         {!isMobile && <Navbar />}
+        {isMobile && <NavbarMobile />}
         <TerminalWrapper
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}

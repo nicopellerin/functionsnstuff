@@ -146,10 +146,6 @@ const Wrapper = styled.div`
   @media (min-width: 501px) {
     grid-template-columns: 145px 1fr 145px;
   }
-
-  @media (min-width: 1367px) {
-    display: none;
-  }
 `
 
 const MenuBar = styled.div`
