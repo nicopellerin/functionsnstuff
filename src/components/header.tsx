@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useEffect } from "react"
+import { useState, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
@@ -15,7 +15,7 @@ const Header = () => {
     typeof window !== "undefined" && window.innerWidth
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth))
 
     return () => {
@@ -100,7 +100,7 @@ const Header = () => {
 
   return (
     <Wrapper>
-      {isMobile && (
+      {isMobile ? (
         <picture>
           <source srcSet="/bg_front_mobile.webp" type="image/webp" />
           <source srcSet="/bg_front_mobile.png" type="image/png" />
@@ -109,8 +109,7 @@ const Header = () => {
             alt="background mountains"
           />
         </picture>
-      )}
-      {!isMobile && (
+      ) : (
         <picture>
           <source srcSet="/bg_front2.webp" type="image/webp" />
           <source srcSet="/bg_front2.png" type="image/png" />
@@ -121,8 +120,7 @@ const Header = () => {
         </picture>
       )}
       <Container>
-        {!isMobile && <Navbar />}
-        {isMobile && <NavbarMobile />}
+        {isMobile ? <NavbarMobile /> : <Navbar />}
         <TerminalWrapper
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}
