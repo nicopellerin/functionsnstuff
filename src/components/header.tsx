@@ -60,8 +60,8 @@ const Header = () => {
       tech: "Typescript",
       logo: "/icons/typescript.svg",
       link: "/tips/typescript",
-      width: 90,
       component: <TypescriptLogo />,
+      width: 90,
     },
   ]
 
@@ -171,14 +171,15 @@ const Header = () => {
                   <TechWrapper
                     whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                   >
-                    <motion.img
-                      src={logo}
+                    <motion.div
                       width={width}
                       variants={itemVariants}
                       style={{ cursor: "pointer" }}
                       onMouseEnter={() => setSelected(tech)}
                       onMouseLeave={() => setSelected("")}
-                    />
+                    >
+                      {component}
+                    </motion.div>
                     {selected === tech && <TechTitle>{tech}</TechTitle>}
                   </TechWrapper>
                 </Link>
