@@ -9,21 +9,33 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
 import TechCard from "../../components/tech-card"
+import {
+  ReactLogo,
+  GolangLogo,
+  GraphqlLogo,
+  NodejsLogo,
+  JavascriptLogo,
+  TypescriptLogo,
+  GatsbyLogo,
+  NextjsLogo,
+} from "../../components/logos"
 
 const techList = [
   {
     tech: "React",
     slug: "react",
     logo: "/icons/react.png",
+    component: <ReactLogo />,
     link: "/tips/react",
     width: 100,
   },
   {
-    tech: "Graphql",
+    tech: "GraphQL",
     slug: "graphql",
     logo: "/icons/graphql.png",
     link: "/tips/graphql",
     width: 90,
+    component: <GraphqlLogo />,
   },
   {
     tech: "Golang",
@@ -31,6 +43,7 @@ const techList = [
     logo: "/icons/golang.png",
     link: "/tips/golang",
     width: 160,
+    component: <GolangLogo />,
   },
   {
     tech: "Node.js",
@@ -38,6 +51,7 @@ const techList = [
     logo: "/icons/nodejs.png",
     link: "/tips/nodejs",
     width: 120,
+    component: <NodejsLogo />,
   },
   {
     tech: "Javascript",
@@ -45,6 +59,7 @@ const techList = [
     logo: "/icons/javascript.png",
     link: "/tips/javascript",
     width: 90,
+    component: <JavascriptLogo />,
   },
   {
     tech: "Typescript",
@@ -52,6 +67,7 @@ const techList = [
     logo: "/icons/typescript.svg",
     link: "/tips/typescript",
     width: 90,
+    component: <TypescriptLogo />,
   },
   {
     tech: "Gatsby",
@@ -59,6 +75,7 @@ const techList = [
     logo: "/icons/gatsby.png",
     link: "/tips/gatsby",
     width: 100,
+    component: <GatsbyLogo />,
   },
   {
     tech: "Next.js",
@@ -66,6 +83,7 @@ const techList = [
     logo: "/icons/nextjs.png",
     link: "/tips/nextjs",
     width: 140,
+    component: <NextjsLogo />,
   },
 ]
 
@@ -151,14 +169,14 @@ const TipsPage: React.FC<Props> = ({ data }) => {
           </RandomButton>
         </RandomButtonWrapper>
         <TechCardList>
-          {techList.map(({ tech, logo, link, width, slug }) => (
+          {techList.map(({ tech, logo, link, width, slug, component }) => (
             <TechCard
               key={tech}
               tech={tech}
               logo={logo}
               link={link}
-              width={width}
               totalCount={techCount[slug]}
+              component={component}
             />
           ))}
         </TechCardList>

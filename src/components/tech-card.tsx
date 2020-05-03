@@ -6,26 +6,31 @@ import { motion } from "framer-motion"
 
 interface Props {
   tech: string
-  logo: string
   link: string
   width: number
   totalCount: number
+  component: any
 }
 
-const TechCard: React.FC<Props> = ({ tech, logo, link, width, totalCount }) => {
+const TechCard: React.FC<Props> = ({
+  tech,
+  logo,
+  link,
+  width,
+  totalCount,
+  component,
+}) => {
   const [selected, setSelected] = useState("")
 
   return (
     <Link to={link}>
       <Wrapper whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}>
-        <Logo
-          src={logo}
-          alt={tech}
-          width={width}
+        <motion.div
           onMouseEnter={() => setSelected(tech)}
           onMouseLeave={() => setSelected("")}
-        />
-
+        >
+          {component}
+        </motion.div>
         {selected === tech ? (
           <Title>{tech}</Title>
         ) : (

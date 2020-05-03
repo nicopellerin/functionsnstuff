@@ -6,55 +6,75 @@ import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
 import TechCard from "../../components/tech-card"
 import { graphql } from "gatsby"
+import {
+  ReactLogo,
+  GolangLogo,
+  GraphqlLogo,
+  NodejsLogo,
+  JavascriptLogo,
+  TypescriptLogo,
+  GatsbyLogo,
+  NextjsLogo,
+} from "../../components/logos"
 
 const techList = [
   {
     tech: "React",
     logo: "/icons/react.png",
-    link: "/tutorials/react",
+    component: <ReactLogo />,
+    link: "/tips/react",
     width: 100,
   },
   {
-    tech: "Graphql",
+    tech: "GraphQL",
     logo: "/icons/graphql.png",
-    link: "/tutorials/graphql",
+    link: "/tips/graphql",
     width: 90,
+    component: <GraphqlLogo />,
   },
   {
     tech: "Golang",
     logo: "/icons/golang.png",
-    link: "/tutorials/golang",
+    link: "/tips/golang",
     width: 160,
+    component: <GolangLogo />,
   },
   {
     tech: "Node.js",
     logo: "/icons/nodejs.png",
-    link: "/tutorials/nodejs",
+    link: "/tips/nodejs",
     width: 120,
+    component: <NodejsLogo />,
   },
   {
     tech: "Javascript",
     logo: "/icons/javascript.png",
-    link: "/tutorials/javascript",
+    link: "/tips/javascript",
     width: 90,
+    component: <JavascriptLogo />,
   },
   {
     tech: "Typescript",
     logo: "/icons/typescript.svg",
-    link: "/tutorials/typescript",
+    link: "/tips/typescript",
     width: 90,
+    component: <TypescriptLogo />,
   },
   {
     tech: "Gatsby",
+    slug: "gatsby",
     logo: "/icons/gatsby.png",
-    link: "/tutorials/gatsby",
+    link: "/tips/gatsby",
     width: 100,
+    component: <GatsbyLogo />,
   },
   {
     tech: "Next.js",
+    slug: "nextjs",
     logo: "/icons/nextjs.png",
-    link: "/tutorials/nextjs",
+    link: "/tips/nextjs",
     width: 140,
+    component: <NextjsLogo />,
   },
 ]
 
@@ -98,7 +118,7 @@ const TutorialsPage: React.FC<Props> = ({ data }) => {
       <PageHeader title="Tutorials" />
       <Layout>
         <TechCardList>
-          {techList.map(({ tech, logo, link, width }) => (
+          {techList.map(({ tech, logo, link, width, component }) => (
             <TechCard
               key={tech}
               tech={tech}
@@ -106,6 +126,7 @@ const TutorialsPage: React.FC<Props> = ({ data }) => {
               link={link}
               width={width}
               totalCount={techCount[tech.toLowerCase()]}
+              component={component}
             />
           ))}
         </TechCardList>

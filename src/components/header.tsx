@@ -7,6 +7,15 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
+import BackgroundMountainsDesktop from "./images/background-mountains-desktop"
+import {
+  ReactLogo,
+  GolangLogo,
+  GraphqlLogo,
+  NodejsLogo,
+  JavascriptLogo,
+  TypescriptLogo,
+} from "./logos"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
@@ -16,6 +25,7 @@ const Header = () => {
     {
       tech: "React",
       logo: "/icons/react.png",
+      component: <ReactLogo />,
       link: "/tips/react",
       width: 100,
     },
@@ -24,30 +34,35 @@ const Header = () => {
       logo: "/icons/graphql.png",
       link: "/tips/graphql",
       width: 90,
+      component: <GraphqlLogo />,
     },
     {
       tech: "Golang",
       logo: "/icons/golang.png",
       link: "/tips/golang",
       width: 160,
+      component: <GolangLogo />,
     },
     {
-      tech: "NodeJS",
+      tech: "Node.js",
       logo: "/icons/nodejs.png",
       link: "/tips/nodejs",
       width: 120,
+      component: <NodejsLogo />,
     },
     {
       tech: "Javascript",
       logo: "/icons/javascript.png",
       link: "/tips/javascript",
       width: 90,
+      component: <JavascriptLogo />,
     },
     {
       tech: "Typescript",
       logo: "/icons/typescript.svg",
       link: "/tips/typescript",
       width: 90,
+      component: <TypescriptLogo />,
     },
   ]
 
@@ -85,15 +100,10 @@ const Header = () => {
         src={"/bg_front_mobile.png"}
         alt="background mountains"
       />
-
-      <BackgroundMountainsDesktop
-        src={"/bg_front2.webp"}
-        alt="background mountains"
-      />
-
       <Container>
         <NavbarMobile />
         <Navbar />
+        <BackgroundMountainsDesktop />
         <TerminalWrapper
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}
@@ -154,20 +164,20 @@ const Header = () => {
               </motion.span>
             </motion.h3>
             <IconsList>
-              {techList.map(({ tech, logo, link, width }) => (
+              {techList.map(({ tech, logo, link, width, component }) => (
                 <Link key={tech} to={link}>
                   <TechWrapper
                     whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                   >
-                    <motion.img
-                      src={logo}
-                      alt="react"
+                    <motion.div
                       width={width}
                       variants={itemVariants}
                       style={{ cursor: "pointer" }}
                       onMouseEnter={() => setSelected(tech)}
                       onMouseLeave={() => setSelected("")}
-                    />
+                    >
+                      {component}
+                    </motion.div>
                     {selected === tech && <TechTitle>{tech}</TechTitle>}
                   </TechWrapper>
                 </Link>
@@ -236,8 +246,8 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.header`
-  max-width: 100rem;
-  margin: 0 auto;
+  /* max-width: 100rem;
+  margin: 0 auto; */
 `
 
 const TerminalWrapper = styled(motion.div)`
@@ -267,24 +277,13 @@ const TerminalContainer = styled(motion.div)`
   z-index: 2000;
 `
 
-const BackgroundMountainsDesktop = styled(motion.img)`
-  position: absolute;
-  top: 20%;
-  width: 100vw;
-  z-index: -1;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`
-
 const BackgroundMountainsMobile = styled(motion.img)`
   position: absolute;
   width: 100%;
   z-index: -1;
   top: 30%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     top: 40%;
   }
 
@@ -292,7 +291,7 @@ const BackgroundMountainsMobile = styled(motion.img)`
     top: 62%;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `
