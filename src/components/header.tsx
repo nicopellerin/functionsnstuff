@@ -269,7 +269,7 @@ const TerminalWrapper = styled(motion.div)`
   transform: translateX(-50%);
   z-index: 2;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 950px) {
     display: none;
   }
 
@@ -291,6 +291,10 @@ const BackgroundMountainsDesktop = styled(motion.img)`
   width: 100vw;
   z-index: -1;
 
+  @media (max-width: 950px) {
+    top: 40%;
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -303,7 +307,7 @@ const BackgroundMountainsMobile = styled(motion.img)`
   top: 30%;
 
   @media (max-width: 768px) {
-    top: 40%;
+    top: 50%;
   }
 
   @media (max-width: 500px) {

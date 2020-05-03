@@ -80,7 +80,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 1366px) {
+  @media (max-width: 1120px) {
     display: none;
   }
 `

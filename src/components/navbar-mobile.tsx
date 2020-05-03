@@ -147,7 +147,7 @@ const Wrapper = styled.div`
     grid-template-columns: 145px 1fr 145px;
   }
 
-  @media (min-width: 1367px) {
+  @media (min-width: 1121px) {
     display: none;
   }
 `
