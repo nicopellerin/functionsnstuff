@@ -201,7 +201,7 @@ const CardGeneratorMain = () => {
                 justifyContent: "flex-end",
                 alignItems: "start",
                 borderRadius: borderRadius,
-                width: "40rem",
+                maxWidth: "40rem",
                 height: "25rem",
                 margin: "0 auto",
                 background: "#000",
@@ -307,7 +307,7 @@ const CardGeneratorMain = () => {
             />
           ) : null} */}
         </TerminalWrapper>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        <SidebarWrapper>
           <Sidebar>
             <SidebarContainer>
               <InputGroup>
@@ -516,7 +516,7 @@ const CardGeneratorMain = () => {
               </CopyButton> */}
             </SidebarContainer>
           </Sidebar>
-        </div>
+        </SidebarWrapper>
       </Wrapper>
       <Spacer />
     </>
@@ -550,7 +550,16 @@ const TerminalWrapper = styled.div`
   position: relative;
 
   @media (max-width: 500px) {
-    padding: 0 2rem;
+    padding: 0;
+  }
+`
+
+const SidebarWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `
 
