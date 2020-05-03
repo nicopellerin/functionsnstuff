@@ -21,7 +21,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("resize", () => setWidth(window.innerWidth))
     }
-  }, [])
+  }, [width])
 
   const isMobile = width <= 1024
 
