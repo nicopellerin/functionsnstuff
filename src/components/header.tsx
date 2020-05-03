@@ -12,6 +12,8 @@ const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState("")
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 500
+
   const techList = [
     {
       tech: "React",
@@ -87,17 +89,29 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <BackgroundMountainsMobile
-        src={"/bg_front_mobile.png"}
-        alt="background mountains"
-      />
-      <BackgroundMountainsDesktop
-        src={"/bg_front2.webp"}
-        alt="background mountains"
-      />
+      {isMobile && (
+        <picture>
+          <source srcSet="/bg_front_mobile.webp" type="image/webp" />
+          <source srcSet="/bg_front_mobile.png" type="image/png" />
+          <BackgroundMountainsMobile
+            src={"/bg_front_mobile.png"}
+            alt="background mountains"
+          />
+        </picture>
+      )}
+      {!isMobile && (
+        <picture>
+          <source srcSet="/bg_front2.webp" type="image/webp" />
+          <source srcSet="/bg_front2.png" type="image/png" />
+          <BackgroundMountainsDesktop
+            src={"/bg_front2.png"}
+            alt="background mountains"
+          />
+        </picture>
+      )}
       <Container>
-        <NavbarMobile />
-        <Navbar />
+        {isMobile && <NavbarMobile />}
+        {!isMobile && <Navbar />}
         <TerminalWrapper
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}

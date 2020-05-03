@@ -16,13 +16,13 @@ const ToolsPage = () => {
         <Wrapper>
           <Card
             title="React Button Generator"
-            image={"/card-rbg.png"}
+            image={"/card-rbg.webp"}
             link="/tools/react-button-generator"
             tech="react"
           />
           <Card
             title="React Card Generator"
-            image={"/card-rcg.png"}
+            image={"/card-rcg.webp"}
             link="/tools/react-card-generator"
             tech="react"
           />

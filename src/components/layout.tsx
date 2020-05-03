@@ -2,8 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import { useMedia } from "react-use-media"
 
-import "typeface-lora"
-
 import Footer from "./footer"
 import FooterMobile from "./footer-mobile"
 
