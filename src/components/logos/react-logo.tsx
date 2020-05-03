@@ -7,7 +7,7 @@ const ReactLogo = () => {
     query {
       file(relativePath: { eq: "icons/react.png" }) {
         childImageSharp {
-          fixed(width: 100) {
+          fixed(quality: 100, width: 100) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }

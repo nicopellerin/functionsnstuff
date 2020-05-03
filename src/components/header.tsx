@@ -8,6 +8,8 @@ import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
 import BackgroundMountainsDesktop from "./images/background-mountains-desktop"
+import BackgroundMountainsMobile from "./images/background-mountains-mobile"
+
 import {
   ReactLogo,
   GolangLogo,
@@ -96,13 +98,10 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <BackgroundMountainsMobile
-        src={"/bg_front_mobile.png"}
-        alt="background mountains"
-      />
       <Container>
         <NavbarMobile />
         <Navbar />
+        <BackgroundMountainsMobile />
         <BackgroundMountainsDesktop />
         <TerminalWrapper
           terminal={"/terminal.webp"}
@@ -275,25 +274,6 @@ const TerminalContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
   z-index: 2000;
-`
-
-const BackgroundMountainsMobile = styled(motion.img)`
-  position: absolute;
-  width: 100%;
-  z-index: -1;
-  top: 30%;
-
-  @media (max-width: 1024px) {
-    top: 40%;
-  }
-
-  @media (max-width: 500px) {
-    top: 62%;
-  }
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
 `
 
 const IconsList = styled.div`

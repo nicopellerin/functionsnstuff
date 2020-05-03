@@ -3,12 +3,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
-const BackgroundMountainsDesktop = () => {
+const BackgroundMountainsMobile = () => {
   const data = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "bg_front2.png" }) {
+      file(relativePath: { eq: "bg_front_mobile.png" }) {
         childImageSharp {
-          fluid(quality: 100, maxWidth: 4000) {
+          fluid(quality: 100, maxWidth: 1024) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }
@@ -19,17 +19,24 @@ const BackgroundMountainsDesktop = () => {
   return <ImgStyled fluid={data.file.childImageSharp.fluid} />
 }
 
-export default BackgroundMountainsDesktop
+export default BackgroundMountainsMobile
 
 // Styles
 const ImgStyled = styled(Img)`
   position: absolute;
-  top: 20%;
-  width: 100vw;
+  width: 100%;
   z-index: -1;
-  overflow: visible;
+  top: 30%;
 
   @media (max-width: 1024px) {
+    top: 40%;
+  }
+
+  @media (max-width: 500px) {
+    top: 62%;
+  }
+
+  @media (min-width: 1024px) {
     display: none;
   }
 `

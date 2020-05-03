@@ -7,7 +7,7 @@ const GolangLogo = () => {
     query {
       file(relativePath: { eq: "icons/golang.png" }) {
         childImageSharp {
-          fixed(width: 160) {
+          fixed(quality: 100, width: 160) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }

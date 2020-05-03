@@ -7,7 +7,7 @@ const NodejsLogo = () => {
     query {
       file(relativePath: { eq: "icons/nodejs.png" }) {
         childImageSharp {
-          fixed(width: 120) {
+          fixed(quality: 100, width: 120) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }

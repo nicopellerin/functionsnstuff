@@ -7,7 +7,7 @@ const NextjsLogo = () => {
     query {
       file(relativePath: { eq: "icons/nextjs.png" }) {
         childImageSharp {
-          fixed(width: 140) {
+          fixed(quality: 100, width: 140) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }

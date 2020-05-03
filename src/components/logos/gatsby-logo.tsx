@@ -7,7 +7,7 @@ const GatsbyLogo = () => {
     query {
       file(relativePath: { eq: "icons/gatsby.png" }) {
         childImageSharp {
-          fixed(width: 100) {
+          fixed(quality: 100, width: 100) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }

@@ -7,7 +7,7 @@ const GraphqlLogo = () => {
     query {
       file(relativePath: { eq: "icons/graphql.png" }) {
         childImageSharp {
-          fixed(width: 90) {
+          fixed(quality: 100, width: 90) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }
