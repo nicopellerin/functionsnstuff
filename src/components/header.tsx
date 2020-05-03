@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useLayoutEffect } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
@@ -11,19 +11,6 @@ import Buddy from "./buddy"
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
   const [selected, setSelected] = useState("")
-  const [width, setWidth] = useState(
-    typeof window !== "undefined" && window.innerWidth
-  )
-
-  useLayoutEffect(() => {
-    window.addEventListener("resize", () => setWidth(window.innerWidth))
-
-    return () => {
-      window.removeEventListener("resize", () => setWidth(window.innerWidth))
-    }
-  }, [width])
-
-  const isMobile = width <= 1024
 
   const techList = [
     {
@@ -100,27 +87,25 @@ const Header = () => {
 
   return (
     <Wrapper>
-      {isMobile ? (
-        <picture>
-          <source srcSet="/bg_front_mobile.webp" type="image/webp" />
-          <source srcSet="/bg_front_mobile.png" type="image/png" />
-          <BackgroundMountainsMobile
-            src={"/bg_front_mobile.png"}
-            alt="background mountains"
-          />
-        </picture>
-      ) : (
-        <picture>
-          <source srcSet="/bg_front2.webp" type="image/webp" />
-          <source srcSet="/bg_front2.png" type="image/png" />
-          <BackgroundMountainsDesktop
-            src={"/bg_front2.png"}
-            alt="background mountains"
-          />
-        </picture>
-      )}
+      <picture>
+        <source srcSet="/bg_front_mobile.webp" type="image/webp" />
+        <source srcSet="/bg_front_mobile.png" type="image/png" />
+        <BackgroundMountainsMobile
+          src={"/bg_front_mobile.png"}
+          alt="background mountains"
+        />
+      </picture>
+      <picture>
+        <source srcSet="/bg_front2.webp" type="image/webp" />
+        <source srcSet="/bg_front2.png" type="image/png" />
+        <BackgroundMountainsDesktop
+          src={"/bg_front2.png"}
+          alt="background mountains"
+        />
+      </picture>
       <Container>
-        {isMobile ? <NavbarMobile /> : <Navbar />}
+        <NavbarMobile />
+        <Navbar />
         <TerminalWrapper
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}
