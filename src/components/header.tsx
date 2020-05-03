@@ -7,14 +7,6 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
-// import {
-//   ReactLogo,
-//   GolangLogo,
-//   GraphqlLogo,
-//   NodejsLogo,
-//   JavascriptLogo,
-//   TypescriptLogo,
-// } from "./logos"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
@@ -24,44 +16,44 @@ const Header = () => {
     {
       tech: "React",
       logo: "/icons/react.png",
-      // component: <ReactLogo />,
+      logoWebp: "/icons/react.webp",
       link: "/tips/react",
       width: 100,
     },
     {
       tech: "GraphQL",
       logo: "/icons/graphql.png",
+      logoWebp: "/icons/graphql.webp",
       link: "/tips/graphql",
       width: 90,
-      // component: <GraphqlLogo />,
     },
     {
       tech: "Golang",
       logo: "/icons/golang.png",
+      logoWebp: "/icons/golang.webp",
       link: "/tips/golang",
       width: 160,
-      // component: <GolangLogo />,
     },
     {
       tech: "Node.js",
       logo: "/icons/nodejs.png",
+      logoWebp: "/icons/nodejs.webp",
       link: "/tips/nodejs",
       width: 120,
-      // component: <NodejsLogo />,
     },
     {
       tech: "Javascript",
       logo: "/icons/javascript.png",
+      logoWebp: "/icons/javascript.webp",
       link: "/tips/javascript",
       width: 90,
-      // component: <JavascriptLogo />,
     },
     {
       tech: "Typescript",
-      logo: "/icons/typescript.svg",
+      logo: "/icons/typescript.png",
+      logoWebp: "/icons/typescript.webp",
       link: "/tips/typescript",
       width: 90,
-      // component: <TypescriptLogo />,
     },
   ]
 
@@ -166,25 +158,30 @@ const Header = () => {
               </motion.span>
             </motion.h3>
             <IconsList>
-              {techList.map(({ tech, logo, link, width, component }) => (
-                <Link key={tech} to={link}>
-                  <TechWrapper
-                    whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
-                  >
-                    <motion.img
-                      src={logo}
-                      alt={tech}
-                      width={width}
-                      variants={itemVariants}
-                      style={{ cursor: "pointer" }}
-                      onMouseEnter={() => setSelected(tech)}
-                      onMouseLeave={() => setSelected("")}
-                    />
-
-                    {selected === tech && <TechTitle>{tech}</TechTitle>}
-                  </TechWrapper>
-                </Link>
-              ))}
+              {techList.map(
+                ({ tech, logo, logoWebp, link, width, component }) => (
+                  <Link key={tech} to={link}>
+                    <TechWrapper
+                      whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
+                    >
+                      <picture>
+                        <source srcSet={logoWebp} type="image/webp" />
+                        <source srcSet={logoWebp} type="image/png" />
+                        <motion.img
+                          src={logo}
+                          alt={tech}
+                          width={width}
+                          variants={itemVariants}
+                          style={{ cursor: "pointer" }}
+                          onMouseEnter={() => setSelected(tech)}
+                          onMouseLeave={() => setSelected("")}
+                        />
+                      </picture>
+                      {selected === tech && <TechTitle>{tech}</TechTitle>}
+                    </TechWrapper>
+                  </Link>
+                )
+              )}
             </IconsList>
           </TerminalContainer>
         </TerminalWrapper>

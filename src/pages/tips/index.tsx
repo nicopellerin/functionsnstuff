@@ -9,81 +9,65 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import PageHeader from "../../components/page-header"
 import TechCard from "../../components/tech-card"
-import {
-  ReactLogo,
-  GolangLogo,
-  GraphqlLogo,
-  NodejsLogo,
-  JavascriptLogo,
-  TypescriptLogo,
-  GatsbyLogo,
-  NextjsLogo,
-} from "../../components/logos"
 
 const techList = [
   {
     tech: "React",
-    slug: "react",
     logo: "/icons/react.png",
-    component: <ReactLogo />,
+    logoWebp: "/icons/react.webp",
     link: "/tips/react",
     width: 100,
   },
   {
     tech: "GraphQL",
-    slug: "graphql",
     logo: "/icons/graphql.png",
+    logoWebp: "/icons/graphql.webp",
     link: "/tips/graphql",
     width: 90,
-    component: <GraphqlLogo />,
   },
   {
     tech: "Golang",
-    slug: "golang",
     logo: "/icons/golang.png",
+    logoWebp: "/icons/golang.webp",
     link: "/tips/golang",
     width: 160,
-    component: <GolangLogo />,
   },
   {
     tech: "Node.js",
-    slug: "nodejs",
     logo: "/icons/nodejs.png",
+    logoWebp: "/icons/nodejs.webp",
     link: "/tips/nodejs",
     width: 120,
-    component: <NodejsLogo />,
   },
   {
     tech: "Javascript",
-    slug: "javascript",
     logo: "/icons/javascript.png",
+    logoWebp: "/icons/javascript.webp",
     link: "/tips/javascript",
     width: 90,
-    component: <JavascriptLogo />,
   },
   {
     tech: "Typescript",
-    slug: "typescript",
-    logo: "/icons/typescript.svg",
+    logo: "/icons/typescript.png",
+    logoWebp: "/icons/typescript.webp",
     link: "/tips/typescript",
     width: 90,
-    component: <TypescriptLogo />,
   },
   {
     tech: "Gatsby",
     slug: "gatsby",
     logo: "/icons/gatsby.png",
+    logoWebp: "/icons/gatsby.webp",
     link: "/tips/gatsby",
     width: 100,
-    component: <GatsbyLogo />,
   },
   {
     tech: "Next.js",
     slug: "nextjs",
     logo: "/icons/nextjs.png",
+    logoWebp: "/icons/nextjs.webp",
     link: "/tips/nextjs",
     width: 140,
-    component: <NextjsLogo />,
   },
 ]
 
@@ -169,14 +153,15 @@ const TipsPage: React.FC<Props> = ({ data }) => {
           </RandomButton>
         </RandomButtonWrapper>
         <TechCardList>
-          {techList.map(({ tech, logo, link, width, slug, component }) => (
+          {techList.map(({ tech, logo, logoWebp, link, width, slug }) => (
             <TechCard
               key={tech}
               tech={tech}
+              width={width}
               logo={logo}
+              logoWebp={logoWebp}
               link={link}
               totalCount={techCount[slug]}
-              component={component}
             />
           ))}
         </TechCardList>
