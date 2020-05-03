@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { AnimatePresence, motion } from "framer-motion"
 import { Link } from "gatsby"
 
-import { donutBase } from "../../utils/base64-images"
 import Logo from "./logo"
 
 const NavbarMobile = () => {
@@ -36,7 +35,7 @@ const NavbarMobile = () => {
         <Link to="/">
           <Logo width={175} />
         </Link>
-        <img src={donutBase} alt="donut" width={35} />
+        <img src={"/donut_mobile.png"} alt="donut" />
       </Wrapper>
       <AnimatePresence>
         {toggleDropdown && (

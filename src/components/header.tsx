@@ -7,14 +7,14 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
-import {
-  ReactLogo,
-  GolangLogo,
-  GraphqlLogo,
-  NodejsLogo,
-  JavascriptLogo,
-  TypescriptLogo,
-} from "./logos"
+// import {
+//   ReactLogo,
+//   GolangLogo,
+//   GraphqlLogo,
+//   NodejsLogo,
+//   JavascriptLogo,
+//   TypescriptLogo,
+// } from "./logos"
 
 const Header = () => {
   const [toggleBrowser, setToggleBrowser] = useState(false)
@@ -24,7 +24,7 @@ const Header = () => {
     {
       tech: "React",
       logo: "/icons/react.png",
-      component: <ReactLogo />,
+      // component: <ReactLogo />,
       link: "/tips/react",
       width: 100,
     },
@@ -33,35 +33,35 @@ const Header = () => {
       logo: "/icons/graphql.png",
       link: "/tips/graphql",
       width: 90,
-      component: <GraphqlLogo />,
+      // component: <GraphqlLogo />,
     },
     {
       tech: "Golang",
       logo: "/icons/golang.png",
       link: "/tips/golang",
       width: 160,
-      component: <GolangLogo />,
+      // component: <GolangLogo />,
     },
     {
       tech: "Node.js",
       logo: "/icons/nodejs.png",
       link: "/tips/nodejs",
       width: 120,
-      component: <NodejsLogo />,
+      // component: <NodejsLogo />,
     },
     {
       tech: "Javascript",
       logo: "/icons/javascript.png",
       link: "/tips/javascript",
       width: 90,
-      component: <JavascriptLogo />,
+      // component: <JavascriptLogo />,
     },
     {
       tech: "Typescript",
       logo: "/icons/typescript.svg",
       link: "/tips/typescript",
-      component: <TypescriptLogo />,
       width: 90,
+      // component: <TypescriptLogo />,
     },
   ]
 
@@ -171,15 +171,16 @@ const Header = () => {
                   <TechWrapper
                     whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                   >
-                    <motion.div
+                    <motion.img
+                      src={logo}
+                      alt={tech}
                       width={width}
                       variants={itemVariants}
                       style={{ cursor: "pointer" }}
                       onMouseEnter={() => setSelected(tech)}
                       onMouseLeave={() => setSelected("")}
-                    >
-                      {component}
-                    </motion.div>
+                    />
+
                     {selected === tech && <TechTitle>{tech}</TechTitle>}
                   </TechWrapper>
                 </Link>
