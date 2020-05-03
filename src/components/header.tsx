@@ -7,9 +7,6 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import Buddy from "./buddy"
-import BackgroundMountainsDesktop from "./images/background-mountains-desktop"
-import BackgroundMountainsMobile from "./images/background-mountains-mobile"
-
 import {
   ReactLogo,
   GolangLogo,
@@ -98,11 +95,17 @@ const Header = () => {
 
   return (
     <Wrapper>
+      <BackgroundMountainsMobile
+        src={"/bg_front_mobile.png"}
+        alt="background mountains"
+      />
+      <BackgroundMountainsDesktop
+        src={"/bg_front2.webp"}
+        alt="background mountains"
+      />
       <Container>
         <NavbarMobile />
         <Navbar />
-        <BackgroundMountainsMobile />
-        <BackgroundMountainsDesktop />
         <TerminalWrapper
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}
@@ -245,8 +248,8 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.header`
-  /* max-width: 100rem;
-  margin: 0 auto; */
+  max-width: 100rem;
+  margin: 0 auto;
 `
 
 const TerminalWrapper = styled(motion.div)`
@@ -274,6 +277,36 @@ const TerminalContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
   z-index: 2000;
+`
+
+const BackgroundMountainsDesktop = styled(motion.img)`
+  position: absolute;
+  top: 20%;
+  width: 100vw;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const BackgroundMountainsMobile = styled(motion.img)`
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  top: 30%;
+
+  @media (max-width: 768px) {
+    top: 40%;
+  }
+
+  @media (max-width: 500px) {
+    top: 62%;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `
 
 const IconsList = styled.div`
