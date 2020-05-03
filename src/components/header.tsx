@@ -171,15 +171,14 @@ const Header = () => {
                   <TechWrapper
                     whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
                   >
-                    <motion.div
+                    <motion.img
+                      src={logo}
                       width={width}
                       variants={itemVariants}
                       style={{ cursor: "pointer" }}
                       onMouseEnter={() => setSelected(tech)}
                       onMouseLeave={() => setSelected("")}
-                    >
-                      {component}
-                    </motion.div>
+                    />
                     {selected === tech && <TechTitle>{tech}</TechTitle>}
                   </TechWrapper>
                 </Link>
