@@ -1,9 +1,10 @@
 import * as React from "react"
-import { useContext } from "react"
 
-import { ThemeContext } from "../context/ThemeProvider"
+interface Props {
+  setToggle: () => void
+}
 
-const DarkMode = ({ setToggle }) => {
+const DarkMode: React.FC<Props> = ({ setToggle }) => {
   return (
     <svg
       onClick={setToggle}

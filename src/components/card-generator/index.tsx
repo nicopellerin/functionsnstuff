@@ -14,7 +14,8 @@ import Toggle from "../generator-shared/toggle"
 import copyToClipboard from "../generator-shared/copy-to-clipboard"
 import CodeBlock from "../generator-shared/code-block"
 
-const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
+const delay = (duration: number) =>
+  new Promise(resolve => setTimeout(resolve, duration))
 
 enum Icons {
   User = "FiUser",
@@ -69,8 +70,8 @@ const CardGeneratorMain = () => {
   const [backgroundType, setBackgroundType] = useState(BackgroundType.Fill)
   const [codeStyle, setCodeStyle] = useState(CodeStyles.InlineStyles)
 
-  const imageRef = useRef(null)
-  const inputFileRef = useRef(null)
+  const imageRef = useRef() as React.MutableRefObject<HTMLImageElement>
+  const inputFileRef = useRef() as React.MutableRefObject<HTMLInputElement>
 
   useEffect(() => {
     setBackgroundGradient1(background)
@@ -136,8 +137,8 @@ const CardGeneratorMain = () => {
     setCopied(false)
   }
 
-  const handleImageUpload = e => {
-    const file = e.target.files[0]
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files![0]
 
     let img = new Image()
     img.src = URL.createObjectURL(file)
@@ -215,7 +216,6 @@ const CardGeneratorMain = () => {
                 drag={editImagePosition ? true : false}
                 src={imageSrc}
                 style={{
-                  width: imageZoom + "%",
                   borderTopLeftRadius: 10,
                   borderTopRightRadius: 10,
                   height:
@@ -318,7 +318,7 @@ const CardGeneratorMain = () => {
                 />
                 <Counter
                   title={"Font size"}
-                  value={headingFontSize}
+                  value={`${headingFontSize}`}
                   inc={() => setHeadingFontSize(prevState => prevState + 1)}
                   dec={() => setHeadingFontSize(prevState => prevState - 1)}
                 />
@@ -342,7 +342,7 @@ const CardGeneratorMain = () => {
                 />
                 <Counter
                   title={"Font size"}
-                  value={fontSize}
+                  value={`${fontSize}`}
                   inc={() => setFontSize(prevState => prevState + 1)}
                   dec={() => setFontSize(prevState => prevState - 1)}
                 />
@@ -400,21 +400,22 @@ const CardGeneratorMain = () => {
                 />
                 <ColorPicker
                   renderOptions={
-                    null
-                    // <ListboxStyled
-                    //   defaultValue={BackgroundType.Fill}
-                    //   onChange={value => setBackgroundType(value as BackgroundType)}
-                    //   style={{ border: "none" }}
-                    // >
-                    //   <div>
-                    //     <ListboxOptionStyled value={BackgroundType.Fill}>
-                    //       Fill
-                    //     </ListboxOptionStyled>
-                    //     <ListboxOptionStyled value={BackgroundType.Gradient}>
-                    //       Gradient
-                    //     </ListboxOptionStyled>
-                    //   </div>
-                    // </ListboxStyled>
+                    <ListboxStyled
+                      defaultValue={BackgroundType.Fill}
+                      onChange={value =>
+                        setBackgroundType(value as BackgroundType)
+                      }
+                      style={{ border: "none" }}
+                    >
+                      <div>
+                        <ListboxOptionStyled value={BackgroundType.Fill}>
+                          Fill
+                        </ListboxOptionStyled>
+                        <ListboxOptionStyled value={BackgroundType.Gradient}>
+                          Gradient
+                        </ListboxOptionStyled>
+                      </div>
+                    </ListboxStyled>
                   }
                   title="Shape color"
                   colorPicked={background}
@@ -432,21 +433,22 @@ const CardGeneratorMain = () => {
                 />
                 <ColorPicker
                   renderOptions={
-                    null
-                    // <ListboxStyled
-                    //   defaultValue={BackgroundType.Fill}
-                    //   onChange={value => setBackgroundType(value as BackgroundType)}
-                    //   style={{ border: "none" }}
-                    // >
-                    //   <div>
-                    //     <ListboxOptionStyled value={BackgroundType.Fill}>
-                    //       Fill
-                    //     </ListboxOptionStyled>
-                    //     <ListboxOptionStyled value={BackgroundType.Gradient}>
-                    //       Gradient
-                    //     </ListboxOptionStyled>
-                    //   </div>
-                    // </ListboxStyled>
+                    <ListboxStyled
+                      defaultValue={BackgroundType.Fill}
+                      onChange={value =>
+                        setBackgroundType(value as BackgroundType)
+                      }
+                      style={{ border: "none" }}
+                    >
+                      <div>
+                        <ListboxOptionStyled value={BackgroundType.Fill}>
+                          Fill
+                        </ListboxOptionStyled>
+                        <ListboxOptionStyled value={BackgroundType.Gradient}>
+                          Gradient
+                        </ListboxOptionStyled>
+                      </div>
+                    </ListboxStyled>
                   }
                   title="Shape border color"
                   colorPicked={background}
@@ -460,7 +462,7 @@ const CardGeneratorMain = () => {
               </InputGroup>
               <Counter
                 title={"Border radius"}
-                value={borderRadius}
+                value={`${borderRadius}`}
                 inc={() => setBorderRadius(prevState => prevState + 1)}
                 dec={() => setBorderRadius(prevState => prevState - 1)}
               />

@@ -3,7 +3,14 @@ import styled from "styled-components"
 import { FiArrowDownCircle, FiArrowUpCircle } from "react-icons/fi"
 import { motion } from "framer-motion"
 
-const Counter = ({ title, value, inc, dec }) => {
+interface Props {
+  title: string
+  value: string
+  inc: () => void
+  dec: () => void
+}
+
+const Counter: React.FC<Props> = ({ title, value, inc, dec }) => {
   return (
     <Wrapper>
       <Title>{title}</Title>

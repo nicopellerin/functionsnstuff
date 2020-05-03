@@ -4,14 +4,14 @@ import styled from "styled-components"
 
 import Checkbox from "../checkbox"
 
-interface ToggleProps {
+interface Props {
   title: string
-  check?: boolean
+  check: boolean
   toggleCheck: () => void
   renderOptions?: React.ReactNode
 }
 
-const Toggle: React.FC<ToggleProps> = ({
+const Toggle: React.FC<Props> = ({
   title,
   check,
   toggleCheck,

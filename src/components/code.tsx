@@ -4,12 +4,13 @@ import { preToCodeBlock } from "mdx-utils"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/dracula"
 import styled from "styled-components"
-import { FiCopy, FiCheck, FiCheckCircle } from "react-icons/fi"
+import { FiCopy, FiCheckCircle } from "react-icons/fi"
 import { AnimatePresence, motion } from "framer-motion"
 
-const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
+const delay = (duration: number) =>
+  new Promise(resolve => setTimeout(resolve, duration))
 
-const Code = props => {
+const Code = (props: any) => {
   const [copied, setCopied] = useState(false)
 
   const codeProps = preToCodeBlock(props)
@@ -33,7 +34,7 @@ const Code = props => {
       language={language}
       theme={theme}
     >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+      {({ style, tokens, getLineProps, getTokenProps }) => (
         <Wrapper>
           <pre className="language-jsx" style={style}>
             {tokens.map((line, i) => (

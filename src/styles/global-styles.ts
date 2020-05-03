@@ -25,24 +25,21 @@ export const GlobalStyles = createGlobalStyle`
 
     @media (max-width: 500px) {
       font-size: 57.5%;
-
+    }
   }
-  }
-
-  #___gatsby {}
 
   body {
     height: 100%;
     background: #080808;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--systemFont);
     color: var(--textColor);
   }
 
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--systemFont);
     color: #FFE5FB;
   }
 

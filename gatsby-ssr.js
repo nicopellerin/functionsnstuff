@@ -4,7 +4,7 @@ const Background = require("./src/components/background").default
 exports.wrapPageElement = ({ element, props }) => {
   return (
     <>
-      <Background {...props} />
+      <Background />
       {element}
     </>
   )

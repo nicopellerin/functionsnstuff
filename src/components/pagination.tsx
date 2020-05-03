@@ -2,7 +2,12 @@ import * as React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-const Pagination = ({ prev, next }) => {
+interface Props {
+  prev: any
+  next: any
+}
+
+const Pagination: React.FC<Props> = ({ prev, next }) => {
   return (
     <Wrapper>
       <Prev disabled={!prev}>
@@ -10,7 +15,7 @@ const Pagination = ({ prev, next }) => {
           to={
             prev?.frontmatter?.slug
               ? `/tips/${prev.frontmatter.tech}/${prev.frontmatter.slug}`
-              : null
+              : "/"
           }
         >
           {prev && (
@@ -30,12 +35,12 @@ const Pagination = ({ prev, next }) => {
           <span>{prev?.frontmatter?.title}</span>
         </LinkStyled>
       </Prev>
-      <Next>
+      <Next disabled={!next}>
         <LinkStyled
           to={
             next?.frontmatter?.slug
               ? `/tips/${next.frontmatter.tech}/${next.frontmatter.slug}`
-              : null
+              : "/"
           }
         >
           <span>{next?.frontmatter?.title}</span>

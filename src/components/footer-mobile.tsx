@@ -3,13 +3,11 @@ import { useState } from "react"
 import styled from "styled-components"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 
-import wave from "../images/wavee.svg"
-
 const FooterMobile = () => {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState("")
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const res = await addToMailchimp(email, null, null)
 
@@ -61,7 +59,7 @@ const FooterMobile = () => {
           &copy;{new Date().getFullYear()} functionsnstuff. All Right Reserved.
         </FooterWrapper>
       </Container>
-      <Wave src={wave} alt="wave" />
+      <Wave src={"/wavee.svg"} alt="wave" />
     </Wrapper>
   )
 }

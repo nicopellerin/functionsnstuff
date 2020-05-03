@@ -1,10 +1,12 @@
 import { useRef, useEffect } from "react"
 
-const useClickOutside = setToggle => {
-  const node = useRef(null)
+const useClickOutside = (
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const node = useRef() as React.MutableRefObject<any>
 
-  const handleClick = e => {
-    if (!node?.current?.contains(e.target)) {
+  const handleClick = (e: MouseEvent) => {
+    if (!node.current.contains(e.target)) {
       setToggle(false)
     }
   }

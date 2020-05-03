@@ -25,9 +25,10 @@ const menuItems = [
 ]
 
 const Navbar = () => {
+  const [show, setShow] = useState<number | null>(null)
+
   const url = typeof window !== "undefined" ? window.location.href : null
   const paths = url ? url.split("/") : []
-  const [show, setShow] = useState(null)
 
   return (
     <Wrapper>

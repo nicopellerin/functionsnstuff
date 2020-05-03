@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { FaDice } from "react-icons/fa"
 import { graphql, navigate } from "gatsby"
 import { motion } from "framer-motion"
-import { useMedia } from "react-use-media"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
@@ -70,11 +69,26 @@ const techList = [
   },
 ]
 
-const TipsPage = ({ data }) => {
-  const isMobile = useMedia({
-    maxWidth: 500,
-  })
+interface Props {
+  data: any
+}
 
+enum Tech {
+  react = "React",
+  javascript = "Javascript",
+  golang = "Golang",
+  graphql = "Graphql",
+  nodejs = "Node.js",
+  typescript = "Typescript",
+  gatsby = "Gatsby",
+  "next.js" = "Next.js",
+}
+
+interface Tip {
+  node: { frontmatter: { tech: string } }
+}
+
+const TipsPage: React.FC<Props> = ({ data }) => {
   const [randomTip, setRandomTip] = useState(false)
 
   const techCount = {
@@ -87,12 +101,12 @@ const TipsPage = ({ data }) => {
     gatsby: 0,
     nextjs: 0,
   }
-  data.allMdx.edges.forEach(post => {
-    techCount[post.node.frontmatter.tech]++
+  data.allMdx.edges.forEach(({ node }: Tip) => {
+    techCount[node.frontmatter.tech]++
   })
 
   useEffect(() => {
-    let id
+    let id: number
 
     const random = Math.floor(Math.random() * 8)
     if (randomTip) {

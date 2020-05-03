@@ -2,10 +2,20 @@ import * as React from "react"
 import { useRef, useEffect } from "react"
 import lottie from "lottie-web"
 
-const Buddy = ({ toggleBrowser, path = "/anim.json", size = 400 }) => {
-  const lottieRef = useRef(null)
+interface Props {
+  toggleBrowser: boolean
+  path?: string
+  size?: number
+}
 
-  let anim
+const Buddy: React.FC<Props> = ({
+  toggleBrowser,
+  path = "/anim.json",
+  size = 400,
+}) => {
+  const lottieRef = useRef() as React.MutableRefObject<HTMLDivElement>
+
+  let anim: any
 
   useEffect(() => {
     anim = lottie.loadAnimation({

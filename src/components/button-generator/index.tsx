@@ -1,21 +1,23 @@
 import * as React from "react"
-import { useState, useRef, useLayoutEffect, useEffect } from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components"
 import * as Icon from "react-icons/fi"
 import { motion, AnimatePresence } from "framer-motion"
 import { useMedia } from "react-use-media"
 import { Listbox, ListboxOption } from "@reach/listbox"
+
 import "@reach/listbox/styles.css"
 
 import Spacer from "../spacer"
 import DarkMode from "../dark-mode"
-import Counter from "./counter"
-import ColorPicker from "./color-picker"
-import Toggle from "./toggle"
-import copyToClipboard from "./copy-to-clipboard"
-import CodeBlock from "./code-block"
+import Counter from "../generator-shared/counter"
+import ColorPicker from "../generator-shared/color-picker"
+import Toggle from "../generator-shared/toggle"
+import copyToClipboard from "../generator-shared/copy-to-clipboard"
+import CodeBlock from "../generator-shared/code-block"
 
-const delay = duration => new Promise(resolve => setTimeout(resolve, duration))
+const delay = (duration: number) =>
+  new Promise(resolve => setTimeout(resolve, duration))
 
 enum Icons {
   User = "FiUser",
@@ -62,13 +64,14 @@ const ButtonGeneratorMain = () => {
     minWidth: 500,
   })
 
+  // Sets color of `gradient1`to equal fill color
   useEffect(() => {
     setBackgroundGradient1(background)
   }, [background])
 
+  // JSX code to export when `copy-to-clipboard`
   const border = "none"
   const cursor = "pointer"
-
   const imports = `import * as React from 'react'\n`
   const animImports = `import {motion} from 'framer-motion'\n\n${
     anim ? "" : "\n"
@@ -80,7 +83,7 @@ const ButtonGeneratorMain = () => {
     anim ? "" : "\n"
   }`
 
-  const value = `${imports}${checkedIcon ? iconImports : ""}${
+  const valueInline = `${imports}${checkedIcon ? iconImports : ""}${
     anim ? animImports : ""
   }export const Button = () => (\n<${anim ? "motion." : ""}button ${
     anim ? "whileHover={{ y: -1 }}\n" : ""
@@ -119,7 +122,7 @@ const ButtonGeneratorMain = () => {
   }
   `
 
-  const handleCopyToClipboard = async value => {
+  const handleCopyToClipboard = async (value: string) => {
     copyToClipboard(value)
     setCopied(true)
     await delay(1500)
@@ -171,7 +174,7 @@ const ButtonGeneratorMain = () => {
                 border,
                 borderRadius,
                 fontSize,
-                fontWeight: isBold ? "600" : "400",
+                fontWeight: isBold ? 600 : 400,
                 boxShadow: `0 4px 20px rgba(0,0,0,${dropShadow / 10})`,
                 cursor,
               }}
@@ -199,7 +202,9 @@ const ButtonGeneratorMain = () => {
           {isDesktop ? (
             <CodeBlock
               value={
-                codeStyle === CodeStyles.InlineStyles ? value : valueStyled
+                codeStyle === CodeStyles.InlineStyles
+                  ? valueInline
+                  : valueStyled
               }
             />
           ) : null}
@@ -210,25 +215,25 @@ const ButtonGeneratorMain = () => {
             <InputField value={text} onChange={e => setText(e.target.value)} />
             <Counter
               title={"Font size"}
-              value={fontSize}
+              value={`${fontSize}`}
               inc={() => setFontSize(prevState => prevState + 1)}
               dec={() => setFontSize(prevState => prevState - 1)}
             />
             <Counter
               title={"Horizontal padding"}
-              value={horiPadding}
+              value={`${horiPadding}`}
               inc={() => setHoriPadding(prevState => prevState + 1)}
               dec={() => setHoriPadding(prevState => prevState - 1)}
             />
             <Counter
               title={"Vertical padding"}
-              value={vertPadding}
+              value={`${vertPadding}`}
               inc={() => setVertPadding(prevState => prevState + 1)}
               dec={() => setVertPadding(prevState => prevState - 1)}
             />
             <Counter
               title={"Border radius"}
-              value={borderRadius}
+              value={`${borderRadius}`}
               inc={() => setBorderRadius(prevState => prevState + 1)}
               dec={() => setBorderRadius(prevState => prevState - 1)}
             />
@@ -289,30 +294,32 @@ const ButtonGeneratorMain = () => {
                   onChange={value => setIcon(value as Icons)}
                   style={{ border: "none" }}
                 >
-                  <ListboxOptionStyled value={Icons.Send}>
-                    Send
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.User}>
-                    User
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.Check}>
-                    Check
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.ChevronRight}>
-                    ChevronRight
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.Login}>
-                    Login
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.Logout}>
-                    Logout
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.Mail}>
-                    Mail
-                  </ListboxOptionStyled>
-                  <ListboxOptionStyled value={Icons.Download}>
-                    Download
-                  </ListboxOptionStyled>
+                  <div>
+                    <ListboxOptionStyled value={Icons.Send}>
+                      Send
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.User}>
+                      User
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Check}>
+                      Check
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.ChevronRight}>
+                      ChevronRight
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Login}>
+                      Login
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Logout}>
+                      Logout
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Mail}>
+                      Mail
+                    </ListboxOptionStyled>
+                    <ListboxOptionStyled value={Icons.Download}>
+                      Download
+                    </ListboxOptionStyled>
+                  </div>
                 </ListboxStyled>
               }
               title="Icon"
@@ -329,7 +336,9 @@ const ButtonGeneratorMain = () => {
               copied={copied ? true : false}
               onClick={() =>
                 handleCopyToClipboard(
-                  codeStyle === CodeStyles.InlineStyles ? value : valueStyled
+                  codeStyle === CodeStyles.InlineStyles
+                    ? valueInline
+                    : valueStyled
                 )
               }
             >

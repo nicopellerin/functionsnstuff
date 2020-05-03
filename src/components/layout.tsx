@@ -21,7 +21,7 @@ const Layout: React.FC<Props> = ({ children, template }) => {
 
   return (
     <Wrapper>
-      <Main template={template}>{children}</Main>
+      <Main template={template ? true : false}>{children}</Main>
       {isDesktop ? <Footer /> : <FooterMobile />}
       <GlobalStyles />
     </Wrapper>

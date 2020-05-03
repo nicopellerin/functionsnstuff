@@ -43,7 +43,7 @@ const techItems = [
 ]
 
 const Main = () => {
-  const [show, setShow] = useState(null)
+  const [show, setShow] = useState<number | null>(null)
 
   const { tutorial, tip } = useStaticQuery(graphql`
     query latestTutorials {

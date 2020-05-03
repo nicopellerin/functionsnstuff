@@ -20,24 +20,10 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
-  const isMobile = (width = 1024) => {
-    let mql =
-      typeof window !== "undefined" &&
-      window.matchMedia(`(max-width: ${width}px)`)
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        typeof window !== "undefined" && window.navigator.userAgent
-      ) &&
-      mql.matches
-    ) {
-      return true
-    }
-    return false
-  }
-
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
-  const ref = useRef()
+
+  const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
   const y2 = useTransform(scrollY, [elementTop, elementTop + 2], [0, -0.3], {
     clamp: false,

@@ -68,8 +68,3 @@ const SepStyled = styled.span`
   margin: 0 1rem;
   color: var(--primaryColor);
 `
-
-const TechHide = styled.span`
-  position: absolute;
-  left: -9999px;
-`

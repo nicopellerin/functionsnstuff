@@ -2,17 +2,28 @@ import * as React from "react"
 import styled from "styled-components"
 
 import Card from "./card"
-import Buddy from "./buddy"
 
 interface Props {
-  data: any
+  data: [CardNode]
+}
+
+interface CardNode {
+  node: {
+    frontmatter: {
+      tech: string
+      title: string
+      cover: string
+      type: string
+      slug: string
+    }
+  }
 }
 
 const CardList: React.FC<Props> = ({ data }) => {
   return (
     <Wrapper>
       {data.length > 0 ? (
-        data.map(({ node }) => (
+        data.map(({ node }: CardNode) => (
           <Card
             tech={node.frontmatter.tech}
             title={node.frontmatter.title}

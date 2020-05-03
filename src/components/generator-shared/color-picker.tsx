@@ -3,6 +3,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import { CompactPicker } from "react-color"
 import { motion, AnimatePresence } from "framer-motion"
+
 import useClickOutside from "../../hooks/useClickOutside"
 
 interface ColorPickerProps {
@@ -22,6 +23,11 @@ enum BackgroundType {
   Gradient = "BackgroundGradient",
 }
 
+enum Gradients {
+  Gradient1 = "gradient1",
+  Gradient2 = "gradient2",
+}
+
 const ColorPicker: React.FC<ColorPickerProps> = ({
   title,
   colorPicked,
@@ -34,25 +40,30 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   renderOptions,
 }) => {
   const [toggle, setToggle] = useState(false)
-  const [selectGradient, setSelectGradient] = useState("")
+  const [selectGradient, setSelectGradient] = useState<string | undefined>("")
 
   const colorNodeRef = useClickOutside(setToggle)
 
-  const handleColorChange = color => {
+  const handleColorChange = (color: { hex: string }) => {
     if (backgroundType === BackgroundType.Fill) {
       setColor(color.hex)
       setToggle(false)
       return
     }
 
-    selectGradient === "gradient1"
-      ? setColorPickedGradient1(color.hex)
-      : setColorPickedGradient2(color.hex)
-    setToggle(false)
+    if (setColorPickedGradient1 && setColorPickedGradient2) {
+      selectGradient === Gradients.Gradient1
+        ? setColorPickedGradient1(color.hex)
+        : setColorPickedGradient2(color.hex)
+      setToggle(false)
+    }
   }
 
-  const toggleColorPicker = e => {
+  const toggleColorPicker = (gradient?: string) => {
     setToggle(true)
+    if (gradient) {
+      setSelectGradient(gradient)
+    }
   }
 
   return (
@@ -60,24 +71,20 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       <Title>{title}</Title>
       {renderOptions}
       {backgroundType === BackgroundType.Fill ? (
-        <ColorDiv onClick={e => toggleColorPicker(e)} color={colorPicked} />
+        <ColorDiv onClick={() => toggleColorPicker()} color={colorPicked} />
       ) : (
-        <>
+        <ColorDivWrapper>
           <ColorDiv
-            name="gradient1"
-            onClick={e => (
-              toggleColorPicker(e), setSelectGradient("gradient1")
-            )}
+            name={Gradients.Gradient1}
+            onClick={() => toggleColorPicker(Gradients.Gradient1)}
             color={colorPickedGradient1}
           />
           <ColorDiv
-            name="gradient2"
-            onClick={e => (
-              toggleColorPicker(e), setSelectGradient("gradient2")
-            )}
+            name={Gradients.Gradient2}
+            onClick={() => toggleColorPicker(Gradients.Gradient2)}
             color={colorPickedGradient2}
           />
-        </>
+        </ColorDivWrapper>
       )}
       <AnimatePresence exitBeforeEnter>
         {toggle && (
@@ -110,6 +117,14 @@ const Wrapper = styled.div`
 
   &:not(:last-of-type) {
     border-bottom: 1px solid #222;
+  }
+`
+
+const ColorDivWrapper = styled.div`
+  display: flex;
+
+  > :first-of-type {
+    margin-right: 3px;
   }
 `
 

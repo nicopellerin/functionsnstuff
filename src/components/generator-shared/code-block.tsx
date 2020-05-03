@@ -3,7 +3,11 @@ import styled from "styled-components"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import theme from "prism-react-renderer/themes/dracula"
 
-const CodeBlock = ({ value }) => {
+interface Props {
+  value: string
+}
+
+const CodeBlock: React.FC<Props> = ({ value }) => {
   return (
     <CodeOverlay>
       <CodeOverlayContainer>

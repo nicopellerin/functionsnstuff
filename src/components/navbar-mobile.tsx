@@ -65,7 +65,15 @@ const NavbarMobile = () => {
   )
 }
 
-const NavbarMobileDropdown = ({ setToggleDropdown, toggleDropdown }) => {
+interface DropdownProps {
+  toggleDropdown: boolean
+  setToggleDropdown: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const NavbarMobileDropdown: React.FC<DropdownProps> = ({
+  setToggleDropdown,
+  toggleDropdown,
+}) => {
   return (
     <Dropdown
       toggled={toggleDropdown ? true : false}

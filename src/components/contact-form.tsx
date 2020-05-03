@@ -17,13 +17,13 @@ const ContactForm = () => {
   const [isSent, setIsSent] = useState(false)
   const [errors, setErrors] = useState("")
 
-  const hiddenRef = useRef(null)
+  const hiddenRef = useRef() as React.MutableRefObject<HTMLInputElement>
 
   const isDesktop = useMedia({
     minWidth: 500,
   })
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (hiddenRef?.current.value !== "") {

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState } from "react"
 import styled from "styled-components"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link } from "gatsby"
 import { motion } from "framer-motion"
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   logo: string
   link: string
   width: number
-  totalCount?: number
+  totalCount: number
 }
 
 const TechCard: React.FC<Props> = ({ tech, logo, link, width, totalCount }) => {
@@ -23,7 +23,7 @@ const TechCard: React.FC<Props> = ({ tech, logo, link, width, totalCount }) => {
           alt={tech}
           width={width}
           onMouseEnter={() => setSelected(tech)}
-          onMouseLeave={() => setSelected(null)}
+          onMouseLeave={() => setSelected("")}
         />
 
         {selected === tech ? (

@@ -22,7 +22,7 @@ const ToolsPage = () => {
           />
           <Card
             title="React Card Generator"
-            image={"/card-rbg.png"}
+            image={"/card-rcg.png"}
             link="/tools/react-card-generator"
             tech="react"
           />

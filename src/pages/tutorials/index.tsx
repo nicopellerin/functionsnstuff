@@ -58,7 +58,26 @@ const techList = [
   },
 ]
 
-const TutorialsPage = ({ data }) => {
+interface Props {
+  data: any
+}
+
+enum Tech {
+  react = "React",
+  javascript = "Javascript",
+  golang = "Golang",
+  graphql = "Graphql",
+  nodejs = "Node.js",
+  typescript = "Typescript",
+  gatsby = "Gatsby",
+  "next.js" = "Next.js",
+}
+
+interface Post {
+  node: { frontmatter: { tech: string } }
+}
+
+const TutorialsPage: React.FC<Props> = ({ data }) => {
   const techCount = {
     react: 0,
     javascript: 0,
@@ -69,8 +88,8 @@ const TutorialsPage = ({ data }) => {
     gatsby: 0,
     "next.js": 0,
   }
-  data.allMdx.edges.forEach(post => {
-    techCount[post.node.frontmatter.tech]++
+  data.allMdx.edges.forEach(({ node }: Post) => {
+    techCount[node.frontmatter.tech]++
   })
 
   return (

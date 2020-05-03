@@ -1,6 +1,10 @@
 import * as React from "react"
 
-const Logo = ({ width }) => (
+interface Props {
+  width: number
+}
+
+const Logo: React.FC<Props> = ({ width }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

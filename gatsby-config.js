@@ -44,11 +44,12 @@ module.exports = {
         trackingId: "UA-165259414-1",
       },
     },
+    `gatsby-plugin-portal`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `functionsnstuff`,
+        short_name: `functionsnstuff`,
         start_url: `/`,
         background_color: `#FFE5FB`,
         theme_color: `#FFE5FB`,
