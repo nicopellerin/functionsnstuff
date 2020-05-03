@@ -13,6 +13,7 @@ import TechCard from "../../components/tech-card"
 const techList = [
   {
     tech: "React",
+    slug: "react",
     logo: "/icons/react.png",
     logoWebp: "/icons/react.webp",
     link: "/tips/react",
@@ -20,6 +21,7 @@ const techList = [
   },
   {
     tech: "GraphQL",
+    slug: "graphql",
     logo: "/icons/graphql.png",
     logoWebp: "/icons/graphql.webp",
     link: "/tips/graphql",
@@ -27,6 +29,7 @@ const techList = [
   },
   {
     tech: "Golang",
+    slug: "golang",
     logo: "/icons/golang.png",
     logoWebp: "/icons/golang.webp",
     link: "/tips/golang",
@@ -34,6 +37,7 @@ const techList = [
   },
   {
     tech: "Node.js",
+    slug: "nodejs",
     logo: "/icons/nodejs.png",
     logoWebp: "/icons/nodejs.webp",
     link: "/tips/nodejs",
@@ -41,6 +45,7 @@ const techList = [
   },
   {
     tech: "Javascript",
+    slug: "javascript",
     logo: "/icons/javascript.png",
     logoWebp: "/icons/javascript.webp",
     link: "/tips/javascript",
@@ -48,6 +53,7 @@ const techList = [
   },
   {
     tech: "Typescript",
+    slug: "typescript",
     logo: "/icons/typescript.png",
     logoWebp: "/icons/typescript.webp",
     link: "/tips/typescript",

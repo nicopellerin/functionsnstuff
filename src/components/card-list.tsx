@@ -49,10 +49,6 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 4rem;
 
-  @media (max-width: 1024px) {
-    justify-items: center;
-  }
-
   @media (max-width: 500px) {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }

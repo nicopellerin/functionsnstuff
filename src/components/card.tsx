@@ -11,27 +11,29 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ title, image, tech, link }) => {
-  const isMobile =
-    typeof window !== "undefined"
-      ? /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-      : null
-
   const imageName = image?.split(".")[0]
   const mobileImage = `${imageName}.png`
 
   return (
     <Link to={link}>
       <Wrapper
-        image={isMobile ? mobileImage : image}
+        // image={isMobile ? mobileImage : image}
         whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
       >
-        <Title>{title}</Title>
-        <TechLogo
-          src={`https://images.weserv.nl/?url=${encodeURI(
-            `https://functionsnstuff.netlify.app/icons/${tech}.png`
-          )}&w=100`}
-          alt={tech}
-        />
+        <Content>
+          <Title>{title}</Title>
+          <TechLogo
+            src={`https://images.weserv.nl/?url=${encodeURI(
+              `https://functionsnstuff.netlify.app/icons/${tech}.png`
+            )}&w=100`}
+            alt={tech}
+          />
+        </Content>
+        <Picture>
+          <source srcSet={image} type="image/webp" />
+          <source srcSet={mobileImage} type="image/png" />
+          <CardImage src={mobileImage} alt={tech} />
+        </Picture>
       </Wrapper>
     </Link>
   )
@@ -44,7 +46,6 @@ const Wrapper = styled(motion.div)`
   background: ${(props: { image: string }) => `url(${props.image})`};
   background-size: cover;
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
-  padding: 2.5rem 2.5rem;
   border-radius: 10px;
   height: 25rem;
   max-width: 500px;
@@ -57,6 +58,27 @@ const Wrapper = styled(motion.div)`
   background-clip: padding-box;
   will-change: transform;
   position: relative;
+`
+
+const Content = styled.div`
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 2.5rem 2.5rem;
+`
+
+const Picture = styled.picture`
+  width: 100%;
+  height: 25rem;
+  position: absolute;
+`
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+  position: absolute;
+  border-radius: 10px;
 `
 
 const Title = styled.h2`
