@@ -8,7 +8,7 @@ const Logo: React.FC<Props> = ({ width }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
-    height="49.74"
+    // height="49.74"
     viewBox="0 0 429.154 49.74"
   >
     <g id="Group_1" data-name="Group 1" transform="translate(-138.846 -146.41)">

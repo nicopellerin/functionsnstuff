@@ -90,6 +90,8 @@ export const GlobalStyles = createGlobalStyle`
   @media (max-width: 500px) {
   max-width: 100%;
   margin: 0;
+  overflow: auto;
+  padding-top: 6rem;
   }
 }
 

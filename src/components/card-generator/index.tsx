@@ -483,7 +483,8 @@ const CardGeneratorMain = () => {
                 check={anim}
                 toggleCheck={() => setAnim(prevState => !prevState)}
               />
-              {/* <CopyButton
+              <CopyButton
+                disabled={true}
                 copied={copied ? true : false}
                 onClick={() =>
                   handleCopyToClipboard(
@@ -509,11 +510,11 @@ const CardGeneratorMain = () => {
                       exit={{ opacity: 0 }}
                     >
                       <CopyToClipboardIcon title="Copy to clipboard" />
-                      <span>Copy JSX</span>
+                      <span>{"Copy JSX - Coming soon :)"}</span>
                     </CopyText>
                   )}
                 </AnimatePresence>
-              </CopyButton> */}
+              </CopyButton>
             </SidebarContainer>
           </Sidebar>
         </SidebarWrapper>
@@ -678,6 +679,11 @@ const CopyButton = styled(motion.button)`
   margin-top: 2rem;
   outline: none;
   height: 5rem;
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
 `
 
 const CopyText = styled(motion.div)`

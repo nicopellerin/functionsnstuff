@@ -184,7 +184,7 @@ const Wrapper = styled.main`
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     grid-gap: 0rem;
-    justify-items: center;
+    justify-items: unset;
   }
 `
 

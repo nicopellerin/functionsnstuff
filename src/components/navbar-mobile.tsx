@@ -73,6 +73,50 @@ const NavbarMobileDropdown: React.FC<DropdownProps> = ({
   setToggleDropdown,
   toggleDropdown,
 }) => {
+  const listVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 10,
+        stiffness: 80,
+        velocity: 2,
+        staggerChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.6,
+      transition: {
+        type: "tween",
+        damping: 100,
+        stiffness: 80,
+        staggerChildren: 0.5,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 10,
+        stiffness: 80,
+      },
+    },
+  }
+
   return (
     <Dropdown
       toggled={toggleDropdown ? true : false}
@@ -84,13 +128,14 @@ const NavbarMobileDropdown: React.FC<DropdownProps> = ({
       <nav>
         <AnimatePresence>
           <DropdownList
-            initial={{ y: -500 }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+            variants={listVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
           >
             <Link to="/tutorials">
               <DropdownListItem
+                variants={itemVariants}
                 onClick={() => setToggleDropdown(prevState => !prevState)}
               >
                 Tutorials
@@ -98,6 +143,7 @@ const NavbarMobileDropdown: React.FC<DropdownProps> = ({
             </Link>
             <Link to="/tips">
               <DropdownListItem
+                variants={itemVariants}
                 onClick={() => setToggleDropdown(prevState => !prevState)}
               >
                 Tips
@@ -105,6 +151,7 @@ const NavbarMobileDropdown: React.FC<DropdownProps> = ({
             </Link>
             <Link to="/tools">
               <DropdownListItem
+                variants={itemVariants}
                 onClick={() => setToggleDropdown(prevState => !prevState)}
               >
                 Tools
@@ -112,6 +159,7 @@ const NavbarMobileDropdown: React.FC<DropdownProps> = ({
             </Link>
             <Link to="/contact">
               <DropdownListItem
+                variants={itemVariants}
                 onClick={() => setToggleDropdown(prevState => !prevState)}
               >
                 Contact
@@ -161,15 +209,15 @@ const MenuBar = styled.div`
 
 const Dropdown = styled(motion.div)`
   position: absolute;
-  background: #000;
+  background: #020207;
   top: 68px;
   width: 100%;
-  padding: 1.5rem 2rem 2.5rem 2rem;
+  padding: 0.5rem 2rem 4.5rem 2rem;
   z-index: 999;
   min-height: 100%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-  /* border-bottom: ${(props: { toggled: boolean }) =>
-    props.toggled ? "2px solid #112" : "2px solid transparent"}; */
+  border-bottom: ${(props: { toggled: boolean }) =>
+    props.toggled ? "4px solid #112)" : "4px solid transparent"};
 `
 
 const DropdownList = styled(motion.ul)`
@@ -180,11 +228,12 @@ const DropdownList = styled(motion.ul)`
 
 const DropdownListItem = styled(motion.li)`
   font-size: 1.6rem;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--menuColor);
-  box-shadow: 0 14px 20px -20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 14px 20px -20px rgba(255, 136, 170, 0.2);
   padding: 2.5rem;
   width: 30rem;
   margin: 0rem auto;
