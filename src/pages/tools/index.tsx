@@ -15,6 +15,12 @@ const ToolsPage = () => {
       <Layout template>
         <Wrapper>
           <Card
+            title="Og:image Generator"
+            image={"/card-oig.webp"}
+            link="/tools/og-image-generator"
+            tech="javascript"
+          />
+          <Card
             title="React Button Generator"
             image={"/card-rbg.webp"}
             link="/tools/react-button-generator"

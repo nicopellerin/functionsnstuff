@@ -43,8 +43,7 @@ const OgImageGenerator = () => {
   const [imageList, setImageList] = useImmer([
     { name: "bg10.png", src: "/bg10.png", height: 500, width: 1000, zIndex: 0 },
   ])
-  const [selectedBlock, setSelectedBlock] = useImmer([])
-  const [optionPressed, setOptionPressed] = useState(false)
+  const [shiftPressed, setShiftPressed] = useState(false)
 
   const imageRef = useRef()
   const imageUploadRef = useRef()
@@ -108,53 +107,42 @@ const OgImageGenerator = () => {
   }
 
   const downloadOgImage = async () => {
-    // const res = await axios.get("/.netlify/functions/og-image-generator", {
-    //   responseType: "arraybuffer",
-    // })
-    // const pdfBlob = new Blob([res.data], { type: "image/png" })
-
-    // console.log(res)
-
     html2canvas(ogImageRef.current, {
       scale: 2,
       scrollX: -7.5,
       scrollY: -window.scrollY,
       useCORS: true,
     }).then(canvas => {
-      // document.body.appendChild(canvas)
       const data = canvas.toDataURL("image/png")
       const src = encodeURI(data)
-      saveAs(src, "Yooo.png")
+      const filename = `og-image-${new Date().getTime()}`
+      saveAs(src, filename)
     })
-  }
-
-  const addToBlock = value => {
-    setSelectedBlock(draft => [...draft, value])
   }
 
   useEffect(() => {
     document.addEventListener("keydown", e => {
       if (e.keyCode === 16) {
-        setOptionPressed(true)
+        setShiftPressed(true)
       }
     })
 
     document.addEventListener("keyup", e => {
       if (e.keyCode === 16) {
-        setOptionPressed(false)
+        setShiftPressed(false)
       }
     })
 
     return () => {
       document.removeEventListener("keydown", e => {
         if (e.keyCode === 16) {
-          setOptionPressed(true)
+          setShiftPressed(true)
         }
       })
 
       document.removeEventListener("keyup", e => {
         if (e.keyCode === 16) {
-          setOptionPressed(false)
+          setShiftPressed(false)
         }
       })
     }
@@ -166,8 +154,8 @@ const OgImageGenerator = () => {
         <OgImage ref={ogImageRef} id="og-image">
           <motion.h1
             id="heading"
-            drag={optionPressed ? "y" : true}
-            onDoubleClick={e => addToBlock(e.currentTarget.id)}
+            drag={shiftPressed ? "y" : true}
+            dragMomentum={false}
             style={{
               position: "relative",
               zIndex: 2,
@@ -183,13 +171,10 @@ const OgImageGenerator = () => {
           </motion.h1>
           <motion.p
             id="tagline"
-            onDoubleClick={e => addToBlock(e.currentTarget.id)}
-            drag={optionPressed ? "y" : true}
+            drag={shiftPressed ? "y" : true}
+            dragMomentum={false}
             style={{
               position: "relative",
-              // top: "55%",
-              // left: "50%",
-              // whiteSpace: "nowrap",
               zIndex: 2,
               fontSize,
               fontFamily: "var(--systemFont)",
@@ -204,10 +189,8 @@ const OgImageGenerator = () => {
           {imageList.map(({ name, src, width }, i) => (
             <motion.img
               key={src}
-              onClick={e =>
-                console.log(e.currentTarget.getBoundingClientRect())
-              }
-              drag={optionPressed ? "y" : true}
+              drag={shiftPressed ? "y" : true}
+              dragMomentum={false}
               src={src}
               alt={name}
               style={{
@@ -229,6 +212,17 @@ const OgImageGenerator = () => {
           Download og:image <Icon.FiDownload style={{ marginLeft: 10 }} />
         </DownloadButton>
       </DownloadButtonWrapper>
+      <p
+        style={{
+          color: "#999",
+          fontSize: "1.4rem",
+          textAlign: "center",
+          margin: "4rem auto 2rem auto",
+          maxWidth: "55rem",
+        }}
+      >
+        Hold down shift while dragging to move in a straight line
+      </p>
       <SidebarWrapper>
         <Sidebar>
           <SidebarContainer>
@@ -331,7 +325,8 @@ const OgImageGenerator = () => {
                     </div>
                     <div>
                       <ButtonIcon
-                        disabled={i - 1 < 0}
+                        disabled={true}
+                        // disabled={i - 1 < 0}
                         onClick={() => handleMoveUp({ src })}
                       >
                         <Icon.FiChevronUp
@@ -340,7 +335,8 @@ const OgImageGenerator = () => {
                         />
                       </ButtonIcon>
                       <ButtonIcon
-                        disabled={i + 1 === imageList.length}
+                        disabled={true}
+                        // disabled={i + 1 === imageList.length}
                         onClick={() => handleMoveDown({ src })}
                       >
                         <Icon.FiChevronDown
