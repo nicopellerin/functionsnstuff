@@ -2,20 +2,13 @@ import * as React from "react"
 import { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import * as Icon from "react-icons/fi"
-import { motion, AnimatePresence } from "framer-motion"
-import { useMedia } from "react-use-media"
-import { Listbox, ListboxOption } from "@reach/listbox"
-import "@reach/listbox/styles.css"
+import { motion } from "framer-motion"
 import { useImmer } from "use-immer"
-import axios from "axios"
 import { saveAs } from "file-saver"
 
-import Spacer from "../spacer"
 import Counter from "../generator-shared/counter"
-import ColorPicker from "../generator-shared/color-picker"
+import ColorPicker from "./color-picker"
 import Toggle from "../generator-shared/toggle"
-import copyToClipboard from "../generator-shared/copy-to-clipboard"
-import CodeBlock from "../generator-shared/code-block"
 
 enum BackgroundType {
   Fill = "BackgroundFill",
@@ -23,6 +16,7 @@ enum BackgroundType {
 }
 
 const OgImageGenerator = () => {
+  const [backgroundColor, setBackgroundColor] = useState("#112")
   const [heading, setHeading] = useState("Welcome")
   const [headingFontSize, setHeadingFontSize] = useState(90)
   const [headingColor, setHeadingColor] = useState("#fff")
@@ -148,7 +142,7 @@ const OgImageGenerator = () => {
   return (
     <Wrapper>
       <OgImageWrapper>
-        <OgImage ref={ogImageRef} id="og-image">
+        <OgImage ref={ogImageRef} id="og-image" style={{ backgroundColor }}>
           <motion.h1
             id="heading"
             drag={shiftPressed ? "y" : true}
@@ -265,10 +259,20 @@ const OgImageGenerator = () => {
                   check={isBold}
                   toggleCheck={() => setIsBold(prevState => !prevState)}
                 />
+
                 <ColorPicker
                   title="Text color"
                   colorPicked={textColor}
                   setColor={setTextColor}
+                  backgroundType={BackgroundType.Fill}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Title>Background</Title>
+                <ColorPicker
+                  title="Background color"
+                  colorPicked={backgroundColor}
+                  setColor={setBackgroundColor}
                   backgroundType={BackgroundType.Fill}
                 />
               </InputGroup>
@@ -356,12 +360,6 @@ const OgImageGenerator = () => {
                 hidden
               />
             </div>
-            <div>
-              {/* <Button onClick={() => imageUploadRef.current.click()}>
-                <Icon.FiPlusCircle style={{ marginRight: 5 }} />
-                Add text
-              </Button> */}
-            </div>
           </SidebarContainer>
         </Sidebar>
       </SidebarWrapper>
@@ -383,7 +381,6 @@ const OgImageWrapper = styled.div`
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-  /* border-radius: 20px; */
   position: relative;
   overflow: hidden;
 

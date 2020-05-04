@@ -52,7 +52,7 @@ const Background = () => {
           >
           <React.Suspense fallback={null}>
             <Particles count={150} />
-            <Stars count={1000} />
+            <Stars count={1250} />
           </React.Suspense>
         </Canvas>
       )}
