@@ -228,8 +228,8 @@ const RandomButton = styled(motion.button)`
   display: flex;
   align-items: center;
   cursor: pointer;
-  width: 150px;
-  height: 44px;
+  width: 156px;
+  height: 48px;
   outline: none;
   will-change: transform;
 `
