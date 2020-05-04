@@ -1,0 +1,29 @@
+---
+title: How to fix 'window is not defined' in Gatsby
+author: Nico Pellerin
+tech: gatsby
+slug: gatsby-window-not-defined
+cover: /card1.webp
+type: tips
+---
+
+<SEO title="How to fix 'window is not defined' in Gatsby" />
+
+# How to fix 'window is not defined' in Gatsby
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+// Ex. Since the `window` object does not exist in the build env,
+// it will throw a "window is not defined" error on build
+// We can fix this by checking if we are in the browser
+
+typeof window !== "undefined" && window.localStorage.getItem("storageKey")
+
+// Ex. Using the package `html2canvas`
+// throws "window is not defined" error on build
+// To fix this, we can check if we are in the browser before requiring it
+
+const html2canvas =
+  typeof window !== "undefined" ? require("html2canvas")
+```

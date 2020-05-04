@@ -5,6 +5,8 @@ import * as Icon from "react-icons/fi"
 import { motion } from "framer-motion"
 import { useImmer } from "use-immer"
 import { saveAs } from "file-saver"
+const html2canvas =
+  typeof window !== "undefined" ? require("html2canvas") : null
 
 import Counter from "../generator-shared/counter"
 import ColorPicker from "./color-picker"
@@ -32,10 +34,10 @@ const OgImageGenerator = () => {
   ])
   const [shiftPressed, setShiftPressed] = useState(false)
 
-  let html2canvas: any
-  useEffect(() => {
-    html2canvas = require("html2canvas")
-  }, [])
+  // let html2canvas: any
+  // useEffect(() => {
+  //   html2canvas = require("html2canvas")
+  // }, [])
 
   const imageUploadRef = useRef()
   const ogImageRef = useRef()
