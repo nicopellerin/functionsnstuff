@@ -7,6 +7,7 @@ import { useMedia } from "react-use-media"
 import { Listbox, ListboxOption } from "@reach/listbox"
 import "@reach/listbox/styles.css"
 import { useImmer } from "use-immer"
+import axios from "axios"
 
 import Spacer from "../spacer"
 import Counter from "../generator-shared/counter"
@@ -103,32 +104,37 @@ const OgImageGenerator = () => {
     })
   }
 
+  const downloadOgImage = async () => {
+    const res = await axios.get("/.netlify/functions/og-image-generator")
+    console.log(res)
+  }
+
   const addToBlock = value => {
     setSelectedBlock(draft => [...draft, value])
   }
 
   useEffect(() => {
     document.addEventListener("keydown", e => {
-      if (e.keyCode === 18) {
+      if (e.keyCode === 16) {
         setOptionPressed(true)
       }
     })
 
     document.addEventListener("keyup", e => {
-      if (e.keyCode === 18) {
+      if (e.keyCode === 16) {
         setOptionPressed(false)
       }
     })
 
     return () => {
       document.removeEventListener("keydown", e => {
-        if (e.keyCode === 18) {
+        if (e.keyCode === 16) {
           setOptionPressed(true)
         }
       })
 
       document.removeEventListener("keyup", e => {
-        if (e.keyCode === 18) {
+        if (e.keyCode === 16) {
           setOptionPressed(false)
         }
       })
@@ -147,65 +153,52 @@ const OgImageGenerator = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            position: "relative",
           }}
         >
-          <motion.div
+          <motion.h1
+            id="heading"
+            drag={optionPressed ? "y" : true}
+            onDoubleClick={e => addToBlock(e.currentTarget.id)}
             style={{
-              border:
-                selectedBlock.length === 2
-                  ? "3px dotted rgba(255, 255, 255, 0.3)"
-                  : "none",
+              position: "relative",
               zIndex: 2,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "2rem",
-              cursor: selectedBlock.length === 2 ? "move" : "initial",
+              margin: 0,
+              fontSize: headingFontSize,
+              cursor: "move",
+              color: headingColor,
+              fontWeight: isHeadingBold ? 700 : 400,
+              justifySelf: "center",
             }}
-            drag={selectedBlock.length === 2 ? true : false}
           >
-            <motion.h1
-              id="heading"
-              drag
-              onDoubleClick={e => addToBlock(e.currentTarget.id)}
-              style={{
-                position: "relative",
-                zIndex: 2,
-                margin: 0,
-                fontSize: headingFontSize,
-                cursor: "move",
-                color: headingColor,
-                fontWeight: isHeadingBold ? 700 : 400,
-                justifySelf: "center",
-                width: "min-content",
-              }}
-            >
-              {heading}
-            </motion.h1>
-            <motion.p
-              id="tagline"
-              onDoubleClick={e => addToBlock(e.currentTarget.id)}
-              drag={optionPressed ? "y" : true}
-              style={{
-                position: "relative",
-                zIndex: 2,
-                fontSize,
-                fontFamily: "var(--systemFont)",
-                cursor: "move",
-                color: textColor,
-                fontWeight: isBold ? 700 : 400,
-                justifySelf: "center",
-              }}
-            >
-              {text}
-            </motion.p>
-          </motion.div>
+            {heading}
+          </motion.h1>
+          <motion.p
+            id="tagline"
+            onDoubleClick={e => addToBlock(e.currentTarget.id)}
+            drag={optionPressed ? "y" : true}
+            style={{
+              position: "relative",
+              // top: "55%",
+              // left: "50%",
+              // whiteSpace: "nowrap",
+              zIndex: 2,
+              fontSize,
+              fontFamily: "var(--systemFont)",
+              cursor: "move",
+              color: textColor,
+              fontWeight: isBold ? 700 : 400,
+              justifySelf: "center",
+            }}
+          >
+            {text}
+          </motion.p>
           {imageList.map(({ name, src, width }, i) => (
             <motion.img
               onClick={e =>
                 console.log(e.currentTarget.getBoundingClientRect())
               }
-              drag
+              drag={optionPressed ? "y" : true}
               src={src}
               alt={name}
               style={{
@@ -218,6 +211,15 @@ const OgImageGenerator = () => {
           ))}
         </div>
       </OgImageWrapper>
+      <DownloadButtonWrapper>
+        <DownloadButton
+          onClick={downloadOgImage}
+          whileHover={{ y: -1 }}
+          whileTap={{ y: 1 }}
+        >
+          Download og:image <Icon.FiDownload style={{ marginLeft: 10 }} />
+        </DownloadButton>
+      </DownloadButtonWrapper>
       <SidebarWrapper>
         <Sidebar>
           <SidebarContainer>
@@ -274,10 +276,9 @@ const OgImageGenerator = () => {
             <div>
               <Title>Images</Title>
               <ImageListWrapper>
-                {imageList.map(({ name, src }) => (
+                {imageList.map(({ name, src }, i) => (
                   <ImageItemWrapper>
                     <div>
-                      {/* <ImageItemName>{name}</ImageItemName> */}
                       <img
                         src={src}
                         alt={name}
@@ -320,10 +321,24 @@ const OgImageGenerator = () => {
                       </ButtonIcon>
                     </div>
                     <div>
-                      <button onClick={() => handleMoveUp({ src })}>Up</button>
-                      <button onClick={() => handleMoveDown({ src })}>
-                        Down
-                      </button>
+                      <ButtonIcon
+                        disabled={i - 1 < 0}
+                        onClick={() => handleMoveUp({ src })}
+                      >
+                        <Icon.FiChevronUp
+                          size={24}
+                          color="var(--primaryColor)"
+                        />
+                      </ButtonIcon>
+                      <ButtonIcon
+                        disabled={i + 1 === imageList.length}
+                        onClick={() => handleMoveDown({ src })}
+                      >
+                        <Icon.FiChevronDown
+                          size={24}
+                          color="var(--primaryColor)"
+                        />
+                      </ButtonIcon>
                     </div>
                   </ImageItemWrapper>
                 ))}
@@ -394,7 +409,7 @@ const SidebarContainer = styled.div`
   grid-gap: 6rem;
 `
 
-const Button = styled.button`
+const Button = styled(motion.button)`
   padding: 0.8em 2em;
   font-size: 1.6rem;
   font-weight: 500;
@@ -416,6 +431,17 @@ const Button = styled.button`
     pointer-events: none;
     opacity: 0.3;
   }
+`
+
+const DownloadButtonWrapper = styled.div`
+  margin: 3rem 0;
+  display: flex;
+  justify-content: center;
+`
+
+const DownloadButton = styled(Button)`
+  width: auto;
+  will-change: transform;
 `
 
 const InputGroup = styled.div`
@@ -472,6 +498,11 @@ const ButtonIcon = styled(motion.button)`
   outline: none;
   cursor: pointer;
   padding: 0.2rem;
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
 `
 
 const Title = styled.h4`
