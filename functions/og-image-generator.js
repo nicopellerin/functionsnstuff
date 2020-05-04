@@ -1,16 +1,10 @@
 const chrome = require("chrome-aws-lambda")
-const { launch } = require("puppeteer-core")
+const puppeteer = require("puppeteer-core")
 
 const exePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
-interface Options {
-  args: string[]
-  executablePath: string
-  headless: boolean
-}
-
-const getOptions = async (isDev: boolean) => {
-  let options: Options
+const getOptions = async isDev => {
+  let options
   if (isDev) {
     options = {
       args: [],
@@ -28,24 +22,29 @@ const getOptions = async (isDev: boolean) => {
   return options
 }
 
-const getScreenshot = async (url: string, isDev: boolean) => {
+const getScreenshot = async (url, isDev) => {
   const options = await getOptions(isDev)
-  const browser = await launch(options)
+  const browser = await puppeteer.launch(options)
   const page = await browser.newPage()
-  await page.setViewport({ width: 1000, height: 500 })
+  await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1.5 })
   await page.goto(url)
-  return page.screenshot({ type: "jpeg", quality: 100 })
+  await page.waitFor(1500)
+  const image = await page.$("#og-image")
+  const buffer = await image.screenshot({ type: "png" })
+  await browser.close()
+  const base64Image = buffer.toString("base64")
+  return base64Image
 }
 
 exports.handler = async (event, content, callback) => {
   try {
     const ogImage = await getScreenshot(
-      "https://functionsnstuff.io/tools/og-image-generator",
+      "http://localhost:8888/tools/og-image-generator",
       true
     )
     return {
       statusCode: 200,
-      body: ogImage.toString("base64"),
+      body: ogImage,
       isBase64Encoded: true,
     }
   } catch (err) {

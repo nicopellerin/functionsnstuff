@@ -8,6 +8,8 @@ import { Listbox, ListboxOption } from "@reach/listbox"
 import "@reach/listbox/styles.css"
 import { useImmer } from "use-immer"
 import axios from "axios"
+import { saveAs } from "file-saver"
+import html2canvas from "html2canvas"
 
 import Spacer from "../spacer"
 import Counter from "../generator-shared/counter"
@@ -46,6 +48,7 @@ const OgImageGenerator = () => {
 
   const imageRef = useRef()
   const imageUploadRef = useRef()
+  const ogImageRef = useRef()
 
   const removeImage = ({ src }) => {
     const newImageList = imageList.filter(image => image.src !== src)
@@ -105,8 +108,24 @@ const OgImageGenerator = () => {
   }
 
   const downloadOgImage = async () => {
-    const res = await axios.get("/.netlify/functions/og-image-generator")
-    console.log(res)
+    // const res = await axios.get("/.netlify/functions/og-image-generator", {
+    //   responseType: "arraybuffer",
+    // })
+    // const pdfBlob = new Blob([res.data], { type: "image/png" })
+
+    // console.log(res)
+
+    html2canvas(ogImageRef.current, {
+      scale: 2,
+      scrollX: -7.5,
+      scrollY: -window.scrollY,
+      useCORS: true,
+    }).then(canvas => {
+      // document.body.appendChild(canvas)
+      const data = canvas.toDataURL("image/png")
+      const src = encodeURI(data)
+      saveAs(src, "Yooo.png")
+    })
   }
 
   const addToBlock = value => {
@@ -144,18 +163,7 @@ const OgImageGenerator = () => {
   return (
     <Wrapper>
       <OgImageWrapper>
-        <div
-          style={{
-            width: 1000,
-            height: 500,
-            background: "#112",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-          }}
-        >
+        <OgImage ref={ogImageRef} id="og-image">
           <motion.h1
             id="heading"
             drag={optionPressed ? "y" : true}
@@ -195,6 +203,7 @@ const OgImageGenerator = () => {
           </motion.p>
           {imageList.map(({ name, src, width }, i) => (
             <motion.img
+              key={src}
               onClick={e =>
                 console.log(e.currentTarget.getBoundingClientRect())
               }
@@ -209,7 +218,7 @@ const OgImageGenerator = () => {
               }}
             />
           ))}
-        </div>
+        </OgImage>
       </OgImageWrapper>
       <DownloadButtonWrapper>
         <DownloadButton
@@ -277,7 +286,7 @@ const OgImageGenerator = () => {
               <Title>Images</Title>
               <ImageListWrapper>
                 {imageList.map(({ name, src }, i) => (
-                  <ImageItemWrapper>
+                  <ImageItemWrapper key={src}>
                     <div>
                       <img
                         src={src}
@@ -388,6 +397,17 @@ const OgImageWrapper = styled.div`
   @media (max-width: 500px) {
     padding: 0;
   }
+`
+
+const OgImage = styled.div`
+  width: 1000px;
+  height: 500px;
+  background: #112;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 `
 
 const SidebarWrapper = styled.div``
