@@ -9,7 +9,6 @@ import "@reach/listbox/styles.css"
 import { useImmer } from "use-immer"
 import axios from "axios"
 import { saveAs } from "file-saver"
-import html2canvas from "html2canvas"
 
 import Spacer from "../spacer"
 import Counter from "../generator-shared/counter"
@@ -32,12 +31,6 @@ const OgImageGenerator = () => {
     "Tutorials & tips for React, Go, Node.js, Gatsby and more!"
   )
   const [fontSize, setFontSize] = useState(24)
-  const [imageSrc, setImageSrc] = useState("/bg10.png")
-  const [imageFileName, setImageFileName] = useState("")
-  const [imageZoom, setImageZoom] = useState(1)
-  const [imageOpacity, setImageOpacity] = useState(1)
-  const [imageDimensions, setImageDimensions] = useState({ h: 400, w: 650 })
-  const [editImagePosition, setEditImagePosition] = useState(false)
   const [textColor, setTextColor] = useState("#fff")
   const [isBold, setIsBold] = useState(false)
   const [imageList, setImageList] = useImmer([
@@ -45,7 +38,11 @@ const OgImageGenerator = () => {
   ])
   const [shiftPressed, setShiftPressed] = useState(false)
 
-  const imageRef = useRef()
+  let html2canvas: any
+  useEffect(() => {
+    html2canvas = require("html2canvas")
+  }, [])
+
   const imageUploadRef = useRef()
   const ogImageRef = useRef()
 
