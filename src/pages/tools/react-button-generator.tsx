@@ -12,7 +12,7 @@ const ButtonGeneratorPage = () => {
     <>
       <SEO
         title="React Button Generator"
-        image="/og-button-generator-react2.png"
+        image="/og-button-generator-react3.png"
         description="Easily create custom React buttons with icons and animations"
       />
       <PageHeader title="React Button Generator" />

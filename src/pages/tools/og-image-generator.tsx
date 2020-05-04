@@ -11,8 +11,8 @@ const OgImageGeneratorPage = () => {
     <>
       <SEO
         title="Og:image Generator"
-        image="/og-button-generator-react2.png"
-        description="Easily create and customize your og image"
+        image="/og-image-generator.png"
+        description="Easily create and customize your og images"
       />
       <PageHeader title="Og:image Generator" />
       <Layout template>

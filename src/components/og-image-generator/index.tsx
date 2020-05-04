@@ -34,11 +34,6 @@ const OgImageGenerator = () => {
   ])
   const [shiftPressed, setShiftPressed] = useState(false)
 
-  // let html2canvas: any
-  // useEffect(() => {
-  //   html2canvas = require("html2canvas")
-  // }, [])
-
   const imageUploadRef = useRef()
   const ogImageRef = useRef()
 
@@ -52,10 +47,8 @@ const OgImageGenerator = () => {
 
     const img = new Image()
     img.src = URL.createObjectURL(file)
-
     let height = 0
     let width = 0
-
     img.onload = () => {
       height = img.height
       width = img.width

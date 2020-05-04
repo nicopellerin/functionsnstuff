@@ -12,7 +12,7 @@ const CardGeneratorPage = () => {
     <>
       <SEO
         title="React Card Generator"
-        image="/og-button-generator-react2.png"
+        image="/og-card-generator-react.png"
         description="Easily create custom React cards with beautiful animations"
       />
       <PageHeader title="React Card Generator" />
