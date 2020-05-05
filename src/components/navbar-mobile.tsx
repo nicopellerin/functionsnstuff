@@ -35,7 +35,7 @@ const NavbarMobile = () => {
         <Link to="/">
           <Logo width={175} />
         </Link>
-        <img src={"/donut_mobile.png"} alt="donut" />
+        {/* <img src={"/donut_mobile.png"} alt="donut" /> */}
       </Wrapper>
       <AnimatePresence>
         {toggleDropdown && (
@@ -185,7 +185,8 @@ const Wrapper = styled.div`
   justify-items: center;
   align-items: center;
   z-index: 1000;
-  /* height: 65px; */
+  /* min-height: 65px;
+  height: 100%; */
   width: 100%;
   transition: 0.3s;
   border-bottom: ${(props: { toggled: boolean }) =>
