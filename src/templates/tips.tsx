@@ -16,7 +16,7 @@ const shortcodes = { SEO, Spacer, pre: Code, Share }
 
 const TipsTemplate = ({ data: { mdx }, pageContext }) => {
   const { prevTip, nextTip } = pageContext
-  console.log(pageContext)
+
   return (
     <>
       <PageHeader tech={mdx.frontmatter.tech} />

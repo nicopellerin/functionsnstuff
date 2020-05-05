@@ -185,7 +185,7 @@ const Wrapper = styled.div`
   justify-items: center;
   align-items: center;
   z-index: 1000;
-  height: 65px;
+  /* height: 65px; */
   width: 100%;
   transition: 0.3s;
   border-bottom: ${(props: { toggled: boolean }) =>
@@ -210,14 +210,14 @@ const MenuBar = styled.div`
 const Dropdown = styled(motion.div)`
   position: absolute;
   background: #020207;
-  top: 68px;
+  top: 6.8rem;
   width: 100%;
-  padding: 0.5rem 2rem 4.5rem 2rem;
+  padding: 0.5rem 2rem 4rem 2rem;
   z-index: 999;
   min-height: 100%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
   border-bottom: ${(props: { toggled: boolean }) =>
-    props.toggled ? "4px solid #112)" : "4px solid transparent"};
+    props.toggled ? "4px solid var(--pink)" : "4px solid transparent"};
 `
 
 const DropdownList = styled(motion.ul)`
@@ -232,8 +232,8 @@ const DropdownListItem = styled(motion.li)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--menuColor);
-  box-shadow: 0 14px 20px -20px rgba(255, 136, 170, 0.2);
+  color: var(--primaryColor);
+  box-shadow: 0 14px 20px -20px rgba(255, 136, 170, 0.1);
   padding: 2.5rem;
   width: 30rem;
   margin: 0rem auto;
