@@ -88,7 +88,7 @@ const OgImageGenerator = () => {
         width,
         height,
         zIndex: imageList.length,
-        opacity: 1,
+        opacity: 100,
       }
       setImageList(draft => [...draft, newImage])
     }
