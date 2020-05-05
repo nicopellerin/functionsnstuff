@@ -33,24 +33,25 @@ const Share = () => {
       typeof window !== "undefined" && window.navigator.share
 
     if (navigatorShare) {
-      navigatorShare({
-        title: document.title,
-        text: document
-          .querySelector('meta[name="description"]')
-          ?.getAttribute("content"),
-        url,
-      })
+      navigatorShare
+        .share({
+          title: document.title,
+          text: document
+            .querySelector('meta[name="description"]')
+            ?.getAttribute("content"),
+          url,
+        })
+        .then(() => console.log("Shared"))
+        .catch(err => console.log("Error sharing", err))
     }
   }
 
   return (
     <Wrapper>
       {isMobile() ? (
-        <FiShare2
-          size={32}
-          onClick={mobileNativeShare}
-          style={{ marginRight: "1.5rem" }}
-        />
+        <ButtonIcon style={{ marginRight: "2rem" }} onClick={mobileNativeShare}>
+          <FiShare2 color="#f4f4f4" size={30} />
+        </ButtonIcon>
       ) : null}
       <FacebookShareButton url={url}>
         <FacebookIcon
@@ -58,7 +59,7 @@ const Share = () => {
             borderRadius: "50%",
             width: 36,
             height: 36,
-            marginRight: "1.5rem",
+            marginRight: "2rem",
           }}
         />
       </FacebookShareButton>
@@ -68,7 +69,7 @@ const Share = () => {
             borderRadius: "50%",
             width: 36,
             height: 36,
-            marginRight: "1.5rem",
+            marginRight: "2rem",
           }}
         />
       </TwitterShareButton>
@@ -91,5 +92,18 @@ const Wrapper = styled.div`
   @media (max-width: 500px) {
     margin-top: 6rem;
     margin-bottom: 4rem;
+  }
+`
+
+const ButtonIcon = styled.button`
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.2rem;
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.3;
   }
 `
