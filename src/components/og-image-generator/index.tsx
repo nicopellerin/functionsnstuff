@@ -34,7 +34,7 @@ const initialState = {
     height: 500,
     width: 1000,
     zIndex: 0,
-    opacity: 1,
+    opacity: 100,
   },
   heading: "Welcome",
   headingColor: "#fff",
@@ -97,8 +97,8 @@ const OgImageGenerator = () => {
   const increaseImageOpacity = ({ src }: Partial<Image>) => {
     const idx = imageList.findIndex(image => image.src === src)
     setImageList(draft => {
-      if (draft[idx].opacity === 1) return
-      draft[idx].opacity += 0.1
+      if (draft[idx].opacity === 100) return
+      draft[idx].opacity += 10
     })
   }
 
@@ -107,7 +107,7 @@ const OgImageGenerator = () => {
     console.log(imageList[idx])
     setImageList(draft => {
       if (draft[idx].opacity === 0) return
-      draft[idx].opacity -= 0.1
+      draft[idx].opacity -= 10
     })
   }
 
@@ -232,7 +232,7 @@ const OgImageGenerator = () => {
                 position: "absolute",
                 zIndex: i,
                 cursor: "move",
-                opacity,
+                opacity: opacity / 100,
               }}
             />
           ))}
@@ -315,7 +315,7 @@ const OgImageGenerator = () => {
           <div>
             <Title>Images</Title>
             <ImageListWrapper>
-              {imageList.map(({ name, src }) => (
+              {imageList.map(({ name, src, opacity }) => (
                 <ImageItemWrapper key={src}>
                   <div>
                     <img
@@ -334,9 +334,10 @@ const OgImageGenerator = () => {
                   <AdjustmentWrapper>
                     <AdjustmentTitle>Opacity</AdjustmentTitle>
                     <ButtonIcon
-                      // disabled={true}
-                      // disabled={i - 1 < 0}
-                      onClick={() => increaseImageOpacity({ src })}
+                      disabled={opacity === 100}
+                      onClick={() =>
+                        opacity < 100 ? increaseImageOpacity({ src }) : null
+                      }
                       style={{ marginRight: 5 }}
                     >
                       <Icon.FiPlusCircle
@@ -345,9 +346,10 @@ const OgImageGenerator = () => {
                       />
                     </ButtonIcon>
                     <ButtonIcon
-                      // disabled={true}
-                      // disabled={i + 1 === imageList.length}
-                      onClick={() => reduceImageOpacity({ src })}
+                      disabled={opacity === 0}
+                      onClick={() =>
+                        opacity > 0 ? reduceImageOpacity({ src }) : null
+                      }
                     >
                       <Icon.FiMinusCircle
                         size={24}
