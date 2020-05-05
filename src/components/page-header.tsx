@@ -45,7 +45,7 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
         alt="background mountains"
         style={{
           position: "absolute",
-          top: 0,
+          // top: 0,
           width: "100%",
           zIndex: -1,
           y: y2,
@@ -133,7 +133,7 @@ const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
 
-  @media (min-width: 1500px) {
+  @media (min-width: 1200px) {
     background-position-y: 20%;
     height: 46rem;
   }
@@ -141,9 +141,13 @@ const Wrapper = styled.div`
 
 const BackgroundMountainsDesktop = styled(motion.img)`
   position: absolute;
-  top: 20%;
+  top: 0%;
   width: 100vw;
   z-index: -1;
+
+  @media (max-width: 1200px) {
+    top: 20%;
+  }
 
   @media (max-width: 768px) {
     display: none;

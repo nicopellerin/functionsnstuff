@@ -24,38 +24,38 @@ const Background = () => {
 
   return (
     <>
-      {/* {isMobile() ? (
+      {isMobile() ? (
         <BackgroundSkyMobile>
-          <BackgroundSky src={"/bg_back.png"} />
+          <BackgroundSky src={"/bg_mobile.png"} />
         </BackgroundSkyMobile>
-      ) : ( */}
-      <Canvas
-        concurrent
-        camera={{
-          fov: 10000,
-          position: [0, 0, 30],
-          near: 0.01,
-          far: 10000,
-        }}
-        style={{
-          position: "absolute",
-          top: 0,
-          width: "100%",
-          maxHeight: "65rem",
-          zIndex: -2,
-        }}
-        onCreated={({ gl }) => {
-          gl.toneMapping = THREE.Uncharted2ToneMapping
-          gl.setClearColor(new THREE.Color("#020207"))
-        }}
-      >
+      ) : (
+        <Canvas
+          concurrent
+          camera={{
+            fov: 10000,
+            position: [0, 0, 30],
+            near: 0.01,
+            far: 10000,
+          }}
+          style={{
+            position: "absolute",
+            top: 0,
+            width: "100%",
+            maxHeight: "65rem",
+            zIndex: -2,
+          }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = THREE.Uncharted2ToneMapping
+            gl.setClearColor(new THREE.Color("#020207"))
+          }}
         >
-        <React.Suspense fallback={null}>
-          <Particles count={150} />
-          <Stars count={1250} />
-        </React.Suspense>
-      </Canvas>
-      {/* )} */}
+          >
+          <React.Suspense fallback={null}>
+            <Particles count={150} />
+            <Stars count={1250} />
+          </React.Suspense>
+        </Canvas>
+      )}
     </>
   )
 }
@@ -74,7 +74,7 @@ const BackgroundSkyMobile = styled.div`
 
 const BackgroundSky = styled.img`
   max-width: 100%;
-  height: 100vh;
+  height: 50rem;
   object-fit: cover;
-  object-position: cover;
+  object-position: center;
 `
