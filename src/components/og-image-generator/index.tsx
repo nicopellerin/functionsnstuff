@@ -17,32 +17,61 @@ enum BackgroundType {
   Gradient = "BackgroundGradient",
 }
 
+interface Image {
+  name: string
+  src: string
+  width: number
+  height: number
+  zIndex: number
+  opacity: number
+}
+
+const initialState = {
+  backgroundColor: "#112",
+  image: {
+    name: "bg10.png",
+    src: "/bg10.png",
+    height: 500,
+    width: 1000,
+    zIndex: 0,
+    opacity: 1,
+  },
+  heading: "Welcome",
+  headingColor: "#fff",
+  headingFontSize: 90,
+  tagline: "Tutorials & tips for React, Go, Node.js, Gatsby and more!",
+  taglineColor: "#fff",
+  taglineFontSize: 24,
+}
+
 const OgImageGenerator = () => {
-  const [backgroundColor, setBackgroundColor] = useState("#112")
-  const [heading, setHeading] = useState("Welcome")
-  const [headingFontSize, setHeadingFontSize] = useState(90)
-  const [headingColor, setHeadingColor] = useState("#fff")
-  const [isHeadingBold, setIsHeadingBold] = useState(true)
-  const [text, setText] = useState(
-    "Tutorials & tips for React, Go, Node.js, Gatsby and more!"
+  const [backgroundColor, setBackgroundColor] = useState(
+    initialState.backgroundColor
   )
-  const [fontSize, setFontSize] = useState(24)
-  const [textColor, setTextColor] = useState("#fff")
-  const [isBold, setIsBold] = useState(false)
-  const [imageList, setImageList] = useImmer([
-    { name: "bg10.png", src: "/bg10.png", height: 500, width: 1000, zIndex: 0 },
-  ])
+  const [heading, setHeading] = useState(initialState.heading)
+  const [headingFontSize, setHeadingFontSize] = useState(
+    initialState.headingFontSize
+  )
+  const [headingColor, setHeadingColor] = useState(initialState.headingColor)
+  const [isHeadingBold, setIsHeadingBold] = useState(true)
+  const [tagline, setTagline] = useState(initialState.tagline)
+  const [taglineFontSize, setTaglineFontSize] = useState(
+    initialState.taglineFontSize
+  )
+  const [taglineColor, setTaglineColor] = useState(initialState.taglineColor)
+  const [isTaglineBold, setIsTaglineBold] = useState(false)
+  const [imageList, setImageList] = useImmer([initialState.image])
   const [shiftPressed, setShiftPressed] = useState(false)
 
-  const imageUploadRef = useRef()
-  const ogImageRef = useRef()
+  const imageUploadRef = useRef() as React.MutableRefObject<HTMLInputElement>
+  const ogImageRef = useRef() as React.MutableRefObject<HTMLDivElement>
 
-  const removeImage = ({ src }) => {
+  const removeImage = ({ src }: Partial<Image>) => {
     const newImageList = imageList.filter(image => image.src !== src)
     setImageList(() => newImageList)
   }
 
-  const addImage = e => {
+  const addImage = (e: React.FormEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files![0]
 
     const img = new Image()
@@ -59,36 +88,54 @@ const OgImageGenerator = () => {
         width,
         height,
         zIndex: imageList.length,
+        opacity: 1,
       }
       setImageList(draft => [...draft, newImage])
     }
   }
 
-  const reduceImageSize = ({ src }) => {
-    const img = imageList.findIndex(image => image.src === src)
+  const increaseImageOpacity = ({ src }: Partial<Image>) => {
+    const idx = imageList.findIndex(image => image.src === src)
     setImageList(draft => {
-      draft[img].width -= 50
+      if (draft[idx].opacity === 1) return
+      draft[idx].opacity += 0.1
     })
   }
 
-  const increaseImageSize = ({ src }) => {
-    const img = imageList.findIndex(image => image.src === src)
+  const reduceImageOpacity = ({ src }: Partial<Image>) => {
+    const idx = imageList.findIndex(image => image.src === src)
+    console.log(imageList[idx])
     setImageList(draft => {
-      draft[img].width += 50
+      if (draft[idx].opacity === 0) return
+      draft[idx].opacity -= 0.1
     })
   }
 
-  const handleMoveUp = ({ src }) => {
-    const img = imageList.findIndex(image => image.src === src)
+  const increaseImageSize = ({ src }: Partial<Image>) => {
+    const idx = imageList.findIndex(image => image.src === src)
     setImageList(draft => {
-      ;[draft[img], draft[img - 1]] = [draft[img - 1], draft[img]]
+      draft[idx].width += 50
     })
   }
 
-  const handleMoveDown = ({ src }) => {
-    const img = imageList.findIndex(image => image.src === src)
+  const reduceImageSize = ({ src }: Partial<Image>) => {
+    const idx = imageList.findIndex(image => image.src === src)
     setImageList(draft => {
-      ;[draft[img], draft[img + 1]] = [draft[img + 1], draft[img]]
+      draft[idx].width -= 50
+    })
+  }
+
+  const handleMoveUp = ({ src }: Partial<Image>) => {
+    const idx = imageList.findIndex(image => image.src === src)
+    setImageList(draft => {
+      ;[draft[idx], draft[idx - 1]] = [draft[idx - 1], draft[idx]]
+    })
+  }
+
+  const handleMoveDown = ({ src }: Partial<Image>) => {
+    const idx = imageList.findIndex(image => image.src === src)
+    setImageList(draft => {
+      ;[draft[idx], draft[idx + 1]] = [draft[idx + 1], draft[idx]]
     })
   }
 
@@ -98,7 +145,7 @@ const OgImageGenerator = () => {
       scrollX: -7.5,
       scrollY: -window.scrollY,
       useCORS: true,
-    }).then(canvas => {
+    }).then((canvas: HTMLCanvasElement) => {
       const data = canvas.toDataURL("image/png")
       const src = encodeURI(data)
       const filename = `og-image-${new Date().getTime()}`
@@ -162,17 +209,18 @@ const OgImageGenerator = () => {
             style={{
               position: "relative",
               zIndex: 2,
-              fontSize,
+              lineHeight: "1.2em",
+              fontSize: taglineFontSize,
               fontFamily: "var(--systemFont)",
               cursor: "move",
-              color: textColor,
-              fontWeight: isBold ? 700 : 400,
+              color: taglineColor,
+              fontWeight: isTaglineBold ? 700 : 400,
               justifySelf: "center",
             }}
           >
-            {text}
+            {tagline}
           </motion.p>
-          {imageList.map(({ name, src, width }, i) => (
+          {imageList.map(({ name, src, width, opacity }, i) => (
             <motion.img
               key={src}
               drag={shiftPressed ? "y" : true}
@@ -184,6 +232,7 @@ const OgImageGenerator = () => {
                 position: "absolute",
                 zIndex: i,
                 cursor: "move",
+                opacity,
               }}
             />
           ))}
@@ -198,166 +247,178 @@ const OgImageGenerator = () => {
           Download og:image <Icon.FiDownload style={{ marginLeft: 10 }} />
         </DownloadButton>
       </DownloadButtonWrapper>
-      <p
-        style={{
-          color: "#999",
-          fontSize: "1.4rem",
-          textAlign: "center",
-          margin: "4rem auto 2rem auto",
-          maxWidth: "55rem",
-        }}
-      >
+      <IntructionText>
         Hold down shift while dragging to move in a straight line
-      </p>
-      <SidebarWrapper>
-        <Sidebar>
-          <SidebarContainer>
-            <div>
-              <InputGroup>
-                <Title>Heading</Title>
-                <InputField
-                  value={heading}
-                  onChange={e => setHeading(e.target.value)}
-                />
-                <Counter
-                  title={"Font size"}
-                  value={`${headingFontSize}`}
-                  inc={() => setHeadingFontSize(prevState => prevState + 1)}
-                  dec={() => setHeadingFontSize(prevState => prevState - 1)}
-                />
-                <Toggle
-                  title="Bold heading"
-                  check={isHeadingBold}
-                  toggleCheck={() => setIsHeadingBold(prevState => !prevState)}
-                />
-                <ColorPicker
-                  title="Heading color"
-                  colorPicked={headingColor}
-                  setColor={setHeadingColor}
-                  backgroundType={BackgroundType.Fill}
-                />
-              </InputGroup>
-              <InputGroup>
-                <Title>Tagline</Title>
-                <InputField
-                  value={text}
-                  onChange={e => setText(e.target.value)}
-                />
-                <Counter
-                  title={"Font size"}
-                  value={`${fontSize}`}
-                  inc={() => setFontSize(prevState => prevState + 1)}
-                  dec={() => setFontSize(prevState => prevState - 1)}
-                />
-                <Toggle
-                  title="Bold text"
-                  check={isBold}
-                  toggleCheck={() => setIsBold(prevState => !prevState)}
-                />
-
-                <ColorPicker
-                  title="Text color"
-                  colorPicked={textColor}
-                  setColor={setTextColor}
-                  backgroundType={BackgroundType.Fill}
-                />
-              </InputGroup>
-              <InputGroup>
-                <Title>Background</Title>
-                <ColorPicker
-                  title="Background color"
-                  colorPicked={backgroundColor}
-                  setColor={setBackgroundColor}
-                  backgroundType={BackgroundType.Fill}
-                />
-              </InputGroup>
-            </div>
-            <div>
-              <Title>Images</Title>
-              <ImageListWrapper>
-                {imageList.map(({ name, src }, i) => (
-                  <ImageItemWrapper key={src}>
-                    <div>
-                      <img
-                        src={src}
-                        alt={name}
-                        width={50}
-                        style={{
-                          marginRight: 15,
-                          border: "1px solid #333",
-                          height: 50,
-                          objectFit: "cover",
-                          borderRadius: "100%",
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <ButtonIcon
-                        whileHover={{ scale: 1.1 }}
-                        onClick={() => increaseImageSize({ src })}
-                        style={{ marginRight: 5 }}
-                      >
-                        <Icon.FiPlusCircle
-                          size={24}
-                          color="var(--primaryColor)"
-                        />
-                      </ButtonIcon>
-                      <ButtonIcon
-                        whileHover={{ scale: 1.1 }}
-                        onClick={() => reduceImageSize({ src })}
-                        style={{ marginRight: 5 }}
-                      >
-                        <Icon.FiMinusCircle
-                          size={24}
-                          color="var(--primaryColor)"
-                        />
-                      </ButtonIcon>
-                      <ButtonIcon
-                        whileHover={{ scale: 1.1 }}
-                        onClick={() => removeImage({ src })}
-                      >
-                        <Icon.FiX size={24} color="red" />
-                      </ButtonIcon>
-                    </div>
-                    <div>
-                      <ButtonIcon
-                        disabled={true}
-                        // disabled={i - 1 < 0}
-                        onClick={() => handleMoveUp({ src })}
-                      >
-                        <Icon.FiChevronUp
-                          size={24}
-                          color="var(--primaryColor)"
-                        />
-                      </ButtonIcon>
-                      <ButtonIcon
-                        disabled={true}
-                        // disabled={i + 1 === imageList.length}
-                        onClick={() => handleMoveDown({ src })}
-                      >
-                        <Icon.FiChevronDown
-                          size={24}
-                          color="var(--primaryColor)"
-                        />
-                      </ButtonIcon>
-                    </div>
-                  </ImageItemWrapper>
-                ))}
-              </ImageListWrapper>
-              <Button onClick={() => imageUploadRef.current.click()}>
-                <Icon.FiPlusCircle style={{ marginRight: 5 }} />
-                Add image
-              </Button>
-              <input
-                ref={imageUploadRef}
-                type="file"
-                onChange={addImage}
-                hidden
+      </IntructionText>
+      <Sidebar>
+        <SidebarContainer>
+          <div>
+            <InputGroup>
+              <Title>Heading</Title>
+              <InputField
+                value={heading}
+                onChange={e => setHeading(e.target.value)}
               />
-            </div>
-          </SidebarContainer>
-        </Sidebar>
-      </SidebarWrapper>
+              <Counter
+                title={"Font size"}
+                value={`${headingFontSize}`}
+                inc={() => setHeadingFontSize(prevState => prevState + 1)}
+                dec={() => setHeadingFontSize(prevState => prevState - 1)}
+              />
+              <Toggle
+                title="Bold heading"
+                check={isHeadingBold}
+                toggleCheck={() => setIsHeadingBold(prevState => !prevState)}
+              />
+              <ColorPicker
+                title="Heading color"
+                colorPicked={headingColor}
+                setColor={setHeadingColor}
+                backgroundType={BackgroundType.Fill}
+              />
+            </InputGroup>
+            <InputGroup>
+              <Title>Tagline</Title>
+              <InputField
+                value={tagline}
+                onChange={e => setTagline(e.target.value)}
+              />
+              <Counter
+                title={"Font size"}
+                value={`${taglineFontSize}`}
+                inc={() => setTaglineFontSize(prevState => prevState + 1)}
+                dec={() => setTaglineFontSize(prevState => prevState - 1)}
+              />
+              <Toggle
+                title="Bold text"
+                check={isTaglineBold}
+                toggleCheck={() => setIsTaglineBold(prevState => !prevState)}
+              />
+
+              <ColorPicker
+                title="Text color"
+                colorPicked={taglineColor}
+                setColor={setTaglineColor}
+                backgroundType={BackgroundType.Fill}
+              />
+            </InputGroup>
+            <InputGroup>
+              <Title>Background</Title>
+              <ColorPicker
+                title="Background color"
+                colorPicked={backgroundColor}
+                setColor={setBackgroundColor}
+                backgroundType={BackgroundType.Fill}
+              />
+            </InputGroup>
+          </div>
+          <div>
+            <Title>Images</Title>
+            <ImageListWrapper>
+              {imageList.map(({ name, src }) => (
+                <ImageItemWrapper key={src}>
+                  <div>
+                    <img
+                      src={src}
+                      alt={name}
+                      width={50}
+                      style={{
+                        marginRight: 15,
+                        border: "1px solid #333",
+                        height: 50,
+                        objectFit: "cover",
+                        borderRadius: "100%",
+                      }}
+                    />
+                  </div>
+                  <AdjustmentWrapper>
+                    <AdjustmentTitle>Opacity</AdjustmentTitle>
+                    <ButtonIcon
+                      // disabled={true}
+                      // disabled={i - 1 < 0}
+                      onClick={() => increaseImageOpacity({ src })}
+                      style={{ marginRight: 5 }}
+                    >
+                      <Icon.FiPlusCircle
+                        size={24}
+                        color="var(--primaryColor)"
+                      />
+                    </ButtonIcon>
+                    <ButtonIcon
+                      // disabled={true}
+                      // disabled={i + 1 === imageList.length}
+                      onClick={() => reduceImageOpacity({ src })}
+                    >
+                      <Icon.FiMinusCircle
+                        size={24}
+                        color="var(--primaryColor)"
+                      />
+                    </ButtonIcon>
+                  </AdjustmentWrapper>
+                  <AdjustmentWrapper>
+                    <AdjustmentTitle>Size</AdjustmentTitle>
+                    <ButtonIcon
+                      whileHover={{ scale: 1.1 }}
+                      onClick={() => increaseImageSize({ src })}
+                      style={{ marginRight: 5 }}
+                    >
+                      <Icon.FiPlusCircle
+                        size={24}
+                        color="var(--primaryColor)"
+                      />
+                    </ButtonIcon>
+                    <ButtonIcon
+                      whileHover={{ scale: 1.1 }}
+                      onClick={() => reduceImageSize({ src })}
+                      style={{ marginRight: 5 }}
+                    >
+                      <Icon.FiMinusCircle
+                        size={24}
+                        color="var(--primaryColor)"
+                      />
+                    </ButtonIcon>
+                  </AdjustmentWrapper>
+                  <div>
+                    <ButtonIcon
+                      disabled={true}
+                      // disabled={i - 1 < 0}
+                      onClick={() => handleMoveUp({ src })}
+                    >
+                      <Icon.FiChevronUp size={24} color="var(--primaryColor)" />
+                    </ButtonIcon>
+                    <ButtonIcon
+                      disabled={true}
+                      // disabled={i + 1 === imageList.length}
+                      onClick={() => handleMoveDown({ src })}
+                    >
+                      <Icon.FiChevronDown
+                        size={24}
+                        color="var(--primaryColor)"
+                      />
+                    </ButtonIcon>
+                    <ButtonIcon
+                      whileHover={{ scale: 1.1 }}
+                      onClick={() => removeImage({ src })}
+                    >
+                      <Icon.FiX size={24} color="red" />
+                    </ButtonIcon>
+                  </div>
+                </ImageItemWrapper>
+              ))}
+            </ImageListWrapper>
+            <Button onClick={() => imageUploadRef.current.click()}>
+              <Icon.FiPlusCircle style={{ marginRight: 5 }} />
+              Add image
+            </Button>
+            <input
+              ref={imageUploadRef}
+              type="file"
+              onChange={addImage}
+              hidden
+            />
+          </div>
+        </SidebarContainer>
+      </Sidebar>
     </Wrapper>
   )
 }
@@ -373,9 +434,8 @@ const OgImageWrapper = styled.div`
   width: 100%;
   margin-top: 2rem;
   display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  align-items: center;
+  width: 1000px;
+  height: 500px;
   position: relative;
   overflow: hidden;
 
@@ -387,6 +447,7 @@ const OgImageWrapper = styled.div`
 const OgImage = styled.div`
   width: 1000px;
   height: 500px;
+  max-height: 500px;
   background: #112;
   display: flex;
   flex-direction: column;
@@ -394,8 +455,6 @@ const OgImage = styled.div`
   justify-content: center;
   position: relative;
 `
-
-const SidebarWrapper = styled.div``
 
 const Sidebar = styled.aside`
   border-radius: 10px;
@@ -436,6 +495,19 @@ const Button = styled(motion.button)`
     pointer-events: none;
     opacity: 0.3;
   }
+`
+
+const AdjustmentWrapper = styled.div`
+  position: relative;
+`
+
+const AdjustmentTitle = styled.span`
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
 `
 
 const DownloadButtonWrapper = styled.div`
@@ -519,4 +591,12 @@ const Title = styled.h4`
   white-space: nowrap;
   user-select: none;
   font-family: var(--systemFont);
+`
+
+const IntructionText = styled.p`
+  color: #999;
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 4rem auto 2rem auto;
+  max-width: 55rem;
 `
