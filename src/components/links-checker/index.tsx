@@ -13,7 +13,7 @@ interface Pages {
   pageUrl: string
 }
 
-const LinksChecker = () => {
+const OgCrawler = () => {
   const [url, setUrl] = useState("")
   const [pages, setPages] = useState([])
   const [siteUrl, setSiteUrl] = useState("")
@@ -22,7 +22,7 @@ const LinksChecker = () => {
   const [errorsFound, setErrorsfound] = useState([])
   const [fetchError, setFetchError] = useState(false)
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const start = new Date().getTime()
     e.preventDefault()
     setPages([])
@@ -37,7 +37,6 @@ const LinksChecker = () => {
       const res = await axios.post("https://og-crawler.now.sh/", url, {
         timeout: 20000,
       })
-      console.log(res.data)
       setPages(res.data.pages)
       setSiteUrl(res.data.url)
       setErrorsfound(res.data.errors)
@@ -160,7 +159,7 @@ const LinksChecker = () => {
   )
 }
 
-export default LinksChecker
+export default OgCrawler
 
 // Styles
 const Wrapper = styled.div`
