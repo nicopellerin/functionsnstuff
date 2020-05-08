@@ -15,6 +15,12 @@ const ToolsPage = () => {
       <Layout template>
         <Wrapper>
           <Card
+            title="Og Crawler"
+            image={"/card-ogcrawler.webp"}
+            link="/tools/og-crawler"
+            tech="golang"
+          />
+          <Card
             title="Og:image Generator"
             image={"/card-oig.webp"}
             link="/tools/og-image-generator"

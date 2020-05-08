@@ -11,8 +11,8 @@ const LinksCheckerPage = () => {
     <>
       <SEO
         title="Og Crawler"
-        image="/og-image-generator.png"
-        description="Easily create and customize your og images"
+        image="/og-image1.png"
+        description="Crawl your website to receive OpenGraph information and errors for every page"
       />
       <PageHeader title="Og Crawler" />
       <Layout template>
