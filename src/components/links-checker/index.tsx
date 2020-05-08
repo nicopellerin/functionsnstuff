@@ -146,9 +146,10 @@ const LinksChecker = () => {
             </Results>
             {pages?.length === 0 && fetchError && (
               <Content>
-                <h3 style={{ textAlign: "center" }}>
+                <h3 style={{ textAlign: "center", lineHeight: "1.6em" }}>
                   Oups! This is a WIP. For now, serverless function times out
-                  after 10s. Please try on a smaller website :/
+                  after 10s. <br />
+                  Please try on a smaller website :/
                 </h3>
               </Content>
             )}
