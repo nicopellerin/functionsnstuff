@@ -5,7 +5,6 @@ import axios from "axios"
 import { ChasingDots } from "better-react-spinkit"
 import { motion } from "framer-motion"
 import { FiClock } from "react-icons/fi"
-import { Link } from "gatsby"
 
 interface Pages {
   title: string
@@ -89,13 +88,13 @@ const LinksChecker = () => {
         )}
       </form>
       <>
-        {errorsFound.length > 0 ? (
+        {errorsFound?.length > 0 ? (
           <ErrorsWrapper>
             <ErrorsTitle>
-              Found <ErrorsSpan>{errorsFound.length}</ErrorsSpan> errors
+              Found <ErrorsSpan>{errorsFound?.length}</ErrorsSpan> errors
             </ErrorsTitle>
             <ErrorsContent>
-              {errorsFound.map((error: string, i) => (
+              {errorsFound?.map((error: string, i) => (
                 <ErrorsText key={i}>
                   <ErrorsSpan>{error.split(" ")[0]}</ErrorsSpan>{" "}
                   <a
