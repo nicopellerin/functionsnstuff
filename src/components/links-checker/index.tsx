@@ -20,7 +20,7 @@ const LinksChecker = () => {
   const [isFetching, setIsFetching] = useState(false)
   const [duration, setDuration] = useState(0)
   const [errorsFound, setErrorsfound] = useState([])
-  const [isFetched, setIsFetched] = useState(false)
+  const [fetchError, setFetchError] = useState(false)
 
   const handleSubmit = async e => {
     const start = new Date().getTime()
@@ -41,13 +41,14 @@ const LinksChecker = () => {
       setPages(res.data.pages)
       setSiteUrl(res.data.url)
       setErrorsfound(res.data.errors)
-      setIsFetched(true)
+      setFetchError(false)
     } catch (err) {
       console.log(err)
     } finally {
       const now = new Date().getTime() - start
       setDuration(now)
       setIsFetching(false)
+      setFetchError(true)
     }
   }
 
@@ -143,11 +144,11 @@ const LinksChecker = () => {
                   }
                 )}
             </Results>
-            {pages?.length === 0 && isFetched && (
+            {pages?.length === 0 && fetchError && (
               <Content>
                 <h3 style={{ textAlign: "center" }}>
-                  Oups! This is a WIP. For now, please try on a smaller website
-                  :/
+                  Oups! This is a WIP. For now, serverless function times out
+                  after 10s. Please try on a smaller website :/
                 </h3>
               </Content>
             )}
