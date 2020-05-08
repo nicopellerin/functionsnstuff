@@ -20,6 +20,7 @@ const LinksChecker = () => {
   const [isFetching, setIsFetching] = useState(false)
   const [duration, setDuration] = useState(0)
   const [errorsFound, setErrorsfound] = useState([])
+  const [isFetched, setIsFetched] = useState(false)
 
   const handleSubmit = async e => {
     const start = new Date().getTime()
@@ -40,6 +41,7 @@ const LinksChecker = () => {
       setPages(res.data.pages)
       setSiteUrl(res.data.url)
       setErrorsfound(res.data.errors)
+      setIsFetched(true)
     } catch (err) {
       console.log(err)
     } finally {
@@ -114,29 +116,42 @@ const LinksChecker = () => {
             <ChasingDots color="white" size={48} />
           </LoadingWrapper>
         ) : (
-          <Results>
-            {pages.map(({ title, description, image, pageUrl }: Pages, i) => {
-              if (
-                image.url.indexOf("https://") !== 0 &&
-                image.url.indexOf("https://") !== 0 &&
-                image.url.length > 0
-              ) {
-                image["url"] = `${siteUrl}${image.url}`
-              }
-              return (
-                <Card key={i}>
-                  <OgImage src={image.url} />
-                  <Content>
-                    <OgTitle>{title}</OgTitle>
-                    <OgDescription>{description}</OgDescription>
-                    <a href={pageUrl} target="_blank" rel="nofollower">
-                      <PageUrl>{pageUrl}</PageUrl>
-                    </a>
-                  </Content>
-                </Card>
-              )
-            })}
-          </Results>
+          <>
+            <Results>
+              {pages?.length > 0 &&
+                pages.map(
+                  ({ title, description, image, pageUrl }: Pages, i) => {
+                    if (
+                      image.url.indexOf("https://") !== 0 &&
+                      image.url.indexOf("https://") !== 0 &&
+                      image.url.length > 0
+                    ) {
+                      image["url"] = `${siteUrl}${image.url}`
+                    }
+                    return (
+                      <Card key={i}>
+                        <OgImage src={image.url} />
+                        <Content>
+                          <OgTitle>{title}</OgTitle>
+                          <OgDescription>{description}</OgDescription>
+                          <a href={pageUrl} target="_blank" rel="nofollower">
+                            <PageUrl>{pageUrl}</PageUrl>
+                          </a>
+                        </Content>
+                      </Card>
+                    )
+                  }
+                )}
+            </Results>
+            {pages?.length === 0 && isFetched && (
+              <Content>
+                <h3 style={{ textAlign: "center" }}>
+                  Oups! This is a WIP. For now, please try on a smaller website
+                  :/
+                </h3>
+              </Content>
+            )}
+          </>
         )}
       </>
     </Wrapper>
