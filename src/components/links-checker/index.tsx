@@ -77,9 +77,15 @@ const LinksChecker = () => {
           </DurationCrawl>
         )}
         {duration === 0 && !isFetching && (
-          <DurationCrawl>
-            Enter a root URL to fetch whole website OG information
-          </DurationCrawl>
+          <>
+            <DurationCrawl>
+              Enter a URL to fetch the website's open-graph info and errors.
+            </DurationCrawl>
+            <DurationCrawl>
+              Please note that at the moment the serverless function times out
+              after 10s.
+            </DurationCrawl>
+          </>
         )}
       </form>
       <>
@@ -280,7 +286,11 @@ const Button = styled(motion.button)`
 
 const DurationCrawl = styled.p`
   text-align: center;
-  margin-top: 4rem;
+  color: #aaa;
+
+  &:first-of-type {
+    margin-top: 4rem;
+  }
 `
 
 const DurationText = styled.span`
