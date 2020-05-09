@@ -13,7 +13,7 @@ interface Pages {
   pageUrl: string
 }
 
-const OgCrawler = () => {
+const OgCrawler = ({ setOgCrawler }) => {
   const [url, setUrl] = useState("")
   const [pages, setPages] = useState([])
   const [siteUrl, setSiteUrl] = useState("")
@@ -25,6 +25,7 @@ const OgCrawler = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const start = new Date().getTime()
     e.preventDefault()
+
     setPages([])
     setSiteUrl("")
     setDuration(0)
@@ -32,15 +33,17 @@ const OgCrawler = () => {
     if (url.length < 1) {
       return
     }
+    setOgCrawler(true)
     setIsFetching(true)
     try {
-      const res = await axios.post("https://og-crawler.now.sh/", url, {
+      const res = await axios.post("https://og-crawler.now.sh", url, {
         timeout: 20000,
       })
       setPages(res.data.pages)
       setSiteUrl(res.data.url)
       setErrorsfound(res.data.errors)
       setFetchError(false)
+      setOgCrawler(false)
     } catch (err) {
       console.log(err)
     } finally {

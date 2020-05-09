@@ -12,14 +12,16 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import BuddyHeader from "./buddy-header"
+import OgCrawler from "./og-errors-crawler"
 
 interface Props {
   tech?: string
   title?: string
   randomTip?: boolean
+  ogCrawler?: boolean
 }
 
-const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
+const PageHeader: React.FC<Props> = ({ tech, title, randomTip, ogCrawler }) => {
   const [elementTop, setElementTop] = useState(0)
   const { scrollY } = useViewportScroll()
 
@@ -71,7 +73,10 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
           ) : (
             <Title
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: randomTip ? 0 : [0, 1], y: [50, 0] }}
+              animate={{
+                opacity: randomTip || ogCrawler ? 0 : [0, 1],
+                y: [50, 0],
+              }}
             >
               {title}
             </Title>
@@ -87,6 +92,20 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip }) => {
               }}
             >
               <BuddyHeader toggleBrowser={randomTip} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {ogCrawler && (
+            <motion.div
+              initial={{ position: "absolute", x: "-50%", y: 200 }}
+              animate={{ y: [200, -405] }}
+              exit={{ y: 200 }}
+              style={{
+                left: "50%",
+              }}
+            >
+              <img src="/og-ice-t.png" alt="og" />
             </motion.div>
           )}
         </AnimatePresence>

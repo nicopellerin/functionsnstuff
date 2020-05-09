@@ -15,9 +15,9 @@ const ToolsPage = () => {
       <Layout template>
         <Wrapper>
           <Card
-            title="Og Crawler"
+            title="OpenGraph + Errors Crawler"
             image={"/card-ogcrawler.webp"}
-            link="/tools/og-crawler"
+            link="/tools/og-errors-crawler"
             tech="golang"
           />
           <Card
