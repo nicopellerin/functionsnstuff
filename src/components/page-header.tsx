@@ -99,13 +99,13 @@ const PageHeader: React.FC<Props> = ({ tech, title, randomTip, ogCrawler }) => {
           {ogCrawler && (
             <motion.div
               initial={{ position: "absolute", x: "-50%", y: 200 }}
-              animate={{ y: [200, -405] }}
+              animate={{ y: [200, -305] }}
               exit={{ y: 200 }}
               style={{
                 left: "50%",
               }}
             >
-              <img src="/og-ice-t.png" alt="og" />
+              <img src="/og-ice-t.png" alt="og" width={500} />
             </motion.div>
           )}
         </AnimatePresence>
