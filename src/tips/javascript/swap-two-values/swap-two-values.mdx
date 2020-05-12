@@ -1,0 +1,28 @@
+---
+title: Swap two values in Javascript
+author: Nico Pellerin
+tech: javascript
+slug: swap-two-values
+cover: /card2.webp
+type: tips
+---
+
+<SEO title="Swap two values in Javascript" />
+
+# Swap two values in Javascript
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```jsx
+let dog = "Max"
+let cat = "Nini"
+
+let temp = cat
+cat = dog
+dog = temp
+
+// Using array destructuring
+[dog, cat] = [cat, dog]
+
+// Result -> dog = "Nini", cat = "Max"
+```
