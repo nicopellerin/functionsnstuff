@@ -33,10 +33,18 @@ const OgCrawler = ({ setOgCrawler }) => {
     if (url.length < 1) {
       return
     }
+
+    let formattedUrl
+    if (!url.startsWith("https://") || !url.startsWith("http://")) {
+      formattedUrl = "https://" + url
+    } else {
+      formattedUrl = url
+    }
+
     setOgCrawler(true)
     setIsFetching(true)
     try {
-      const res = await axios.post("https://og-crawler.now.sh", url, {
+      const res = await axios.post("https://og-crawler.now.sh", formattedUrl, {
         timeout: 20000,
       })
       setPages(res.data.pages)
