@@ -80,7 +80,7 @@ const ContactForm = () => {
             animate={{ opacity: 1, y: [20, 0] }}
             exit={{ opacity: 0 }}
           >
-            <SuccessMsg>{"Your message was sent sucessfully :)"}</SuccessMsg>
+            <SuccessMsg>{"Your message was sent successfully :)"}</SuccessMsg>
           </SuccessMsgWrapper>
         ) : (
           <>
