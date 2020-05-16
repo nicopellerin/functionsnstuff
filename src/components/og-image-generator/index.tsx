@@ -545,6 +545,7 @@ const InputField = styled.input`
   border: 1px solid #222;
   min-width: 253px;
   height: 5rem;
+  -webkit-appearance: none;
 
   @media (max-width: 500px) {
     width: 100%;

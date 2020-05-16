@@ -213,6 +213,7 @@ const InputField = styled.input`
   font-size: 1.6rem;
   font-family: inherit;
   margin-bottom: 1.6rem;
+  -webkit-appearance: none;
 `
 
 const TextareaField = styled.textarea`
@@ -226,6 +227,7 @@ const TextareaField = styled.textarea`
   margin-bottom: 1.2rem;
   min-height: 20rem;
   resize: none;
+  -webkit-appearance: none;
 `
 
 const Button = styled.button`
