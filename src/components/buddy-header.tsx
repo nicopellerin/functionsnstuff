@@ -2,11 +2,10 @@ import * as React from "react"
 import { useRef, useEffect } from "react"
 import lottie from "lottie-web"
 
-const BuddyHeader = ({ toggleBrowser }) => {
-  const lottieRef = useRef(null)
+const BuddyHeader = () => {
+  const lottieRef = useRef() as React.MutableRefObject<HTMLDivElement>
 
-  let anim
-
+  let anim: any
   useEffect(() => {
     anim = lottie.loadAnimation({
       container: lottieRef.current,
@@ -18,10 +17,6 @@ const BuddyHeader = ({ toggleBrowser }) => {
 
     return () => anim.destroy()
   })
-
-  // useEffect(() => {
-  //   toggleBrowser ? anim.play() : anim.stop()
-  // }, [toggleBrowser])
 
   return <div style={{ width: 400 }} ref={lottieRef} />
 }

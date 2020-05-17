@@ -12,7 +12,6 @@ import { Link } from "gatsby"
 import Navbar from "./navbar"
 import NavbarMobile from "./navbar-mobile"
 import BuddyHeader from "./buddy-header"
-import OgCrawler from "./og-errors-crawler"
 
 interface Props {
   tech?: string
