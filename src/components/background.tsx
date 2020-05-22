@@ -43,7 +43,7 @@ const Background = () => {
         0.85
       )
 
-      gl.toneMappingExposure = 0.9
+      gl.toneMappingExposure = 0.75
 
       bloomPass.threshold = 0.1
       bloomPass.strength = 4
