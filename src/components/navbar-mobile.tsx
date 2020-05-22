@@ -35,7 +35,7 @@ const NavbarMobile = () => {
         <Link to="/">
           <Logo width={175} />
         </Link>
-        {/* <img src={"/donut_mobile.png"} alt="donut" /> */}
+        <img src={"/donut_mobile.png"} alt="donut" />
       </Wrapper>
       <AnimatePresence>
         {toggleDropdown && (
