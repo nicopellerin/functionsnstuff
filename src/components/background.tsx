@@ -87,7 +87,7 @@ const Background = () => {
           <React.Suspense fallback={null}>
             <Effects>
               <Particles count={150} />
-              <Stars count={1250} />
+              <Stars count={800} />
               <fog attach="fog" args={["#ff88aa", 8, 1]} />
             </Effects>
           </React.Suspense>
