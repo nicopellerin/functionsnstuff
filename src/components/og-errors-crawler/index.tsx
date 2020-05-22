@@ -35,7 +35,7 @@ const OgCrawler = ({ setOgCrawler }) => {
     }
 
     let formattedUrl
-    if (!url.startsWith("https://") || !url.startsWith("http://")) {
+    if (!url.startsWith("https://") && !url.startsWith("http://")) {
       formattedUrl = "https://" + url
     } else {
       formattedUrl = url
