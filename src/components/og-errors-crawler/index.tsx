@@ -68,6 +68,8 @@ const OgCrawler = ({ setOgCrawler }) => {
         <InputGroup>
           <InputField
             name="url"
+            autoCorrect="off"
+            autoCapitalize="none"
             value={url}
             onChange={e => setUrl(e.target.value)}
             placeholder="https://yourwebsite.com"
