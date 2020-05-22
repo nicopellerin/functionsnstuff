@@ -110,7 +110,12 @@ const Header = () => {
           terminal={"/terminal.webp"}
           initial={{ y: 200, x: "-50%" }}
           animate={{ y: toggleBrowser ? 310 : 10 }}
-          transition={{ type: "spring", damping: 20, stiffness: 100 }}
+          transition={{
+            type: "spring",
+            damping: 20,
+            stiffness: 100,
+            delay: 0.2,
+          }}
         >
           <button
             onClick={() => setToggleBrowser(prevState => !prevState)}
