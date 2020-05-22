@@ -114,7 +114,7 @@ const Header = () => {
             type: "spring",
             damping: 20,
             stiffness: 100,
-            delay: 0.2,
+            delay: 0.18,
           }}
         >
           <button
