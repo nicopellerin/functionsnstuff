@@ -42,6 +42,6 @@ const Main = styled.main`
   position: relative;
 
   @media (max-width: 1024px) {
-    padding: 4rem 2rem 8rem;
+    padding: 4rem 2rem 4rem;
   }
 `

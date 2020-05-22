@@ -49,6 +49,8 @@ const Wrapper = styled(motion.div)`
   border-radius: 10px;
   height: 25rem;
   max-width: 500px;
+  min-width: 340px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -58,6 +60,10 @@ const Wrapper = styled(motion.div)`
   background-clip: padding-box;
   will-change: transform;
   position: relative;
+
+  @media (max-width: 339px) {
+    max-width: 300px;
+  }
 `
 
 const Content = styled.div`
