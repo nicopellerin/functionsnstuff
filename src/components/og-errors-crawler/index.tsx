@@ -159,7 +159,8 @@ const OgCrawler = ({ setOgCrawler }) => {
                 <h3 style={{ textAlign: "center", lineHeight: "1.6em" }}>
                   Oups! This is a WIP. For now, serverless function times out
                   after 10s. <br />
-                  Please try on a smaller website :/
+                  Make sure the website exists or please try on a smaller
+                  website.
                 </h3>
               </Content>
             )}
