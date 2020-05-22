@@ -1,7 +1,11 @@
-import React from "react"
+import * as React from "react"
+import { useRef, useEffect } from "react"
 import styled from "styled-components"
-import { Canvas } from "react-three-fiber"
+import { Canvas, useFrame, useThree } from "react-three-fiber"
 import * as THREE from "three"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js"
 
 import Particles from "./particles"
 import Stars from "./stars"
@@ -21,6 +25,36 @@ const Background = () => {
     }
     return false
   }
+
+  const Effects = React.memo(({ children }) => {
+    const { gl, camera, size } = useThree()
+    const composer = useRef()
+    const scene = useRef()
+
+    useEffect(() => {
+      composer.current = new EffectComposer(gl)
+
+      composer.current.addPass(new RenderPass(scene.current, camera))
+
+      const bloomPass = new UnrealBloomPass(
+        new THREE.Vector2(size.width, size.height),
+        1.5,
+        0.5,
+        0.85
+      )
+
+      gl.toneMappingExposure = 0.9
+
+      bloomPass.threshold = 0.1
+      bloomPass.strength = 4
+      bloomPass.radius = 0.75
+
+      composer.current.addPass(bloomPass)
+    }, [])
+
+    useFrame(() => composer.current.render(), 1)
+    return <scene ref={scene}>{children}</scene>
+  })
 
   return (
     <>
@@ -51,8 +85,11 @@ const Background = () => {
         >
           >
           <React.Suspense fallback={null}>
-            <Particles count={150} />
-            <Stars count={1250} />
+            <Effects>
+              <Particles count={150} />
+              <Stars count={1250} />
+              <fog attach="fog" args={["#ff88aa", 8, 1]} />
+            </Effects>
           </React.Suspense>
         </Canvas>
       )}
