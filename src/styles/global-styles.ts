@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     height: 100%;
-    background: #080808;
+    background: #020207;
     margin: 0;
     padding: 0;
     font-family: var(--systemFont);
