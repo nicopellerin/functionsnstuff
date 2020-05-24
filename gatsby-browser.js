@@ -3,7 +3,7 @@ const Background = require("./src/components/background").default
 
 require("typeface-lora")
 
-exports.wrapRootElement = ({ element }) => {
+exports.wrapPageElement = ({ element }) => {
   return (
     <>
       <Background />
