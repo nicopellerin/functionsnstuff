@@ -1,6 +1,6 @@
 const React = require("react")
 const ReactDOM = require("react-dom")
-// const Background = require("./src/components/background").default
+const Background = require("./src/components/background")
 
 require("typeface-lora")
 
@@ -23,7 +23,7 @@ exports.wrapRootElement = ({ element }) => {
   return (
     <>
       <React.Suspense fallback={<div></div>}>
-        <LazyBackground />
+        <Background />
       </React.Suspense>
       <React.Fragment>{element}</React.Fragment>
     </>
