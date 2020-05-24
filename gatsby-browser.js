@@ -6,10 +6,7 @@ require("typeface-lora")
 
 const LazyBackground = React.lazy(() => {
   return new Promise(resolve => {
-    setTimeout(
-      () => resolve(import("./src/components/background").default),
-      1100
-    )
+    setTimeout(() => resolve(import("./src/components/background")), 1100)
   })
 })
 
