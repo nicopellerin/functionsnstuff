@@ -19,10 +19,10 @@ exports.replaceHydrateFunction = () => {
   }
 }
 
-exports.wrapPageElement = ({ element }) => {
+exports.wrapRootElement = ({ element }) => {
   return (
     <>
-      <React.Suspense fallback={null}>
+      <React.Suspense fallback={<div></div>}>
         <LazyBackground />
       </React.Suspense>
       <React.Fragment>{element}</React.Fragment>
