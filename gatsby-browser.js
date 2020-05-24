@@ -1,6 +1,6 @@
 const React = require("react")
 const ReactDOM = require("react-dom")
-const Background = require("./src/components/background")
+const Background = require("./src/components/background").default
 
 require("typeface-lora")
 
