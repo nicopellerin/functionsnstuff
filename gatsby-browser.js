@@ -6,9 +6,7 @@ require("typeface-lora")
 exports.wrapPageElement = ({ element }) => {
   return (
     <>
-      <React.Suspense fallback={null}>
-        <Background />
-      </React.Suspense>
+      <Background />
       <React.Fragment>{element}</React.Fragment>
     </>
   )
