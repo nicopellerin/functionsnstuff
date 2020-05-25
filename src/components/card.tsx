@@ -16,10 +16,7 @@ const Card: React.FC<Props> = ({ title, image, tech, link }) => {
 
   return (
     <Link to={link}>
-      <Wrapper
-        // image={isMobile ? mobileImage : image}
-        whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}
-      >
+      <Wrapper whileHover={{ scale: [1, 1.04, 1.02], y: [0, -5] }}>
         <Content>
           <Title>{title}</Title>
           <TechLogo
