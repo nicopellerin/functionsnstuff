@@ -87,7 +87,8 @@ const OgCrawler = ({ setOgCrawler }) => {
         {duration != 0 && (
           <DurationCrawl>
             Website crawled in{" "}
-            <DurationText>{`${(duration / 1000).toFixed(3)}s`}</DurationText>
+            <DurationText>{`${(duration / 1000).toFixed(3)}s`}</DurationText> |
+            Found {pages.length} page{pages.length === 1 ? "" : "s"}
           </DurationCrawl>
         )}
         {duration === 0 && !isFetching && (
