@@ -98,6 +98,7 @@ enum Tech {
   typescript = "Typescript",
   gatsby = "Gatsby",
   "next.js" = "Next.js",
+  rust = "Rust",
 }
 
 interface Tip {
@@ -107,7 +108,7 @@ interface Tip {
 const TipsPage: React.FC<Props> = ({ data }) => {
   const [randomTip, setRandomTip] = useState(false)
 
-  const techCount = {
+  const techCount: any = {
     react: 0,
     javascript: 0,
     golang: 0,
@@ -116,6 +117,7 @@ const TipsPage: React.FC<Props> = ({ data }) => {
     typescript: 0,
     gatsby: 0,
     nextjs: 0,
+    rust: 0,
   }
   data.allMdx.edges.forEach(({ node }: Tip) => {
     techCount[node.frontmatter.tech]++

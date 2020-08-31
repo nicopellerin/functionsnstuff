@@ -1,0 +1,22 @@
+---
+title: Filter out values in vector
+author: Nico Pellerin
+tech: rust
+slug: filter-values-vector-rust
+cover: /card1.webp
+type: tips
+---
+
+<SEO title="Filter out values in vector" />
+
+# Filter out values in vector
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```rust
+// Filter out values less than 5
+let v = vec![1,3,5,7,9];
+let v2 = v.iter().cloned().filter(|&x| x > 5).collect::<Vec<i32>>();
+
+println!("{:?}", v2); // Returns [7, 9]
+```
