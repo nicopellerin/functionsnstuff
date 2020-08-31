@@ -46,7 +46,7 @@
     "mdx-utils": "^0.2.0",
     "preact": "^10.4.0",
     "prism-react-renderer": "^1.0.2",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.21.0",
     "prop-types": "^15.7.2",
     "puppeteer-core": "^3.0.2",
     "react": "^16.13.1",

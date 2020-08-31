@@ -2,10 +2,14 @@ import * as React from "react"
 import { useState } from "react"
 import { preToCodeBlock } from "mdx-utils"
 import Highlight, { defaultProps } from "prism-react-renderer"
+import Prism from "prism-react-renderer/prism"
 import theme from "prism-react-renderer/themes/dracula"
 import styled from "styled-components"
 import { FiCopy, FiCheckCircle } from "react-icons/fi"
 import { AnimatePresence, motion } from "framer-motion"
+;(typeof global !== "undefined" ? global : window).Prism = Prism
+
+import("prismjs/components/prism-rust")
 
 const delay = (duration: number) =>
   new Promise(resolve => setTimeout(resolve, duration))
