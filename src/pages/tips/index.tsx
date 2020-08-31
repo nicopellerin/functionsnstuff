@@ -75,6 +75,14 @@ const techList = [
     link: "/tips/nextjs",
     width: 140,
   },
+  {
+    tech: "Rust",
+    slug: "rust",
+    logo: "/icons/rust.png",
+    logoWebp: "/icons/rust.webp",
+    link: "/tips/rust",
+    width: 90,
+  },
 ]
 
 interface Props {

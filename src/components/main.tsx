@@ -10,35 +10,39 @@ import Card from "./card"
 const techItems = [
   {
     title: "React",
-    link: "/tutorials/react",
+    link: "/tips/react",
   },
   {
     title: "Node.js",
-    link: "/tutorials/nodejs",
+    link: "/tips/nodejs",
   },
   {
     title: "Javascript",
-    link: "/tutorials/javascript",
+    link: "/tips/javascript",
   },
   {
     title: "Typescript",
-    link: "/tutorials/typescript",
+    link: "/tips/typescript",
   },
   {
     title: "Gatsby",
-    link: "/tutorials/gatsby",
+    link: "/tips/gatsby",
   },
   {
     title: "Next.js",
-    link: "/tutorials/nextjs",
+    link: "/tips/nextjs",
   },
   {
     title: "GraphQL",
-    link: "/tutorials/graphql",
+    link: "/tips/graphql",
   },
   {
     title: "Golang",
-    link: "/tutorials/golang",
+    link: "/tips/golang",
+  },
+  {
+    title: "Rust",
+    link: "/tips/rust",
   },
 ]
 

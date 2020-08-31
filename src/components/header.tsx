@@ -21,10 +21,10 @@ const Header = () => {
       width: 100,
     },
     {
-      tech: "GraphQL",
-      logo: "/icons/graphql.png",
-      logoWebp: "/icons/graphql.webp",
-      link: "/tips/graphql",
+      tech: "Rust",
+      logo: "/icons/rust.png",
+      logoWebp: "/icons/rust.webp",
+      link: "/tips/rust",
       width: 90,
     },
     {
