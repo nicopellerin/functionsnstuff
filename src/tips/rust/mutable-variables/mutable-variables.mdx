@@ -1,0 +1,25 @@
+---
+title: Mutable variables
+author: Nico Pellerin
+tech: rust
+slug: mutable-variables
+cover: /card2.webp
+type: tips
+---
+
+<SEO title="Mutable variables" />
+
+# Mutable variables
+
+<Spacer margin="6rem 0 4rem 0" />
+
+```rust
+// By default, every variable in Rust is immutable
+let c = 5;
+c = 3;
+Error - error[E0384]: cannot assign twice to immutable variable `c`
+
+// To fix this error and make variable mutable, simply add `mut` to the variable
+let mut c = 5;
+c = 3;
+```
