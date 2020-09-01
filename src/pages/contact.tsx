@@ -26,7 +26,7 @@ const ContactPage = () => {
         <TextWrapper>
           <Text>
             Have an idea for a tutorial or would like to retain my services as a
-            programmer?
+            full-stack developer?
           </Text>
           <Text>
             Drop me a message and we can talk!{" "}
