@@ -41,7 +41,7 @@
     "gatsby-transformer-sharp": "^2.4.3",
     "graphql-request": "^1.8.2",
     "html2canvas": "^1.0.0-rc.5",
-    "immer": "^6.0.8",
+    "immer": "^9.0.6",
     "lottie-web": "^5.6.8",
     "mdx-utils": "^0.2.0",
     "preact": "^10.4.0",
