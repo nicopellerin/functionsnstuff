@@ -37,7 +37,7 @@
     "gatsby-remark-embed-snippet": "^4.2.4",
     "gatsby-remark-prismjs": "^3.4.4",
     "gatsby-source-filesystem": "^2.2.2",
-    "gatsby-transformer-remark": "^2.7.3",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.4.3",
     "graphql-request": "^1.8.2",
     "html2canvas": "^1.0.0-rc.5",
